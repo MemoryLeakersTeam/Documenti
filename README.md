@@ -5,4 +5,4 @@ Siamo il gruppo 3 del progetto di Ingegneria del Software del corso di laurea in
 Questa repository raccoglie e organizza i documenti prodotti dal gruppo durante le fasi dello sviluppo del progetto didattico.
 
 ### Formato
-Il gruppo deciso di utilizzare ***Typst*** come formato per il codice sorgente dei documenti (`.typ`).
+Il gruppo ha deciso di utilizzare ***Typst*** come formato per il codice sorgente dei documenti (`.typ`).

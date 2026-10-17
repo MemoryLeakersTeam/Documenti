@@ -1,12 +1,17 @@
-#import "../../Templates/templateVerbali.typ": verbale, gloss
+#import "../../Templates/Verbali.typ": verbale, gloss
 
 #show: verbale.with(
-  tipo: "Verbale interno",
+  titolo: "Verbale interno del 13/10/2026",
+  tipo-documento: "Verbale Interno",
   data: datetime(year: 2026, month: 10, day: 13),
+  ora: "17:10 – 18:00",
+  luogo: "Google Meet",
   versione: "0.0.1",
   stato: "Bozza",
+  autore: "Jacopo De Donà",
+  verificatore: "Chiara Protopapa",
+  file-nome: "2026-10-13.pdf",
   gruppo: "Memory Leakers",
-  // logo: image("assets/logo.png", width: 45%),
   ordine-del-giorno: (
     [Scelta del nome del gruppo],
     [Creazione dell'indirizzo email],
@@ -20,11 +25,21 @@
     "Matteo Marcon", "Riccardo Peresson", "Paolo Prevedello Ramirez", "Chiara Protopapa",
   ),
   distribuzione: ("Memory Leakers", "Prof. Riccardo Cardin", "Prof. Tullio Vardanega"),
-  registro: (
-    (ver: "0.0.1", data: "13/10/2026", autore: "Jacopo De Donà",
-     verificatore: "Chiara Protopapa", descrizione: [Bozza del primo incontro]),
+  // Ogni riga: (Ver., Data, Descrizione, Autore, Verificatore)
+  registro-modifiche: (
+    ([0.0.1], [13/10/2026], [Bozza del primo incontro], [Jacopo De Donà], [Chiara Protopapa]),
   ),
-  revisore: "...",
+  // Ogni riga: (Nome attività, Descrizione, Responsabile, Scadenza)
+  attivita-todo: (
+    ([Verbale], [Redazione del verbale], [Jacopo De Donà], [14/10/2026]),
+    ([Template], [Creazione del template #gloss[Typst]], [Chiara Protopapa], [19/10/2026]),
+    ([Email], [Creazione dell'indirizzo email], [Riccardo Peresson], [14/10/2026]),
+    ([Logo], [Creazione del logo], [Jacopo Franco, Paolo Prevedello Ramirez], [15/10/2026]),
+    ([GitHub], [Creazione dell'organizzazione GitHub], [Matteo Marcon], [15/10/2026]),
+    ([Sito], [Creazione del sito #gloss[GitHub Pages]], [Matteo Arcandi], [19/10/2026]),
+  ),
+  ora-fine-riunione: "18:00",
+  data-prossima-riunione: "19/10/2026 alle ore 14:00",
 )
 
 = Introduzione
@@ -56,19 +71,3 @@ Al momento della riunione, i capitolati ad aver suscitato maggiore interesse son
 
 = Decisioni e attività
 Si è infine proceduto alla ripartizione delle attività individuate nel corso della riunione, riportata nella tabella seguente.
-#figure(
-  table(
-    columns: (2fr, 1.5fr, auto),
-    [Descrizione], [Responsabile], [Scadenza],
-    [Redazione del verbale], [Jacopo De Donà], [14/10/2026],
-    [Creazione del template #gloss[Typst]], [Chiara Protopapa], [19/10/2026],
-    [Creazione dell'indirizzo email], [Riccardo Peresson], [14/10/2026],
-    [Creazione del logo], [Jacopo Franco, Paolo Prevedello Ramirez], [15/10/2026],
-    [Creazione dell'organizzazione GitHub], [Matteo Marcon], [15/10/2026],
-    [Creazione del sito #gloss[GitHub Pages]], [Marco Arcandi], [19/10/2026],
-  ),
-  caption: [Decisioni intraprese e attività conseguenti],
-)
-
-= Conclusione della riunione
-Il gruppo ha infine stabilito la data della prossima riunione interna che si terrà il 19/10/2026 alle 14:00.

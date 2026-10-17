@@ -1,0 +1,44 @@
+name: Compila PDF
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**.typ"
+      - "Templates/**"
+      - "scripts/compila.sh"
+      - ".github/workflows/compila-pdf.yml"
+  workflow_dispatch: # permette di avviarlo a mano dalla scheda Actions
+
+# Evita che due esecuzioni ravvicinate pubblichino in contemporanea
+concurrency:
+  group: compila-pdf
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout documentazione
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Installa Typst
+        uses: typst-community/setup-typst@v4
+
+      - name: Installa font Liberation
+        run: sudo apt-get update -q && sudo apt-get install -y -q fonts-liberation
+
+      - name: Compila tutti i documenti
+        run: bash scripts/compila.sh
+
+      # I PDF sono scaricabili dalla pagina dell'esecuzione (scheda Actions)
+      - name: Carica i PDF come artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdf
+          path: pdf/

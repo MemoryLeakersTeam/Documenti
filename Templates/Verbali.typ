@@ -1,3 +1,5 @@
+#let gloss(term) = [#term#sub[G]]
+
 #let verbale(
   titolo: "VERBALE DI RIUNIONE N. 01",
   gruppo: "Memory Leakers",
@@ -29,6 +31,7 @@
   let colore-secondario = rgb("#41837b")
   let colore-sfondo = rgb("#eaf7f2")
   let colore-bordo = rgb("#49736a")
+  let data-str = data.display("[day]/[month]/[year]")
 
   // Impostazioni Pagina
   set page(
@@ -56,6 +59,7 @@
 
   set text(font: "Liberation Sans", size: 10.5pt, lang: "it")
   set par(justify: true)
+  show table.cell: set par(justify: false)
 
   show heading: it => [
     #set text(fill: colore-primario)
@@ -99,7 +103,7 @@
     [*Autore:*], autore,
     [*Stato:*], stato,
     [*Verificato da:*], verificatore,
-    [*In data:*], data,
+    [*In data:*], data-str,
     [*Tipo documento:*], tipo-documento,
     [*File:*], file-nome
   )
@@ -124,6 +128,15 @@
     #v(8pt)
   ]
 
+  // Indice
+  context outline(
+    title: [Indice dei Contenuti],
+    indent: 1.5em,
+    target: selector(heading).after(here()),
+  )
+
+  v(10pt)
+
   if ordine-del-giorno.len() > 0 [
     #block(
       fill: colore-sfondo,
@@ -144,7 +157,7 @@
     inset: 7pt,
     fill: (x, y) => if x == 0 { colore-sfondo } else { none },
     stroke: 0.5pt + colore-bordo,
-    [*Data e Ora:*], [#data #if ora != "" [ (#ora) ]],
+    [*Data e Ora:*], [#data-str #if ora != "" [ (#ora) ]],
     [*Luogo / Link:*], luogo,
     [*Partecipanti:*], [
       #for p in partecipanti [
@@ -158,15 +171,8 @@
     ]
   )
 
-  v(10pt)
-
-  // Indice
-  outline(
-    title: [Indice dei Contenuti],
-    indent: 1.5em,
-  )
-
   v(15pt)
+
 
   //Contenuto effettivo verbale, aggiungere punti dell'indice
   body
@@ -175,7 +181,7 @@
 
   // --- TABELLA ATTIVITÀ (TO-DO) GENERATA AUTOMATICAMENTE ---
   if attivita-todo.len() > 0 [
-    == Attività da Svolgere (To-Do)
+    == Attività da Svolgere
     #table(
       columns: (1.2fr, 2.5fr, 1fr, 1fr),
       inset: 7pt,
@@ -197,7 +203,7 @@
 
   if ruoli-prossima-settimana.len() > 0 [
     #v(5pt)
-    [== Tabella Ruoli per la Prossima Settimana]
+    == Tabella Ruoli per la Prossima Settimana
     #table(
       columns: (1fr, 2fr),
       inset: 7pt,

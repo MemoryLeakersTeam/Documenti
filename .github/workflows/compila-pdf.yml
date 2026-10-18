@@ -23,12 +23,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout documentazione
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
       - name: Installa Typst
-        uses: typst-community/setup-typst@v4
+        uses: typst-community/setup-typst@v5
 
       - name: Installa font Liberation
         run: sudo apt-get update -q && sudo apt-get install -y -q fonts-liberation
@@ -38,7 +38,7 @@ jobs:
 
       # I PDF sono scaricabili dalla pagina dell'esecuzione (scheda Actions)
       - name: Carica i PDF come artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: pdf
           path: pdf/

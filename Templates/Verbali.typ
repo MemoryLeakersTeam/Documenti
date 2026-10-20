@@ -19,7 +19,7 @@
     "Membri del Gruppo",
     "Committente / Docente"
   ),
-  // --- PARAMETRI AGGIUNTI PER RISOLVERE L'ERRORE ---
+  decisioni: (),
   attivita-todo: (),
   ora-fine-riunione: "11:30",
   ruoli-prossima-settimana: (),
@@ -178,7 +178,21 @@
   body
 
   v(10pt)
-
+  // --- TABELLA DECISIONI GENERATA AUTOMATICAMENTE ---
+  if decisioni.len() > 0 [
+    == Decisioni Prese
+    #table(
+      columns: (0.5fr, 2.5fr),
+      inset: 7pt,
+      align: (col, row) => if row == 0 { center + horizon } else { left + horizon },
+      fill: (x, y) => if y == 0 { colore-primario } else if calc.even(y) { colore-sfondo } else { none },
+      stroke: 0.5pt + colore-bordo,
+      [*#text(fill: white)[ID]*], 
+      [*#text(fill: white)[Decisione presa]*], 
+      ..decisioni.flatten()
+    )
+    #v(10pt)
+  ]
   // --- TABELLA ATTIVITÀ (TO-DO) GENERATA AUTOMATICAMENTE ---
   if attivita-todo.len() > 0 [
     == Attività da Svolgere

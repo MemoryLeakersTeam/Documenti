@@ -24,6 +24,7 @@
   ora-fine-riunione: "11:30",
   ruoli-prossima-settimana: (),
   data-prossima-riunione: "",
+  firma-responsabile: "Firma del Responsabile di Progetto",
   body
 ) = {
   // Variabili Colore
@@ -34,20 +35,22 @@
   let data-str = data.display("[day]/[month]/[year]")
 
   // Impostazioni Pagina
-  set page(
+ set page(
     paper: "a4",
     margin: (x: 2cm, y: 2.5cm),
     header: context {
       if counter(page).get().first() > 1 [
-        #grid(
-          columns: (auto, 1fr, auto),
-          align: horizon,
-          image("Immagini/MemoryLeakersLogo.jpeg", height: 50pt),
-          align(center)[
+        #block(width: 100%)[
+          #grid(
+            columns: (1fr, 1fr),
+            align: horizon,
+            image("Immagini/MemoryLeakersLogo.jpg", height: 45pt),
+            align(right, image("Immagini/Logo_unipd.png", height: 28pt))
+          )
+          #place(center + horizon)[
             #text(8.5pt, fill: luma(120))[*#tipo-documento* | #gruppo]
-          ],
-          image("Immagini/Logo_unipd.png", height: 28pt)
-        )
+          ]
+        ]
         #v(-12pt)
         #line(length: 100%, stroke: 0.5pt + colore-primario)
       ]
@@ -78,7 +81,7 @@
       columns: (auto, auto),
       column-gutter: 2cm,
       align: horizon + center,
-      image("Immagini/MemoryLeakersLogo.jpeg", width: 100%),
+      image("Immagini/MemoryLeakersLogo.jpg", width: 100%),
       image("Immagini/Logo_unipd.png", width: 50%)
     )
 
@@ -197,11 +200,12 @@
   if attivita-todo.len() > 0 [
     == Attività da Svolgere
     #table(
-      columns: (1.2fr, 2.5fr, 1fr, 1fr),
+      columns: (0.5fr, 1.2fr, 2.5fr, 1fr, 1fr),
       inset: 7pt,
       align: (col, row) => if row == 0 { center + horizon } else { left + horizon },
       fill: (x, y) => if y == 0 { colore-primario } else if calc.even(y) { colore-sfondo } else { none },
       stroke: 0.5pt + colore-bordo,
+      [*#text(fill: white)[ID]*], 
       [*#text(fill: white)[Nome Attività]*], 
       [*#text(fill: white)[Breve Descrizione]*], 
       [*#text(fill: white)[Responsabile]*], 
@@ -238,6 +242,16 @@
       radius: (right: 4pt),
     )[
       *Data Prossima Riunione:* #data-prossima-riunione
+    ]
+  ]
+ //firma reponsabile
+  place(bottom + right, dy: -0.5cm)[
+    #block(width: 45%)[
+      #align(center)[
+        #line(length: 100%, stroke: 0.5pt + rgb("#a0a0a0"))
+        #v(2pt)
+        #text(9.5pt, weight: "medium", fill: rgb("#404040"))[#firma-responsabile]
+      ]
     ]
   ]
 }

@@ -6,13 +6,18 @@
 #      Candidatura/Verbali_interni/2026-10-13.typ
 #        → pdf/Candidatura/Verbali_interni/2026-10-13.pdf
 #  - Genera pdf/elenco.json con la lista dei PDF (utile al sito)
-#
 # ---------------------------------------------------------------------
 set -euo pipefail
 
 OUT="pdf"
 rm -rf "$OUT"
 mkdir -p "$OUT"
+
+# Configurazione fissa del percorso dei font
+FONT_ARGS=()
+if [ -d "Templates/Fonts" ]; then
+  FONT_ARGS=("--font-path" "Templates/Fonts")
+fi
 
 errori=0
 while IFS= read -r -d '' file; do

@@ -7,7 +7,7 @@
   ora: "17:10 – 18:00",
   luogo: "Google Meet",
   versione: "1.0.1",
-  stato: "Approved",
+  stato: "Approvato",
   autore: "Jacopo De Donà",
   verificatore: "Chiara Protopapa",
   file-nome: "2026-10-13.pdf",

@@ -16,9 +16,6 @@
     [Verifica del completamento delle attività assegnate nella riunione precedente],
     [Presentazione dei risultati della valutazione di YouTrack e scelta dello strumento per la gestione delle attività],
     [Definizione della struttura della bozza del Way of Working],
-    [Definizione dello stack di lavoro e della struttura dei repository],
-    [Regole per la gestione dei branch, delle issue e dei commit],
-    [Organizzazione del team, degli sprint e delle riunioni periodiche],
     [Presentazione del logo aggiornato],
     [Ripartizione delle attività],
     [Varie ed eventuali],
@@ -30,13 +27,14 @@
   distribuzione: ("Memory Leakers", "Prof. Riccardo Cardin", "Prof. Tullio Vardanega"),
   // Ogni riga: (Ver., Data, Descrizione, Autore, Verificatore)
   registro-modifiche: (
+    ([0.1.0], [23/10/2026], [Prima revisione del verbale], [Jacopo De Donà], [Chiara Protopapa]),
     ([0.0.1], [20/10/2026], [Bozza del terzo incontro], [Jacopo De Donà], []),
   ),
   // Ogni riga: (ID, Decisione presa)
   decisioni: (
     ([D1], [Adottato GitHub Projects per la pianificazione e l'avanzamento delle attività.]),
     ([D2], [Riunione fissa ogni martedì dalle 14:00 alle 15:00 a partire dall'aggiudicazione.]),
-    ([D3], [Adottato un modello di branching con `main` e branch dedicati alle singole issue.]),
+    ([D3], [Adottato un modello di branching per i repository.]),
     ([D4], [Commit in inglese secondo la convenzione Conventional Commits.]),
     ([D5], [Sprint di due settimane con rotazione dei ruoli a ogni sprint a partire dall'aggiudicazione.]),
     ([D6], [Creazione della bozza del glossario affidata esclusivamente a Jacopo Franco]),

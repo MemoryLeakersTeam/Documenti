@@ -21,10 +21,12 @@
   ),
   decisioni: (),
   attivita-todo: (),
+  mostra-conclusioni-automatiche: true,
   ora-fine-riunione: "11:30",
   ruoli-prossima-settimana: (),
   data-prossima-riunione: "",
   firma-responsabile: "Firma del Responsabile di Progetto",
+  firma-esterna: "",
   body
 ) = {
   // Variabili Colore
@@ -216,8 +218,10 @@
   ]
 
   //conclusionui e ruoli prossima riunuione
-  [= Conclusioni]
-  [La riunione si è conclusa alle ore #ora-fine-riunione con la validazione delle attività assegnate.]
+  if mostra-conclusioni-automatiche {
+    [= Conclusioni]
+    [La riunione si è conclusa alle ore #ora-fine-riunione con la validazione delle attività assegnate.]
+  }
 
   if ruoli-prossima-settimana.len() > 0 [
     #v(5pt)
@@ -245,21 +249,58 @@
     ]
   ]
 
-  //firma del responsabile
-  place(bottom + right, dy: -0.5cm)[
-    #block(width: 45%)[
-      #align(center)[
-        #if firma-responsabile != "" and firma-responsabile != "Firma del Responsabile di Progetto" [
-          #text(
-            font: ("Dancing Script", "Z003", "Liberation Serif"),
-            size: 16pt,
-            fill: rgb("#1a2b4c")
-          )[#firma-responsabile]
-          #v(-5pt)
+  //firma del responsabile e, per i verbali esterni, del revisore esterno
+  v(2cm)
+  block(breakable: false)[
+    #if tipo-documento == "Verbale Esterno" [
+      #grid(
+        columns: (1fr, 1fr),
+        column-gutter: 1cm,
+        align: bottom,
+        align(center)[
+          #if firma-responsabile != "" and firma-responsabile != "Firma del Responsabile di Progetto" [
+            #text(
+              font: ("Dancing Script", "Z003", "Liberation Serif"),
+              size: 16pt,
+              fill: rgb("#1a2b4c")
+            )[#firma-responsabile]
+            #v(-5pt)
+          ]
+          #line(length: 100%, stroke: 0.5pt + rgb("#a0a0a0"))
+          #v(2pt)
+          #text(9.5pt, weight: "medium", fill: rgb("#404040"))[Firma del Responsabile di Progetto]
+        ],
+        align(center)[
+          #if firma-esterna != "" [
+            #text(
+              font: ("Dancing Script", "Z003", "Liberation Serif"),
+              size: 16pt,
+              fill: rgb("#1a2b4c")
+            )[#firma-esterna]
+            #v(-5pt)
+          ]
+          #line(length: 100%, stroke: 0.5pt + rgb("#a0a0a0"))
+          #v(2pt)
+          #text(9.5pt, weight: "medium", fill: rgb("#404040"))[Firma del Revisore Esterno]
         ]
-        #line(length: 100%, stroke: 0.5pt + rgb("#a0a0a0"))
-        #v(2pt)
-        #text(9.5pt, weight: "medium", fill: rgb("#404040"))[Firma del Responsabile di Progetto]
+      )
+    ] else [
+      #align(right)[
+        #block(width: 45%)[
+          #align(center)[
+            #if firma-responsabile != "" and firma-responsabile != "Firma del Responsabile di Progetto" [
+              #text(
+                font: ("Dancing Script", "Z003", "Liberation Serif"),
+                size: 16pt,
+                fill: rgb("#1a2b4c")
+              )[#firma-responsabile]
+              #v(-5pt)
+            ]
+            #line(length: 100%, stroke: 0.5pt + rgb("#a0a0a0"))
+            #v(2pt)
+            #text(9.5pt, weight: "medium", fill: rgb("#404040"))[Firma del Responsabile di Progetto]
+          ]
+        ]
       ]
     ]
   ]

@@ -4,13 +4,13 @@
   titolo: "Way of Working",
   sottotitolo: "",
   tipo-documento: "Documento Interno",
-  versione: "1.0.0",
+  versione: "0.0.1",
   autore: "Riccardo Peresson",
-  verificatore: "",
+  verificatore: "Chiara Protopapa",
   stato: "In revisione",
-  file-nome: "WayOfWorking.pdf",
+  file-nome: "Way_Of_Working.pdf",
   registro-modifiche: (
-    ([], [24/10/2026], [Prima stesura], [Riccardo Peresson], []),
+    ([0.0.1], [24/10/2026], [Prima stesura], [Riccardo Peresson], [Chiara Protopapa]),
   ),
 )
 

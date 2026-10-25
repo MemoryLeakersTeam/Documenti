@@ -6,10 +6,10 @@
   data: datetime(year: 2026, month: 10, day: 19),
   ora: "16:00 – 17:10",
   luogo: "Google Meet",
-  versione: "0.0.1",
-  stato: "Bozza",
+  versione: "1.0.1",
+  stato: "Approvato",
   autore: "Jacopo De Donà",
-  verificatore: "",
+  verificatore: "Chiara Protopapa",
   file-nome: "2026-10-19.pdf",
   gruppo: "Memory Leakers",
   ordine-del-giorno: (
@@ -30,6 +30,8 @@
   distribuzione: ("Memory Leakers", "Prof. Riccardo Cardin", "Prof. Tullio Vardanega"),
   // Ogni riga: (Ver., Data, Descrizione, Autore, Verificatore)
   registro-modifiche: (
+    ([1.0.1], [23/10/2026], [Firma ed approvazione del verbale], [Jacopo De Donà], [Paolo Prevedello Ramirez]),
+    ([1.0.0], [20/10/2026], [Prima versione completa del verbale], [Jacopo De Donà], [Chiara Protopapa]),
     ([0.0.1], [19/10/2026], [Bozza del secondo incontro], [Jacopo De Donà], []),
   ),
   // Ogni riga: (ID, Decisione presa)
@@ -45,22 +47,23 @@
     ([D9], [Definiti i ruoli per le prossime due settimane: *Responsabile* temporaneo: *Paolo Prevedello Ramirez*, *Verificatore*: *Chiara Protopapa*, *Analisti*: tutti gli altri membri del gruppo]),
     ([D10], [Pianificate le riunioni del 20/10, 23/10, 25/10 e 27/10/2026]),
   ),
-  // Ogni riga: (Nome attività, Descrizione, Responsabile, Scadenza)
+  // Ogni riga: (ID, Nome attività, Descrizione, Responsabile, Scadenza)
   attivita-todo: (
-    ([Email docenti], [Invio email ai docenti], [Paolo Prevedello Ramirez], [20/10/2026 (mattina)]),
-    ([Email aziende], [Stesura della bozza dell'email alle aziende per richiedere un colloquio, da inoltrare al Responsabile], [Matteo Arcandi], [19/10/2026 (entro mezzanotte)]),
-    ([Email aziende], [Invio dell'email alle aziende], [Paolo Prevedello Ramirez], [21/10/2026]),
-    ([Telegram], [Creazione del gruppo Telegram], [Matteo Marcon], [20/10/2026]),
-    ([Google Docs], [Creazione del file Google Docs per raccogliere le domande da porre alle aziende], [Matteo Marcon], [20/10/2026]),
-    ([Google Docs], [Raccolta di domande e argomenti per le aziende], [Tutti], [21/10/2026]),
-    ([YouTrack], [Valutazione di YouTrack e presentazione dei risultati], [Chiara Protopapa], [20/10/2026]),
-    ([Sito], [Collegamento dei PDF dei verbali al sito], [Jacopo De Donà], [Da definire]),
-    ([Verbale], [Redazione del verbale], [Jacopo De Donà], [21/10/2026]),
-    ([Logo], [Cambio colore del logo], [Jacopo Franco, Riccardo Peresson], [Da definire]),
-    ([Glossario], [Creazione bozza glossario], [Jacopo Franco, Riccardo Peresson], [Da definire]),
+    ([A1], [Email docenti], [Invio email ai docenti], [Paolo Prevedello Ramirez], [20/10/2026 (mattina)]),
+    ([A2], [Email aziende], [Stesura della bozza dell'email alle aziende per richiedere un colloquio, da inoltrare al Responsabile], [Matteo Arcandi], [19/10/2026 (entro mezzanotte)]),
+    ([A3], [Email aziende], [Invio dell'email alle aziende], [Paolo Prevedello Ramirez], [21/10/2026]),
+    ([A4], [Telegram], [Creazione del gruppo Telegram], [Matteo Marcon], [20/10/2026]),
+    ([A5], [Google Docs], [Creazione del file Google Docs per raccogliere le domande da porre alle aziende], [Matteo Marcon], [20/10/2026]),
+    ([A6], [Google Docs], [Raccolta di domande e argomenti per le aziende], [Tutti], [21/10/2026]),
+    ([A7], [YouTrack], [Valutazione di YouTrack e presentazione dei risultati], [Chiara Protopapa], [20/10/2026]),
+    ([A8], [Sito], [Collegamento dei PDF dei verbali al sito], [Jacopo De Donà], [Da definire]),
+    ([A9], [Verbale], [Redazione del verbale], [Jacopo De Donà], [21/10/2026]),
+    ([A10], [Logo], [Cambio colore del logo], [Jacopo Franco, Riccardo Peresson], [Da definire]),
+    ([A11], [Glossario], [Creazione bozza glossario], [Jacopo Franco, Riccardo Peresson], [Da definire]),
   ),
   ora-fine-riunione: "17:10",
   data-prossima-riunione: "20/10/2026 alle ore 16:00",
+  firma-responsabile: "Paolo Prevedello Ramirez"
 )
 
 = Introduzione
@@ -81,7 +84,7 @@ A seguito della necessità di organizzare le attività del gruppo in modo più e
 È stato adottato #gloss[*Telegram*] per la comunicazione interna del gruppo, in quanto ritenuto più adatto rispetto a #gloss[*WhatsApp*] per la gestione dei messaggi e delle informazioni, grazie anche alla possibilità di creare canali tematici.
 
 == Discussione delle convenzioni per git e GitHub
-Dopo una breve discussione sono state definite le convenzioni per git e GitHub, per garantire una gestione coerente ed efficiente del #gloss[repository]. Ogni membro del gruppo lavorerà su un #gloss[branch] dedicato alla #gloss[issue] di cui si occupa. Le modifiche saranno integrate nel branch principale tramite #gloss[pull request], previa revisione del #gloss[Verificatore]. Per quanto riguarda i messaggi di #gloss[commit], si è deciso di adottare i #gloss[*Conventional Commits*], per renderli più chiari e comprensibili. Ogni messaggio di commit deve indicare la issue a cui si riferisce, scrivendo `#numero` per un semplice riferimento oppure `close #numero` per chiudere la issue.
+Dopo una breve discussione è stato definito il #gloss[way of working] per git e GitHub, per garantire una gestione coerente ed efficiente del #gloss[repository]. Ogni membro del gruppo lavorerà su un #gloss[branch] dedicato alla #gloss[issue] di cui si occupa. Le modifiche saranno integrate nel branch principale tramite #gloss[pull request], previa revisione del #gloss[Verificatore]. Per quanto riguarda i messaggi di #gloss[commit], si è deciso di adottare i #gloss[*Conventional Commits*], per renderli più chiari e comprensibili. Ogni messaggio di commit deve indicare la issue a cui si riferisce, scrivendo `#numero` per un semplice riferimento oppure `close #numero` per chiudere la issue.
 
 == Discussione dei capitolati
 Dopo un'attenta analisi dei capitolati, è stato deciso di cambiare le priorità dei capitolati su cui il gruppo si concentrerà, aggiungendo un nuovo capitolato di interesse, il *Capitolato C7* - *Smart Dashboard*, proposto da Ergon. Il nuovo ordine di priorità è C6, C1, C7, C5. Prima degli incontri con le aziende, il file condiviso sarà popolato con le domande da porre.
@@ -96,7 +99,7 @@ Data la necessità di una migliore organizzazione dei ruoli, si è deciso di nom
 Sono state fissate le seguenti riunioni:
 - martedì 20/10/2026 alle ore 16:00, dedicata al way of working;
 - venerdì 23/10/2026 dalle ore 13:00 alle 14:00, per la preparazione del diario di bordo del 26/10/2026;
-- domenica 25/10/2026 dalle ore 14:00, per la stesura dell'analisi dei capitolati;
+- lunedì 26/10/2026 dalle ore 14:00, per la stesura dell'analisi dei capitolati;
 - martedì 27/10/2026 alle ore 13:00, per la continuazione della stesura.
 
 = Decisioni e attività

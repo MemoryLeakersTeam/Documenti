@@ -35,7 +35,7 @@
   let data-str = data.display("[day]/[month]/[year]")
 
   // Impostazioni Pagina
- set page(
+  set page(
     paper: "a4",
     margin: (x: 2cm, y: 2.5cm),
     header: context {
@@ -244,13 +244,22 @@
       *Data Prossima Riunione:* #data-prossima-riunione
     ]
   ]
- //firma reponsabile
+
+  //firma del responsabile
   place(bottom + right, dy: -0.5cm)[
     #block(width: 45%)[
       #align(center)[
+        #if firma-responsabile != "" and firma-responsabile != "Firma del Responsabile di Progetto" [
+          #text(
+            font: ("Dancing Script", "Z003", "Liberation Serif"),
+            size: 16pt,
+            fill: rgb("#1a2b4c")
+          )[#firma-responsabile]
+          #v(-5pt)
+        ]
         #line(length: 100%, stroke: 0.5pt + rgb("#a0a0a0"))
         #v(2pt)
-        #text(9.5pt, weight: "medium", fill: rgb("#404040"))[#firma-responsabile]
+        #text(9.5pt, weight: "medium", fill: rgb("#404040"))[Firma del Responsabile di Progetto]
       ]
     ]
   ]

@@ -250,8 +250,9 @@
   ]
 
   //firma del responsabile e, per i verbali esterni, del revisore esterno
-  if tipo-documento == "Verbale Esterno" [
-    #place(bottom, dy: -0.5cm)[
+  v(2cm)
+  block(breakable: false)[
+    #if tipo-documento == "Verbale Esterno" [
       #grid(
         columns: (1fr, 1fr),
         column-gutter: 1cm,
@@ -283,24 +284,24 @@
           #text(9.5pt, weight: "medium", fill: rgb("#404040"))[Firma del Revisore Esterno]
         ]
       )
-    ]
-  ] else [ 
-    #place(bottom + right, dy: -0.5cm)[
-      #block(width: 45%)[
-        #align(center)[
-          #if firma-responsabile != "" and firma-responsabile != "Firma del Responsabile di Progetto" [
-            #text(
-              font: ("Dancing Script", "Z003", "Liberation Serif"),
-              size: 16pt,
-              fill: rgb("#1a2b4c")
-            )[#firma-responsabile]
-            #v(-5pt)
-          ]
-          #line(length: 100%, stroke: 0.5pt + rgb("#a0a0a0"))
-          #v(2pt)
-          #text(9.5pt, weight: "medium", fill: rgb("#404040"))[Firma del Responsabile di Progetto]
+    ] else [
+      #align(right)[
+        #block(width: 45%)[
+          #align(center)[
+            #if firma-responsabile != "" and firma-responsabile != "Firma del Responsabile di Progetto" [
+              #text(
+                font: ("Dancing Script", "Z003", "Liberation Serif"),
+                size: 16pt,
+                fill: rgb("#1a2b4c")
+              )[#firma-responsabile]
+              #v(-5pt)
+            ]
+            #line(length: 100%, stroke: 0.5pt + rgb("#a0a0a0"))
+            #v(2pt)
+            #text(9.5pt, weight: "medium", fill: rgb("#404040"))[Firma del Responsabile di Progetto]
           ]
         ]
       ]
+    ]
   ]
 }

@@ -16,7 +16,7 @@
     [Presentazione breve del gruppo all'azienda Ergon Informatica],
     [Domande del gruppo e chiarimenti richiesti]
   ),
-  partecipanti: (
+  partecipanti: ( "Gianluca Carlesso",
     "Paolo Prevedello Ramirez", "Chiara Protopapa", "Jacopo Franco"
   ),
   distribuzione: ("Memory Leakers", "Ergon Informatica", "Prof. Riccardo Cardin", "Prof. Tullio Vardanega"),

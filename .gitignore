@@ -7,3 +7,4 @@ desktop.ini
 pdf/
 *.pdf
 !/Templates/Template Diario di bordo.pdf
+!/Presentazioni/Diario_di_bordo/*.pdf

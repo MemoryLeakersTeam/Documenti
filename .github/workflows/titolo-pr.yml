@@ -1,0 +1,43 @@
+name: Titolo PR
+
+on:
+  pull_request:
+    branches: [main]
+    # "edited" serve per ricontrollare il titolo quando viene modificato
+    types: [opened, edited, synchronize, reopened]
+
+# Una sola esecuzione per PR: un nuovo evento annulla quella precedente
+concurrency:
+  group: titolo-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  titolo:
+    name: Titolo Conventional Commits
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Controlla il formato del titolo
+        env:
+          TITOLO: ${{ github.event.pull_request.title }}
+        run: |
+          tipi='feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert'
+          regex="^(${tipi})(\([a-z0-9._/-]+\))?!?: [^ ].*$"
+
+          if [[ "$TITOLO" =~ $regex ]]; then
+            echo "✅ Titolo valido: $TITOLO"
+          else
+            echo "::error title=Titolo PR non valido::Il titolo \"$TITOLO\" non rispetta Conventional Commits."
+            echo ""
+            echo "Formato atteso:  <tipo>(<ambito opzionale>): <descrizione>"
+            echo "Tipi ammessi:    ${tipi//|/, }"
+            echo "L'ambito va scritto in minuscolo."
+            echo "Esempi:"
+            echo "  docs(norme): aggiunge sezione sulla verifica"
+            echo "  fix(pdp): corregge il preventivo del periodo 2"
+            echo "  feat!: nuovo template dei verbali"
+            exit 1
+          fi

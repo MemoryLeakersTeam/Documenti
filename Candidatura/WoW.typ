@@ -4,14 +4,15 @@
   titolo: "Way of Working",
   sottotitolo: "",
   tipo-documento: "Documento Interno",
-  versione: "1.0.0",
+  versione: "1.0.1",
   autore: "Riccardo Peresson",
   verificatore: "Chiara Protopapa",
   stato: "In revisione",
-  file-nome: "Way_Of_Working.pdf",
+  file-nome: "WoW.pdf",
   registro-modifiche: (
-    ([0.0.1], [24/10/2026], [Prima stesura], [Riccardo Peresson], [Chiara Protopapa]),
-    ([1.0.0], [25/10/2026], [Aggiunta link a glossario], [Riccardo Peresson], [Chiara Protopapa])
+    ([1.0.1], [26/10/2026], [Precisazioni dei concetti e correzioni], [Riccardo Peresson], [Chiara Protopapa]),
+    ([1.0.0], [25/10/2026], [Aggiunta link a glossario], [Riccardo Peresson], [Chiara Protopapa]),
+     ([0.0.1], [24/10/2026], [Prima stesura], [Riccardo Peresson], [Chiara Protopapa])
   ),
 )
 
@@ -31,31 +32,34 @@ Di seguito le tecnologie adottate dal team.
 
 Per le comunicazioni interne:
 
-- _Google Meet_#footnote[#link("https://meet.google.com/home")], riunioni da remoto;
-- _WhatsApp_#footnote[#link("https://www.whatsapp.com/?lang=it")], comunicazioni rapide e informali;
-- _Telegram_#footnote[#link("https://telegram.org/")], comunicazioni strutturate e formali; nel dettaglio si dispone dei canali:
+- _Google Meet_#footnote[#link("https://meet.google.com/home")], riunioni da remoto; piattaforma di videoconferenza utilizzata per le riunioni del team quando non è possibile incontrarsi di persona; permette di condividere lo schermo e registrare gli incontri, favorendo la collaborazione anche a distanza;
+- _WhatsApp_#footnote[#link("https://www.whatsapp.com/?lang=it")], comunicazioni rapide e informali; applicazione di messaggistica istantanea per scambi veloci, promemoria e aggiornamenti che non richiedono una formalizzazione; non è il canale di riferimento per le decisioni o per la documentazione del lavoro;
+- _Telegram_#footnote[#link("https://telegram.org/")], comunicazioni strutturate e formali; piattaforma di messaggistica organizzata in canali tematici, che raccoglie le comunicazioni ufficiali del team, suddivise per argomento, così da mantenere ordine e tracciabilità delle informazioni; nel dettaglio si dispone dei canali
+  - Generale,
+  - ToDo,
+  - Sondaggi,
+  - Candidatura,
   - Riunioni interne,
   - Riunioni esterne,
-  - Candidatura,
   - Link Utili.
 
 Per le comunicazioni esterne:
 
-- _Gmail_#footnote[#link("https://workspace.google.com/intl/it/gmail/")], attraverso l'indirizzo *#link("mailto:memoryleakersteam@gmail.com")[memoryleakersteam\@gmail.com]*.
+- _Gmail_#footnote[#link("https://workspace.google.com/intl/it/gmail/")], attraverso l'indirizzo *#link("mailto:memoryleakersteam@gmail.com")[memoryleakersteam\@gmail.com]*; servizio di posta elettronica utilizzato per la corrispondenza ufficiale con soggetti esterni al team.
 
 == Organizzazione del lavoro
 
-- _GitHub Projects_#footnote[#link("https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects")], task, planning, calendario e timesheet;
+- _GitHub Projects_#footnote[#link("https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects")], task, planning (attravero l'utilizzo della view Kanban), calendario: strumento di gestione dei progetti integrato con GitHub; consente di creare e assegnare le attività, pianificarne le scadenze e seguirne l’avanzamento tramite una bacheca Kanban, suddivisa in colonne che rappresentano lo stato dei lavori, oltre ad una vista calendario per la pianificazione temporale.
 
 == Repository
 
-- _GitHub_#footnote[#link("https://github.com/")], versionamento, pipeline (GitHub Actions) e knowledge (Wiki).
+- _GitHub_#footnote[#link("https://github.com/")], versionamento, pipeline (GitHub Actions) e knowledge (Wiki): piattaforma di hosting per il codice e i documenti del progetto. Tiene traccia di ogni modifica tramite il controllo di versione, esegue automaticamente test e processi di build tramite GitHub Actions e ospita la Wiki, dove viene raccolta la documentazione condivisa del team.
 
 == Altri strumenti
 
-- _Typst_#footnote[#link("https://typst.app/home")], documentazione;
-- Da definire, diagrammi UML;
-- _Google Presentazioni_#footnote[#link("https://docs.google.com/presentation/u/0/")], per le slide da utilizzare durante i diari di bordo.
+- _Typst_#footnote[#link("https://typst.app/home")], documentazione: linguaggio di composizione tipografica moderno e veloce, usato per redigere la documentazione tecnica e produrne una versione finale in formato PDF con un risultato curato
+- _Da definire_, diagrammi UML: strumento non ancora scelto per la realizzazione dei diagrammi UML, che serviranno a modellare e rappresentare graficamente la struttura e il comportamento del sistema
+- _Google Presentazioni_#footnote[#link("https://docs.google.com/presentation/u/0/")], per le slide da utilizzare durante i diari di bordo: applicazione per la creazione di presentazioni
 
 = Repository GitHub
 
@@ -91,8 +95,11 @@ Convenzioni per la gestione dei branches.
 
 === I rami principali
 
+Il team ha deciso di applicare la tecnica del #gloss(url: "https://memoryleakersteam.github.io/glossario")[Git Flow]:
 - _Main_ contiene la versione stabile del codice;
-- _Develop_ è il ramo di integrazione, raccoglie i branch di lavoro prima di essere approvati al _Main_.
+- _Develop_ è il ramo di integrazione, dedicato al codice del prodotto, raccoglie i branch di lavoro prima di essere approvati al _Main_.
+
+Inerentemente alla documentazione, non è previsto un ramo _Develop_, ma la creazione dei branch necessari come indicato in 3.2.2 .
 
 === Issue
 
@@ -100,7 +107,7 @@ Ogni #gloss(url: "https://memoryleakersteam.github.io/glossario#issues")[issue] 
 
 === Pull request
 
-Le #gloss(url:"https://memoryleakersteam.github.io/glossario#pull-request")[pull request] verso il _Main_ possono essere approvate solo da un #gloss(url: "https://memoryleakersteam.github.io/glossario#verificatore")[verificatore], e devono provenire da _Develop_ (e non da un suo sotto-branch), in seguito al soddisfacimento della #gloss(url:"https://memoryleakersteam.github.io/glossario#definition-of-done")[Definition of Done].
+Le #gloss(url:"https://memoryleakersteam.github.io/glossario#pull-request")[pull request] verso il _Main_ e _Develop_ possono essere approvate solo da un #gloss(url: "https://memoryleakersteam.github.io/glossario#verificatore")[verificatore], in seguito al soddisfacimento della #gloss(url:"https://memoryleakersteam.github.io/glossario#definition-of-done")[Definition of Done].
 
 = Pratiche di lavoro
 

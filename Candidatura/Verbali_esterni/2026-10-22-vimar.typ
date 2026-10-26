@@ -1,4 +1,7 @@
-#import "../../Templates/Verbali.typ": verbale, gloss
+#import "../../Templates/Verbali.typ": verbale, gloss, 
+#let colore-primario = rgb("#305b57")
+#let colore-sfondo = rgb("#eaf7f2")
+#let colore-bordo = rgb("#49736a")
 
 #show: verbale.with(
   titolo: "Verbale riunione esterna con Vimar del 22/10/2026",
@@ -6,7 +9,7 @@
   data: datetime(year: 2026, month: 10, day: 22),
   ora: "16:00 - 17:00",
   luogo: "Microsoft Teams",
-  versione: "0.0.1",
+  versione: "0.0.2",
   stato: "Bozza",
   autore: "Jacopo De Donà",
   verificatore: "",
@@ -22,6 +25,7 @@
   ),
   distribuzione: ("Memory Leakers", "Vimar", "Prof. Riccardo Cardin", "Prof. Tullio Vardanega"),
   registro-modifiche: (
+    ([0.0.2], [25/10/2026], [Aggiunta sezione decisioni ed attività], [Jacopo De Donà], []),
     ([0.0.1], [25/10/2026], [Bozza del verbale], [Jacopo De Donà], []),
   ),
   ora-fine-riunione: "17:00",
@@ -153,6 +157,29 @@ svolgerli in presenza nelle salette della sede Vimar in caso di necessità. Sono
 presenza: all'inizio del progetto, per la consegna del kit, e al collaudo finale. Sono inoltre previste
 indicativamente due demo con i colleghi del reparto R&D, a metà progetto (PoC) e alla fine (#gloss[MVP]). L'azienda
 si è resa disponibile per dubbi progettuali, scelte architetturali e coerenza della soluzione.
+
+= Decisioni e attività
+
+== Decisioni prese
+Data la natura dell'incontro, non sono state prese decisioni vincolanti. Le indicazioni dell'azienda sono state raccolte come
+requisiti e linee guida per la progettazione della soluzione, e sono state riportate nel verbale per chiarezza e tracciabilità.
+
+#v(10pt)
+
+== Attività da svolgere
+#table(
+  columns: (0.5fr, 1.2fr, 2.5fr, 1fr, 1fr),
+  inset: 7pt,
+  align: (col, row) => if row == 0 { center + horizon } else { left + horizon },
+  fill: (x, y) => if y == 0 { colore-primario } else if calc.even(y) { colore-sfondo } else { none },
+  stroke: 0.5pt + colore-bordo,
+  [*#text(fill: white)[ID]*], [*#text(fill: white)[Nome Attività]*], [*#text(fill: white)[Breve Descrizione]*], [*#text(fill: white)[Responsabile]*], [*#text(fill: white)[Scadenza]*],
+  [A1], [Verifica e invio del verbale], [Verifica del presente verbale e invio a Vimar per l'approvazione], [Chiara Protopapa, Riccardo Peresson], [28/10/2026],
+  [A2], [Aggiornamento Glossario], [Inserimento dei nuovi termini emersi], [Jacopo Franco], [29/10/2026],
+  [A3], [Valutazione capitolato C1], [Integrazione delle risposte ricevute nella valutazione del capitolato per la candidatura], [Tutto il gruppo], [30/10/2026],
+  [A4], [Studio delle tecnologie], [Studio esplorativo di documentazione KNX IoT per integratori, standard MCP e FastMCP], [Tutto il gruppo], [Continuativa],
+  [A5], [Avvio con Vimar], [In caso di aggiudicazione: concordare l'incontro di consegna del kit, individuare chi lo custodirà e valutare la richiesta di accesso AWS e chiave LLM], [Da assegnare], [Dopo il 03/11/2026],
+)
 
 = Conclusioni
 L'incontro è stato utile per chiarire i dubbi sorti tra i componenti del gruppo riguardo all'architettura, alla

@@ -1,0 +1,22 @@
+name: Compilazione PR
+
+on:
+  pull_request:
+    branches: [main]
+    # Niente "edited": cambiare titolo o descrizione non richiede di ricompilare
+    types: [opened, synchronize, reopened]
+
+# Una sola esecuzione per PR: un nuovo push annulla quella precedente
+concurrency:
+  group: compila-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  compila:
+    uses: ./.github/workflows/compila-comune.yml
+    with:
+      nome-artifact: pdf-pr-${{ github.event.pull_request.number }}
+      giorni-conservazione: 7

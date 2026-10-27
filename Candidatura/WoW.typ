@@ -95,7 +95,7 @@ Convenzioni per la gestione dei branches.
 
 === I rami principali
 
-Il team ha deciso di applicare la tecnica del #gloss(url: "https://memoryleakersteam.github.io/glossario")[Git Flow]:
+Il team ha deciso di applicare la tecnica del #gloss(url: "https://memoryleakersteam.github.io/glossario#git-flow")[Git Flow]:
 - _Main_ contiene la versione stabile del codice;
 - _Develop_ è il ramo di integrazione, dedicato al codice del prodotto, raccoglie i branch di lavoro prima di essere approvati al _Main_.
 

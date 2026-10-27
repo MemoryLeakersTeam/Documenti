@@ -6,3 +6,5 @@ desktop.ini
 .DS_Store
 pdf/
 *.pdf
+!/Templates/Template Diario di bordo.pdf
+!/Presentazioni/Diario_di_bordo/*.pdf

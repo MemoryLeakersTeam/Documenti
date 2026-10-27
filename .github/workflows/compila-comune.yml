@@ -1,0 +1,42 @@
+name: Compilazione comune
+
+on:
+  workflow_call:
+    inputs:
+      nome-artifact:
+        description: Nome dell'artifact con i PDF
+        type: string
+        required: true
+      giorni-conservazione:
+        description: Per quanti giorni conservare l'artifact
+        type: number
+        required: false
+        default: 90
+
+jobs:
+  compila:
+    name: Compilazione Typst
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout documentazione
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Installa Typst
+        uses: typst-community/setup-typst@v5
+
+      - name: Installa font Liberation
+        run: sudo apt-get update -q && sudo apt-get install -y -q fonts-liberation
+
+      - name: Compila tutti i documenti
+        run: bash Scripts/compila.sh
+
+      - name: Carica i PDF come artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: ${{ inputs.nome-artifact }}
+          path: pdf/
+          if-no-files-found: error
+          retention-days: ${{ inputs.giorni-conservazione }}

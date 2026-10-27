@@ -49,7 +49,8 @@ Per le comunicazioni esterne:
 
 == Organizzazione del lavoro
 
-- _GitHub Projects_#footnote[#link("https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects")], task, planning (attravero l'utilizzo della view Kanban), calendario: strumento di gestione dei progetti integrato con GitHub; consente di creare e assegnare le attività, pianificarne le scadenze e seguirne l’avanzamento tramite una bacheca Kanban, suddivisa in colonne che rappresentano lo stato dei lavori, oltre ad una vista calendario per la pianificazione temporale.
+- _GitHub Projects_#footnote[#link("https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects")], task, planning (attravero l'utilizzo della view Kanban): strumento di gestione dei progetti integrato con GitHub; consente di creare e assegnare le attività, pianificarne le scadenze e seguirne l’avanzamento tramite una bacheca Kanban, suddivisa in colonne che rappresentano lo stato dei lavori
+- _Google Calendar_#footnote[#link("https://workspace.google.com/intl/it/products/calendar/")], calendario condiviso tra ogni membro del team per la condivisione delle disponibilità orarie della settimana
 
 == Repository
 

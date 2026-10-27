@@ -12,7 +12,7 @@
   versione: "1.0.0",
   stato: "Approvato",
   autore: "Jacopo De Donà",
-  verificatore: "",
+  verificatore: "Chiara Protopapa",
   file-nome: "2026-10-22-vimar.pdf",
   gruppo: "Memory Leakers",
   ordine-del-giorno: (
@@ -25,7 +25,8 @@
   ),
   distribuzione: ("Memory Leakers", "Vimar", "Prof. Riccardo Cardin", "Prof. Tullio Vardanega"),
   registro-modifiche: (
-    ([1.0.0], [26/10/2026], [Versione finale firmata], [Jacopo De Donà], [Chiara Protopapa]),
+    ([1.0.0], [26/10/2026], [Versione finale firmata], [Jacopo De Donà], [Paolo Prevedello Ramirez]),
+    ([0.1.0], [26/10/2026], [Verifica del verbale], [Jacopo De Donà], [Chiara Protopapa]),
     ([0.0.2], [25/10/2026], [Aggiunta sezione decisioni ed attività], [Jacopo De Donà], []),
     ([0.0.1], [25/10/2026], [Bozza del verbale], [Jacopo De Donà], []),
   ),

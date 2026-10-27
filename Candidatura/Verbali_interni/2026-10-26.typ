@@ -6,8 +6,8 @@
   data: datetime(year: 2026, month: 10, day: 26),
   ora: "13:00 – 15:00",
   luogo: "Google Meet",
-  versione: "0.0.1",
-  stato: "Bozza",
+  versione: "0.1.0",
+  stato: "Verificato",
   autore: "Jacopo De Donà",
   verificatore: "",
   file-nome: "2026-10-26.pdf",
@@ -26,6 +26,7 @@
   distribuzione: ("Memory Leakers", "Prof. Riccardo Cardin", "Prof. Tullio Vardanega"),
   // Ogni riga: (Ver., Data, Descrizione, Autore, Verificatore)
   registro-modifiche: (
+    ([0.1.0], [27/10/2026], [Prima revisione del verbale], [Jacopo De Donà], [Chiara Protopapa]),
     ([0.0.1], [27/10/2026], [Bozza del quinto incontro], [Jacopo De Donà], []),
   ),
   // Ogni riga: (ID, Decisione presa)

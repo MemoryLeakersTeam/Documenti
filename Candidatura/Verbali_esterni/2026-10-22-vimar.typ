@@ -9,8 +9,8 @@
   data: datetime(year: 2026, month: 10, day: 22),
   ora: "16:00 - 17:00",
   luogo: "Microsoft Teams",
-  versione: "0.0.2",
-  stato: "Bozza",
+  versione: "1.0.0",
+  stato: "Approvato",
   autore: "Jacopo De Donà",
   verificatore: "",
   file-nome: "2026-10-22-vimar.pdf",
@@ -25,12 +25,13 @@
   ),
   distribuzione: ("Memory Leakers", "Vimar", "Prof. Riccardo Cardin", "Prof. Tullio Vardanega"),
   registro-modifiche: (
+    ([1.0.0], [26/10/2026], [Versione finale firmata], [Jacopo De Donà], [Chiara Protopapa]),
     ([0.0.2], [25/10/2026], [Aggiunta sezione decisioni ed attività], [Jacopo De Donà], []),
     ([0.0.1], [25/10/2026], [Bozza del verbale], [Jacopo De Donà], []),
   ),
   ora-fine-riunione: "17:00",
   mostra-conclusioni-automatiche: false,
-  firma-responsabile: "",
+  firma-responsabile: "Paolo Prevedello Ramirez",
   firma-esterna: "",
 )
 

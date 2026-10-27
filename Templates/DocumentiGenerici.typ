@@ -1,4 +1,7 @@
-#let gloss(term) = [#term#sub[G]]
+#let gloss(term, url: none) = {
+  let t = [#term#sub[G]]
+  if url == none or url == "" { t } else { link(url)[#t] }
+}
 
 #let documento(
   titolo: "TITOLO DEL DOCUMENTO",

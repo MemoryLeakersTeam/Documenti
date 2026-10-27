@@ -9,7 +9,7 @@
   data: datetime(year: 2026, month: 10, day: 22),
   ora: "16:00 - 17:00",
   luogo: "Microsoft Teams",
-  versione: "1.0.0",
+  versione: "1.1.0",
   stato: "Approvato",
   autore: "Jacopo De Donà",
   verificatore: "Chiara Protopapa",

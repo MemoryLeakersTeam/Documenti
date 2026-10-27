@@ -25,6 +25,7 @@
   ),
   distribuzione: ("Memory Leakers", "Vimar", "Prof. Riccardo Cardin", "Prof. Tullio Vardanega"),
   registro-modifiche: (
+    ([1.1.0], [27/10/2026], [Modifiche a seguito dei commenti di Vimar e aggiunta firma esterna], [Jacopo De Donà], [Mariano Sciacco]),
     ([1.0.0], [26/10/2026], [Versione finale firmata], [Jacopo De Donà], [Paolo Prevedello Ramirez]),
     ([0.1.0], [26/10/2026], [Verifica del verbale], [Jacopo De Donà], [Chiara Protopapa]),
     ([0.0.2], [25/10/2026], [Aggiunta sezione decisioni ed attività], [Jacopo De Donà], []),
@@ -33,7 +34,7 @@
   ora-fine-riunione: "17:00",
   mostra-conclusioni-automatiche: false,
   firma-responsabile: "Paolo Prevedello Ramirez",
-  firma-esterna: "",
+  firma-esterna: "Vimar S.p.A.",
 )
 
 = Introduzione
@@ -57,7 +58,7 @@ I temi a cui hanno contribuito le domande del gruppo *Memory Leakers* sono stati
 6. Esiste un ambiente simulato per sviluppare in parallelo?
 7. Quali sono le priorità e cosa aspettarsi dal #gloss[PoC]?
 
-Nel corso dell'incontro l'azienda ha comunque risposto a tutti i 14 temi emersi, riportati di seguito.
+Nel corso dell’incontro l’azienda ha comunque risposto a tutti i 14 temi emersi, tra cui le 7 domande poste, di seguito riportati.
 
 = Resoconto
 == Architettura e linguaggi
@@ -86,8 +87,7 @@ gradito, ma non è richiesta alcuna interfaccia di selezione.
 Per l'LLM possono essere usati i piani gratuiti o studente dei servizi commerciali (es. connettore personalizzato di
 Claude, Copilot con il GitHub Student Pack). Su richiesta, e da discutere in fase di avvio, l'azienda può fornire
 accesso a un insieme ristretto di servizi #gloss[AWS] e una chiave LLM per alcune prove. Per la consegna è
-sufficiente che la soluzione funzioni in locale tramite #gloss[Docker]: al collaudo sarà l'azienda a installarla su
-AWS o su un proprio server.
+sufficiente che la soluzione funzioni in locale tramite #gloss[Docker]: al collaudo, l'azienda si metterà a disposizione per il supporto all'installazione su AWS o su un proprio server.
 
 == Protocolli e sicurezza
 === Autenticazione MyVimar
@@ -105,12 +105,12 @@ tramite gli #gloss[scope] di #gloss[KNX IoT]. L'agente deve comprendere la richi
 corretto; #gloss[guardrail] o skill aggiuntive sono ammessi se motivati nei requisiti.
 
 === Polling e notifiche
-Per questo progetto il polling è adeguato, come previsto dal capitolato e concordato dal proponente. Generalmente un
+Per questo progetto il polling verso le API per la gestione dei dispositivi è adeguato, come previsto dal capitolato e concordato dal proponente. Generalmente un
 servizio AI non riceve messaggi avviati da un #gloss[webhook], ma è possibile esplorare se qualche servizio lo
 supporti.
 
 === Richieste gestite dall'assistente
-Gli utenti non useranno le frasi esatte degli esempi: l'LLM deve gestire varianti, sinonimi e richieste ambigue. I
+Gli utenti non useranno esclusivamentele frasi esatte degli esempi: l'LLM deve gestire varianti, sinonimi e richieste ambigue. I
 casi base e avanzati del capitolato sono esempi e non un elenco esaustivo, e costituiscono il punto di partenza per
 i requisiti. Nuove interazioni non previste sono un nice-to-have gradito, da discutere con l'azienda. È stato
 consigliato di far riformulare a un LLM le domande della test list e di provarle con modelli diversi, per aumentarne
@@ -158,7 +158,7 @@ Gli stati di avanzamento lavori (#gloss[SAL]) si terranno generalmente su Micros
 svolgerli in presenza nelle salette della sede Vimar in caso di necessità. Sono previsti due incontri obbligatori in
 presenza: all'inizio del progetto, per la consegna del kit, e al collaudo finale. Sono inoltre previste
 indicativamente due demo con i colleghi del reparto R&D, a metà progetto (PoC) e alla fine (#gloss[MVP]). L'azienda
-si è resa disponibile per dubbi progettuali, scelte architetturali e coerenza della soluzione.
+si è resa disponibile per dubbi progettuali, scelte architetturali e coerenza della soluzione, precisando tuttavia che non potrà revisionare la documentazione prodotta in ambito accademico.
 
 = Decisioni e attività
 

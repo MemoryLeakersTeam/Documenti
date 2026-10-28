@@ -25,6 +25,7 @@
   ),
   distribuzione: ("Memory Leakers", "Var Group", "Prof. Riccardo Cardin", "Prof. Tullio Vardanega"),
   registro-modifiche: (
+    ([1.0.1], [28/10/2026], [Correzione data errata], [Jacopo Franco], [Chiara Protopapa]),
     ([1.0.0], [28/10/2026], [Firma ed approvazione del verbale], [Jacopo Franco], [Paolo Prevedello Ramirez]),
     ([0.1.0], [28/10/2026], [Verifica del verbale], [Jacopo Franco], [Chiara Protopapa]),
     ([0.0.1], [26/10/2026], [Bozza del verbale], [Jacopo Franco], []),
@@ -36,7 +37,7 @@
 )
 
 = Introduzione
-Il presente documento attesta che in data *22 ottobre 2026* è avvenuto l'incontro con il #gloss[proponente]
+Il presente documento attesta che in data *26 ottobre 2026* è avvenuto l'incontro con il #gloss[proponente]
 *Var Group S.p.A.*, in videoconferenza. L'incontro, rivolto a tutti i gruppi interessati, è stato
 organizzato nell'ambito della fase di pre-assegnazione dei capitolati con lo scopo di rispondere ai dubbi raccolti
 riguardo al capitolato *C6 - SCSDF*.

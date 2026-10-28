@@ -10,10 +10,10 @@
   data: datetime(year: 2026, month: 10, day: 26),
   ora: "15:00 - 15:40",
   luogo: "Microsoft Team",
-  versione: "0.0.1",
-  stato: "Bozza",
+  versione: "0.1.0",
+  stato: "Verificato",
   autore: "Jacopo Franco",
-  verificatore: "",
+  verificatore: "Chiara Protopapa",
   file-nome: "2026-10-26-vargroup.pdf",
   gruppo: "Memory Leakers",
   ordine-del-giorno: (
@@ -25,6 +25,7 @@
   ),
   distribuzione: ("Memory Leakers", "Var Group", "Prof. Riccardo Cardin", "Prof. Tullio Vardanega"),
   registro-modifiche: (
+    ([0.1.0], [28/10/2026], [Verifica del verbale], [Jacopo Franco], [Chiara Protopapa]),
     ([0.0.1], [26/10/2026], [Bozza del verbale], [Jacopo Franco], []),
   ),
   ora-fine-riunione: "15:40",

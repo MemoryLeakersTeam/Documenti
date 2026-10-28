@@ -103,7 +103,7 @@
   titolo: "Dichiarazione degli Impegni",
   sottotitolo: "Pianificazione delle risorse e preventivo dei costi",
   tipo-documento: "Documento Esterno",
-  versione: "0.0.5",
+  versione: "0.0.6",
   autore: "Jacopo De Donà, Matteo Marcon, Chiara Protopapa",
   verificatore: "",
   stato: "Bozza",
@@ -111,6 +111,7 @@
   file-nome: "Dichiarazione_degli_impegni.pdf",
   gruppo: "Memory Leakers",
   registro-modifiche: (
+    "0.0.6", "28/10/2026", "Correzione refusi", "Jacopo De Donà", "",
     "0.0.5", "28/10/2026", "Aggiunti riferimenti al glossario", "Chiara Protopapa, Matteo Marcon", "",
     "0.0.4", "28/10/2026", "Modificata analisi della data di consegna prevista", "Matteo Marcon", "",
     "0.0.3", "28/10/2026", "Aggiunta di grafici, periodi di rallentamento e analisi dei rischi", "Jacopo De Donà", "",
@@ -129,7 +130,7 @@ Durante il ciclo di vita del progetto, i membri del gruppo si alterneranno nei s
 
 - *Responsabile:* Coordina il team, gestisce la pianificazione temporale e rappresenta il gruppo nei rapporti con il #gloss[committente] e la #gloss[proponente]. Supervisiona lo stato di avanzamento del progetto e risolve eventuali criticità organizzative. L'impegno è distribuito in modo costante per tutta la durata del progetto, per poter garantire stabilità nell'avanzamento.
 
-- *Amministratore:* Definisce, configura, controlla e mantiene l'ambiente di lavoro condiviso come i #gloss[repository] #gloss[GitHub] e il #gloss[kanban project]. Garantisce l'efficienza degli strumenti di supporto e il rispetto del Way of Working definito dal gruppo. La sua attività è più presente all'avvio del progetto ma si protrae per tutta la lunghezza del progetto per garantire manutenzione costante.
+- *Amministratore:* Definisce, configura, controlla e mantiene l'ambiente di lavoro condiviso come i #gloss[repository] #gloss[GitHub] e il #gloss[Kanban Project]. Garantisce l'efficienza degli strumenti di supporto e il rispetto del Way of Working definito dal gruppo. La sua attività è più presente all'avvio del progetto ma si protrae per tutta la lunghezza del progetto per garantire manutenzione costante.
 
 - *Analista:* Conduce l'analisi approfondita dei requisiti, redigendo la documentazione iniziale e individuando i casi d'uso e i #gloss[requisiti funzionali] e #gloss[requisiti qualitativi]. Interagisce attivamente con i documenti di capitolato per definire le basi funzionali del sistema. Questo ruolo è centrale e intensivo soprattutto nelle prime settimane di avvio del progetto mentre diminuirà le ore di lavoro con l'avanzamento del progetto.
 
@@ -140,7 +141,7 @@ Durante il ciclo di vita del progetto, i membri del gruppo si alterneranno nei s
 - *Verificatore:* Esegue la verifica formale e i #gloss[test di qualità] sui documenti prodotti e sul codice sorgente sviluppato, assicurando la piena conformità ai requisiti. Valuta se il lavoro svolto dal team rispetta gli standard definiti tramite #gloss[*Definition of Done*]. La sua presenza è costante e si intensifica notevolmente da quando inizia la parte di codifica.
 
 = Impegno individuale
-Il gruppo ha analizzato il capitolato *C6 - Sistema AI di caching semantico e dashboard FinOps*, proposto da *VarGroup SpA*, e ha valutato di impegnare *93* #gloss[*ore* produttive] per ciascun componente, distribuite per i vari ruoli, per un totale di *651 ore produttive*.
+Il gruppo ha analizzato il capitolato *C6 - Sistema AI di caching semantico e dashboard FinOps*, proposto da *VarGroup S.p.A.*, e ha valutato di impegnare *93* #gloss[*ore* produttive] per ciascun componente, distribuite per i vari ruoli, per un totale di *651 ore produttive*.
 
 == Distribuzione delle ore
 La tabella seguente illustra la distribuzione delle 93 ore per ciascun membro del gruppo nei 6 ruoli definiti. Per indicare i ruoli vengono utilizzati i seguenti acronimi:
@@ -298,7 +299,7 @@ Il grafico seguente confronta, per ciascun ruolo, la quota sulle ore totali con 
 A seguito delle analisi svolte, il preventivo finale dei costi risulta essere *#euro(costo-totale)*.
 
 = Data di consegna prevista
-Il gruppo ha stimato una durata complessiva del progetto di circa *20 settimane* a partire dalla data di aggiudicazione del capitolato, prevista martedì *3 novembre 2026*. 
+Il gruppo ha stimato una durata complessiva del progetto di circa *20 settimane* a partire dalla data di aggiudicazione del capitolato, prevista per martedì *3 novembre 2026*. 
 Alla luce di tale durata stimata, della pianificazione delle attività in sprint bisettimali o settimanali e dei criteri di rotazione dei ruoli previsti, il gruppo si impegna a completare tutte le attività di progetto entro e non oltre martedì *23 marzo 2027*.
 
 

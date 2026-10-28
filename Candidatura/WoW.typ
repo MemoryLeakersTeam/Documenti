@@ -104,7 +104,7 @@ Inerentemente alla documentazione, non è previsto un ramo _Develop_, ma la crea
 
 === Issue
 
-Ogni #gloss(url: "https://memoryleakersteam.github.io/glossario#issues")[issue] va lavorata in un branch dedicato dal ramo _Develop_, e il nome indica il tipo di modifica (lo stesso prefisso dei commit): _fix/_, _docs/_ e così via. Il branch ha una vita massima di 3 giorni: deve essere chiuso o eliminato entro questo termine, per evitare branch dimenticati e divergenze troppo grandi rispetto al ramo principale.
+Per ogni #gloss(url: "https://memoryleakersteam.github.io/glossario#issues")[issue] deve essere creato un branch dedicato a partire dal ramo _Develop_, seguendo la convenzione dei Conventional Branches (<tipo>/<descrizione-o-issue>, dove il prefisso tipo segue la tabella riportata sopra dei conventional commits). Ogni branch ha una vita massima di 3 giorni: deve essere integrato nel branch develop o eliminato entro questo termine, per evitare branch dimenticati e divergenze troppo grandi rispetto al ramo principale.
 
 === Pull request
 

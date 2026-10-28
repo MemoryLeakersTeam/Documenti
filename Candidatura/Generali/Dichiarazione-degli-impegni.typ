@@ -103,7 +103,7 @@
   titolo: "Dichiarazione degli Impegni",
   sottotitolo: "Pianificazione delle risorse e preventivo dei costi",
   tipo-documento: "Documento Esterno",
-  versione: "0.0.4",
+  versione: "0.0.5",
   autore: "Jacopo De Donà, Matteo Marcon, Chiara Protopapa",
   verificatore: "",
   stato: "Bozza",
@@ -111,6 +111,7 @@
   file-nome: "Dichiarazione_degli_impegni.pdf",
   gruppo: "Memory Leakers",
   registro-modifiche: (
+    "0.0.5", "28/10/2026", "Aggiunti riferimenti al glossario", "Chiara Protopapa, Matteo Marcon", "",
     "0.0.4", "28/10/2026", "Modificata analisi della data di consegna prevista", "Matteo Marcon", "",
     "0.0.3", "28/10/2026", "Aggiunta di grafici, periodi di rallentamento e analisi dei rischi", "Jacopo De Donà", "",
     "0.0.2", "27/10/2026", "Continuazione stesura", "Matteo Marcon", "",
@@ -119,16 +120,16 @@
 )
 
 = Introduzione
-Il presente documento descrive la Dichiarazione degli Impegni per i componenti del gruppo *Memory Leakers* nello sviluppare il progetto del capitolato *C6 - Sistema AI di #gloss[caching semantico] e #gloss[dashboard FinOps]*. 
+Il presente documento descrive la Dichiarazione degli Impegni per i componenti del gruppo *Memory Leakers* nello sviluppare il #gloss[progetto] del #gloss[capitolato] *C6 - Sistema AI di #gloss[caching semantico] e #gloss[dashboard FinOps]*. 
 
-Con questo documento ciascun componente del gruppo dichiara di aver compreso il carico di lavoro richiesto e prende l'impegno di svolgere con continuità e responsabilità le attività del progetto, rispettando scadenze, ruoli e way of working definito dal gruppo.
+Con questo documento ciascun componente del gruppo dichiara di aver compreso il carico di lavoro richiesto e prende l'impegno di svolgere con continuità e responsabilità le attività del progetto, rispettando scadenze, ruoli e #gloss[Way of Working] definito dal gruppo.
 
 = Analisi dei ruoli
 Durante il ciclo di vita del progetto, i membri del gruppo si alterneranno nei seguenti ruoli, distribuendo l'impegno in base alle diverse fasi di avanzamento:
 
 - *Responsabile:* Coordina il team, gestisce la pianificazione temporale e rappresenta il gruppo nei rapporti con il #gloss[committente] e la #gloss[proponente]. Supervisiona lo stato di avanzamento del progetto e risolve eventuali criticità organizzative. L'impegno è distribuito in modo costante per tutta la durata del progetto, per poter garantire stabilità nell'avanzamento.
 
-- *Amministratore:* Definisce, configura, controlla e mantiene l'ambiente di lavoro condiviso come i #gloss[repository] #gloss[GitHub] e il #gloss[kanban project]. Garantisce l'efficienza degli strumenti di supporto e il rispetto del #gloss[Way of Working] definito dal gruppo. La sua attività è più presente all'avvio del progetto ma si protrae per tutta la lunghezza del progetto per garantire manutenzione costante.
+- *Amministratore:* Definisce, configura, controlla e mantiene l'ambiente di lavoro condiviso come i #gloss[repository] #gloss[GitHub] e il #gloss[kanban project]. Garantisce l'efficienza degli strumenti di supporto e il rispetto del Way of Working definito dal gruppo. La sua attività è più presente all'avvio del progetto ma si protrae per tutta la lunghezza del progetto per garantire manutenzione costante.
 
 - *Analista:* Conduce l'analisi approfondita dei requisiti, redigendo la documentazione iniziale e individuando i casi d'uso e i #gloss[requisiti funzionali] e #gloss[requisiti qualitativi]. Interagisce attivamente con i documenti di capitolato per definire le basi funzionali del sistema. Questo ruolo è centrale e intensivo soprattutto nelle prime settimane di avvio del progetto mentre diminuirà le ore di lavoro con l'avanzamento del progetto.
 
@@ -139,7 +140,7 @@ Durante il ciclo di vita del progetto, i membri del gruppo si alterneranno nei s
 - *Verificatore:* Esegue la verifica formale e i #gloss[test di qualità] sui documenti prodotti e sul codice sorgente sviluppato, assicurando la piena conformità ai requisiti. Valuta se il lavoro svolto dal team rispetta gli standard definiti tramite #gloss[*Definition of Done*]. La sua presenza è costante e si intensifica notevolmente da quando inizia la parte di codifica.
 
 = Impegno individuale
-Il gruppo ha analizzato il capitolato *C6 - Sistema AI di caching semantico e dashboard FinOps*, proposto da *VarGroup SpA*, e ha valutato di impegnare *93 ore* #gloss[produttive] per ciascun componente, distribuite per i vari ruoli, per un totale di *651 ore produttive*.
+Il gruppo ha analizzato il capitolato *C6 - Sistema AI di caching semantico e dashboard FinOps*, proposto da *VarGroup SpA*, e ha valutato di impegnare *93* #gloss[*ore* produttive] per ciascun componente, distribuite per i vari ruoli, per un totale di *651 ore produttive*.
 
 == Distribuzione delle ore
 La tabella seguente illustra la distribuzione delle 93 ore per ciascun membro del gruppo nei 6 ruoli definiti. Per indicare i ruoli vengono utilizzati i seguenti acronimi:
@@ -186,8 +187,8 @@ La tabella seguente illustra la distribuzione delle 93 ore per ciascun membro de
 
 == Analisi svolta
 La ripartizione delle ore precedentemente indicata è stata definita a seguito di un'analisi puntuale sulle necessità del progetto:
-- *Responsabile*: la scelta di dedicare *60 ore* complessive a questo ruolo, pari a circa 3 ore a settimana distribuite lungo tutta la durata del progetto, è volta a garantire un coordinamento efficace e rappresentanza continua.
-- *Amministratore*: per questo ruolo il gruppo ritiene opportuno dedicare un totale di *56 ore*, tenendo conto dell'utilizzo di strumenti come GitHub e GitHub Projects che consentono di automatizzare e velocizzare i flussi di lavoro.
+- *Responsabile*: la scelta di dedicare *60 ore* complessive a questo ruolo, pari a circa 3 ore a settimana distribuite lungo tutta la durata del progetto, è volta a garantire un coordinamento efficace e una rappresentanza continuativa.
+- *Amministratore*: per questo ruolo il gruppo ritiene opportuno dedicare un totale di *56 ore*, tenendo conto dell'utilizzo di strumenti come GitHub e #gloss[GitHub Projects] che consentono di automatizzare e velocizzare i flussi di lavoro.
 - *Analista*: vista la necessità di una fase di analisi, focalizzata soprattutto nelle prime settimane, per definire accuratamente i requisiti, per il ruolo di analista sono state previste *80 ore*.
 - *Progettista*: per la progettazione delle funzionalità chiave richieste dal capitolato, quali la cache semantica e la dashboard FinOps, il gruppo ha riservato *112 ore* a questo ruolo. 
 - *Programmatore*: per lo sviluppo delle funzionalità previste si riservano *182 ore*.
@@ -240,7 +241,7 @@ Viste le risorse limitate, anche in termini di tempo, e l'inesperienza del grupp
 
 == Tecnologie nuove per il gruppo
 #rischio(
-  [Il capitolato propone diverse tecnologie sconosciute alla maggior parte dei membri del gruppo, in particolare quelle legate alla cache semantica: LiteLLM, i modelli di embedding, i vector store (Qdrant o pgvector) e Redis. Il tempo necessario per apprenderle potrebbe rallentare le attività di progettazione e sviluppo.],
+  [Il capitolato propone alcune tecnologie sconosciute alla maggior parte dei membri del gruppo, in particolare quelle legate alla cache semantica: #gloss[LiteLLM], i #gloss[modelli di embedding], i #gloss[vector store] (Qdrant o pgvector) e #gloss[Redis]. Il tempo necessario per apprenderle potrebbe rallentare le attività di progettazione e sviluppo.],
   [Alta],
   [Medio],
   [Studio delle tecnologie fin dalle prime settimane, condivisione delle conoscenze all'interno del gruppo e confronto con il proponente in caso di dubbi.],

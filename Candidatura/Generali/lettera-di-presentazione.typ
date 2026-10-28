@@ -68,7 +68,7 @@
     column-gutter: 2cm,
     align: horizon + center,
     image("../../Templates/Immagini/MemoryLeakersLogo.jpg", width: 100%),
-    image("../../Templates/Immagini/Logo_unipd.png", width: 50%)
+    image("../../Templates/Immagini/Logo_unipd.jpeg", width: 50%)
   )
 
   #v(2cm)
@@ -140,12 +140,13 @@ Egregio Prof. Riccardo Cardin,
 // Corpo della lettera
 Con la presente, il gruppo Memory Leakers (Gruppo 3) intende comunicarVi ufficialmente la propria candidatura al capitolato *C6 – Sistema IA di Caching Semantico e Dashboard FinOps*, proposto dall'azienda *Var Group S.p.A.* nell'ambito del Progetto Didattico del corso di Ingegneria del Software.
 
-La documentazione prodotta dal gruppo per la candidatura è integralmente consultabile sul #link("https://memoryleakersteam.github.io")[#text(fill: colore-secondario)[#underline[sito ufficiale]]] di Memory Leakers. Di seguito sono elencati i documenti prodotti finora:
+Per lo svolgimento del progetto abbiamo predisposto una #link("https://github.com/MemoryLeakersTeam")[#text(fill: colore-secondario)[#underline[GitHub Organization]]] dedicata, e la documentazione per la candidatura è integralmente consultabile sul nostro #link("https://memoryleakersteam.github.io/#candidatura")[#text(fill: colore-secondario)[#underline[sito ufficiale]]]. Di seguito sono elencati i documenti prodotti finora:
 
- - *Valutazione dei capitolati*
  - *Lettera di presentazione*
+ - *Valutazione dei capitolati*
  - *Dichiarazione degli impegni*
  - *Verbali interni ed esterni*
+ - *Way of working*
 
 Nella Dichiarazione degli impegni abbiamo indicato un costo complessivo stimato di *12.865€* per lo svolgimento del progetto e una data di consegna fissata al *23 marzo 2027*.
 

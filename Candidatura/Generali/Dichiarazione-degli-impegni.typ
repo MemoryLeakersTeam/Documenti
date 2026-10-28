@@ -119,27 +119,27 @@
 )
 
 = Introduzione
-Il presente documento descrive la Dichiarazione degli Impegni per i componenti del gruppo *Memory Leakers* nello sviluppare il progetto del capitolato *C6 - Sistema AI di caching semantico e dashboard FinOps*. 
+Il presente documento descrive la Dichiarazione degli Impegni per i componenti del gruppo *Memory Leakers* nello sviluppare il progetto del capitolato *C6 - Sistema AI di #gloss[caching semantico] e #gloss[dashboard FinOps]*. 
 
 Con questo documento ciascun componente del gruppo dichiara di aver compreso il carico di lavoro richiesto e prende l'impegno di svolgere con continuità e responsabilità le attività del progetto, rispettando scadenze, ruoli e way of working definito dal gruppo.
 
 = Analisi dei ruoli
 Durante il ciclo di vita del progetto, i membri del gruppo si alterneranno nei seguenti ruoli, distribuendo l'impegno in base alle diverse fasi di avanzamento:
 
-- *Responsabile:* Coordina il team, gestisce la pianificazione temporale e rappresenta il gruppo nei rapporti con i committenti e la proponente. Supervisiona lo stato di avanzamento del progetto e risolve eventuali criticità organizzative. L'impegno è distribuito in modo costante per tutta la durata del progetto, per poter garantire stabilità nell'avanzamento.
+- *Responsabile:* Coordina il team, gestisce la pianificazione temporale e rappresenta il gruppo nei rapporti con il #gloss[committente] e la #gloss[proponente]. Supervisiona lo stato di avanzamento del progetto e risolve eventuali criticità organizzative. L'impegno è distribuito in modo costante per tutta la durata del progetto, per poter garantire stabilità nell'avanzamento.
 
-- *Amministratore:* Definisce, configura, controlla e mantiene l'ambiente di lavoro condiviso come i repository GitHub e il kanban project. Garantisce l'efficienza degli strumenti di supporto e il rispetto del Way of Working definito dal gruppo. La sua attività è più presente all'avvio del progetto ma si protrae per tutta la lunghezza del progetto per garantire manutenzione costante.
+- *Amministratore:* Definisce, configura, controlla e mantiene l'ambiente di lavoro condiviso come i #gloss[repository] #gloss[GitHub] e il #gloss[kanban project]. Garantisce l'efficienza degli strumenti di supporto e il rispetto del #gloss[Way of Working] definito dal gruppo. La sua attività è più presente all'avvio del progetto ma si protrae per tutta la lunghezza del progetto per garantire manutenzione costante.
 
-- *Analista:* Conduce l'analisi approfondita dei requisiti, redigendo la documentazione iniziale e individuando i casi d'uso e i requisiti funzionali e qualitativi. Interagisce attivamente con i documenti di capitolato per definire le basi funzionali del sistema. Questo ruolo è centrale e intensivo soprattutto nelle prime settimane di avvio del progetto mentre diminuirà le ore di lavoro con l'avanzamento del progetto.
+- *Analista:* Conduce l'analisi approfondita dei requisiti, redigendo la documentazione iniziale e individuando i casi d'uso e i #gloss[requisiti funzionali] e #gloss[requisiti qualitativi]. Interagisce attivamente con i documenti di capitolato per definire le basi funzionali del sistema. Questo ruolo è centrale e intensivo soprattutto nelle prime settimane di avvio del progetto mentre diminuirà le ore di lavoro con l'avanzamento del progetto.
 
-- *Progettista:* Definisce l'architettura software di alto livello e di dettaglio (*design*), focalizzandosi su componenti critici come la cache semantica e la dashboard FinOps. Traduce i requisiti emersi dall'analisi nel design. La presenza di questo ruolo diventa particolarmente significativa a seguito dell'analisi dei requisiti.
+- *Progettista:* Definisce l'#gloss[architettura software] di alto livello e di dettaglio (#gloss[*design*]), focalizzandosi su componenti critici come la cache semantica e la dashboard FinOps. Traduce i requisiti emersi dall'analisi nel design. La presenza di questo ruolo diventa particolarmente significativa a seguito dell'analisi dei requisiti.
 
-- *Programmatore:* Implementa il codice sorgente del sistema applicativo seguendo rigorosamente le specifiche di design definite dai progettisti. Si occupa dello sviluppo effettivo delle funzionalità e della stesura del codice. Questo ruolo entra nel vivo ed è maggiormente presente nella seconda parte del progetto, durante la fase di codifica vera e propria.
+- *Programmatore:* Implementa il #gloss[codice sorgente] del sistema applicativo seguendo rigorosamente le specifiche di design definite dai progettisti. Si occupa dello sviluppo effettivo delle funzionalità, della stesura del codice e degli #gloss[unit test]. Questo ruolo entra nel vivo ed è maggiormente presente nella seconda parte del progetto, durante la fase di codifica vera e propria.
 
-- *Verificatore:* Esegue la verifica formale e i test di qualità sui documenti prodotti e sul codice sorgente sviluppato, assicurando la piena conformità ai requisiti. Valuta se il lavoro svolto dal team rispetta gli standard definiti tramite *Definition of Done*. La sua presenza è costante e si intensifica notevolmente da quando inizia la parte di codifica.
+- *Verificatore:* Esegue la verifica formale e i #gloss[test di qualità] sui documenti prodotti e sul codice sorgente sviluppato, assicurando la piena conformità ai requisiti. Valuta se il lavoro svolto dal team rispetta gli standard definiti tramite #gloss[*Definition of Done*]. La sua presenza è costante e si intensifica notevolmente da quando inizia la parte di codifica.
 
 = Impegno individuale
-Il gruppo ha analizzato il capitolato *C6 - Sistema AI di caching semantico e dashboard FinOps*, proposto da *VarGroup SpA*, e ha valutato di impegnare *93 ore* produttive per ciascun componente, distribuite per i vari ruoli, per un totale di *651 ore produttive*.
+Il gruppo ha analizzato il capitolato *C6 - Sistema AI di caching semantico e dashboard FinOps*, proposto da *VarGroup SpA*, e ha valutato di impegnare *93 ore* #gloss[produttive] per ciascun componente, distribuite per i vari ruoli, per un totale di *651 ore produttive*.
 
 == Distribuzione delle ore
 La tabella seguente illustra la distribuzione delle 93 ore per ciascun membro del gruppo nei 6 ruoli definiti. Per indicare i ruoli vengono utilizzati i seguenti acronimi:
@@ -199,7 +199,7 @@ Nel complesso, questa suddivisione garantisce un adeguato equilibrio tra le atti
 Al fine di consentire a tutti i componenti del gruppo di ricoprire ciascun ruolo per un periodo di tempo adeguato ad acquisire le competenze necessarie, si prevede di effettuare una rotazione dei ruoli ogni due settimane. Il gruppo ha stabilito che inizialmente gli #gloss[sprint] avranno una durata di due settimane, in linea con la frequenza prevista per la rotazione. In futuro, la durata degli sprint potrà eventualmente essere ridotta a una settimana, prevedendo in tal caso una rotazione dei ruoli ogni due sprint.
 
 = Periodi di rallentamento
-Il gruppo ha individuato due periodi in cui il lavoro rallenterà, possibilmente fino a uno stato di inattività: il periodo natalizio e la sessione d'esame invernale.
+Il gruppo ha individuato due periodi in cui potrebbero esserci rallentamenti nell'avanzamento del progetto, riportati nella seguente tabella.
 
 #figure(
   table(

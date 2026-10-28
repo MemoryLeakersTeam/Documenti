@@ -1,31 +1,39 @@
 #import "../../Templates/Verbali.typ": verbale, gloss
 
+#let colore-primario = rgb("#305b57")
+#let colore-sfondo = rgb("#eaf7f2")
+#let colore-bordo = rgb("#49736a")
+
 #show: verbale.with(
   titolo: "Verbale riunione esterna con Ergon Informatica del 22/10/2026",
   tipo-documento: "Verbale Esterno",
   data: datetime(year: 2026, month: 10, day: 22),
   ora: "15:30 - 15:50",
   luogo: "Microsoft Teams",
-  versione: "0.0.1",
-  stato: "Bozza",
+  versione: "1.0.0",
+  stato: "Approvato",
   autore: "Jacopo franco",
   verificatore: "Chiara Protopapa",
   file-nome: "2026-10-22-ergon.pdf",
   gruppo: "Memory Leakers",
   ordine-del-giorno: (
-    [Presentazione breve del gruppo all'azienda Ergon Informatica],
-    [Domande del gruppo e chiarimenti richiesti]
+    [Presentazione breve del gruppo all'azienda Ergon Informatica C7 - SmartDashBoard],
+    [Domande del gruppo e chiarimenti richiesti],
+    [Prossimi passi]
   ),
-  partecipanti: ( "Gianluca Carlesso",
+  partecipanti: ( "Gianluca Carlesso (Ergon)",
     "Paolo Prevedello Ramirez", "Chiara Protopapa", "Jacopo Franco"
   ),
   distribuzione: ("Memory Leakers", "Ergon Informatica", "Prof. Riccardo Cardin", "Prof. Tullio Vardanega"),
   registro-modifiche: (
-    ([0.0.1], [24/10/2026], [Bozza del verbale], [Jacopo Franco], [Chiara Protopapa]),
+    ([1.0.0],[26/10/2026], [Firma ed approvazione del verbale], [Jacopo Franco], [Paolo Prevedello Ramirez]),
+    ([0.1.0],[26/10/2026], [Verifica del verbale], [Jacopo Franco], [Chiara Protopapa]),
+    ([0.0.2],[26/10/2026], [Aggiunta sezione decisioni ed attività], [Jacopo Franco], []),
+    ([0.0.1], [24/10/2026], [Bozza del verbale], [Jacopo Franco], []),
   ),
   ora-fine-riunione: "15:50",
   mostra-conclusioni-automatiche: false,
-  firma-responsabile: "",
+  firma-responsabile: "Paolo Prevedello Ramirez",
   firma-esterna: "",
 )
 
@@ -110,6 +118,28 @@ L'azienda ha raccomandato di prestare molta attenzione alla fase di analisi dei 
 Essendo il progetto molto ampio e ricco di funzionalità interessanti, è necessario
 circoscriverlo con precisione fin dall'inizio, per evitare di impiegare un tempo molto
 superiore a quello disponibile per il corso o di non riuscire a completare il lavoro.
+
+= Decisioni e attività
+
+== Decisioni prese
+Data la natura dell'incontro, non sono state prese decisioni vincolanti. Le indicazioni fornite da Ergon Informatica sono state raccolte come requisiti, vincoli e linee guida per la perimetrazione e la progettazione della soluzione *SmartDashboard*, e sono state riportate nel presente verbale per chiarezza e tracciabilità.
+
+#v(10pt)
+
+== Attività da svolgere
+#table(
+  columns: (0.5fr, 1.2fr, 2.5fr, 1fr, 1fr),
+  inset: 7pt,
+  align: (col, row) => if row == 0 { center + horizon } else { left + horizon },
+  fill: (x, y) => if y == 0 { colore-primario } else if calc.even(y) { colore-sfondo } else { none },
+  stroke: 0.5pt + colore-bordo,
+  [*#text(fill: white)[ID]*], [*#text(fill: white)[Nome Attività]*], [*#text(fill: white)[Breve Descrizione]*], [*#text(fill: white)[Responsabile]*], [*#text(fill: white)[Scadenza]*],
+  [A1], [Verifica e invio del verbale], [Verifica del presente verbale e invio ai referenti di Ergon Informatica per l'approvazione], [Chiara Protopapa, Riccardo Peresson] , [28/10/2026],
+  [A2], [Aggiornamento Glossario], [Inserimento dei nuovi termini tecnici emersi (es. Whitelist, System Prompt, Guardrail, DuckDB, Widget Contenitore, JSON Schema)], [Jacopo Franco], [29/10/2026],
+  [A3], [Valutazione capitolato C7], [Integrazione delle risposte ricevute nella valutazione del capitolato SmartDashboard per la candidatura e perimetrazione dei requisiti MVP], [Tutto il gruppo], [30/10/2026],
+  [A4], [Studio delle tecnologie], [Studio esplorativo del database colonnare DuckDB, della gestione di query dirette con whitelist e delle tecniche di prompt engineering per evitare allucinazioni], [Tutto il gruppo], [Continuativa],
+  [A5], [Avvio con Ergon Informatica], [In caso di aggiudicazione: concordare la consegna del dataset di test con domande e risultati attesi, definire la predisposizione dell'ambiente di lavoro e fissare la riunione di avvio], [Da assegnare], [Dopo il 03/11/2026],
+)
 
 = Conclusioni
 L'incontro è stato utile per chiarire i dubbi sorti tra i componenti del gruppo riguardo

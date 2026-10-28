@@ -6,10 +6,10 @@
   data: datetime(year: 2026, month: 10, day: 23),
   ora: "13:20 – 14:10",
   luogo: "Google Meet",
-  versione: "0.0.1",
-  stato: "Bozza",
+  versione: "1.0.0",
+  stato: "Approvato",
   autore: "Matteo Marcon",
-  verificatore: "",
+  verificatore: "Chiara Protopapa",
   file-nome: "2026-10-23.pdf",
   gruppo: "Memory Leakers",
   ordine-del-giorno: (
@@ -26,6 +26,8 @@
   distribuzione: ("Memory Leakers", "Prof. Riccardo Cardin", "Prof. Tullio Vardanega"),
   // Ogni riga: (Ver., Data, Descrizione, Autore, Verificatore)
   registro-modifiche: (
+    ([1.0.0], [28/10/2026], [Firma ed approvazione del verbale], [Matteo Marcon], [Paolo Prevedello Ramirez]),
+    ([0.1.0], [27/10/2026], [Verifica del verbale], [Matteo Marcon], [Chiara Protopapa]),
     ([0.0.1], [26/10/2026], [Bozza del quarto incontro], [Matteo Marcon], []),
   ),
   // Ogni riga: (ID, Decisione presa)
@@ -51,6 +53,7 @@
   ),
   ora-fine-riunione: "14:10",
   data-prossima-riunione: "26/10/2026 alle ore 13:00",
+  firma-responsabile: "Paolo Prevedello Ramirez"
 )
 
 = Introduzione

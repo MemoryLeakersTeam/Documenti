@@ -1,4 +1,4 @@
-#import "DocumentiGenerici.typ": *
+#import "../Templates/DocumentiGenerici.typ": *
 
 #show: documento.with(
   titolo: "Way of Working",

@@ -9,10 +9,10 @@
   data: datetime(year: 2026, month: 10, day: 26),
   ora: "17:00 - 17:30",
   luogo: "Google Meet",
-  versione: "0.0.1",
-  stato: "Bozza",
+  versione: "1.0.0",
+  stato: "Approvato",
   autore: "Matteo Marcon",
-  verificatore: "",
+  verificatore: "Chiara Protopapa",
   file-nome: "2026-10-26-miriade.pdf",
   gruppo: "Memory Leakers",
   ordine-del-giorno: (
@@ -23,11 +23,13 @@
   ),
   distribuzione: ("Memory Leakers", "Miriade", "Prof. Riccardo Cardin", "Prof. Tullio Vardanega"),
   registro-modifiche: (
+    ([1.0.0], [28/10/2026], [Firma ed approvazione del verbale], [Matteo Marcon], [Paolo Prevedello Ramirez]),
+    ([0.1.0], [27/10/2026], [Verifica del verbale], [Matteo Marcon], [Chiara Protopapa]),
     ([0.0.1], [27/10/2026], [Bozza del verbale], [Matteo Marcon], []),
   ),
   ora-fine-riunione: "17:30",
   mostra-conclusioni-automatiche: false,
-  firma-responsabile: "",
+  firma-responsabile: "Paolo Prevedello Ramirez",
   firma-esterna: "",
 )
 

@@ -103,7 +103,7 @@
   titolo: "Dichiarazione degli Impegni",
   sottotitolo: "Pianificazione delle risorse e preventivo dei costi",
   tipo-documento: "Documento Esterno",
-  versione: "0.0.3",
+  versione: "0.0.4",
   autore: "Jacopo De Donà, Matteo Marcon, Chiara Protopapa",
   verificatore: "",
   stato: "Bozza",
@@ -111,6 +111,7 @@
   file-nome: "Dichiarazione_degli_impegni.pdf",
   gruppo: "Memory Leakers",
   registro-modifiche: (
+    "0.0.4", "28/10/2026", "Modificata analisi della data di consegna prevista", "Matteo Marcon", "",
     "0.0.3", "28/10/2026", "Aggiunta di grafici, periodi di rallentamento e analisi dei rischi", "Jacopo De Donà", "",
     "0.0.2", "27/10/2026", "Continuazione stesura", "Matteo Marcon", "",
     "0.0.1", "27/10/2026", "Stesura iniziale del documento e pianificazione ore", "Chiara Protopapa", "",
@@ -296,6 +297,7 @@ Il grafico seguente confronta, per ciascun ruolo, la quota sulle ore totali con 
 A seguito delle analisi svolte, il preventivo finale dei costi risulta essere *#euro(costo-totale)*.
 
 = Data di consegna prevista
-Il gruppo ha stimato una durata complessiva del progetto di circa *20 settimane* a partire dall'aggiudicazione del capitolato. Si impegna pertanto a completare tutte le attività entro e non oltre il *19 marzo 2027*.
+Il gruppo ha stimato una durata complessiva del progetto di circa *20 settimane* a partire dalla data di aggiudicazione del capitolato, prevista martedì *3 novembre 2026*. 
+Alla luce di tale durata stimata, della pianificazione delle attività in sprint bisettimali o settimanali e dei criteri di rotazione dei ruoli previsti, il gruppo si impegna a completare tutte le attività di progetto entro e non oltre martedì *23 marzo 2027*.
 
 

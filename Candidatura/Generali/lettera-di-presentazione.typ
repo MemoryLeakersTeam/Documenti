@@ -138,7 +138,7 @@ Egregio Prof. Riccardo Cardin,
 #v(0.3cm)
 
 // Corpo della lettera
-Con la presente, il gruppo Memory Leakers intende comunicarVi ufficialmente la propria candidatura al capitolato *C6 – Sistema IA di Caching Semantico e Dashboard FinOps*, proposto dall'azienda *Var Group S.p.A.* nell'ambito del Progetto Didattico del corso di Ingegneria del Software.
+Con la presente, il gruppo Memory Leakers (Gruppo 3) intende comunicarVi ufficialmente la propria candidatura al capitolato *C6 – Sistema IA di Caching Semantico e Dashboard FinOps*, proposto dall'azienda *Var Group S.p.A.* nell'ambito del Progetto Didattico del corso di Ingegneria del Software.
 
 La documentazione prodotta dal gruppo per la candidatura è integralmente consultabile sul #link("https://memoryleakersteam.github.io")[#text(fill: colore-secondario)[#underline[sito ufficiale]]] di Memory Leakers. Di seguito sono elencati i documenti prodotti finora:
 
@@ -147,7 +147,7 @@ La documentazione prodotta dal gruppo per la candidatura è integralmente consul
  - *Dichiarazione degli impegni*
  - *Verbali interni ed esterni*
 
-Nella Dichiarazione degli impegni abbiamo indicato un costo complessivo stimato di *12.865€* per lo svolgimento del progetto e una data di consegna fissata al *19 marzo 2027*.
+Nella Dichiarazione degli impegni abbiamo indicato un costo complessivo stimato di *12.865€* per lo svolgimento del progetto e una data di consegna fissata al *23 marzo 2027*.
 
 Per qualsiasi delucidazione rimaniamo a Vostra completa disposizione.
 

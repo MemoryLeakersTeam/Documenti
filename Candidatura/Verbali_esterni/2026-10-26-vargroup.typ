@@ -10,7 +10,7 @@
   data: datetime(year: 2026, month: 10, day: 26),
   ora: "15:00 - 15:40",
   luogo: "Microsoft Team",
-  versione: "1.0.0",
+  versione: "1.0.1",
   stato: "Approvato",
   autore: "Jacopo Franco",
   verificatore: "Chiara Protopapa",

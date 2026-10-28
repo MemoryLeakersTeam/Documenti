@@ -1,4 +1,4 @@
-membri#import "../../Templates/Verbali.typ": verbale, gloss
+#import "../../Templates/Verbali.typ": verbale, gloss
 
 #let colore-primario = rgb("#305b57")
 #let colore-sfondo = rgb("#eaf7f2")

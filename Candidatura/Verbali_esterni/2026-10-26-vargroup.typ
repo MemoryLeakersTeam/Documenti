@@ -1,4 +1,4 @@
-#import "../../Templates/Verbali.typ": verbale, gloss
+membri#import "../../Templates/Verbali.typ": verbale, gloss
 
 #let colore-primario = rgb("#305b57")
 #let colore-sfondo = rgb("#eaf7f2")
@@ -9,15 +9,15 @@
   tipo-documento: "Verbale Esterno",
   data: datetime(year: 2026, month: 10, day: 26),
   ora: "15:00 - 15:40",
-  luogo: "Microsoft Team",
-  versione: "1.0.1",
+  luogo: "Microsoft Teams",
+  versione: "1.0.2",
   stato: "Approvato",
   autore: "Jacopo Franco",
   verificatore: "Chiara Protopapa",
   file-nome: "2026-10-26-vargroup.pdf",
   gruppo: "Memory Leakers",
   ordine-del-giorno: (
-    [RIsposte di Vargroup ai dubbi dei gruppi presenti all'incontro],
+    [RIsposte di Var Group ai dubbi dei gruppi presenti all'incontro],
     [Prossimi passi],
   ),
   partecipanti: ( "Stefano Dindo (Var Group)", "Laura Ferretti (Var Group)", "Alessio Borgheresi (Var Group)", "Michele Massaro (Var Group)",
@@ -25,6 +25,7 @@
   ),
   distribuzione: ("Memory Leakers", "Var Group", "Prof. Riccardo Cardin", "Prof. Tullio Vardanega"),
   registro-modifiche: (
+    ([1.0.2], [28/10/2026], [Correzioni ortografiche], [Jacopo Franco], [Chiara Protopapa]),
     ([1.0.1], [28/10/2026], [Correzione data errata], [Jacopo Franco], [Chiara Protopapa]),
     ([1.0.0], [28/10/2026], [Firma ed approvazione del verbale], [Jacopo Franco], [Paolo Prevedello Ramirez]),
     ([0.1.0], [28/10/2026], [Verifica del verbale], [Jacopo Franco], [Chiara Protopapa]),

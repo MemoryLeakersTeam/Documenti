@@ -1,4 +1,7 @@
-#let gloss(term) = [#term#sub[G]]
+#let gloss(term, url: none) = {
+  let t = [#term#sub[G]]
+  if url == none or url == "" { t } else { link(url)[#t] }
+}
 
 #let documento(
   titolo: "TITOLO DEL DOCUMENTO",
@@ -35,7 +38,7 @@
             columns: (1fr, 1fr),
             align: horizon,
             image("Immagini/MemoryLeakersLogo.jpg", height: 45pt),
-            align(right, image("Immagini/Logo_unipd.png", height: 28pt))
+            align(right, image("Immagini/Logo_unipd.jpeg", height: 28pt))
           )
           #place(center + horizon)[
             #text(8.5pt, fill: luma(120))[*#tipo-documento* | #gruppo]
@@ -78,7 +81,7 @@
       column-gutter: 2cm,
       align: horizon + center,
       image("Immagini/MemoryLeakersLogo.jpg", width: 100%),
-      image("Immagini/Logo_unipd.png", width: 50%)
+      image("Immagini/Logo_unipd.jpeg", width: 50%)
     )
 
     #v(2cm)

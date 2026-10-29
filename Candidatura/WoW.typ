@@ -4,15 +4,15 @@
   titolo: "Way of Working",
   sottotitolo: "",
   tipo-documento: "Documento Interno",
-  versione: "1.1.0",
+  versione: "0.1.1",
   autore: "Riccardo Peresson",
   verificatore: "Chiara Protopapa",
   stato: "Approvato",
   file-nome: "WoW.pdf",
   registro-modifiche: (
-    ([1.1.0], [29/10/2026], [Rivalutazione svolgimento Sprint Retrospective e ruolo del Responsabile, correzioni minori], [Riccardo Peresson], [Chiara Protopapa]),
-    ([1.0.1], [26/10/2026], [Precisazioni dei concetti e correzioni], [Riccardo Peresson], [Chiara Protopapa]),
-    ([1.0.0], [25/10/2026], [Aggiunta link a glossario], [Riccardo Peresson], [Chiara Protopapa]),
+    ([0.1.1], [29/10/2026], [Rivalutazione svolgimento Sprint Retrospective e ruolo del Responsabile, correzioni minori], [Riccardo Peresson], [Chiara Protopapa]),
+    ([0.1.0], [26/10/2026], [Precisazioni dei concetti e correzioni], [Riccardo Peresson], [Chiara Protopapa]),
+    ([0.0.2], [25/10/2026], [Aggiunta link a glossario], [Riccardo Peresson], [Chiara Protopapa]),
      ([0.0.1], [24/10/2026], [Prima stesura], [Riccardo Peresson], [Chiara Protopapa])
   ),
 )

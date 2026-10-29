@@ -143,7 +143,7 @@ Con la presente, il gruppo Memory Leakers (Gruppo 3) intende comunicarVi ufficia
 Per lo svolgimento del progetto abbiamo predisposto una #link("https://github.com/MemoryLeakersTeam")[#text(fill: colore-secondario)[#underline[GitHub Organization]]] dedicata, e la documentazione per la candidatura è integralmente consultabile sul nostro #link("https://memoryleakersteam.github.io/#candidatura")[#text(fill: colore-secondario)[#underline[sito ufficiale]]]. Di seguito sono elencati i documenti prodotti finora:
 
  - *Lettera di presentazione*
- - *Valutazione dei capitolati*
+ - *Analisi dei capitolati*
  - *Dichiarazione degli impegni*
  - *Verbali interni ed esterni*
  - *Way of working*

@@ -6,10 +6,10 @@
   data: datetime(year: 2026, month: 10, day: 28),
   ora: "15:00 – 17:00",
   luogo: "Google Meet",
-  versione: "0.0.1",
-  stato: "Bozza",
+  versione: "0.1.0",
+  stato: "Verificato",
   autore: "Jacopo De Donà",
-  verificatore: "",
+  verificatore: "Chiara Protopapa",
   file-nome: "2026-10-28.pdf",
   gruppo: "Memory Leakers",
   ordine-del-giorno: (
@@ -26,11 +26,12 @@
   distribuzione: ("Memory Leakers", "Prof. Riccardo Cardin", "Prof. Tullio Vardanega"),
   // Ogni riga: (Ver., Data, Descrizione, Autore, Verificatore)
   registro-modifiche: (
+    ([0.1.0], [29/10/2026], [Prima revisione del verbale], [Jacopo De Donà], [Chiara Protopapa]),
     ([0.0.1], [29/10/2026], [Bozza del settimo incontro], [Jacopo De Donà], []),
   ),
   // Ogni riga: (ID, Decisione presa)
   decisioni: (
-    ([D1], [Deciso di inviare nuovamente a *VarGroup S.p.A.* il verbale esterno da firmare, a causa di alcuni refusi]),
+    ([D1], [Deciso di inviare nuovamente a *VarGroup S.p.A.* il verbale esterno da firmare, a causa di un refuso sulla data]),
     ([D2], [Decisa la revisione del documento *Way of Working* per chiarire alcuni punti che avevano generato malintesi]),
     ([D3], [Decisa la modifica del logo presente nella *Lettera di presentazione*]),
     ([D4], [Deciso di completare il glossario prima della consegna dei documenti di candidatura]),
@@ -57,7 +58,7 @@ L'incontro ha dato seguito alla riunione del 27/10/2026 ed è stato dedicato pri
 = Resoconto
 
 == Comunicazioni con VarGroup
-Poiché il verbale esterno inviato a *VarGroup S.p.A.* per la firma conteneva alcuni refusi, il gruppo ha deciso di correggerlo e di inviarlo nuovamente all'azienda.
+Poiché il verbale esterno inviato a *VarGroup S.p.A.* per la firma conteneva un refuso sulla data, il gruppo ha deciso di correggerlo ed inviarlo nuovamente all'azienda.
 
 == Revisione del Way of Working
 Per chiarire alcuni punti che avevano generato malintesi, si è ritenuto necessario apportare piccole modifiche al documento *Way of Working*.

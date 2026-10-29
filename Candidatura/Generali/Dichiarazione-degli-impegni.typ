@@ -103,14 +103,16 @@
   titolo: "Dichiarazione degli Impegni",
   sottotitolo: "Pianificazione delle risorse e preventivo dei costi",
   tipo-documento: "Documento Esterno",
-  versione: "0.0.7",
+  versione: "1.0.0",
   autore: "Jacopo De Donà, Matteo Marcon, Chiara Protopapa",
-  verificatore: "",
-  stato: "Bozza",
+  verificatore: "Paolo Prevedello Ramirez",
+  stato: "Approvato",
   data: datetime(year: 2026, month: 10, day: 28),
   file-nome: "Dichiarazione-degli-impegni.pdf",
   gruppo: "Memory Leakers",
   registro-modifiche: (
+    "1.0.0", "29/10/2026", "Firma ed approvazione del documento", "Jacopo De Donà, Matteo Marcon, Chiara Protopapa", "Paolo Prevedello Ramirez",
+    "0.1.0", "29/10/2026", "Verifica del documento", "Jacopo De Donà, Matteo Marcon, Chiara Protopapa", "Paolo Prevedello Ramirez",
     "0.0.7", "29/10/2026", "Correzioni formali", "Jacopo De Donà", "",
     "0.0.6", "28/10/2026", "Correzione refusi", "Jacopo De Donà", "",
     "0.0.5", "28/10/2026", "Aggiunti riferimenti al glossario", "Chiara Protopapa, Matteo Marcon", "",
@@ -118,7 +120,8 @@
     "0.0.3", "28/10/2026", "Aggiunta di grafici, periodi di rallentamento e analisi dei rischi", "Jacopo De Donà", "",
     "0.0.2", "27/10/2026", "Continuazione stesura", "Matteo Marcon", "",
     "0.0.1", "27/10/2026", "Stesura iniziale del documento e pianificazione ore", "Chiara Protopapa", "",
-  )
+  ),
+  firma-responsabile: "Paolo Prevedello Ramirez"
 )
 
 = Introduzione

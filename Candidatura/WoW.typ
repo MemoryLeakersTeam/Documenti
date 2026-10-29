@@ -4,12 +4,13 @@
   titolo: "Way of Working",
   sottotitolo: "",
   tipo-documento: "Documento Interno",
-  versione: "1.0.1",
+  versione: "1.1.0",
   autore: "Riccardo Peresson",
   verificatore: "Chiara Protopapa",
   stato: "In revisione",
   file-nome: "WoW.pdf",
   registro-modifiche: (
+    ([1.1.0], [29/10/2026], [Rivalutazione svolgimento Sprint Retrospective e ruolo del Responsabile, correzioni minori], [Riccardo Peresson], [Chiara Protopapa]),
     ([1.0.1], [26/10/2026], [Precisazioni dei concetti e correzioni], [Riccardo Peresson], [Chiara Protopapa]),
     ([1.0.0], [25/10/2026], [Aggiunta link a glossario], [Riccardo Peresson], [Chiara Protopapa]),
      ([0.0.1], [24/10/2026], [Prima stesura], [Riccardo Peresson], [Chiara Protopapa])
@@ -58,9 +59,8 @@ Per le comunicazioni esterne:
 
 == Altri strumenti
 
-- _Typst_#footnote[#link("https://typst.app/home")], documentazione: linguaggio di composizione tipografica moderno e veloce, usato per redigere la documentazione tecnica e produrne una versione finale in formato PDF con un risultato curato
-- _Da definire_, diagrammi UML: strumento non ancora scelto per la realizzazione dei diagrammi UML, che serviranno a modellare e rappresentare graficamente la struttura e il comportamento del sistema
-- _Google Presentazioni_#footnote[#link("https://docs.google.com/presentation/u/0/")], per le slide da utilizzare durante i diari di bordo: applicazione per la creazione di presentazioni
+- _Typst_#footnote[#link("https://typst.app/home")], documentazione: linguaggio di composizione tipografica moderno e veloce, usato per redigere la documentazione tecnica e produrne una versione finale in formato PDF con un risultato curato.
+- _Google Presentazioni_#footnote[#link("https://workspace.google.com/intl/it/products/slides/")], per le slide da utilizzare durante i diari di bordo: applicazione per la creazione di presentazioni.
 
 = Repository GitHub
 
@@ -98,7 +98,7 @@ Convenzioni per la gestione dei branches.
 
 Il team ha deciso di applicare la tecnica del #gloss(url: "https://memoryleakersteam.github.io/glossario#git-flow")[Git Flow]:
 - _Main_ contiene la versione stabile del codice;
-- _Develop_ è il ramo di integrazione, dedicato al codice del prodotto, raccoglie i branch di lavoro prima di essere approvati al _Main_.
+- _Develop_ è il ramo di integrazione, dedicato al codice del sistema, raccoglie i branch di lavoro prima di essere approvati al _Main_.
 
 Inerentemente alla documentazione, non è previsto un ramo _Develop_, ma la creazione dei branch necessari come indicato in 3.2.2 .
 
@@ -120,14 +120,13 @@ Il team riserva questo periodo alla sperimentazione e ricerca di un metodo di la
 
 == Calendario e metodo post-aggiudicazione
 
-Il team adotta una metodologia #gloss(url: "https://memoryleakersteam.github.io/glossario#agile")[agile], individuando il martedì (14.00 -- 15.00) come svolgimento della #gloss(url: "https://memoryleakersteam.github.io/glossario#sprint-retrospective")[Sprint Retrospective], inizialmente a cadenza bisettimanale e successivamente (a data da destinarsi) settimanale. Bisettimanalmente, coincidente con la #gloss(url: "https://memoryleakersteam.github.io/glossario#sprint-retrospective")[Sprint Retrospective], avviene la rotazione dei ruoli all'interno del team, predeterminata e nota in anticipo a tutti i membri. L'incontro presenta la seguente struttura:
+Il team adotta una metodologia #gloss(url: "https://memoryleakersteam.github.io/glossario#agile")[agile], individuando il martedì (14.00 -- 15.00) come svolgimento della #gloss(url: "https://memoryleakersteam.github.io/glossario#sprint-retrospective")[Sprint Retrospective], inizialmente a cadenza bisettimanale e successivamente (a data da destinarsi) settimanale. Bisettimanalmente, coincidente con la Sprint Retrospective, avviene la rotazione dei ruoli all'interno del team. L'incontro presenta la seguente struttura:
 
-- 14.00 -- 14.45 discussione e recap sullo #gloss(url: "https://memoryleakersteam.github.io/glossario#sprint")[sprint] precedente, guidata dal responsabile (uscente se rotazione avvenuta);
-- 14.45 -- 15.00 discussione e commento sullo sprint successivo, guidata dal responsabile (entrante se rotazione avvenuta).
+- 14.00 -- 14.30 discussione e recap sullo #gloss(url: "https://memoryleakersteam.github.io/glossario#sprint")[sprint] precedente;
+- 14.30 -- 15.00 rotazione dei ruoli, discussione dello sprint successivo e assegnazione delle task tra i componenti.
 
-Prima di ogni #gloss(url: "https://memoryleakersteam.github.io/glossario#sprint-retrospective")[Sprint Retrospective]:
+Prima di ogni Sprint Retrospective:
 
-- ogni membro compila il calendario indicando gli slot ore disponibili per la settimana a venire (entro il sabato precedente);
-- il responsabile (entrante se immediatamente precedente alla rotazione dei ruoli) assegna le task al team per lo sprint successivo (entro la #gloss(url: "https://memoryleakersteam.github.io/glossario#sprint-retrospective")[Sprint Retrospective]).
+- ogni membro compila il calendario indicando gli slot ore disponibili per la settimana a venire (entro il sabato precedente).
 
-Durante ogni #gloss(url: "https://memoryleakersteam.github.io/glossario#sprint")[sprint] i membri del gruppo si impegnano a riferire tempestivamente al responsabile difficoltà non previste nello svolgimento dello #gloss(url: "https://memoryleakersteam.github.io/glossario#sprint")[sprint]; il responsabile si impegna a comunicare il prima possibile le contromisure da applicare al team.
+Durante ogni sprint i membri del gruppo si impegnano a riferire tempestivamente al responsabile difficoltà non previste nello svolgimento dello sprint; il responsabile si impegna a comunicare il prima possibile le contromisure da applicare al team.

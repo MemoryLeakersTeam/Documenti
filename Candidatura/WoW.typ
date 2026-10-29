@@ -4,17 +4,19 @@
   titolo: "Way of Working",
   sottotitolo: "",
   tipo-documento: "Documento Interno",
-  versione: "0.1.1",
+  versione: "1.0.0",
   autore: "Riccardo Peresson",
   verificatore: "Chiara Protopapa",
   stato: "Approvato",
   file-nome: "WoW.pdf",
   registro-modifiche: (
+    ([1.0.0], [29/10/2026], [Firma ed approvazione del documento], [Riccardo Peresson], [Paolo Prevedello Ramirez]),
     ([0.1.1], [29/10/2026], [Rivalutazione svolgimento Sprint Retrospective e ruolo del Responsabile, correzioni minori], [Riccardo Peresson], [Chiara Protopapa]),
     ([0.1.0], [26/10/2026], [Precisazioni dei concetti e correzioni], [Riccardo Peresson], [Chiara Protopapa]),
-    ([0.0.2], [25/10/2026], [Aggiunta link a glossario], [Riccardo Peresson], [Chiara Protopapa]),
-     ([0.0.1], [24/10/2026], [Prima stesura], [Riccardo Peresson], [Chiara Protopapa])
+    ([0.0.2], [25/10/2026], [Aggiunta link a glossario], [Riccardo Peresson], []),
+     ([0.0.1], [24/10/2026], [Prima stesura], [Riccardo Peresson], [])
   ),
+  firma-responsabile: "Paolo Prevdello Ramirez"
 )
 
 #set heading(numbering: "1.1.1")

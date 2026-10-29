@@ -16,7 +16,7 @@
     ([0.0.2], [25/10/2026], [Aggiunta link a glossario], [Riccardo Peresson], []),
      ([0.0.1], [24/10/2026], [Prima stesura], [Riccardo Peresson], [])
   ),
-  firma-responsabile: "Paolo Prevdello Ramirez"
+  firma-responsabile: "Paolo Prevedello Ramirez"
 )
 
 #set heading(numbering: "1.1.1")

@@ -6,8 +6,8 @@
   data: datetime(year: 2026, month: 10, day: 28),
   ora: "15:00 – 17:00",
   luogo: "Google Meet",
-  versione: "0.1.0",
-  stato: "Verificato",
+  versione: "1.0.0",
+  stato: "Approvato",
   autore: "Jacopo De Donà",
   verificatore: "Chiara Protopapa",
   file-nome: "2026-10-28.pdf",
@@ -26,6 +26,7 @@
   distribuzione: ("Memory Leakers", "Prof. Riccardo Cardin", "Prof. Tullio Vardanega"),
   // Ogni riga: (Ver., Data, Descrizione, Autore, Verificatore)
   registro-modifiche: (
+    ([1.0.0], [29/10/2026], [Firma ed approvazione del verbale], [Jacopo De Donà], [Paolo Prevedello Ramirez]),
     ([0.1.0], [29/10/2026], [Prima revisione del verbale], [Jacopo De Donà], [Chiara Protopapa]),
     ([0.0.1], [29/10/2026], [Bozza del settimo incontro], [Jacopo De Donà], []),
   ),
@@ -47,6 +48,7 @@
   ),
   ora-fine-riunione: "17:00",
   data-prossima-riunione: "da definire, a seguito dell'aggiudicazione dei capitolati",
+  firma-responsabile: "Paolo Prevedello Ramirez"
 )
 
 = Introduzione
@@ -76,3 +78,5 @@ Si è deciso di rimandare la definizione della data della prossima riunione inte
 
 = Decisioni e attività
 Si è infine proceduto alla ripartizione delle attività individuate nel corso della riunione, riportata nella tabella seguente.
+\
+\

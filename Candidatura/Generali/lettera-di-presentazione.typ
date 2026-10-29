@@ -9,7 +9,7 @@
 #let sottotitolo = ""
 #let gruppo = "Memory Leakers"
 #let tipo-documento = "Lettera"
-#let data-str = datetime.today().display("[day]/[month]/[year]")
+#let data-str = "30/10/2026"
 
 // Componenti del gruppo: (Nome e Cognome, Matricola)
 #let membri = (

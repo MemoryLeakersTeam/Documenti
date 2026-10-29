@@ -7,7 +7,7 @@
   versione: "1.1.0",
   autore: "Riccardo Peresson",
   verificatore: "Chiara Protopapa",
-  stato: "In revisione",
+  stato: "Approvato",
   file-nome: "WoW.pdf",
   registro-modifiche: (
     ([1.1.0], [29/10/2026], [Rivalutazione svolgimento Sprint Retrospective e ruolo del Responsabile, correzioni minori], [Riccardo Peresson], [Chiara Protopapa]),

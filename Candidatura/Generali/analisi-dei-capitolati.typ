@@ -5,14 +5,15 @@
   sottotitolo: "Valutazione e scelta dei capitolati d'appalto per l'A.A. 2026/2027",
   gruppo: "Memory Leakers",
   tipo-documento: "Analisi dei Capitolati",
-  versione: "0.0.2",
+  versione: "0.0.3",
   autore: "Matteo Arcandi",
   verificatore: "",
   stato: "Bozza",
-  data: datetime(year: 2026, month: 10, day: 28),
+  data: datetime(year: 2026, month: 10, day: 29),
   file-nome: "analisi-dei-capitolati.pdf",
   registro-modifiche: (
-     "0.0.2", "29/10/2026", "Correzione e fine stesura.", "Jacopo Franco", "",
+    "0.0.3", "29/10/2026", "Correzione imperfezioni.", "Matteo Arcandi", "",
+    "0.0.2", "29/10/2026", "Correzione e fine stesura.", "Jacopo Franco", "",
     "0.0.1", "28/10/2026", "Stesura iniziale del documento di analisi dei capitolati.", "Matteo Arcandi", "",
   ),
   firma-responsabile: ""
@@ -158,7 +159,7 @@ I casi d'uso previsti sono 17 casi base (accesso, elenco impianti, lettura e com
 
 == Conclusioni
 
-C1 è il capitolato con i criteri di completamento più definiti, un supporto molto strutturato e un risvolto pratico concreto. Il gruppo lo mantiene tra le alternative: le tecnologie sono quasi tutte nuove, la soluzione è quasi interamente back-end, il dominio soddisfa parzialmente gli interessi del gruppo; tuttavia il capitolato C6 tratta un tema (FinOps) maggiormente in linea con le preferenze espresse dal gruppo, mantenendo un perimetro altrettanto chiaro. L'incontro con Vimar del 22/10/2026 ha chiarito i dubbi del gruppo senza modificare il giudizio complessivo (si rimanda al #link("https://memoryleakersteam.github.io/pdf/candidatura/verbali_esterni/2026-10-22-vimar-signed.pdf")[#underline[#text(fill: blue)[verbale esterno firmato dell'incontro]]]).
+C1 è il capitolato con i criteri di completamento più definiti, un supporto molto strutturato e un risvolto pratico concreto. Il gruppo lo mantiene tra le alternative: le tecnologie sono quasi tutte nuove, la soluzione è quasi interamente back-end, il dominio soddisfa parzialmente gli interessi del gruppo; tuttavia il capitolato C6 tratta un tema (il caching semantico) maggiormente in linea con le preferenze espresse dal gruppo, mantenendo un perimetro altrettanto chiaro. L'incontro con Vimar del 22/10/2026 ha chiarito i dubbi del gruppo senza modificare il giudizio complessivo (si rimanda al #link("https://memoryleakersteam.github.io/pdf/candidatura/verbali_esterni/2026-10-22-vimar-signed.pdf")[#underline[#text(fill: blue)[verbale esterno firmato dell'incontro]]]).
 
 = C2 - NEXUM Concierge (Eggon)
 
@@ -261,7 +262,7 @@ Non è imposto uno stack; è richiesto il rilascio con licenza permissiva (Apach
 
 == Conclusioni
 
-Il gruppo preferisce non procedere alla candidatura per questo capitolato: pur riconoscendone il valore, l'ampiezza e la varietà delle competenze richieste, dall'hardware al backend, e la gestione dell'hardware fisico comportano un rischio tecnico e organizzativo troppo alto rispetto al totale delle ore e al calendario. La valutazione si basa unicamente sulla documentazione fornita e sulla presentazione svolta in aula, non essendo stato svolto alcun incontro con l'azienda.
+Il gruppo preferisce non procedere alla candidatura per questo capitolato: pur riconoscendone il valore, l'ampiezza, la varietà delle competenze richieste (dall'hardware al backend) e la gestione dell'hardware fisico comportano un rischio tecnico e organizzativo troppo alto rispetto al totale delle ore e al calendario. La valutazione si basa unicamente sulla documentazione fornita e sulla presentazione svolta in aula, non essendo stato svolto alcun incontro con l'azienda.
 
 
 = C4 - Piattaforma per veicoli e servizi post-vendita (M31 S.r.l.)
@@ -397,9 +398,17 @@ Estendere LiteLLM con due componenti originali:
 - *Dashboard:* React con Chart.js, oppure Streamlit come alternativa rapida; API REST in JSON.
 - *Versionamento:* Git su GitHub o Bitbucket.
 
-== Pro e contro
+== Rischi e punti aperti
 
-=== Pro
+- *Funzioni già presenti in LiteLLM.* Le versioni recenti includono già una cache semantica di base (Redis, Qdrant) e il tracciamento della spesa con budget per team e chiave; non sono previsti forecast. Il valore originale di C6 sta quindi nel potenziare cache e valutazione, nel calcolare il risparmio e il costo complessivo di esercizio, nella storia delle appartenenze ai team, nella previsione di spesa e nella dashboard: va definito con precisione nell'analisi dei requisiti.
+- *Cache condivisa.* Var Group desidera una cache unica per tutti: richiede di modificare l'isolamento di default e di valutare le implicazioni sui dati riservati.
+- *Falsi hit.* Una risposta sbagliata a una domanda simile ma non equivalente: serve calibrare la soglia con un dataset di coppie di domande.
+- *Versione.* Tra la versione in produzione (1.91.2) e quella più recente c'è un divario da considerare.
+- *Costi API* per sviluppo e test di embedding e modelli, mitigati dall'ambiente con budget fornito da Var Group.
+
+== Motivazione della scelta
+
+Il gruppo ha scelto C6 come prima scelta per i seguenti motivi:
 
 - *Tema attuale e rilevante.* Rendere sostenibile l'AI monitorandone i costi è un problema reale, comune a molti altri progetti, e il risultato è misurabile in token e costi risparmiati, latenza e accuratezza della cache. L'MVP si può validare numericamente e dà contenuto concreto al Piano di Qualifica.
 - *Perimetro ben definito.* Due componenti su un proxy esistente, senza hardware e senza necessità di gestire i dati sensibili, essendo già in ambiente a basso rischio.
@@ -407,14 +416,6 @@ Estendere LiteLLM con due componenti originali:
 - *Supporto strutturato.* Design thinking, formazioni mirate su LiteLLM (2 ore), Embedding e Caching (2 ore) e FinOps con dashboard (1,5 ore), revisioni e incontri ogni due settimane.
 - *Competenze di partenza.* Python, Docker, SQL e Git sono già noti al gruppo e alcuni componenti conoscono le API REST: le tecnologie sono in buona parte note, diversamente da altri capitolati.
 - *Fattibilità.* Un PoC per la RTB (cache semantica minimale e aggregazione dei costi) e un MVP validabile nei tempi del progetto sono realistici.
-
-=== Contro
-
-- *Funzioni già presenti in LiteLLM.* Le versioni recenti includono già una cache semantica di base (Redis, Qdrant) e il tracciamento della spesa con budget per team e chiave; non sono previsti forecast. Il valore originale di C6 sta quindi nel potenziare cache e valutazione, nel calcolare il risparmio e il costo complessivo di esercizio, nella storia delle appartenenze ai team, nella previsione di spesa e nella dashboard: va definito con precisione nell'analisi dei requisiti.
-- *Cache condivisa.* Var Group desidera una cache unica per tutti: richiede di modificare l'isolamento di default e di valutare le implicazioni sui dati riservati.
-- *Falsi hit.* Una risposta sbagliata a una domanda simile ma non equivalente: serve calibrare la soglia con un dataset di coppie di domande.
-- *Versione.* Tra la versione in produzione (1.91.2) e quella più recente c'è un divario da considerare.
-- *Costi API.* per sviluppo e test di embedding e modelli, mitigati dall'ambiente con budget fornito da Var Group.
 
 == Conclusioni
 
@@ -589,7 +590,7 @@ Il gruppo riconosce l'interesse del tema e la sua pertinenza con il corso, ma pr
   [*#text(fill: white)[Capitolato]*], [*#text(fill: white)[Proponente]*], [*#text(fill: white)[Data]*], [*#text(fill: white)[Partecipanti]*], [*#text(fill: white)[Verbale]*],
   [C7 SmartDashboard], [Ergon Informatica], [22/10/2026, 15:30-15:50], [Gianluca Carlesso (Ergon); Paolo Prevedello Ramirez, Chiara Protopapa, Jacopo Franco], [Verbale esterno nel repository documentale],
   [C1 AURA], [Vimar], [22/10/2026, 16:00-17:00], [Mariano Sciacco e Domenico Bevilacqua (Vimar); Jacopo De Donà e Matteo Marcon], [Verbale esterno nel repository documentale],
-  [C6 Caching semantico e FinOps], [Var Group], [26/10/2026, 15:00-15:40], [Dindo, Ferretti, Borgheresi, Massaro (Var Group); Chiara Protopapa, Jacopo Franco, Jacopo De Donà e Matteo Marcon], [Verbale esterno nel repository documentale],
+  [C6 Caching semantico e FinOps], [Var Group], [26/10/2026, 15:00-15:40], [Stefano Dindo, Laura Ferretti, Alessio Borgheresi, Michele Massaro (Var Group); Chiara Protopapa, Jacopo Franco, Jacopo De Donà e Matteo Marcon], [Verbale esterno nel repository documentale],
   [C5 RareCare Navigator], [Miriade], [26/10/2026, 17:00-17:30], [Emanuele Righetto (Miriade); Chiara Protopapa, Riccardo Peresson, Jacopo De Donà e Matteo Marcon], [Verbale esterno nel repository documentale],
 )
 

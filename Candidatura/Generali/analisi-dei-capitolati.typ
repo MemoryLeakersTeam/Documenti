@@ -1,17 +1,18 @@
-#import "../../Templates/DocumentiGenerici.typ": documento
+#import "../../Templates/DocumentiGenerici.typ": documento, gloss
 
 #show: documento.with(
   titolo: "Analisi dei Capitolati",
   sottotitolo: "Valutazione e scelta dei capitolati d'appalto per l'A.A. 2026/2027",
   gruppo: "Memory Leakers",
   tipo-documento: "Analisi dei Capitolati",
-  versione: "0.0.3",
+  versione: "0.0.4",
   autore: "Matteo Arcandi",
   verificatore: "",
   stato: "Bozza",
   data: datetime(year: 2026, month: 10, day: 29),
   file-nome: "analisi-dei-capitolati.pdf",
   registro-modifiche: (
+    "0.0.4", "30/10/2026", "Aggiunta link al glossario.", "Riccardo Peresson", "",
     "0.0.3", "29/10/2026", "Correzione imperfezioni.", "Matteo Arcandi", "",
     "0.0.2", "29/10/2026", "Correzione e fine stesura.", "Jacopo Franco", "",
     "0.0.1", "28/10/2026", "Stesura iniziale del documento di analisi dei capitolati.", "Matteo Arcandi", "",
@@ -36,9 +37,9 @@
 
 = Introduzione
 
-Il gruppo Memory Leakers (gruppo 3), composto da sette persone, ha analizzato tutti i capitolati proposti per l'anno accademico 2026/2027 per individuare il più affine alla candidatura; per ciascun capitolato il documento riporta, con lo stesso schema: descrizione, obiettivo, tecnologie richieste, pro e contro, motivazione per il capitolato scelto e conclusioni del gruppo.
+Il gruppo Memory Leakers (gruppo 3), composto da sette persone, ha analizzato tutti i capitolati proposti per l'anno accademico 2026/2027 per individuare il più affine alla candidatura; per ciascun #gloss(url:"https://memoryleakersteam.github.io/glossario#capitolato")[capitolato] il documento riporta, con lo stesso schema: descrizione, obiettivo, tecnologie richieste, pro e contro, motivazione per il capitolato scelto e conclusioni del gruppo.
 
-*Fonti.* Ogni valutazione si basa sulla documentazione fornita da ogni proponente e sulle slide presentate in aula il 13/10/2026; per i capitolati C1, C5, C6 e C7 si aggiungono, inoltre, gli incontri con le aziende (Appendice B), di cui sono riportati i link ai verbali.
+*Fonti.* Ogni valutazione si basa sulla documentazione fornita da ogni #gloss(url:"https://memoryleakersteam.github.io/glossario#proponente")[proponente] e sulle slide presentate in aula il 13/10/2026; per i capitolati C1, C5, C6 e C7 si aggiungono, inoltre, gli incontri con le aziende (Appendice B), di cui sono riportati i link ai verbali.
 
 *Criteri di valutazione.* Il gruppo ha considerato: rischio tecnico e fattibilità nelle ore a disposizione, chiarezza dei requisiti e dei criteri di accettazione, supporto offerto dal proponente, interesse del gruppo e competenze di partenza, valore formativo, allineamento con i criteri del corso (documentazione, verifica, tracciabilità).
 
@@ -57,7 +58,7 @@ Il gruppo Memory Leakers (gruppo 3), composto da sette persone, ha analizzato tu
   [C1 AURA], [Vimar], [22/10/2026], [Alternativa: requisiti molto chiari, tecnologie nuove e dominio meno vicino al gruppo],
   [C2 NEXUM Concierge], [Eggon], [no], [Non selezionato: stack AI da definire],
   [C3 FossDot], [Uranion], [no], [Non selezionato: hardware, firmware e backend, rischio tecnico troppo alto],
-  [C4 Veicoli e post-vendita], [M31], [no], [Non selezionato: dominio ampio e microservizi, rischio sui tempi di analisi],
+  [C4 Veicoli e post-vendita], [M31], [no], [Non selezionato: dominio ampio e #gloss(url:"https://memoryleakersteam.github.io/glossario#microservizi")[microservizi], rischio sui tempi di analisi],
   [C5 RareCare Navigator], [Miriade], [26/10/2026], [Alternativa: forte valore sociale, perimetro ampio e tecnologie nuove],
   [C6 Caching semantico e FinOps], [Var Group], [26/10/2026], [Capitolato scelto],
   [C7 SmartDashboard], [Ergon Informatica], [22/10/2026], [Seconda scelta: percorso completo, perimetro ampio],
@@ -71,7 +72,7 @@ Il gruppo Memory Leakers (gruppo 3), composto da sette persone, ha analizzato tu
 
 Sanmarco Informatica S.p.A. propone AIRA (AI Requests Automation), un sistema per gestire richieste aziendali non strutturate (ordini d'acquisto, ticket di assistenza, prenotazioni, opportunità commerciali) provenienti da canali eterogenei come e-mail, messaggistica e cartelle condivise.
 
-Le richieste arrivano come testo, note vocali, immagini e PDF scansionati, spesso con abbreviazioni e codici incompleti: presidiare a mano ogni fonte sovraccarica gli operatori e causa errori e ritardi. Il sistema ha l'obiettivo di elaborare i diversi formati con modelli AI, OCR e speech-to-text, trasformarli in dati strutturati (ad esempio JSON) e inoltrarli ai gestionali aziendali tramite API REST.
+Le richieste arrivano come testo, note vocali, immagini e PDF scansionati, spesso con abbreviazioni e codici incompleti: presidiare a mano ogni fonte sovraccarica gli operatori e causa errori e ritardi. Il sistema ha l'obiettivo di elaborare i diversi formati con modelli AI, OCR e speech-to-text, trasformarli in dati strutturati (ad esempio #gloss(url:"https://memoryleakersteam.github.io/glossario#json")[JSON]) e inoltrarli ai gestionali aziendali tramite #gloss(url: "https://memoryleakersteam.github.io/glossario#api")[API] REST.
 
 == Obiettivo
 
@@ -80,11 +81,11 @@ Il capitolato richiede una pipeline che:
 - monitora in continuo i canali configurati (caselle di posta, WhatsApp, cartelle su filesystem), rilevando mittente, testo e allegati;
 - filtra i dati in ingresso per isolare i clienti (tenant) ed evitare accessi non autorizzati;
 - converte l'audio in testo e legge immagini e documenti scansionati (OCR e visione artificiale);
-- interpreta le richieste con un LLM e le mappa su template per tipologia (ordine, ticket, caso, evento), associando ad esempio le descrizioni informali ai codici articolo del catalogo;
-- avvia azioni configurabili: chiamate REST a portali B2B, ERP, CRM, ticketing oppure invio di e-mail;
+- interpreta le richieste con un #gloss(url:"https://memoryleakersteam.github.io/glossario#llm")[LLM] e le mappa su template per tipologia (ordine, ticket, caso, evento), associando ad esempio le descrizioni informali ai codici articolo del catalogo;
+- avvia azioni configurabili: chiamate REST a portali B2B, #gloss(url:"https://memoryleakersteam.github.io/glossario#erp")[ERP], CRM, ticketing oppure invio di e-mail;
 - espone un'interfaccia web di amministrazione per configurare i canali, consultare lo storico dei log e gestire la persistenza dei dati.
 
-Sono opzionali una dashboard analitica dei flussi e le risposte automatiche al mittente.
+Sono opzionali una #gloss(url:"https://memoryleakersteam.github.io/glossario#dashboard")[dashboard] analitica dei flussi e le risposte automatiche al mittente.
 
 == Tecnologie richieste
 
@@ -101,8 +102,8 @@ Il proponente consiglia:
 
 === Pro
 
-- Problema aziendale concreto e ben motivato, con un'architettura a pipeline modulare facile da suddividere fra i componenti del gruppo.
-- Tecnologie accessibili e documentate; supporto con metodologia Agile da parte di Sanmarco, azienda con solida esperienza industriale.
+- Problema aziendale concreto e ben motivato, con un'#gloss(url: "https://memoryleakersteam.github.io/glossario#architettura-software")[architettura] a pipeline modulare facile da suddividere fra i componenti del gruppo.
+- Tecnologie accessibili e documentate; supporto con metodologia #gloss(url: "https://memoryleakersteam.github.io/glossario#agile")[Agile] da parte di Sanmarco, azienda con solida esperienza industriale.
 - Buon valore formativo: elaborazione multimodale, uso degli LLM per strutturare i dati, integrazione con servizi REST.
 
 === Contro
@@ -115,28 +116,28 @@ Il proponente consiglia:
 
 == Conclusioni
 
-Il gruppo preferisce non procedere alla candidatura per questo capitolato. L'assenza di criteri di accettazione misurabili e dei dati necessari alla parte più critica rende difficile dimostrare in modo oggettivo il valore di un MVP, e l'ampiezza tecnica (audio, immagini, testo e integrazione con i gestionali) richiede un carico elevato rispetto alle ore a disposizione. La valutazione si basa unicamente sulla documentazione fornita e sulla presentazione svolta in aula, non essendo stato svolto alcun incontro con l'azienda.
+Il gruppo preferisce non procedere alla candidatura per questo capitolato. L'assenza di criteri di accettazione misurabili e dei dati necessari alla parte più critica rende difficile dimostrare in modo oggettivo il valore di un #gloss(url:"https://memoryleakersteam.github.io/glossario#mvp")[MVP], e l'ampiezza tecnica (audio, immagini, testo e integrazione con i gestionali) richiede un carico elevato rispetto alle ore a disposizione. La valutazione si basa unicamente sulla documentazione fornita e sulla presentazione svolta in aula, non essendo stato svolto alcun incontro con l'azienda.
 
 = C1 - AURA (Vimar)
 
 == Descrizione
 
-Vimar S.p.A. vuole mostrare come i servizi di AI generativa esistenti (Claude, ChatGPT, Gemini, Copilot) possano essere usati come interfaccia in linguaggio naturale per gli impianti domotici residenziali Vimar View Wireless, senza sviluppare un assistente dedicato. L'impianto consiste in una rete Bluetooth Mesh collegata al cloud Vimar tramite un gateway BLE. L'accesso programmatico passa dalle KNX IoT 3rd-party API, un'interfaccia REST in cui un ambiente (_Location_) contiene funzionalità (_Function_) i cui attributi sono i _Datapoint_. Il progetto rende queste API utilizzabili da un modello linguistico attraverso il Model Context Protocol (MCP): un server espone risorse e strumenti, un client permette al modello di scoprirli e usarli.
+Vimar S.p.A. vuole mostrare come i servizi di AI generativa esistenti (Claude, ChatGPT, Gemini, Copilot) possano essere usati come interfaccia in linguaggio naturale per gli impianti domotici residenziali Vimar View Wireless, senza sviluppare un assistente dedicato. L'impianto consiste in una rete Bluetooth Mesh collegata al cloud Vimar tramite un gateway BLE. L'accesso programmatico passa dalle KNX IoT 3rd-party API, un'interfaccia REST in cui un ambiente (_Location_) contiene funzionalità (_Function_) i cui attributi sono i _Datapoint_. Il #gloss(url:"https://memoryleakersteam.github.io/glossario#progetto")[progetto] rende queste API utilizzabili da un modello linguistico attraverso il Model Context Protocol (#gloss(url:"https://memoryleakersteam.github.io/glossario#mcp")[MCP]): un server espone risorse e strumenti, un client permette al modello di scoprirli e usarli.
 
 == Obiettivo
 
 Il capitolato richiede tre componenti obbligatori:
 
-- *Infrastruttura cloud-ready:* container, Infrastructure as Code, avvio con un solo comando (docker compose up); compatibilità con AWS, mentre il rilascio su AWS è opzionale.
-- *Server e client MCP:* il server supporta le API KNX IoT (Authorization, Datapoint, Function, Information, Location, Subscription, Timeseries), in lettura e scrittura, con autenticazione OAuth2 e ricostruzione delle relazioni tra ambienti, funzionalità e datapoint; il client si interfaccia solo con il server realizzato.
+- *Infrastruttura cloud-ready:* #gloss(url:"https://memoryleakersteam.github.io/glossario#container")[container], Infrastructure as Code, avvio con un solo comando (docker compose up); compatibilità con #gloss(url:"https://memoryleakersteam.github.io/glossario#aws")[AWS], mentre il rilascio su AWS è opzionale.
+- *Server e client MCP:* il server supporta le API KNX IoT (Authorization, Datapoint, Function, Information, Location, Subscription, Timeseries), in lettura e scrittura, con autenticazione #gloss(url:"https://memoryleakersteam.github.io/glossario#oauth2")[OAuth2] e ricostruzione delle relazioni tra ambienti, funzionalità e datapoint; il client si interfaccia solo con il server realizzato.
 - *Agente o modello AI esterno commerciale:* con autenticazione dell'utente tramite account MyVimar, scelta e memorizzazione dell'impianto nella conversazione, lettura e modifica dello stato dei dispositivi.
 
-I casi d'uso previsti sono 17 casi base (accesso, elenco impianti, lettura e comando di luci e tapparelle, comandi su più dispositivi) e 21 casi avanzati (richieste ambigue, sinonimi, richieste implicite come «è buio», conferma per comandi estesi, elementi non trovati). Sono _nice-to-have_ gli scenari multi-impianto, i comandi condizionali, lo storico e i trigger. La copertura dei test deve essere almeno del 75% su unità e integrazione, mentre almeno dell'80% sui test end-to-end. Sono previsti due incontri in presenza a Padova e due dimostrazioni al reparto R&D.
+I casi d'uso previsti sono 17 casi base (accesso, elenco impianti, lettura e comando di luci e tapparelle, comandi su più dispositivi) e 21 casi avanzati (richieste ambigue, sinonimi, richieste implicite come «è buio», conferma per comandi estesi, elementi non trovati). Sono _nice-to-have_ gli scenari multi-impianto, i comandi condizionali, lo storico e i trigger. La copertura dei test deve essere almeno del 75% su unità e integrazione, mentre almeno dell'80% sui #gloss(url:"https://memoryleakersteam.github.io/glossario#test-e2e")[test end-to-end]. Sono previsti due incontri in presenza a Padova e due dimostrazioni al reparto R&D.
 
 == Tecnologie richieste
 
-- *Vincolanti:* Docker con docker-compose, KNX IoT 3rd-party API, OAuth2, repository Git pubblico con licenza open source.
-- *Suggerite:* Python con l'SDK FastMCP (alternative TypeScript o Java), AWS Lightsail o EC2, database relazionali o Redis, CI con GitHub Actions, Terraform, AWS CDK o Ansible.
+- *Vincolanti:* Docker con docker-compose, KNX IoT 3rd-party API, OAuth2, #gloss(url:"https://memoryleakersteam.github.io/glossario#repository")[repository] Git pubblico con licenza open source.
+- *Suggerite:* Python con l'SDK FastMCP (alternative TypeScript o Java), AWS Lightsail o EC2, database relazionali o #gloss(url:"https://memoryleakersteam.github.io/glossario#redis")[Redis], CI con GitHub Actions, Terraform, AWS CDK o Ansible.
 - *Hardware:* kit fisico portatile (gateway BLE, attuatori, comando tapparelle, sensori, termostato) fornito dall'azienda.
 
 == Pro e contro
@@ -211,7 +212,7 @@ Lo stack AI e i modelli sono da concordare dopo l'aggiudicazione; l'MVP può ess
 
 == Conclusioni
 
-Il gruppo preferisce non procedere alla candidatura per questo capitolato: il perimetro è ampio e richiede un'analisi dei requisiti molto accurata per essere scomposto in attività gestibili, le scelte sullo stack AI sono rinviate a dopo l'aggiudicazione, lo stack di sviluppo è poco noto al gruppo e il dominio ha suscitato limitato interesse; inoltre la componente RAG è presente anche in C5, che offre più supporto sul dominio. La valutazione si basa unicamente sulla documentazione fornita e sulla presentazione svolta in aula, non essendo stato svolto alcun incontro con l'azienda.
+Il gruppo preferisce non procedere alla candidatura per questo capitolato: il perimetro è ampio e richiede un'analisi dei requisiti molto accurata per essere scomposto in attività gestibili, le scelte sullo stack AI sono rinviate a dopo l'aggiudicazione, lo stack di sviluppo è poco noto al gruppo e il dominio ha suscitato limitato interesse; inoltre la componente #gloss(url:"https://memoryleakersteam.github.io/glossario#rag")[RAG] è presente anche in C5, che offre più supporto sul dominio. La valutazione si basa unicamente sulla documentazione fornita e sulla presentazione svolta in aula, non essendo stato svolto alcun incontro con l'azienda.
 
 = C3 - FossDot (Uranion)
 
@@ -228,7 +229,7 @@ Il capitolato richiede quattro componenti:
 - servizio di bridging STT → LLM → TTS con astrazione sul provider e client MCP;
 - interfaccia web per registrare e gestire più dispositivi.
 
-L'MVP richiede il flusso «wake word, domanda, risposta vocale» su un dispositivo fisico. La consegna completa aggiunge più provider (anche locali con Ollama), MCP, Skills e Agents, multi-dispositivo, aggiornamenti OTA e hardening. Copertura dei test almeno dell'80% per le componenti software, da concordare per il firmware.
+L'MVP richiede il flusso «wake word, domanda, risposta vocale» su un dispositivo fisico. La consegna completa aggiunge più provider (anche locali con #gloss(url:"https://memoryleakersteam.github.io/glossario#ollama")[Ollama]), MCP, Skills e Agents, multi-dispositivo, aggiornamenti OTA e hardening. Copertura dei test almeno dell'80% per le componenti software, da concordare per il firmware.
 
 == Tecnologie richieste
 
@@ -244,7 +245,7 @@ Non è imposto uno stack; è richiesto il rilascio con licenza permissiva (Apach
 - Model Context Protocol;
 - Ollama;
 - Axum e Tokio;
-- containerizzazione e CI/CD incoraggiate.
+- containerizzazione e #gloss(url:"https://memoryleakersteam.github.io/glossario#ci-cd")[CI/CD] incoraggiate.
 
 == Pro e contro
 
@@ -279,14 +280,14 @@ M31 S.r.l. propone di sviluppare una piattaforma software distribuita per la ges
 
 Il capitolato prevede di centralizzare le informazioni relative a modelli e veicoli, migliorare il flusso di lavoro fra la casa madre e la rete di vendita e assistenza, offrire ai proprietari un unico punto di accesso per gestire le informazioni dell'auto, le manutenzioni, gli appuntamenti, i richiami e le notifiche, con accesso profilato e separato per ruolo.
 
-I prodotti attesi sono un'analisi dello stato dell'arte, un PoC che comprenda ad esempio creazione del veicolo, vendita, manutenzione o richiamo, notifica e un MVP con interfacce, API, autenticazione, persistenza e verifica automatizzata.
+I prodotti attesi sono un'analisi dello stato dell'arte, un #gloss(url:"https://memoryleakersteam.github.io/glossario#poc")[PoC] che comprenda ad esempio creazione del veicolo, vendita, manutenzione o richiamo, notifica e un MVP con interfacce, API, autenticazione, persistenza e verifica automatizzata.
 
 == Tecnologie richieste
 
 L'azienda riporta possibili strumenti per l'implementazione dell'architettura distribuita, quali:
 
 - Node.js e NestJS con TypeScript per lo sviluppo dei servizi applicativi e delle API; Go per componenti che richiedono alte prestazioni o gestione di processi concorrenti;
-- NATS o Apache Kafka per la comunicazione asincrona e la gestione degli eventi;
+- NATS o Apache Kafka per la comunicazione #gloss(url: "https://memoryleakersteam.github.io/glossario#asincrona")[asincrona] e la gestione degli eventi;
 - Kubernetes per l'orchestrazione e la gestione centralizzata dei servizi;
 - PostgreSQL o MongoDB per la persistenza dei dati;
 - Redis per il caching e le sessioni;
@@ -322,10 +323,10 @@ Miriade S.r.l. propone RareCare Navigator, una piattaforma digitale con assisten
 
 Il capitolato elenca diciotto requisiti (R1-R18):
 
-- *obbligatori:* permessi e ruoli (RBAC), workflow e notifiche per scadenze (invalidità, PAI/PEI) via push ed email, chatbot RAG basato solo su fonti ufficiali verificate;
+- *obbligatori:* permessi e ruoli (#gloss(url:"https://memoryleakersteam.github.io/glossario#rbac")[RBAC]), workflow e notifiche per scadenze (invalidità, PAI/PEI) via push ed email, chatbot RAG basato solo su fonti ufficiali verificate;
 - *opzionali:* assistente vocale, mappatura geospaziale, analisi predittiva dei bisogni;
 - *sicurezza e privacy:* conformità GDPR con TLS 1.3 e AES-256, autenticazione a più fattori e OAuth2;
-- *architettura e interfaccia:* cloud nativo e serverless, pattern a plugin per estendere ad altre patologie («Disease Pack», configurazione e non codice), accessibilità WCAG 2.1 AA, frontend cross-platform;
+- *architettura e interfaccia:* cloud nativo e #gloss(url:"https://memoryleakersteam.github.io/glossario#serverless")[serverless], pattern a plugin per estendere ad altre patologie («Disease Pack», configurazione e non codice), accessibilità WCAG 2.1 AA, frontend cross-platform;
 - *servizi AI:* RAG con risposte verificate, estrazione di entità cliniche da testo e voce, checklist dinamiche da PAI/PEI.
 
 == Tecnologie richieste
@@ -333,12 +334,12 @@ Il capitolato elenca diciotto requisiti (R1-R18):
 Il capitolato raccomanda:
 
 - Flutter o React Native per il frontend;
-- un'architettura serverless su AWS (Lambda, API Gateway) con Amazon Bedrock, oppure OpenAI o modelli open source.
+- un'architettura serverless su AWS (Lambda, API Gateway) con #gloss(url:"https://memoryleakersteam.github.io/glossario#aws-bedrock")[Amazon Bedrock], oppure OpenAI o modelli open source.
 
 L'allegato tecnico, non vincolante, propone:
 
-- Cognito (identità e MFA);
-- Amazon Verified Permissions;
+- Cognito (identità e #gloss(url:"https://memoryleakersteam.github.io/glossario#mfa")[MFA]);
+- #gloss(url:"https://memoryleakersteam.github.io/glossario#avp")[Amazon Verified Permissions];
 - Step Functions ed EventBridge;
 - Bedrock Knowledge Bases e Guardrails;
 - Aurora Serverless con pgvector;
@@ -351,8 +352,8 @@ L'allegato segnala anche le criticità: la cifratura end-to-end in senso stretto
 === Pro
 
 - *Impatto sociale e formativo.* Forte valore sociale e formativo: AI generativa applicata a un caso reale.
-- *Competenze e affiancamento.* Supporto molto strutturato: competenze su cloud, AI, UX e dominio clinico, formazione iniziale e possibilità di affiancare una figura specializzata.
-- *Flessibilità sul perimetro.* Perimetro negoziabile con il gruppo, requisiti numerati, architettura di riferimento e indicazioni sui flussi dati; una persona del design system può aiutare all'inizio inerentemente a struttura e bozza grafica.
+- *Competenze e affiancamento.* Supporto molto strutturato: competenze su cloud, AI, #gloss(url:"https://memoryleakersteam.github.io/glossario#ux-ui")[UX] e dominio clinico, formazione iniziale e possibilità di affiancare una figura specializzata.
+- *Flessibilità sul perimetro.* Perimetro negoziabile con il gruppo, requisiti numerati, architettura di riferimento e indicazioni sui flussi dati; una persona del #gloss(url:"https://memoryleakersteam.github.io/glossario#design")[design] system può aiutare all'inizio inerentemente a struttura e bozza grafica.
 
 === Contro
 
@@ -372,18 +373,18 @@ C5 offre uno dei supporti più ricchi tra i capitolati e un tema di forte valore
 
 Var Group usa un'architettura AI a due livelli. Il primo aggrega modelli pubblici (Claude Enterprise, GPT, ricerca web) per attività che non toccano dati riservati. Il secondo, privato su AWS, ospita modelli proprietari, agenti e connettori verso ERP, CRM, SharePoint e Atlassian, con dati classificati su tre livelli di sensibilità (Gold, Silver, Bronze). Un orchestratore AI riceve ogni richiesta, da un processo automatico o da un'interfaccia conversazionale, e la instrada in base all'identità dell'utente e alla natura del dato.
 
-L'instradamento è affidato a LiteLLM, un proxy open source compatibile con le API di OpenAI, già in produzione presso Var Group: gestisce il routing fra più provider, le chiavi e le credenziali. I limiti riscontrati dall'azienda sono:
+L'instradamento è affidato a #gloss(url:"https://memoryleakersteam.github.io/glossario#litellm")[LiteLLM], un #gloss(url:"https://memoryleakersteam.github.io/glossario#proxy")[proxy] open source compatibile con le API di OpenAI, già in produzione presso Var Group: gestisce il routing fra più provider, le chiavi e le credenziali. I limiti riscontrati dall'azienda sono:
 
 - cache solo esatta (basata su hash): due domande equivalenti ma formulate in modo diverso generano due chiamate, raddoppiando i costi;
-- nessuna dashboard FinOps nativa né visibilità aggregata sui costi;
+- nessuna #gloss(url:"https://memoryleakersteam.github.io/glossario#dashboard-finops")[dashboard FinOps] nativa né visibilità aggregata sui costi;
 - nessuna previsione (forecast) della spesa;
-- multi-tenancy limitata, con difficoltà a isolare i costi per team e progetto.
+- #gloss(url:"https://memoryleakersteam.github.io/glossario#multi-tenancy")[multi-tenancy] limitata, con difficoltà a isolare i costi per team e progetto.
 
 == Obiettivo
 
 Estendere LiteLLM con due componenti originali:
 
-- *Cache semantica:* livello di cache basato su embedding e ricerca per similarità, che riconosce le query semanticamente simili e restituisce la risposta già calcolata, se presente. Prevede soglia di similarità configurabile, invalidazione con TTL e versioning, persistenza su Redis o database vettoriale, registrazione di token e latenza risparmiati.
+- *#gloss(url:"https://memoryleakersteam.github.io/glossario#cache-semantica")[Cache semantica] :* livello di cache basato su #gloss(url:"https://memoryleakersteam.github.io/glossario#modelli-di-embedding")[embedding] e ricerca per similarità, che riconosce le query semanticamente simili e restituisce la risposta già calcolata, se presente. Prevede soglia di similarità configurabile, invalidazione con TTL e versioning, persistenza su Redis o database vettoriale, registrazione di #gloss(url:"https://memoryleakersteam.github.io/glossario#token")[token] e latenza risparmiati.
 - *Dashboard FinOps:* servizio separato che aggrega i consumi per team, progetto e utente, calcola il risparmio reale generato dalla cache, gestisce budget e alert, produce il forecast mensile della spesa, con aggiornamento quasi in tempo reale, multi-tenancy e isolamento dei dati per team e progetto.
 
 *Vincoli e criteri:* LiteLLM è la base e non va reinventato; copertura dei test almeno del 70% del codice prodotto, con separazione fra test deterministici e valutazione probabilistica; PoC di fattibilità prima dell'implementazione e stand-up periodici.
@@ -394,9 +395,9 @@ Estendere LiteLLM con due componenti originali:
 
 - *Backend e proxy:* Python, LiteLLM, FastAPI o Flask, Docker.
 - *Embedding e similarità:* OpenAI text-embedding-3-small o sentence-transformers (open source); similarità del coseno (numpy, scikit-learn).
-- *Cache e vector store:* Redis (cache con TTL), Qdrant o pgvector, PostgreSQL per le metriche FinOps.
+- *Cache e #gloss(url:"https://memoryleakersteam.github.io/glossario#vector-store")[vector store] :* Redis (cache con TTL), Qdrant o pgvector, PostgreSQL per le metriche FinOps.
 - *Dashboard:* React con Chart.js, oppure Streamlit come alternativa rapida; API REST in JSON.
-- *Versionamento:* Git su GitHub o Bitbucket.
+- *Versionamento:* Git su #gloss(url:"https://memoryleakersteam.github.io/glossario#github")[GitHub] o Bitbucket.
 
 == Rischi e punti aperti
 
@@ -415,7 +416,7 @@ Il gruppo ha scelto C6 come prima scelta per i seguenti motivi:
 - *Criteri di qualità chiari.* La soglia di copertura (70%) è esplicita e raggiungibile, e la distinzione fra test deterministici e valutazione probabilistica è un tema formativo importante.
 - *Supporto strutturato.* Design thinking, formazioni mirate su LiteLLM (2 ore), Embedding e Caching (2 ore) e FinOps con dashboard (1,5 ore), revisioni e incontri ogni due settimane.
 - *Competenze di partenza.* Python, Docker, SQL e Git sono già noti al gruppo e alcuni componenti conoscono le API REST: le tecnologie sono in buona parte note, diversamente da altri capitolati.
-- *Fattibilità.* Un PoC per la RTB (cache semantica minimale e aggregazione dei costi) e un MVP validabile nei tempi del progetto sono realistici.
+- *Fattibilità.* Un PoC per la #gloss(url:"https://memoryleakersteam.github.io/glossario#rtb")[RTB] (cache semantica minimale e aggregazione dei costi) e un MVP validabile nei tempi del progetto sono realistici.
 
 == Conclusioni
 
@@ -425,13 +426,13 @@ Il gruppo si candida ufficialmente per lo sviluppo del capitolato C6: il tema è
 
 == Descrizione
 
-Ergon Informatica S.r.l. propone SmartDashboard, una piattaforma di Business Intelligence end-to-end destinata alle aziende dei settori alimentare e dei trasporti. Nel gestionale ERP queste aziende accumulano dati preziosi (ordini, vendite, magazzino, consegne, marginalità) in una forma pensata per l'operatività e non per l'analisi: ogni nuovo report passa dal reparto IT e i numeri grezzi non spiegano il perché degli andamenti. La piattaforma recupera i dati dall'ERP, li consolida in un data warehouse ottimizzato per l'analisi ed espone una web app in cui l'utente costruisce in autonomia dashboard interattive. Ciò che la distingue da un comune strumento di reportistica è un livello di intelligenza artificiale con due finalità: abbattere la barriera tecnica, generando un grafico da una richiesta in linguaggio naturale, e arricchire l'analisi con l'interpretazione automatica dei dati (anomalie, tendenze, spiegazioni).
+Ergon Informatica S.r.l. propone SmartDashboard, una piattaforma di Business Intelligence end-to-end destinata alle aziende dei settori alimentare e dei trasporti. Nel gestionale ERP queste aziende accumulano dati preziosi (ordini, vendite, magazzino, consegne, marginalità) in una forma pensata per l'operatività e non per l'analisi: ogni nuovo report passa dal reparto IT e i numeri grezzi non spiegano il perché degli andamenti. La piattaforma recupera i dati dall'ERP, li consolida in un #gloss(url:"https://memoryleakersteam.github.io/glossario#data-warehouse")[data warehouse] ottimizzato per l'analisi ed espone una web app in cui l'utente costruisce in autonomia dashboard interattive. Ciò che la distingue da un comune strumento di reportistica è un livello di intelligenza artificiale con due finalità: abbattere la barriera tecnica, generando un grafico da una richiesta in linguaggio naturale, e arricchire l'analisi con l'interpretazione automatica dei dati (anomalie, tendenze, spiegazioni).
 
 == Obiettivo
 
-Il capitolato prevede un'architettura a tre livelli: un _Raw Data Store_ con copia storicizzata dei dati grezzi, un _Data Warehouse_ con ETL e modello dimensionale a star schema, e una web app con backend che espone i dati tramite API (senza rendere accessibili al frontend le interrogazioni dirette) e un costruttore di dashboard.
+Il capitolato prevede un'architettura a tre livelli: un _Raw Data Store_ con copia storicizzata dei dati grezzi, un _Data Warehouse_ con #gloss(url:"https://memoryleakersteam.github.io/glossario#etl")[ETL] e modello dimensionale a star schema, e una web app con backend che espone i dati tramite API (senza rendere accessibili al frontend le interrogazioni dirette) e un costruttore di dashboard.
 
-- *Requisiti funzionali:* dashboard drag and drop su griglia reattiva con configurazioni per utente; libreria di widget (barre, linee, torta, KPI, gauge, tabelle, pivot, mappe); filtri trasversali; temi chiaro e scuro; esportazione in PDF ed Excel; autenticazione.
+- *#gloss(url:"https://memoryleakersteam.github.io/glossario#requisiti-funzionali")[Requisiti funzionali] :* dashboard drag and drop su griglia reattiva con configurazioni per utente; libreria di widget (barre, linee, torta, KPI, gauge, tabelle, pivot, mappe); filtri trasversali; temi chiaro e scuro; esportazione in PDF ed Excel; autenticazione.
 - *Layer AI, in ordine di priorità:* generazione di visualizzazioni da linguaggio naturale (capacità centrale), insight automatici, assistente designer, spiegazione di un indicatore su richiesta (estensione). L'AI opera solo su dati e metadati esposti dalla piattaforma, con controlli di coerenza delle risposte.
 - *Fasi consigliate:* prima la BI funzionante, poi la generazione da linguaggio naturale, poi insight e assistente, infine la spiegazione. Il capitolato non fissa soglie numeriche di test.
 
@@ -441,7 +442,7 @@ Le tecnologie sono suggerite e non vincolanti:
 
 - *Data warehouse:* DuckDB (alternative ClickHouse, MonetDB, Apache DataFusion); sorgente dati sostituibile come requisito desiderabile.
 - *Raw store e configurazioni:* PostgreSQL, MySQL o MariaDB.
-- *ETL:* Python con Polars o Pandas, eventualmente con orchestratori (Airflow, Prefect, Dagster); connettori ODBC o middleware JSON verso l'ERP.
+- *ETL:* Python con Polars o Pandas, eventualmente con orchestratori (Airflow, Prefect, Dagster); connettori ODBC o #gloss(url:"https://memoryleakersteam.github.io/glossario#middleware")[middleware] JSON verso l'ERP.
 - *AI:* LLM tramite API commerciale (OpenAI, Anthropic); LangChain o Vanna.ai per la traduzione da linguaggio naturale a dati.
 - *Frontend:* React, Angular o Vue con ECharts o Chart.js, AG Grid per tabelle e pivot; comunicazione con il backend via API REST.
 
@@ -470,7 +471,7 @@ C7 offre un percorso completo e seguito, risposte concrete e materiali di prova 
 
 == Descrizione
 
-Halue S.r.l. Società Benefit propone Sonar, un'applicazione web che si collega a uno store Shopify e ne ricostruisce la mappa: cosa esiste, cosa dipende da cosa e quali componenti non sono più utilizzati. Con il tempo gli store di grandi dimensioni si stratificano accumulando app installate e dimenticate, webhook verso fornitori non più attivi, campi personalizzati mai letti, script e funzioni di cui si è persa la traccia e codice di tema non più referenziato. Questa conoscenza non è documentata e si perde al cambio di fornitore o di personale, allungando i tempi di intervento e aumentando i rischi di incidenti in produzione.
+Halue S.r.l. Società Benefit propone Sonar, un'applicazione web che si collega a uno store Shopify e ne ricostruisce la mappa: cosa esiste, cosa dipende da cosa e quali componenti non sono più utilizzati. Con il tempo gli store di grandi dimensioni si stratificano accumulando app installate e dimenticate, #gloss(url:"https://memoryleakersteam.github.io/glossario#webhook")[webhook] verso fornitori non più attivi, campi personalizzati mai letti, script e funzioni di cui si è persa la traccia e codice di tema non più referenziato. Questa conoscenza non è documentata e si perde al cambio di fornitore o di personale, allungando i tempi di intervento e aumentando i rischi di incidenti in produzione.
 
 == Obiettivo
 
@@ -574,10 +575,10 @@ Il gruppo riconosce l'interesse del tema e la sua pertinenza con il corso, ma pr
 = Appendice A - Contesto e vincoli del gruppo
 
 - *Composizione:* sette persone: Matteo Arcandi, Jacopo De Donà, Jacopo Franco, Matteo Marcon, Riccardo Peresson, Paolo Prevedello Ramirez, Chiara Protopapa.
-- *Impegno:* ore produttive a persona entro l'intervallo 80-95 previsto dal Regolamento, come indicato nella Dichiarazione degli Impegni.
+- *Impegno:* #gloss(url:"https://memoryleakersteam.github.io/glossario#ore-produttive")[ore produttive] a persona entro l'intervallo 80-95 previsto dal Regolamento, come indicato nella Dichiarazione degli Impegni.
 - *Calendario:* circa 20 settimane dall'aggiudicazione del 3 novembre 2026, con rallentamenti per la pausa natalizia e la sessione d'esame invernale; data di consegna come indicato nella Dichiarazione degli Impegni.
 - *Costo:* preventivo non inferiore a 12.000 €, il minimo previsto per un gruppo di sette persone.
-- *Revisioni:* RTB (requisiti e proof of concept) e PB (specifica tecnica e MVP validato dal proponente).
+- *Revisioni:* RTB (requisiti e proof of concept) e #gloss(url:"https://memoryleakersteam.github.io/glossario#pb")[PB] (specifica tecnica e MVP validato dal proponente).
 
 = Appendice B - Incontri esplorativi
 

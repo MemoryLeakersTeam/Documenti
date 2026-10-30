@@ -5,19 +5,20 @@
   sottotitolo: "Valutazione e scelta dei capitolati d'appalto per l'A.A. 2026/2027",
   gruppo: "Memory Leakers",
   tipo-documento: "Analisi dei Capitolati",
-  versione: "0.0.4",
-  autore: "Matteo Arcandi",
-  verificatore: "",
-  stato: "Bozza",
+  versione: "1.0.0",
+  autore: "Matteo Arcandi, Jacopo Franco, Riccardo Peresson",
+  verificatore: "Chiara Protopapa",
+  stato: "Approvato",
   data: datetime(year: 2026, month: 10, day: 29),
   file-nome: "analisi-dei-capitolati.pdf",
   registro-modifiche: (
-    "0.0.4", "30/10/2026", "Aggiunta link al glossario.", "Riccardo Peresson", "",
-    "0.0.3", "29/10/2026", "Correzione imperfezioni.", "Matteo Arcandi", "",
+    "1.0.0", "30/10/2026", "Firma ed approvazione del documento.", "Matteo Arcandi, Jacopo Franco, Riccardo Peresson", "Paolo Prevedello Ramirez",
+    "0.1.1", "30/10/2026", "Aggiunta link al glossario.", "Riccardo Peresson", "Chiara Protopapa",
+    "0.1.0", "29/10/2026", "Correzione imperfezioni.", "Matteo Arcandi", "Chiara Protopapa",
     "0.0.2", "29/10/2026", "Correzione e fine stesura.", "Jacopo Franco", "",
     "0.0.1", "28/10/2026", "Stesura iniziale del documento di analisi dei capitolati.", "Matteo Arcandi", "",
   ),
-  firma-responsabile: ""
+  firma-responsabile: "Paolo Prevedello Ramirez"
 )
 
 // Regola per rendere in grassetto i titoli dei capitolati nell'indice

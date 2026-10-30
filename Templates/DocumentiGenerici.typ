@@ -147,8 +147,11 @@
   body
 
  //firma
- place(bottom + right, dy: -0.5cm)[
-    #block(width: 45%)[
+ // in fondo all'ultima pagina se c'è spazio, altrimenti in cima alla pagina successiva
+ v(1cm)
+ v(1fr)
+ align(right)[
+    #block(width: 45%, breakable: false)[
       #align(center)[
         #if firma-responsabile != "" and firma-responsabile != "Firma del Responsabile di Progetto" [
           #text(

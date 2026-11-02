@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - "**.typ"
+      - "**-signed.pdf"
+      - "**/Diario_di_bordo/**"
       - "Templates/**"
       - "Scripts/compila.sh"
       - ".github/workflows/compila-pdf.yml"
@@ -24,3 +26,4 @@ jobs:
     uses: ./.github/workflows/compila-comune.yml
     with:
       nome-artifact: pdf
+

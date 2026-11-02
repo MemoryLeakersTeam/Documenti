@@ -9,7 +9,8 @@
 #let sottotitolo = ""
 #let gruppo = "Memory Leakers"
 #let tipo-documento = "Lettera"
-#let data-str = "30/10/2026"
+#let data = datetime(year: 2026, month: 10, day: 30)
+#let data-str = data.display("[day]/[month]/[year]")
 
 // Componenti del gruppo: (Nome e Cognome, Matricola)
 #let membri = (
@@ -48,6 +49,15 @@
 #set text(font: "Liberation Sans", size: 10.5pt, lang: "it")
 #set par(justify: true)
 #show table.cell: set par(justify: false)
+
+// Dati letti da Scripts/compila.sh per pubblicare il documento sul sito
+#metadata((
+  titolo: titolo,
+  data: data.display("[year]-[month]-[day]"),
+  stato: "Approvato",
+  versione: "1.0.0",
+  tipo-documento: tipo-documento,
+)) <documento>
 
 // Copertina
 #align(center + horizon)[

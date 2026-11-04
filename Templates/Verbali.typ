@@ -39,7 +39,7 @@
   let attivita-todo-compat = attivita-todo.map(
     attivita => {
       if attivita.len() == 5 {
-        (..attivita, [], [])
+        (..attivita, [[N/D]], [[N/D]])
       } else {
         attivita
       }
@@ -212,7 +212,7 @@
   if attivita-todo.len() > 0 [
     == Attività da Svolgere
     #table(
-      columns: (0.5fr, 1.2fr, 1.8fr, 1fr, 1fr, 1fr, 1fr),
+      columns: (0.5fr, 1fr, 2fr, 1fr, 1fr, 1fr, 0.6fr),
       inset: 7pt,
       align: (col, row) => if row == 0 { center + horizon } else { left + horizon },
       fill: (x, y) => if y == 0 { colore-primario } else if calc.even(y) { colore-sfondo } else { none },
@@ -223,7 +223,7 @@
       [*#text(fill: white)[Responsabile]*], 
       [*#text(fill: white)[Scadenza]*],
       [*#text(fill: white)[Riferimento Decisione]*],
-      [*#text(fill: white)[GitHub Issue]*],
+      [*#text(fill: white)[Issue]*],
       
       ..attivita-todo-compat.flatten()
     )

@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - "**.typ"
+      - "**-signed.pdf"
+      - "**/Diario_di_bordo/**"
       - "Templates/**"
       - "Scripts/compila.sh"
       - ".github/workflows/compila-pdf.yml"
@@ -24,3 +26,72 @@ jobs:
     uses: ./.github/workflows/compila-comune.yml
     with:
       nome-artifact: pdf
+
+  # Pubblica i PDF approvati sul sito (MemoryLeakersTeam.github.io) con
+  # tools/sync_documenti.py del sito. Serve la GitHub App dell'organizzazione:
+  # variabile SITO_APP_ID e secret SITO_APP_PRIVATE_KEY; finché mancano il job viene saltato
+  pubblica:
+    name: Pubblicazione sul sito
+    needs: compila
+    if: github.ref == 'refs/heads/main' && vars.SITO_APP_ID != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Token della GitHub App
+        id: token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ vars.SITO_APP_ID }}
+          private-key: ${{ secrets.SITO_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: MemoryLeakersTeam.github.io
+
+      - name: Scarica i PDF compilati
+        uses: actions/download-artifact@v8
+        with:
+          name: pdf
+          path: artifact
+
+      - name: Checkout del sito
+        uses: actions/checkout@v5
+        with:
+          repository: ${{ github.repository_owner }}/MemoryLeakersTeam.github.io
+          token: ${{ steps.token.outputs.token }}
+          path: sito
+
+      - name: Sincronizza e pubblica
+        working-directory: sito
+        env:
+          GH_TOKEN: ${{ steps.token.outputs.token }}
+          BOT: ${{ steps.token.outputs.app-slug }}[bot]
+        run: |
+          set -o pipefail   # un errore dello script non deve sparire dietro a tee
+          id="$(gh api "/users/${BOT}" --jq .id)"
+          git config user.name "$BOT"
+          git config user.email "${id}+${BOT}@users.noreply.github.com"
+
+          # Se nel frattempo il pannello admin ha committato, si riparte da capo:
+          # lo script è idempotente, quindi rieseguirlo è più sicuro di un rebase
+          # Il riepilogo va nella pagina del workflow una volta sola, quello dell'ultimo tentativo
+          riepilogo="$RUNNER_TEMP/riepilogo.txt"
+          scrivi_riepilogo() { { echo '### Pubblicazione sul sito'; echo '```'; cat "$riepilogo"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"; }
+
+          for tentativo in 1 2 3; do
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            python3 tools/sync_documenti.py ../artifact | tee "$riepilogo"
+            git add -A pdf data
+            if git diff --cached --quiet; then
+              scrivi_riepilogo
+              exit 0
+            fi
+            git commit -q -m "docs(pdf): aggiorna da Documenti@${GITHUB_SHA::7}"
+            if git push -q origin HEAD:main; then
+              scrivi_riepilogo
+              exit 0
+            fi
+            echo "::warning::Push rifiutato (tentativo $tentativo), riprovo"
+            sleep 5
+          done
+          echo "::error::Impossibile pubblicare sul sito dopo 3 tentativi"
+          exit 1

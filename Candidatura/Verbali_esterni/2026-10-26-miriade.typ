@@ -6,6 +6,7 @@
 #show: verbale.with(
   titolo: "Verbale riunione esterna con Miriade del 26/10/2026",
   tipo-documento: "Verbale Esterno",
+  azienda: "Miriade",
   data: datetime(year: 2026, month: 10, day: 26),
   ora: "17:00 - 17:30",
   luogo: "Google Meet",

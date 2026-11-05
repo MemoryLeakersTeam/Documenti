@@ -7,6 +7,7 @@
 #show: verbale.with(
   titolo: "Verbale riunione esterna con Ergon Informatica del 22/10/2026",
   tipo-documento: "Verbale Esterno",
+  azienda: "Ergon",
   data: datetime(year: 2026, month: 10, day: 22),
   ora: "15:30 - 15:50",
   luogo: "Microsoft Teams",

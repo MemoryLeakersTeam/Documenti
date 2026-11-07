@@ -62,6 +62,15 @@
     #it
   ]
 
+  // Dati letti da Scripts/compila.sh per pubblicare il documento sul sito
+  [#metadata((
+    titolo: titolo,
+    data: data.display("[year]-[month]-[day]"),
+    stato: stato,
+    versione: versione,
+    tipo-documento: tipo-documento,
+  )) <documento>]
+
   //prima pagina
   align(center + horizon)[
     #text(24pt, weight: "bold", fill: colore-primario)[#titolo]

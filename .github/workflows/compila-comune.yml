@@ -26,6 +26,9 @@ jobs:
 
       - name: Installa Typst
         uses: typst-community/setup-typst@v5
+        with:
+          # compila.sh usa "typst eval --in", disponibile da Typst 0.15
+          typst-version: "0.15"
 
       - name: Installa font Liberation
         run: sudo apt-get update -q && sudo apt-get install -y -q fonts-liberation

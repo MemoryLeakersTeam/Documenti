@@ -7,7 +7,7 @@
   versione: "1.0.0",
   autore: "",
   verificatore: "",
-  stato: "Approvato",
+  stato: "",// Bozza -> Verificato -> Approvato (viene caricato sul sito)
   data: "",
   ora: "",
   luogo: "Google Meet",
@@ -27,6 +27,7 @@
   data-prossima-riunione: "",
   firma-responsabile: "Firma del Responsabile di Progetto",
   firma-esterna: "",
+  azienda: "",
   body
 ) = {
   // Variabili Colore
@@ -80,6 +81,16 @@
     #set text(fill: colore-primario)
     #it
   ]
+
+  // Dati letti da Scripts/compila.sh per pubblicare il documento sul sito
+  [#metadata((
+    titolo: titolo,
+    data: data.display("[year]-[month]-[day]"),
+    stato: stato,
+    versione: versione,
+    tipo-documento: tipo-documento,
+    azienda: azienda,
+  )) <documento>]
 
   align(center + horizon)[
     #text(24pt, weight: "bold", fill: colore-primario)[#titolo]

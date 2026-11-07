@@ -9,4 +9,4 @@ pdf/
 # ...tranne i PDF firmati
 !*-signed.pdf
 !/Templates/Template Diario di bordo.pdf
-!/Presentazioni/Diario_di_bordo/*.pdf
+!/*/Diario_di_bordo/*.pdf

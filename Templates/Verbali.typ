@@ -7,7 +7,7 @@
   versione: "1.0.0",
   autore: "",
   verificatore: "",
-  stato: "Approvato",
+  stato: "",// Bozza -> Verificato -> Approvato (viene caricato sul sito)
   data: "",
   ora: "",
   luogo: "Google Meet",

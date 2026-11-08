@@ -80,6 +80,7 @@
     #set text(fill: colore-primario)
     #it
   ]
+  show link: it => underline(text(fill: colore-secondario, it))
 
   align(center + horizon)[
     #text(24pt, weight: "bold", fill: colore-primario)[#titolo]
@@ -212,7 +213,7 @@
   if attivita-todo.len() > 0 [
     == Attività da Svolgere
     #table(
-      columns: (0.5fr, 1fr, 2fr, 1fr, 1fr, 1fr, 0.6fr),
+      columns: (35pt, 1.2fr, 2.2fr, 1.2fr, 1fr, 0.8fr, 0.8fr),
       inset: 7pt,
       align: (col, row) => if row == 0 { center + horizon } else { left + horizon },
       fill: (x, y) => if y == 0 { colore-primario } else if calc.even(y) { colore-sfondo } else { none },

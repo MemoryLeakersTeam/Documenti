@@ -1,0 +1,107 @@
+name: Verbale
+description: Stesura del verbale di una riunione interna o esterna.
+title: "docs(minutes): verbale interno del AAAA-MM-GG"
+labels: ["verbale interno"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Una issue = **una persona** e **una scadenza**. Assegnala al redattore e imposta la milestone.
+        Per un verbale **esterno** cambia il titolo e sostituisci la label con `verbale esterno`.
+
+  - type: input
+    id: riunione
+    attributes:
+      label: Riunione
+      description: La riunione da verbalizzare, con data in formato AAAA-MM-GG.
+      placeholder: "Riunione interna del AAAA-MM-GG  |  Riunione con <proponente> del AAAA-MM-GG"
+    validations:
+      required: true
+
+  - type: input
+    id: output
+    attributes:
+      label: Output atteso
+      placeholder: "RTB/Verbali_interni/AAAA-MM-GG.typ"
+    validations:
+      required: true
+
+  - type: input
+    id: scadenza
+    attributes:
+      label: Scadenza
+      description: Formato AAAA-MM-GG.
+      placeholder: "AAAA-MM-GG"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: ruolo
+    attributes:
+      label: Ruolo
+      description: Il ruolo con cui il redattore svolge l'attività (serve per il consuntivo delle ore).
+      options:
+        - Responsabile
+        - Amministratore
+        - Analista
+        - Progettista
+        - Programmatore
+        - Verificatore
+    validations:
+      required: true
+
+  - type: input
+    id: stima
+    attributes:
+      label: Stima delle ore
+      placeholder: "es. 2"
+    validations:
+      required: true
+
+  - type: input
+    id: verificatore
+    attributes:
+      label: Verificatore
+      description: Menzionalo, così riceve la notifica. Deve essere una persona diversa dal redattore.
+      placeholder: "@nome"
+    validations:
+      required: true
+
+  - type: textarea
+    id: dod
+    attributes:
+      label: Definition of Done
+      description: Aggiungi i criteri specifici di questa riunione, se ce ne sono.
+      value: |
+        - [ ] Verbale redatto con il template `Templates/Verbali.typ`
+        - [ ] Per ogni azione decisa esiste la sua issue, e il numero è nella colonna Issue
+        - [ ] La PR del verbale elenca tutte le issue citate (`Refs #n`)
+    validations:
+      required: true
+
+  - type: textarea
+    id: verifica
+    attributes:
+      label: Verifica
+      description: Checklist per i verbali. La compila il verificatore, che non modifica il verbale ma lascia commenti.
+      value: |
+        - [ ] La Definition of Done è soddisfatta
+        - [ ] Il primo punto è l'ordine del giorno; data, ora e partecipanti sono presenti
+        - [ ] Ogni decisione è motivata
+        - [ ] Ogni azione ha una sola persona, una scadenza in AAAA-MM-GG, la decisione di riferimento e la sua issue
+        - [ ] Non ci sono «Tutti», «da definire» o `N/D`
+        - [ ] Le issue citate esistono e corrispondono alle azioni (assegnatario e scadenza coincidono)
+        - [ ] Tutte le date sono nel formato AAAA-MM-GG
+        - [ ] Registro delle modifiche: una riga per modifica, con un solo autore; la verifica non aggiunge righe
+        - [ ] Il verbale compila senza errori (CI verde)
+        - [ ] (solo esterni) Il proponente ha firmato e il PDF è caricato come `*-signed.pdf`
+
+        **Esito** (spuntane uno):
+        - [ ] ✅ Accettato
+        - [ ] 💬 Da correggere (vedi commenti)
+        - [ ] ❌ Rifiutato
+
+  - type: textarea
+    id: note
+    attributes:
+      label: Note e dipendenze

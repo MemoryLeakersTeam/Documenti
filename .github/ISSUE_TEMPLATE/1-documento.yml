@@ -1,0 +1,120 @@
+name: Documento
+description: Stesura o modifica di un documento (Way of Working, Piano di Progetto, Analisi dei Requisiti, diario di bordo, template...).
+title: "docs(<ambito>): "
+labels: ["documentazione"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Una issue = **una persona** e **una scadenza**. Assegnala a una sola persona dalla barra laterale e imposta la milestone.
+        Se il lavoro richiede più di 3 giorni (la vita massima di un branch), dividilo in più issue.
+
+  - type: input
+    id: origine
+    attributes:
+      label: Origine
+      description: La riunione in cui è stata decisa l'attività, oppure chi la propone. Gli ID D/A li assegna il verbale, non vanno scritti qui.
+      placeholder: "Riunione interna del AAAA-MM-GG  |  Proposta di @nome"
+    validations:
+      required: true
+
+  - type: textarea
+    id: decisione
+    attributes:
+      label: Decisione e motivazione
+      description: Cosa è stato deciso e perché, in 1-3 righe.
+    validations:
+      required: true
+
+  - type: textarea
+    id: descrizione
+    attributes:
+      label: Descrizione
+      description: Cosa va fatto.
+    validations:
+      required: true
+
+  - type: input
+    id: output
+    attributes:
+      label: Output atteso
+      description: Percorso del file che verrà creato o modificato.
+      placeholder: "RTB/Generali/<nome>.typ"
+    validations:
+      required: true
+
+  - type: input
+    id: scadenza
+    attributes:
+      label: Scadenza
+      description: Formato AAAA-MM-GG. Non sono ammesse scadenze «da definire».
+      placeholder: "AAAA-MM-GG"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: ruolo
+    attributes:
+      label: Ruolo
+      description: Il ruolo con cui l'assegnatario svolge l'attività (serve per il consuntivo delle ore).
+      options:
+        - Responsabile
+        - Amministratore
+        - Analista
+        - Progettista
+        - Programmatore
+        - Verificatore
+    validations:
+      required: true
+
+  - type: input
+    id: stima
+    attributes:
+      label: Stima delle ore
+      placeholder: "es. 2"
+    validations:
+      required: true
+
+  - type: input
+    id: verificatore
+    attributes:
+      label: Verificatore
+      description: Menzionalo, così riceve la notifica. Deve essere una persona diversa dall'assegnatario.
+      placeholder: "@nome"
+    validations:
+      required: true
+
+  - type: textarea
+    id: dod
+    attributes:
+      label: Definition of Done
+      description: I criteri specifici di questa issue, scritti prima di iniziare.
+      value: |
+        - [ ]
+    validations:
+      required: true
+
+  - type: textarea
+    id: verifica
+    attributes:
+      label: Verifica
+      description: Checklist per i documenti. La compila il verificatore, che non modifica il documento ma lascia commenti.
+      value: |
+        - [ ] La Definition of Done è soddisfatta
+        - [ ] Il contenuto è corretto, completo e non ambiguo
+        - [ ] Forma: frasi brevi, verbi in forma attiva, parole accentate e non apostrofate
+        - [ ] Tutte le date sono nel formato AAAA-MM-GG
+        - [ ] I termini del glossario sono marcati e collegati alla voce sul sito
+        - [ ] Il documento compila senza errori (CI verde)
+        - [ ] Registro delle modifiche: la nuova riga ha un solo autore e nessun «Tutti»; la verifica non aggiunge righe, completa solo il verificatore della riga verificata
+        - [ ] La PR chiude questa issue (`Closes #n`)
+
+        **Esito** (spuntane uno):
+        - [ ] ✅ Accettato
+        - [ ] 💬 Da correggere (vedi commenti)
+        - [ ] ❌ Rifiutato
+
+  - type: textarea
+    id: note
+    attributes:
+      label: Note e dipendenze

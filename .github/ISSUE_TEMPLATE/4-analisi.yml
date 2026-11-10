@@ -1,0 +1,121 @@
+name: Analisi (senza PR)
+description: Studio di una tecnologia o di un requisito, preparazione di una riunione, sessione di design thinking. Si chiude con un output linkato, senza branch né PR.
+title: "<tipo>(<ambito>): "
+labels: ["analisi"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Una issue = **una persona** e **una scadenza**. Se un'analisi riguarda più persone, apri un'issue per ciascuna, ognuna con un tema diverso.
+        Questa issue non richiede un branch: si chiude quando l'output è linkato in un commento ed è stato verificato.
+
+  - type: input
+    id: origine
+    attributes:
+      label: Origine
+      description: La riunione in cui è stata decisa l'attività, oppure chi la propone. Gli ID D/A li assegna il verbale, non vanno scritti qui.
+      placeholder: "Riunione interna del AAAA-MM-GG  |  Proposta di @nome"
+    validations:
+      required: true
+
+  - type: textarea
+    id: decisione
+    attributes:
+      label: Decisione e motivazione
+      description: Cosa è stato deciso e perché, in 1-3 righe.
+    validations:
+      required: true
+
+  - type: textarea
+    id: domande
+    attributes:
+      label: Domande a cui rispondere
+      description: Cosa deve chiarire l'analisi. Un'analisi senza domande non si può verificare.
+      value: |
+        1.
+    validations:
+      required: true
+
+  - type: input
+    id: output
+    attributes:
+      label: Output atteso
+      description: Dove verrà pubblicato il risultato.
+      placeholder: "Pagina della Wiki, commento nell'issue, documento condiviso..."
+    validations:
+      required: true
+
+  - type: input
+    id: scadenza
+    attributes:
+      label: Scadenza
+      description: Formato AAAA-MM-GG. Non sono ammesse scadenze «da definire».
+      placeholder: "AAAA-MM-GG"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: ruolo
+    attributes:
+      label: Ruolo
+      description: Il ruolo con cui l'assegnatario svolge l'attività (serve per il consuntivo delle ore).
+      options:
+        - Analista
+        - Responsabile
+        - Amministratore
+        - Progettista
+        - Programmatore
+        - Verificatore
+    validations:
+      required: true
+
+  - type: input
+    id: stima
+    attributes:
+      label: Stima delle ore
+      placeholder: "es. 2"
+    validations:
+      required: true
+
+  - type: input
+    id: verificatore
+    attributes:
+      label: Verificatore
+      description: Menzionalo, così riceve la notifica. Deve essere una persona diversa dall'assegnatario.
+      placeholder: "@nome"
+    validations:
+      required: true
+
+  - type: textarea
+    id: dod
+    attributes:
+      label: Definition of Done
+      description: I criteri specifici di questa issue, scritti prima di iniziare.
+      value: |
+        - [ ] Ogni domanda ha una risposta o è segnata come aperta
+        - [ ]
+    validations:
+      required: true
+
+  - type: textarea
+    id: verifica
+    attributes:
+      label: Verifica
+      description: Checklist per le analisi. La compila il verificatore, che non modifica l'output ma lascia commenti.
+      value: |
+        - [ ] La Definition of Done è soddisfatta
+        - [ ] L'output è linkato in un commento di questa issue
+        - [ ] Completo: risponde a tutte le domande elencate
+        - [ ] Non ambiguo: ogni affermazione ha una fonte (capitolato, documentazione ufficiale, verbale)
+        - [ ] Tracciabile: indica a quale requisito, decisione o riunione serve
+        - [ ] Le domande rimaste aperte sono riportate per la prossima riunione
+
+        **Esito** (spuntane uno):
+        - [ ] ✅ Accettato
+        - [ ] 💬 Da correggere (vedi commenti)
+        - [ ] ❌ Rifiutato
+
+  - type: textarea
+    id: note
+    attributes:
+      label: Note e dipendenze

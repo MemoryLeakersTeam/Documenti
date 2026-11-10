@@ -88,8 +88,10 @@ body:
     id: dod
     attributes:
       label: Definition of Done
-      description: I criteri specifici di questa issue, scritti prima di iniziare.
+      description: I criteri specifici di questa issue, scritti prima di iniziare. Le voci le spunta l'assegnatario.
       value: |
+        _Le voci le spunta l'assegnatario, man mano che le completa. Quando sono tutte spuntate, avvisa il verificatore._
+
         - [ ]
     validations:
       required: true
@@ -100,6 +102,8 @@ body:
       label: Verifica
       description: Checklist per i documenti. La compila il verificatore, che non modifica il documento ma lascia commenti.
       value: |
+        _Le voci le spunta solo il verificatore. Se una voce della Definition of Done non è vera, non la toglie: segna «Da correggere» e lascia un commento._
+
         - [ ] La Definition of Done è soddisfatta
         - [ ] Il contenuto è corretto, completo e non ambiguo
         - [ ] Forma: frasi brevi, verbi in forma attiva, parole accentate e non apostrofate

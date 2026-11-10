@@ -71,8 +71,10 @@ body:
     id: dod
     attributes:
       label: Definition of Done
-      description: Aggiungi i criteri specifici di questa riunione, se ce ne sono.
+      description: Aggiungi i criteri specifici di questa riunione, se ce ne sono. Le voci le spunta l'assegnatario.
       value: |
+        _Le voci le spunta l'assegnatario, man mano che le completa. Quando sono tutte spuntate, avvisa il verificatore._
+
         - [ ] Verbale redatto con il template `Templates/Verbali.typ`
         - [ ] Per ogni azione decisa esiste la sua issue, e il numero è nella colonna Issue
         - [ ] La PR del verbale elenca tutte le issue citate (`Refs #n`)
@@ -85,6 +87,8 @@ body:
       label: Verifica
       description: Checklist per i verbali. La compila il verificatore, che non modifica il verbale ma lascia commenti.
       value: |
+        _Le voci le spunta solo il verificatore. Se una voce della Definition of Done non è vera, non la toglie: segna «Da correggere» e lascia un commento._
+
         - [ ] La Definition of Done è soddisfatta
         - [ ] Il primo punto è l'ordine del giorno; data, ora e partecipanti sono presenti
         - [ ] Ogni decisione è motivata

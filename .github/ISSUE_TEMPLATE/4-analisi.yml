@@ -90,8 +90,10 @@ body:
     id: dod
     attributes:
       label: Definition of Done
-      description: I criteri specifici di questa issue, scritti prima di iniziare.
+      description: I criteri specifici di questa issue, scritti prima di iniziare. Le voci le spunta l'assegnatario.
       value: |
+        _Le voci le spunta l'assegnatario, man mano che le completa. Quando sono tutte spuntate, avvisa il verificatore._
+
         - [ ] Ogni domanda ha una risposta o è segnata come aperta
         - [ ]
     validations:
@@ -103,6 +105,8 @@ body:
       label: Verifica
       description: Checklist per le analisi. La compila il verificatore, che non modifica l'output ma lascia commenti.
       value: |
+        _Le voci le spunta solo il verificatore. Se una voce della Definition of Done non è vera, non la toglie: segna «Da correggere» e lascia un commento._
+
         - [ ] La Definition of Done è soddisfatta
         - [ ] L'output è linkato in un commento di questa issue
         - [ ] Completo: risponde a tutte le domande elencate

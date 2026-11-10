@@ -79,8 +79,10 @@ body:
     id: dod
     attributes:
       label: Definition of Done
-      description: I criteri specifici di questa issue, scritti prima di iniziare. Ognuno deve essere verificabile.
+      description: I criteri specifici di questa issue, scritti prima di iniziare. Ognuno deve essere verificabile. Le voci le spunta l'assegnatario.
       value: |
+        _Le voci le spunta l'assegnatario, man mano che le completa. Quando sono tutte spuntate, avvisa il verificatore._
+
         - [ ]
     validations:
       required: true
@@ -91,6 +93,8 @@ body:
       label: Verifica
       description: Checklist per gli strumenti. La compila il verificatore, che non modifica il codice ma lascia commenti.
       value: |
+        _Le voci le spunta solo il verificatore. Se una voce della Definition of Done non è vera, non la toglie: segna «Da correggere» e lascia un commento._
+
         - [ ] La Definition of Done è soddisfatta
         - [ ] La CI è verde sulla PR
         - [ ] Provato su un caso reale, con l'esito descritto nella PR

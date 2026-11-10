@@ -137,7 +137,7 @@
       [Riccardo Peresson],
       [10/11/2026],
       [D8],
-      [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/55")[\#55]],
+      [N/D],
     ),
     (
       [A8],

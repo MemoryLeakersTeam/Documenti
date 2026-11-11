@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         Una issue = **una persona** e **una scadenza**. Assegnala al redattore e imposta la milestone.
-        Il verbale esterno va firmato dall'azienda: la PR si unisce solo dopo aver caricato il PDF firmato, perché il sito pubblica solo la versione `*-signed.pdf`.
+        Il verbale esterno va firmato dall'azienda. La PR del verbale si integra appena il Responsabile la approva e cita questa issue solo con `Refs #n`. Il PDF firmato arriva con una seconda PR, che chiude questa issue (`Closes #n`). Il sito pubblica il verbale solo quando c'è la versione `*-signed.pdf`.
 
   - type: input
     id: riunione
@@ -77,9 +77,9 @@ body:
 
         - [ ] Verbale redatto con il template `Templates/Verbali.typ`, con il campo `azienda` compilato
         - [ ] Per ogni azione decisa esiste la sua issue, e il numero è nella colonna Issue
-        - [ ] Dopo l'approvazione del Responsabile, il verbale è stato inviato all'azienda per la firma
-        - [ ] Il PDF firmato è caricato accanto al sorgente come `*-signed.pdf`
-        - [ ] La PR chiude solo questa issue (`Closes #n`); le issue delle azioni sono citate con `Refs #n`
+        - [ ] La PR del verbale cita questa issue e le issue delle azioni solo con `Refs #n`, ed è integrata dopo l'approvazione del Responsabile
+        - [ ] Il Responsabile ha inviato all'azienda, per la firma, il PDF della versione integrata in `main`
+        - [ ] Il PDF firmato è caricato accanto al sorgente come `*-signed.pdf`, con una seconda PR che chiude questa issue (`Closes #n`)
     validations:
       required: true
 
@@ -100,8 +100,8 @@ body:
         - [ ] Tutte le date sono nel formato AAAA-MM-GG
         - [ ] Registro delle modifiche: una riga per modifica, con un solo autore; la verifica non aggiunge righe
         - [ ] Il verbale compila senza errori (CI verde)
-        - [ ] Il PDF firmato corrisponde all'ultima versione approvata del verbale
-        - [ ] La PR chiude solo questa issue (`Closes #n`) e non chiude le issue delle azioni
+        - [ ] Il PDF firmato corrisponde alla versione del verbale integrata in `main`
+        - [ ] La PR del verbale non chiude nessuna issue; questa issue la chiude solo la PR del PDF firmato
 
         **Esito** (spuntane uno):
         - [ ] ✅ Accettato

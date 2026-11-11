@@ -26,13 +26,14 @@ Ogni issue si apre con uno dei moduli di *New issue*: le issue vuote sono disatt
 |---|---|
 | Documento | stesura o modifica di un documento (WoW, Piano di Progetto, Analisi dei Requisiti, diario di bordo, template) |
 | Verbale interno | verbale di una riunione del gruppo |
-| Verbale esterno | verbale di una riunione con un'azienda; la PR si unisce dopo aver caricato il PDF firmato |
+| Verbale esterno | verbale di una riunione con un'azienda; la PR si integra dopo l'approvazione del Responsabile, e il PDF firmato arriva con una seconda PR che chiude l'issue |
 | Strumento, CI o automazione | workflow, script e altri strumenti del repository |
 | Analisi (senza PR) | studio di un tema o preparazione di una riunione, che si chiude con un output linkato nell'issue |
 
 Regole:
+- le issue le apre l'**Amministratore**;
 - ogni issue ha **una sola persona** assegnata e una **scadenza** in formato `AAAA-MM-GG`;
 - l'**origine** è la riunione in cui è stata decisa l'attività, oppure «Proposta di @nome»; gli ID delle decisioni e delle attività (D, A) li assegna il verbale;
 - la **Definition of Done** la spunta l'assegnatario; la sezione **Verifica** la spunta solo il verificatore, che non modifica il prodotto ma lascia commenti;
-- una PR chiude solo la sua issue (`Closes #n`); le altre issue si citano con `Refs #n`;
+- una PR chiude solo la sua issue (`Closes #n`); le altre issue si citano con `Refs #n`. Per un verbale esterno, l'issue la chiude la PR del PDF firmato;
 - lo studio individuale («palestra») non ha una sua issue.

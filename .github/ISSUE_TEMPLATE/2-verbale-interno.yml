@@ -1,5 +1,5 @@
-name: Verbale
-description: Stesura del verbale di una riunione interna o esterna.
+name: Verbale interno
+description: Stesura del verbale di una riunione interna del gruppo.
 title: "docs(minutes): verbale interno del AAAA-MM-GG"
 labels: ["verbale interno"]
 body:
@@ -7,14 +7,14 @@ body:
     attributes:
       value: |
         Una issue = **una persona** e **una scadenza**. Assegnala al redattore e imposta la milestone.
-        Per un verbale **esterno** cambia il titolo e sostituisci la label con `verbale esterno`.
+        Per una riunione con un'azienda usa il modulo **Verbale esterno**.
 
   - type: input
     id: riunione
     attributes:
       label: Riunione
       description: La riunione da verbalizzare, con data in formato AAAA-MM-GG.
-      placeholder: "Riunione interna del AAAA-MM-GG  |  Riunione con <proponente> del AAAA-MM-GG"
+      placeholder: "Riunione interna del AAAA-MM-GG"
     validations:
       required: true
 
@@ -77,7 +77,7 @@ body:
 
         - [ ] Verbale redatto con il template `Templates/Verbali.typ`
         - [ ] Per ogni azione decisa esiste la sua issue, e il numero è nella colonna Issue
-        - [ ] La PR del verbale elenca tutte le issue citate (`Refs #n`)
+        - [ ] La PR chiude solo questa issue (`Closes #n`); le issue delle azioni sono citate con `Refs #n`
     validations:
       required: true
 
@@ -85,7 +85,7 @@ body:
     id: verifica
     attributes:
       label: Verifica
-      description: Checklist per i verbali. La compila il verificatore, che non modifica il verbale ma lascia commenti.
+      description: Checklist per i verbali interni. La compila il verificatore, che non modifica il verbale ma lascia commenti.
       value: |
         _Le voci le spunta solo il verificatore. Se una voce della Definition of Done non è vera, non la toglie: segna «Da correggere» e lascia un commento._
 
@@ -98,7 +98,7 @@ body:
         - [ ] Tutte le date sono nel formato AAAA-MM-GG
         - [ ] Registro delle modifiche: una riga per modifica, con un solo autore; la verifica non aggiunge righe
         - [ ] Il verbale compila senza errori (CI verde)
-        - [ ] (solo esterni) Il proponente ha firmato e il PDF è caricato come `*-signed.pdf`
+        - [ ] La PR chiude solo questa issue (`Closes #n`) e non chiude le issue delle azioni
 
         **Esito** (spuntane uno):
         - [ ] ✅ Accettato

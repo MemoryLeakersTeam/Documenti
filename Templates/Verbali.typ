@@ -215,7 +215,7 @@
     #table(
       columns: (0.6fr, 1.4fr, 2fr, 1fr, 1fr, 1fr, 0.6fr),
       inset: 7pt,
-      align: (col, row) => if row == 0 { center + horizon } else { left + horizon },
+      align: (col, row) => if row == 0 or (col in (0, 5, 6)) { center + horizon } else { left + horizon },
       fill: (x, y) => if y == 0 { colore-primario } else if calc.even(y) { colore-sfondo } else { none },
       stroke: 0.5pt + colore-bordo,
       [*#text(fill: white)[ID]*], 

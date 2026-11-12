@@ -1,0 +1,114 @@
+name: Strumento, CI o automazione
+description: Workflow di GitHub Actions, script, template del repository o altri strumenti del Way of Working.
+title: "<tipo>(<ambito>): "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Una issue = **una persona** e **una scadenza**. Assegnala a una sola persona dalla barra laterale e imposta la milestone.
+        Nel titolo usa il tipo dei Conventional Commits (`ci`, `chore`, `build`, `fix`...). Se il lavoro richiede più di 3 giorni, dividilo in più issue.
+
+  - type: input
+    id: origine
+    attributes:
+      label: Origine
+      description: La riunione in cui è stata decisa l'attività, oppure chi la propone. Gli ID D/A li assegna il verbale, non vanno scritti qui.
+      placeholder: "Riunione interna del AAAA-MM-GG  |  Proposta di @nome"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problema
+    attributes:
+      label: Contesto e problema
+      description: Come funziona oggi e cosa non va.
+    validations:
+      required: true
+
+  - type: textarea
+    id: soluzione
+    attributes:
+      label: Soluzione proposta
+      description: "Cosa cambia: file, workflow, script."
+    validations:
+      required: true
+
+  - type: input
+    id: scadenza
+    attributes:
+      label: Scadenza
+      description: Formato AAAA-MM-GG. Non sono ammesse scadenze «da definire».
+      placeholder: "AAAA-MM-GG"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: ruolo
+    attributes:
+      label: Ruolo
+      description: Il ruolo con cui l'assegnatario svolge l'attività (serve per il consuntivo delle ore).
+      options:
+        - Amministratore
+        - Responsabile
+        - Analista
+        - Progettista
+        - Programmatore
+        - Verificatore
+    validations:
+      required: true
+
+  - type: input
+    id: stima
+    attributes:
+      label: Stima delle ore
+      placeholder: "es. 3"
+    validations:
+      required: true
+
+  - type: input
+    id: verificatore
+    attributes:
+      label: Verificatore
+      description: Menzionalo, così riceve la notifica. Deve essere una persona diversa dall'assegnatario.
+      placeholder: "@nome"
+    validations:
+      required: true
+
+  - type: textarea
+    id: dod
+    attributes:
+      label: Definition of Done
+      description: I criteri specifici di questa issue, scritti prima di iniziare. Ognuno deve essere verificabile. Le voci le spunta l'assegnatario.
+      value: |
+        _Le voci le spunta l'assegnatario, man mano che le completa. Quando sono tutte spuntate, avvisa il verificatore._
+
+        - [ ]
+    validations:
+      required: true
+
+  - type: textarea
+    id: verifica
+    attributes:
+      label: Verifica
+      description: Checklist per gli strumenti. La compila il verificatore, che non modifica il codice ma lascia commenti.
+      value: |
+        _Le voci le spunta solo il verificatore. Se una voce della Definition of Done non è vera, non la toglie: segna «Da correggere» e lascia un commento._
+
+        - [ ] La Definition of Done è soddisfatta
+        - [ ] La CI è verde sulla PR
+        - [ ] Provato su un caso reale, con l'esito descritto nella PR
+        - [ ] I documenti esistenti compilano ancora
+        - [ ] La regola d'uso è scritta nel Way of Working (o nel README) prima che lo strumento venga usato
+        - [ ] Nel repository non finiscono segreti, audio o dati personali
+        - [ ] La PR chiude questa issue (`Closes #n`)
+
+        **Esito** (spuntane uno):
+        - [ ] ✅ Accettato
+        - [ ] 💬 Da correggere (vedi commenti)
+        - [ ] ❌ Rifiutato
+
+  - type: textarea
+    id: note
+    attributes:
+      label: Note e dipendenze

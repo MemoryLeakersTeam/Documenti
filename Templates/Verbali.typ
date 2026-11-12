@@ -1,3 +1,5 @@
+#import "Dati.typ": campi-dati
+
 #let gloss(term) = [#term#sub[G]]
 
 #let verbale(
@@ -28,8 +30,16 @@
   firma-responsabile: "Firma del Responsabile di Progetto",
   firma-esterna: "",
   azienda: "",
+  // Dati gestiti dall'automazione del registro, letti dal file accanto al sorgente:
+  // dati: yaml("<nome>.yml"). Se ci sono, sostituiscono versione, stato,
+  // verificatore, firma-responsabile e registro-modifiche
+  dati: none,
   body
 ) = {
+  if dati != none {
+    (versione, stato, verificatore, firma-responsabile, registro-modifiche) = campi-dati(dati)
+  }
+
   // Variabili Colore
   let colore-primario = rgb("#305b57")
   let colore-secondario = rgb("#41837b")

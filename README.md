@@ -26,6 +26,8 @@ Per un documento nuovo:
 - copia `Templates/DatiDocumento.yml` accanto al sorgente come `<nome>.yml`, senza modificarlo;
 - passa i dati al template: `#show: documento.with(..., dati: yaml("<nome>.yml"))` (per i verbali `verbale.with`).
 
+Per un documento già su `main` che ha ancora i dati scritti nel sorgente (**migrazione**), `<nome>.yml` riporta i dati così come sono: versione, stato, verificatore, firma e registro, con le date in `AAAA-MM-GG` e la riga più recente in cima. Il controllo ne verifica la forma e segnala la migrazione al Verificatore, che controlla che i valori coincidano con quelli del sorgente su `main`.
+
 Nella pull request:
 - metti la label `minor` (modifica sostanziale) oppure `patch` (correzione minore);
 - compila la sezione *Registro delle modifiche* della descrizione: diventa la descrizione della riga del registro.

@@ -5,7 +5,10 @@ Due comandi:
   controlla  controllo obbligatorio sulle pull request verso main
              (workflow registro-pr.yml): label minor/patch, sezione
              «Registro delle modifiche» compilata, file dei dati non toccati,
-             approvazione del Verificatore dello sprint;
+             approvazione del Verificatore dello sprint. Un <nome>.yml nuovo è
+             la copia del modello, oppure, se il sorgente era già su main
+             (migrazione), riporta i dati che il sorgente aveva: se ne
+             controlla la forma e il Verificatore ne controlla i valori;
   aggiorna   dopo il merge (workflow registro-modifiche.yml): per ogni
              documento modificato aggiorna versione, stato e verificatore e
              aggiunge la riga in cima al registro, nel file <nome>.yml.
@@ -254,6 +257,43 @@ def prossima_versione(dati, label):
     return f"{x}.{y + 1}.0" if label == "minor" else f"{x}.{y}.{z + 1}"
 
 
+def sorgente_nuovo(d, voci):
+    """Il sorgente del documento è creato da questa PR (non era su main)."""
+    return any(v["filename"] == f"{d}.typ" and v["status"] in ("added", "copied") for v in voci)
+
+
+CAMPI_DATI = ("versione", "stato", "verificatore", "firma-responsabile", "registro")
+CAMPI_RIGA = ("versione", "data", "descrizione", "autore", "verificatore")
+STATI = ("Bozza", "Verificato", "Approvato")
+
+
+def problemi_dati(dati):
+    """Problemi di forma del file dei dati di un documento migrato: i valori li
+    controlla il Verificatore, la forma si controlla qui."""
+    if not isinstance(dati, dict):
+        return ["non è un elenco di campi"]
+    mancanti = [c for c in CAMPI_DATI if c not in dati]
+    if mancanti:
+        return [f"mancano i campi {', '.join(mancanti)}"]
+    problemi = []
+    if not re.fullmatch(r"\d+\.\d+\.\d+", str(dati["versione"])):
+        problemi.append(f"versione «{dati['versione']}» non nel formato X.Y.Z")
+    if dati["stato"] not in STATI:
+        problemi.append(f"stato «{dati['stato']}» non tra {', '.join(STATI)}")
+    registro = dati["registro"]
+    if not isinstance(registro, list) or not registro:
+        return problemi + ["il registro è vuoto, ma un documento già su main ha almeno una riga"]
+    for i, riga in enumerate(registro, 1):
+        mancanti = [c for c in CAMPI_RIGA if not isinstance(riga, dict) or c not in riga]
+        if mancanti:
+            problemi.append(f"alla riga {i} del registro mancano {', '.join(mancanti)}")
+        elif not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(riga["data"])):
+            problemi.append(f"la data «{riga['data']}» della riga {i} del registro non è nel formato AAAA-MM-GG")
+    if isinstance(registro[0], dict) and registro[0].get("versione") != dati["versione"]:
+        problemi.append("la prima riga del registro (la più recente) non ha la versione del documento")
+    return problemi
+
+
 def ultime_review(review):
     """Ultima review che conta per ogni login (minuscolo), in ordine cronologico."""
     ultime = {}
@@ -285,7 +325,7 @@ def controlla(a):
     errori = []
 
     # Documenti toccati: dati presenti, letti dal sorgente e non modificati a mano
-    modificati = []
+    modificati, migrati = [], []
     for d, voci in documenti_toccati(file_pr).items():
         typ, yml = radice / f"{d}.typ", radice / f"{d}.yml"
         nome_yml = f"{PurePosixPath(d).name}.yml"
@@ -310,7 +350,12 @@ def controlla(a):
         for v in voci:
             if v["filename"] != f"{d}.yml":
                 continue
-            if v["status"] in ("added", "copied"):
+            if v["status"] in ("added", "copied") and not sorgente_nuovo(d, voci):
+                # Migrazione: il sorgente era già su main con i dati scritti dentro e ora
+                # li legge da <nome>.yml, che li riporta così com'erano (non dal modello)
+                migrati.append(d)
+                errori += [f"`{d}.yml` (migrazione): {p}." for p in problemi_dati(leggi_yaml(yml))]
+            elif v["status"] in ("added", "copied"):
                 if leggi_yaml(yml) != leggi_yaml(radice / MODELLO):
                     errori.append(f"`{d}.yml` è nuovo ma è diverso da `{MODELLO}`: copialo senza modificarlo, i dati li scrive l'automazione dopo il merge.")
             elif v["status"] == "renamed" and v.get("changes", 0) == 0:
@@ -378,11 +423,21 @@ def controlla(a):
                 try:
                     dati = leggi_yaml(yml)
                     prima = "nuovo" if not dati.get("registro") else dati.get("versione", "—")
+                    if d in migrati:
+                        prima = f"{prima} (migrazione)"
                     if len(label) == 1:
                         dopo = prossima_versione(dati, label[0])
                 except Errore as e:
                     errori.append(str(e))
             righe.append(f"| `{d}` | {prima} | {dopo} |")
+        if migrati:
+            avviso = (
+                "Migrazione: il file dei dati di un documento già su main non viene dal modello. "
+                "Il Verificatore controlla che versione, stato, verificatore, firma e registro "
+                "coincidano con quelli che il sorgente aveva su main."
+            )
+            segnala("warning", f"{avviso} Documenti: {', '.join(migrati)}")
+            righe += ["", f"⚠️ {avviso}", ""] + [f"- `{d}.yml`" for d in migrati]
     else:
         righe.append("La PR non modifica documenti gestiti dal registro.")
         righe.append(f"Verificatore: {approvato_da or '_manca l’approvazione_'}")

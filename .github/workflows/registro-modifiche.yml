@@ -1,0 +1,122 @@
+name: Registro delle modifiche
+
+# Dopo il merge di una PR in main, per ogni documento modificato (da RTB/ in
+# poi) aggiorna il file dei dati <nome>.yml: versione secondo la label
+# (0.1.0 se il documento è nuovo), riga in cima al registro, verificatore e
+# stato «Verificato». Il commit va direttamente su main con la GitHub App
+# dell'organizzazione, che deve poter scavalcare il ruleset di main: il push
+# dell'App fa ripartire compila-pdf.yml.
+# Serve la GitHub App: variabile SITO_APP_ID e secret SITO_APP_PRIVATE_KEY.
+# Il job parte solo con la variabile REGISTRO_ATTIVO = true, da impostare dopo
+# aver installato l'App su questo repository (contents: write) e averla aggiunta
+# a chi può scavalcare il ruleset di main: prima fallirebbe a ogni merge
+on:
+  pull_request:
+    branches: [main]
+    types: [closed]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  aggiorna:
+    name: Aggiornamento dopo il merge
+    if: github.event.pull_request.merged == true && vars.REGISTRO_ATTIVO == 'true' && vars.SITO_APP_ID != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Token della GitHub App
+        id: token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ vars.SITO_APP_ID }}
+          private-key: ${{ secrets.SITO_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+
+      - name: Checkout di main
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          token: ${{ steps.token.outputs.token }}
+          fetch-depth: 0
+
+      - name: Installa Typst
+        uses: typst-community/setup-typst@v5
+        with:
+          # Scripts/registro.py legge i file YAML con "typst eval"
+          typst-version: "0.15"
+
+      - name: Scarica i dati della PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          gh api "repos/${GITHUB_REPOSITORY}/pulls/${PR}" > "$RUNNER_TEMP/pr.json"
+          gh api --paginate "repos/${GITHUB_REPOSITORY}/pulls/${PR}/reviews" --jq '.[]' > "$RUNNER_TEMP/review.jsonl"
+          gh api --paginate "repos/${GITHUB_REPOSITORY}/pulls/${PR}/files" --jq '.[]' > "$RUNNER_TEMP/file.jsonl"
+
+      - name: Aggiorna i dati dei documenti e fai il commit su main
+        env:
+          GH_TOKEN: ${{ steps.token.outputs.token }}
+          BOT: ${{ steps.token.outputs.app-slug }}[bot]
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          id="$(gh api "/users/${BOT}" --jq .id)"
+          git config user.name "$BOT"
+          git config user.email "${id}+${BOT}@users.noreply.github.com"
+
+          # Il riepilogo va nella pagina del workflow una volta sola, quello dell'ultimo tentativo
+          riepilogo="$RUNNER_TEMP/riepilogo.md"
+          fine() { cat "$riepilogo" >> "$GITHUB_STEP_SUMMARY"; exit "$1"; }
+
+          # Se nel frattempo un altro merge ha cambiato main, il push viene rifiutato:
+          # si riparte da main aggiornato e si ricalcola, così due merge ravvicinati
+          # sullo stesso documento danno due versioni consecutive
+          for tentativo in 1 2 3 4 5; do
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            base="$(git rev-parse HEAD)"
+            : > "$riepilogo"
+
+            # Una riesecuzione del workflow non deve registrare due volte la stessa PR
+            # (--fixed-strings: le parentesi quadre di "[bot]" non sono una regex)
+            registrate="$(git log --fixed-strings --author="$BOT" --format=%B origin/main)"
+            if grep -qxF "Refs: #${PR}" <<<"$registrate"; then
+              echo "La PR #${PR} è già nel registro" | tee "$riepilogo"
+              fine 0
+            fi
+
+            if ! GITHUB_STEP_SUMMARY="$riepilogo" python3 Scripts/registro.py aggiorna \
+                --pr "$RUNNER_TEMP/pr.json" \
+                --review "$RUNNER_TEMP/review.jsonl" \
+                --file "$RUNNER_TEMP/file.jsonl" \
+                --ruoli .github/ruoli.yml \
+                --messaggio "$RUNNER_TEMP/messaggio.txt"; then
+              fine 1
+            fi
+
+            git add -A
+            if git diff --cached --quiet; then
+              fine 0
+            fi
+            git commit -q -F "$RUNNER_TEMP/messaggio.txt"
+            if git push -q origin HEAD:main 2> "$RUNNER_TEMP/push.err"; then
+              fine 0
+            fi
+
+            # Si riprova solo se main è avanzato (un altro merge): ogni altro rifiuto,
+            # per esempio del ruleset, non si risolve riprovando
+            git fetch -q origin main
+            if [ "$(git rev-parse origin/main)" = "$base" ]; then
+              cat "$RUNNER_TEMP/push.err"
+              echo "::error::Push su main rifiutato senza che main sia cambiato: controlla che la GitHub App sia installata con contents: write e possa scavalcare il ruleset di main"
+              fine 1
+            fi
+            echo "::warning::main è cambiato durante l'aggiornamento (tentativo $tentativo), riprovo"
+            # Attesa casuale: due esecuzioni in conflitto non riprovano nello stesso istante
+            sleep $((5 + RANDOM % 10))
+          done
+          echo "::error::Impossibile aggiornare il registro dopo 5 tentativi"
+          fine 1

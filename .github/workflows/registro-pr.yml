@@ -1,0 +1,76 @@
+name: Registro PR
+
+# Controllo obbligatorio nel ruleset di main (job «Registro delle modifiche»).
+# Blocca il merge se la PR modifica un documento (da RTB/ in poi) senza
+# esattamente una label tra minor e patch, con la sezione «Registro delle
+# modifiche» vuota o modificando un file dei dati <nome>.yml, e se non l'ha
+# approvata il Verificatore dello sprint (.github/ruoli.yml su main).
+# Il motivo è nel riepilogo del job. Le regole sono in Scripts/registro.py,
+# letto dalla versione su main. Questo file invece è quello della PR (evento
+# pull_request): chi lo modifica lo segnala al Verificatore nella descrizione
+on:
+  pull_request:
+    branches: [main]
+    # edited: la descrizione; labeled/unlabeled: minor e patch
+    types: [opened, edited, synchronize, reopened, labeled, unlabeled]
+  pull_request_review:
+    # L'approvazione del Verificatore cambia l'esito del controllo
+    types: [submitted, edited, dismissed]
+
+# Una sola esecuzione per PR: un nuovo evento annulla quella precedente
+concurrency:
+  group: registro-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  controlla:
+    name: Registro delle modifiche
+    # pull_request_review parte per tutte le PR: si controllano solo quelle verso main
+    if: github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout documentazione
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Installa Typst
+        uses: typst-community/setup-typst@v5
+        with:
+          # Scripts/registro.py legge i file YAML con "typst eval"
+          typst-version: "0.15"
+
+      # Label, descrizione e review si leggono dall'API e non dall'evento:
+      # così una riesecuzione vede sempre lo stato attuale della PR
+      - name: Scarica i dati della PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          gh api "repos/${GITHUB_REPOSITORY}/pulls/${PR}" > "$RUNNER_TEMP/pr.json"
+          gh api --paginate "repos/${GITHUB_REPOSITORY}/pulls/${PR}/reviews" --jq '.[]' > "$RUNNER_TEMP/review.jsonl"
+          gh api --paginate "repos/${GITHUB_REPOSITORY}/pulls/${PR}/files" --jq '.[]' > "$RUNNER_TEMP/file.jsonl"
+          # I ruoli valgono nella versione su main: una PR non può nominare il proprio Verificatore
+          if ! git show origin/main:.github/ruoli.yml > "$RUNNER_TEMP/ruoli.yml" 2>/dev/null; then
+            echo "::warning::.github/ruoli.yml non è ancora su main: uso quello della PR"
+            cp .github/ruoli.yml "$RUNNER_TEMP/ruoli.yml"
+          fi
+          # Anche le regole si prendono da main: una PR non può allentare il controllo
+          # che la blocca. Una modifica a registro.py vale dalle PR successive al suo merge
+          if ! git show origin/main:Scripts/registro.py > "$RUNNER_TEMP/registro.py" 2>/dev/null; then
+            echo "::warning::Scripts/registro.py non è ancora su main: uso quello della PR"
+            cp Scripts/registro.py "$RUNNER_TEMP/registro.py"
+          fi
+
+      - name: Controlla label, descrizione, dati e approvazione
+        run: |
+          python3 "$RUNNER_TEMP/registro.py" controlla \
+            --pr "$RUNNER_TEMP/pr.json" \
+            --review "$RUNNER_TEMP/review.jsonl" \
+            --file "$RUNNER_TEMP/file.jsonl" \
+            --ruoli "$RUNNER_TEMP/ruoli.yml"

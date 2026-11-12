@@ -1,0 +1,11 @@
+# File dei dati di partenza di un documento nuovo (da RTB/ in poi).
+# Copialo accanto al sorgente come <nome>.yml, senza modificarlo, e passalo
+# al template con dati: yaml("<nome>.yml").
+# Dopo il merge versione, stato, verificatore e registro li scrive
+# l'automazione del registro delle modifiche (Scripts/registro.py):
+# il primo merge porta il documento alla versione 0.1.0.
+versione: "0.0.0"
+stato: "Bozza"
+verificatore: ""
+firma-responsabile: ""
+registro: []

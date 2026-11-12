@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths:
       - "**.typ"
+      # Dati dei documenti: il commit dell'automazione del registro cambia solo questi
+      - "**.yml"
+      - "!.github/**"
       - "**-signed.pdf"
       - "**/Diario_di_bordo/**"
       - "Templates/**"

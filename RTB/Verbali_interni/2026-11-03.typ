@@ -6,10 +6,10 @@
   data: datetime(year: 2026, month: 11, day: 03),
   ora: "14:00 – 16:00",
   luogo: "Google Meet",
-  versione: "0.1.0",
-  stato: "Bozza",
+  versione: "1.0.0",
+  stato: "Approvato",
   autore: "Paolo Prevedello Ramirez",
-  verificatore: "",
+  verificatore: "Jacopo Franco",
   file-nome: "2026-11-03.pdf",
   gruppo: "Memory Leakers",
   ordine-del-giorno: (
@@ -33,7 +33,10 @@
   distribuzione: ("Memory Leakers", "Prof. Riccardo Cardin", "Prof. Tullio Vardanega"),
   // Ogni riga: (Ver., Data, Descrizione, Autore, Verificatore)
   registro-modifiche: (
-    ([0.1.0], [03/11/2026], [Stesura del verbale dell'ottavo incontro], [Paolo Prevedello Ramirez], []),
+    ([1.0.0], [12/11/2026], [Firma responsabile], [Chiara Protopapa], [-]),
+    ([0.1.1], [03/11/2026], [Correzioni varie], [Paolo Prevedello Ramirez], [Jacopo Franco]),
+    ([0.1.0], [03/11/2026], [Stesura del verbale dell'ottavo incontro], [Paolo Prevedello Ramirez], [Jacopo Franco]),
+
   ),
   // Ogni riga: (ID, Decisione presa)
   decisioni: (
@@ -157,6 +160,7 @@
     ([*Verificatore*], [Jacopo Franco]),
     ([*Analisti*], [Matteo Arcandi, Matteo Marcon, Riccardo Peresson, Paolo Prevedello Ramirez]),
   ),
+  firma-responsabile: "Chiara Protopapa"
 )
 
 = Introduzione

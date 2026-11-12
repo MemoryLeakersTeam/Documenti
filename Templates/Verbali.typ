@@ -81,6 +81,7 @@
     #set text(fill: colore-primario)
     #it
   ]
+  show link: it => underline(text(fill: colore-secondario, it))
 
   // Dati letti da Scripts/compila.sh per pubblicare il documento sul sito
   [#metadata((
@@ -223,9 +224,9 @@
   if attivita-todo.len() > 0 [
     == Attività da Svolgere
     #table(
-      columns: (0.5fr, 1fr, 2fr, 1fr, 1fr, 1fr, 0.6fr),
+      columns: (0.6fr, 1.4fr, 2fr, 1fr, 1fr, 1fr, 0.6fr),
       inset: 7pt,
-      align: (col, row) => if row == 0 { center + horizon } else { left + horizon },
+      align: (col, row) => if row == 0 or (col in (0, 5, 6)) { center + horizon } else { left + horizon },
       fill: (x, y) => if y == 0 { colore-primario } else if calc.even(y) { colore-sfondo } else { none },
       stroke: 0.5pt + colore-bordo,
       [*#text(fill: white)[ID]*], 

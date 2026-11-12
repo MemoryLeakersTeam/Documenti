@@ -1,0 +1,33 @@
+# Ruoli dello sprint in corso. L'Amministratore aggiorna questo file a ogni
+# rotazione dei ruoli, con una pull request.
+# Lo leggono il controllo delle pull request (registro-pr.yml) e l'automazione
+# del registro delle modifiche (registro-modifiche.yml), sempre nella versione
+# su main:
+# - una pull request si integra solo con l'approvazione di chi ha il ruolo
+#   «Verificatore», diverso dall'autore;
+# - nel registro, autore e verificatore sono il «nome» corrispondente al login.
+sprint:
+  inizio: "2026-11-03"
+  fine: "2026-11-17"
+membri:
+  - login: "Kyara-Prot"
+    nome: "Chiara Protopapa"
+    ruolo: "Responsabile"
+  - login: "jeidi19"
+    nome: "Jacopo De Donà"
+    ruolo: "Amministratore"
+  - login: "JJ-jacopo24"
+    nome: "Jacopo Franco"
+    ruolo: "Verificatore"
+  - login: "ttteo"
+    nome: "Matteo Arcandi"
+    ruolo: "Analista"
+  - login: "Matteomarcon"
+    nome: "Matteo Marcon"
+    ruolo: "Analista"
+  - login: "Ric02P"
+    nome: "Riccardo Peresson"
+    ruolo: "Analista"
+  - login: "paolopreve"
+    nome: "Paolo Prevedello Ramirez"
+    ruolo: "Analista"

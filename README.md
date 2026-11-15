@@ -32,9 +32,18 @@ Nella pull request:
 - metti la label `minor` (modifica sostanziale) oppure `patch` (correzione minore);
 - compila la sezione *Registro delle modifiche* della descrizione: diventa la descrizione della riga del registro.
 
-Il controllo **Registro delle modifiche** (`registro-pr.yml`) blocca il merge, e ne scrive il motivo, se la PR modifica un documento senza esattamente una delle due label o con la sezione vuota, se modifica un file `<nome>.yml` già esistente, oppure se non l'ha approvata il Verificatore dello sprint (diverso dall'autore).
+Il controllo **Registro delle modifiche** (`registro-pr.yml`) blocca il merge, e ne scrive il motivo, se la PR modifica un documento senza esattamente una delle due label o con la sezione vuota, se modifica un file `<nome>.yml` già esistente, oppure se non l'ha approvata il Verificatore dello sprint (diverso dall'autore). Dopo una review il controllo si riesegue da solo (`registro-review.yml`).
+
+Se un autore diventa Verificatore mentre la sua PR è aperta, il lavoro passa al membro che entra al suo posto: chiude la PR e ne apre una nuova dallo stesso branch, così ne è l'autore e il Verificatore può approvarla.
+
+Un documento si sposta (per esempio da `RTB/` a `PB/`) con `git mv`, insieme al suo `<nome>.yml` e senza modificarlo: così versione e registro restano. Lo spostamento conta come modifica: serve la label, e dopo il merge il documento ha una versione nuova ed è «Verificato». Un documento copiato invece è nuovo e riparte dal modello.
 
 Al merge, `registro-modifiche.yml` aggiorna ogni documento modificato con un commit su `main`: versione `0.1.0` se il documento è nuovo, altrimenti X.(Y+1).0 con `minor` e X.Y.(Z+1) con `patch`; riga in cima al registro con data del merge, descrizione, autore e Verificatore; stato «Verificato» e firma del Responsabile tolta, perché il contenuto non è più quello approvato.
+
+Se l'automazione fallisce (per esempio per un push rifiutato), basta rieseguire il job dalla pagina del workflow: una PR già registrata non viene registrata due volte. Un errore nei dati di un documento, per esempio una descrizione sbagliata nel registro, si corregge con una PR a parte con la label `correzione-registro`:
+- la PR modifica solo file `<nome>.yml` già esistenti, nella forma giusta, e non cambia stato e firma;
+- non servono la label `minor` o `patch` né la sezione *Registro delle modifiche*, ma serve l'approvazione del Verificatore, che controlla i valori nel diff;
+- dopo il merge non c'è una versione nuova. Il PDF si ricompila, ma il sito sostituisce un PDF già pubblicato solo quando cambia la versione.
 
 I ruoli dello sprint sono in `.github/ruoli.yml` (login GitHub, nome e ruolo): lo aggiorna l'Amministratore, con una PR, a ogni rotazione dei ruoli.
 

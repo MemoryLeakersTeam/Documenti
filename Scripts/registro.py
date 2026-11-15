@@ -8,10 +8,14 @@ Due comandi:
              approvazione del Verificatore dello sprint. Un <nome>.yml nuovo è
              la copia del modello, oppure, se il sorgente era già su main
              (migrazione), riporta i dati che il sorgente aveva: se ne
-             controlla la forma e il Verificatore ne controlla i valori;
+             controlla la forma e il Verificatore ne controlla i valori.
+             Con la label correzione-registro la PR corregge solo file dei
+             dati già esistenti (per esempio una riga sbagliata del registro),
+             senza cambiare stato e firma: non serve la label minor o patch;
   aggiorna   dopo il merge (workflow registro-modifiche.yml): per ogni
              documento modificato aggiorna versione, stato e verificatore e
              aggiunge la riga in cima al registro, nel file <nome>.yml.
+             Una correzione del registro non crea una versione nuova.
 
 I dati della pull request li scarica il workflow dall'API di GitHub:
   --pr       la pull request              (GET /repos/{repo}/pulls/{n})
@@ -40,6 +44,10 @@ from zoneinfo import ZoneInfo
 ESCLUSE = {"Templates", "Candidatura", "Scripts"}
 MODELLO = "Templates/DatiDocumento.yml"
 LABEL = ("minor", "patch")
+# Correzione dei file dei dati (errore nel registro): niente versione nuova
+LABEL_CORREZIONE = "correzione-registro"
+# Campi che una correzione non può cambiare: li scrivono l'automazione e il rilascio (#66)
+CAMPI_FISSI = ("stato", "firma-responsabile")
 SEZIONE = "Registro delle modifiche"
 RUOLO_VERIFICATORE = "Verificatore"
 STATO_VERIFICATO = "Verificato"
@@ -209,6 +217,22 @@ def label_versione(pr):
     return sorted({l["name"] for l in pr.get("labels") or []} & set(LABEL))
 
 
+def correzione_registro(pr):
+    return any(l["name"] == LABEL_CORREZIONE for l in pr.get("labels") or [])
+
+
+def yaml_su_base(radice, base, percorso):
+    """Dati del file YAML nella versione di base (main), o None se lì non c'è."""
+    r = subprocess.run(["git", "-C", str(radice), "show", f"{base}:{percorso}"], capture_output=True)
+    if r.returncode != 0:
+        return None
+    copia = Path(os.environ.get("RUNNER_TEMP") or os.environ.get("TMPDIR") or "/tmp") / "registro-base" / percorso
+    copia.parent.mkdir(parents=True, exist_ok=True)
+    copia.write_bytes(r.stdout)
+    _leggi_yaml.cache_clear()  # stesso percorso per basi diverse
+    return leggi_yaml(copia)
+
+
 def descrizione_registro(corpo):
     """Testo della sezione «Registro delle modifiche» della descrizione della PR,
     su una riga. I commenti HTML si ignorano; la sezione finisce al primo titolo
@@ -322,11 +346,51 @@ def controlla(a):
     autore = pr["user"]["login"]
     label = label_versione(pr)
     descrizione = descrizione_registro(pr.get("body"))
+    correzione = correzione_registro(pr)
     errori = []
+    toccati = documenti_toccati(file_pr)
+
+    # Correzione del registro: solo file dei dati già su main, modificati nella forma
+    # giusta e senza cambiare stato e firma. Il Verificatore ne controlla i valori
+    corretti = []
+    if correzione:
+        if label:
+            errori.append(f"La label `{LABEL_CORREZIONE}` non va insieme a `minor` o `patch`: una correzione del registro non crea una versione nuova.")
+        for d, voci in toccati.items():
+            altri = [v["filename"] for v in voci if v["filename"] != f"{d}.yml" or v["status"] != "modified"]
+            if altri:
+                errori.append(
+                    f"Con la label `{LABEL_CORREZIONE}` la PR modifica solo file dei dati già esistenti, "
+                    f"ma tocca anche {', '.join(f'`{f}`' for f in altri)}: le altre modifiche vanno in una PR a parte."
+                )
+                continue
+            corretti.append(d)
+            try:
+                dati, prima = leggi_yaml(radice / f"{d}.yml"), yaml_su_base(radice, a.base, f"{d}.yml")
+            except Errore as e:
+                errori.append(str(e))
+                continue
+            errori += [f"`{d}.yml`: {p}." for p in problemi_dati(dati)]
+            if prima is None:
+                errori.append(f"`{d}.yml` non è su `{a.base}`: si può correggere solo un file dei dati già esistente.")
+                continue
+            cambiati = [c for c in CAMPI_FISSI if dati.get(c) != prima.get(c)]
+            if cambiati:
+                errori.append(
+                    f"`{d}.yml`: una correzione non cambia {', '.join(f'`{c}`' for c in cambiati)}, "
+                    "che scrivono l'automazione dopo il merge e il Responsabile al rilascio."
+                )
+            try:
+                meta = metadati_documento(radice, radice / f"{d}.typ")
+                if (meta.get("versione"), meta.get("stato")) != (dati.get("versione"), dati.get("stato")):
+                    errori.append(f"`{d}.typ` non mostra i dati di `{d}.yml` (versione e stato).")
+            except Errore as e:
+                errori.append(str(e))
+        toccati = {}
 
     # Documenti toccati: dati presenti, letti dal sorgente e non modificati a mano
     modificati, migrati = [], []
-    for d, voci in documenti_toccati(file_pr).items():
+    for d, voci in toccati.items():
         typ, yml = radice / f"{d}.typ", radice / f"{d}.yml"
         nome_yml = f"{PurePosixPath(d).name}.yml"
         if not typ.exists():
@@ -364,7 +428,8 @@ def controlla(a):
                 errori.append(
                     f"La PR modifica o elimina `{d}.yml`: versione, stato, verificatore, firma e registro "
                     f"li aggiorna l'automazione dopo il merge. Annulla la modifica con "
-                    f"`git checkout origin/main -- \"{d}.yml\"`."
+                    f"`git checkout origin/main -- \"{d}.yml\"`. Per correggere un errore nel registro "
+                    f"serve una PR a parte con la label `{LABEL_CORREZIONE}`, che modifica solo i file dei dati."
                 )
 
     # Label e descrizione della riga del registro
@@ -438,6 +503,12 @@ def controlla(a):
             )
             segnala("warning", f"{avviso} Documenti: {', '.join(migrati)}")
             righe += ["", f"⚠️ {avviso}", ""] + [f"- `{d}.yml`" for d in migrati]
+    elif corretti:
+        righe.append(f"Correzione del registro (label `{LABEL_CORREZIONE}`): nessuna versione nuova.")
+        righe.append(f"- Autore: {nome(membri, autore)}")
+        righe.append(f"- Verificatore: {approvato_da or '_manca l’approvazione_'}")
+        righe += ["", "Il Verificatore controlla nel diff che i valori corretti siano giusti:", ""]
+        righe += [f"- `{d}.yml`" for d in corretti]
     else:
         righe.append("La PR non modifica documenti gestiti dal registro.")
         righe.append(f"Verificatore: {approvato_da or '_manca l’approvazione_'}")
@@ -481,6 +552,10 @@ def aggiorna(a):
     numero = pr["number"]
 
     documenti = [d for d in documenti_toccati(file_pr) if (radice / f"{d}.typ").exists()]
+    if correzione_registro(pr):
+        riepilogo(["### Registro delle modifiche", "",
+                   f"La PR #{numero} è una correzione del registro (label `{LABEL_CORREZIONE}`): nessuna versione nuova."])
+        return 0
     if not documenti:
         riepilogo(["### Registro delle modifiche", "", f"La PR #{numero} non modifica documenti gestiti dal registro."])
         return 0
@@ -553,6 +628,8 @@ def main():
         p.add_argument("--file", required=True, help="file della PR, uno JSON per riga")
         p.add_argument("--ruoli", required=True, help=".github/ruoli.yml nella versione su main")
         p.add_argument("--radice", default=".", help="cartella del repository (predefinita: .)")
+        if nome_comando == "controlla":
+            p.add_argument("--base", default="origin/main", help="ref con i file dei dati prima della PR (predefinito: origin/main)")
         if nome_comando == "aggiorna":
             p.add_argument("--messaggio", help="file in cui scrivere il messaggio del commit")
     a = parser.parse_args()

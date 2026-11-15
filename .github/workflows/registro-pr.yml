@@ -3,19 +3,20 @@ name: Registro PR
 # Controllo obbligatorio nel ruleset di main (job «Registro delle modifiche»).
 # Blocca il merge se la PR modifica un documento (da RTB/ in poi) senza
 # esattamente una label tra minor e patch, con la sezione «Registro delle
-# modifiche» vuota o modificando un file dei dati <nome>.yml, e se non l'ha
-# approvata il Verificatore dello sprint (.github/ruoli.yml su main).
+# modifiche» vuota o modificando un file dei dati <nome>.yml (salvo la label
+# correzione-registro), e se non l'ha approvata il Verificatore dello sprint
+# (.github/ruoli.yml su main).
 # Il motivo è nel riepilogo del job. Le regole sono in Scripts/registro.py,
 # letto dalla versione su main. Questo file invece è quello della PR (evento
-# pull_request): chi lo modifica lo segnala al Verificatore nella descrizione
+# pull_request): chi lo modifica lo segnala al Verificatore nella descrizione.
+# Dopo una review non parte un nuovo controllo: registro-review.yml riesegue
+# questo. Due controlli con lo stesso nome dovrebbero passare entrambi, e
+# quello partito prima dell'approvazione resterebbe rosso
 on:
   pull_request:
     branches: [main]
     # edited: la descrizione; labeled/unlabeled: minor e patch
     types: [opened, edited, synchronize, reopened, labeled, unlabeled]
-  pull_request_review:
-    # L'approvazione del Verificatore cambia l'esito del controllo
-    types: [submitted, edited, dismissed]
 
 # Una sola esecuzione per PR: un nuovo evento annulla quella precedente
 concurrency:
@@ -29,8 +30,6 @@ permissions:
 jobs:
   controlla:
     name: Registro delle modifiche
-    # pull_request_review parte per tutte le PR: si controllano solo quelle verso main
-    if: github.event.pull_request.base.ref == 'main'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:

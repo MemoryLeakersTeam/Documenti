@@ -152,6 +152,9 @@ I documenti stanno in `<Tappa>/<Cartella>/`, per esempio `RTB/Verbali_interni/20
   [`Diario_di_bordo`], [PDF delle presentazioni], [`AAAA-MM-GG.pdf`],
 )
 
+Al passaggio a una nuova tappa (per esempio da `RTB/` a `PB/`), un documento si sposta con `git mv`, insieme al suo `<nome>.yml` e senza modificarlo: così versione e registro delle modifiche continuano. Lo spostamento conta come una modifica (@versionamento): serve la label, e dopo il merge il documento ha una nuova versione ed è «Verificato». Un documento copiato, invece, è un documento nuovo e riparte dalla versione 0.1.0.
+// TODO: oggi il sito rimuove la voce della tappa precedente di un documento spostato; si corregge con l'issue #9 del sito
+
 === Glossario
 
 - Il glossario sta sul sito del gruppo. Ogni voce ha un identificativo univoco, che permette il collegamento diretto (`glossario#<id>`).
@@ -173,6 +176,8 @@ I documenti stanno in `<Tappa>/<Cartella>/`, per esempio `RTB/Verbali_interni/20
     - passa i dati al template: `#show: documento.with(..., dati: yaml("<nome>.yml"))`; per un verbale, `verbale.with`.
 
     Un documento esistente ha già il suo `<nome>.yml`: l'autore non lo modifica.
+
+    Un documento già in `main` che ha ancora questi dati scritti nel sorgente si *migra*: riceve il suo `<nome>.yml` con i dati così come sono, cioè versione, stato, Verificatore, firma e registro, con le date in `AAAA-MM-GG` e la riga più recente in cima; il sorgente passa i dati al template e non li scrive più. La migrazione è una modifica come le altre: serve la label, e il Verificatore controlla che i dati del `<nome>.yml` coincidano con quelli del sorgente in `main`.
   + Compila il documento in locale, dalla cartella principale del repository, per controllare che non ci siano errori: `typst compile --root . --font-path Templates/Fonts <file>.typ`. In alternativa, `Scripts/compila.sh` compila tutti i documenti in `pdf/`.
   + Fa i commit seguendo le regole dei commit (@commit).
   + Spunta le voci della #g("definition-of-done", "Definition of Done") man mano che le completa.
@@ -244,9 +249,30 @@ Il registro delle modifiche elenca le versioni dalla più recente:
 - ogni rilascio aggiunge la riga «Approvazione per il rilascio», con il Responsabile come autore e senza Verificatore;
 - la verifica non aggiunge righe e non modifica né il documento né il suo `<nome>.yml`: il Verificatore approva la pull request, e il suo nome entra nel registro con il merge.
 
+=== Correzione dei dati di un documento <correzione>
+
+Se dopo un merge l'automazione fallisce (per esempio per un push rifiutato), non serve una correzione: l'Amministratore riesegue il job di `registro-modifiche.yml` dalla scheda _Actions_. Una pull request già registrata non viene registrata due volte.
+
+Un errore nei dati di un documento, per esempio una descrizione o un nome sbagliati nel registro, si corregge con una pull request a parte.
+
+#procedura(
+  chi: [Assegnatario dell'issue],
+  input: [Errore nel `<nome>.yml` di un documento in `main`; issue del modulo *Documento*],
+  output: [Pull request integrata, senza una nuova versione del documento],
+  strumenti: [Git, GitHub],
+)[
+  + Crea il branch e modifica solo i file `<nome>.yml` da correggere, senza toccare altri file.
+  + Non cambia lo stato e la firma del Responsabile: li scrivono l'automazione dopo il merge e il Responsabile al rilascio (@rilascio).
+  + Apre la pull request con la label `correzione-registro`, senza `minor` o `patch`. La sezione _Registro delle modifiche_ non serve: nella descrizione spiega l'errore e la correzione.
+  + Chiede la review al Verificatore dello sprint, che controlla nel diff che i valori corretti siano giusti.
+]
+
+Dopo il merge l'automazione non crea una versione nuova. Il PDF si ricompila, ma sul sito un PDF già pubblicato resta quello di prima, perché il sito lo sostituisce solo quando cambia la versione.
+
 === Rilascio di un documento <rilascio>
 
 Il Responsabile approva il rilascio di un documento senza ulteriore verifica. Il rilascio non ha una pull request: il documento è già verificato e non c'è nulla da modificare.
+// TODO: `rilascio.yml` si realizza con l'issue #66. Finché non c'è, con l'automazione del registro attiva un documento non può diventare «Approvato»
 
 #procedura(
   chi: [Responsabile],
@@ -319,7 +345,7 @@ I messaggi di commit seguono i #g("conventional-commits", "Conventional Commits"
   + Compila la descrizione con il template `.github/pull_request_template.md`:
     - chiude la sua issue con `Closes #n`; le altre issue si citano con `Refs #n`;
     - se la pull request modifica un documento da `RTB/` in poi, scrive nella sezione _Registro delle modifiche_ cosa cambia, in una frase: diventa la descrizione della riga del registro. Più voci di un elenco diventano una riga sola, separate da «;».
-  + Se la pull request modifica un documento da `RTB/` in poi, mette esattamente una label: `minor` per una modifica sostanziale, `patch` per una correzione minore (@versionamento).
+  + Se la pull request modifica un documento da `RTB/` in poi, mette esattamente una label: `minor` per una modifica sostanziale, `patch` per una correzione minore (@versionamento). Una pull request che corregge solo i dati di un documento ha invece la label `correzione-registro` (@correzione).
   + Chiede la review al Verificatore dello sprint, che riceve così la notifica.
   + Attende che la CI compili i documenti senza errori e che il controllo *Registro delle modifiche* passi.
   + Se il Verificatore chiede modifiche, le applica con nuovi commit e chiede di nuovo la review.
@@ -328,9 +354,13 @@ I messaggi di commit seguono i #g("conventional-commits", "Conventional Commits"
 Il controllo *Registro delle modifiche* è obbligatorio nel ruleset di `main`: finché non passa, la pull request non si integra. Il motivo del blocco è nel riepilogo del controllo. Il controllo blocca la pull request se:
 - modifica un documento da `RTB/` in poi e non ha esattamente una label tra `minor` e `patch`;
 - modifica un documento da `RTB/` in poi e la sezione _Registro delle modifiche_ della descrizione è vuota;
-- modifica un file dei dati `<nome>.yml` già esistente, oppure ne aggiunge uno diverso da `Templates/DatiDocumento.yml`;
+- modifica un file dei dati `<nome>.yml` già esistente senza la label `correzione-registro`;
+- aggiunge un `<nome>.yml` diverso da `Templates/DatiDocumento.yml`. Per una migrazione ne controlla solo la forma, e la segnala al Verificatore;
 - modifica un documento che non ha il suo `<nome>.yml` o non lo passa al template;
+- ha la label `correzione-registro` e modifica altri file oltre ai `<nome>.yml` già esistenti, ne cambia lo stato o la firma, oppure ha anche la label `minor` o `patch`;
 - non ha l'approvazione dell'ultimo commit da parte del Verificatore dello sprint, che deve essere diverso dall'autore della pull request.
+
+Dopo ogni review il controllo si riesegue da solo (`registro-review.yml`, @automazioni). Nel ruleset è obbligatorio solo il controllo *Registro delle modifiche*.
 
 Il Verificatore approva l'integrazione di una pull request in `main` o `develop`, dopo aver controllato che la Definition of Done sia soddisfatta (@verifica). Il Responsabile approva il rilascio di un documento, senza ulteriore verifica (@rilascio).
 
@@ -384,6 +414,8 @@ I ruoli dello sprint in corso sono nel file `.github/ruoli.yml`: per ogni membro
 - il controllo delle pull request accetta solo l'approvazione del Verificatore (@pr);
 - il workflow di rilascio si avvia solo dal Responsabile (@rilascio);
 - nel registro delle modifiche, autore e Verificatore compaiono con il nome corrispondente al login.
+
+Se alla rotazione l'autore di una pull request ancora aperta diventa Verificatore, il lavoro passa al membro che entra nel ruolo che l'autore lasciava: chiude la pull request e ne apre una nuova dallo stesso branch. Il controllo considera autore chi ha aperto la pull request, e il registro riporta lui come autore.
 
 #tabella(
   (auto, 1fr),
@@ -483,8 +515,9 @@ L'Amministratore mantiene gli strumenti del gruppo e le automazioni del reposito
   ("Workflow", "Quando parte", "Cosa fa"),
   [`compila-pr.yml`], [Pull request verso `main`], [Compila i documenti e segnala gli errori],
   [`titolo-pr.yml`], [Pull request verso `main`], [Controlla che il titolo segua i Conventional Commits],
-  [`registro-pr.yml`], [Pull request verso `main`: apertura, modifica della descrizione, nuovi commit, label e review], [Controllo obbligatorio *Registro delle modifiche*: blocca il merge se mancano la label, la sezione _Registro delle modifiche_ o l'approvazione del Verificatore dello sprint, oppure se la pull request modifica un `<nome>.yml` (@pr)],
-  [`registro-modifiche.yml`], [Merge di una pull request in `main`, solo se la variabile del repository `REGISTRO_ATTIVO` vale `true`], [Per ogni documento modificato aggiorna `<nome>.yml`: versione secondo la label, riga in cima al registro, Verificatore, stato «Verificato» e firma tolta. Fa il commit direttamente su `main` con la GitHub App dell'organizzazione],
+  [`registro-pr.yml`], [Pull request verso `main`: apertura, modifica della descrizione, nuovi commit e label], [Controllo obbligatorio *Registro delle modifiche*: blocca il merge se mancano la label, la sezione _Registro delle modifiche_ o l'approvazione del Verificatore dello sprint, oppure se la pull request modifica un `<nome>.yml` senza la label `correzione-registro` (@pr)],
+  [`registro-review.yml`], [Review di una pull request verso `main`, inviata o annullata], [Riesegue il controllo *Registro delle modifiche* dell'ultimo commit, che così vede la review. Non aggiunge un secondo controllo con lo stesso nome: resterebbe quello rosso di prima dell'approvazione, e bloccherebbe il merge],
+  [`registro-modifiche.yml`], [Merge di una pull request in `main`, solo se la variabile del repository `REGISTRO_ATTIVO` vale `true`], [Per ogni documento modificato aggiorna `<nome>.yml`: versione secondo la label, riga in cima al registro, Verificatore, stato «Verificato» e firma tolta. Fa il commit direttamente su `main` con la GitHub App dell'organizzazione. Con la label `correzione-registro` non modifica nulla (@correzione)],
   [`rilascio.yml`], [Avvio a mano del Responsabile], [Porta i documenti indicati a (X+1).0.0, con stato «Approvato» e la firma del Responsabile (@rilascio)],
   [`compila-pdf.yml`], [Push su `main`, anche dei commit di `registro-modifiche.yml` e `rilascio.yml`], [Compila i documenti e pubblica sul sito quelli approvati],
   [`compila-comune.yml`], [Da `compila-pr.yml` e `compila-pdf.yml`], [Contiene i passi comuni: installa Typst e i font, compila i documenti con `Scripts/compila.sh` e carica i PDF come artifact],

@@ -1,3 +1,5 @@
+#import "Dati.typ": campi-dati
+
 #let gloss(term, url: none) = {
   let t = [#term#sub[G]]
   if url == none or url == "" { t } else { link(url)[#t] }
@@ -18,8 +20,16 @@
   mostra-controllo-documentale: true,
   mostra-registro-modifiche: true,
   firma-responsabile: "",
+  // Dati gestiti dall'automazione del registro, letti dal file accanto al sorgente:
+  // dati: yaml("<nome>.yml"). Se ci sono, sostituiscono versione, stato,
+  // verificatore, firma-responsabile e registro-modifiche
+  dati: none,
   body
 ) = {
+  if dati != none {
+    (versione, stato, verificatore, firma-responsabile, registro-modifiche) = campi-dati(dati)
+  }
+
   // Variabili Colore (Coerenti con i Verbali)
   let colore-primario = rgb("#305b57")
   let colore-secondario = rgb("#41837b")

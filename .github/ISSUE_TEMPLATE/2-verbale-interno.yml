@@ -76,7 +76,7 @@ body:
         _Le voci le spunta l'assegnatario, man mano che le completa. Quando sono tutte spuntate, avvisa il verificatore._
 
         - [ ] Verbale redatto con il template `Templates/Verbali.typ`
-        - [ ] Il campo `versione` è aggiornato secondo le regole di versionamento delle Norme di Progetto; il registro delle modifiche non è modificato a mano
+        - [ ] La PR ha la label `minor` o `patch` e la sezione *Registro delle modifiche* compilata; versione, stato e registro (`<nome>.yml`) non sono modificati a mano
         - [ ] Per ogni azione decisa esiste la sua issue, e il numero è nella colonna Issue
         - [ ] La PR chiude solo questa issue (`Closes #n`); le issue delle azioni sono citate con `Refs #n`
     validations:
@@ -97,8 +97,8 @@ body:
         - [ ] Non ci sono «Tutti», «da definire» o `N/D`
         - [ ] Le issue citate esistono e corrispondono alle azioni (assegnatario e scadenza coincidono)
         - [ ] Tutte le date sono nel formato AAAA-MM-GG
-        - [ ] Registro delle modifiche: una riga per modifica, con un solo autore; la verifica non aggiunge righe
-        - [ ] Versionamento: la `versione` segue le Norme di Progetto (un documento nuovo parte da 0.1.0; `Z` per una correzione minore; `Y`, con `Z` azzerata, per un aggiornamento sostanziale; `X` solo con l'approvazione del Responsabile per il rilascio)
+        - [ ] Registro delle modifiche: la sezione della PR descrive la modifica in modo chiaro; la verifica non modifica il documento né il suo `<nome>.yml`
+        - [ ] Versionamento: la label è adatta alla modifica (`patch` per una correzione minore, `minor` per un aggiornamento sostanziale); la versione la calcola l'automazione dopo il merge
         - [ ] Il verbale compila senza errori (CI verde)
         - [ ] La PR chiude solo questa issue (`Closes #n`) e non chiude le issue delle azioni
 

@@ -92,7 +92,7 @@ body:
       value: |
         _Le voci le spunta l'assegnatario, man mano che le completa. Quando sono tutte spuntate, avvisa il verificatore._
 
-        - [ ] Il campo `versione` è aggiornato secondo le regole di versionamento delle Norme di Progetto; il registro delle modifiche non è modificato a mano
+        - [ ] La PR ha la label `minor` o `patch` e la sezione *Registro delle modifiche* compilata; versione, stato e registro (`<nome>.yml`) non sono modificati a mano
         - [ ]
     validations:
       required: true
@@ -111,8 +111,8 @@ body:
         - [ ] Tutte le date sono nel formato AAAA-MM-GG
         - [ ] I termini del glossario sono marcati e collegati alla voce sul sito
         - [ ] Il documento compila senza errori (CI verde)
-        - [ ] Registro delle modifiche: la nuova riga ha un solo autore e nessun «Tutti»; la verifica non aggiunge righe, completa solo il verificatore della riga verificata
-        - [ ] Versionamento: la `versione` segue le Norme di Progetto (un documento nuovo parte da 0.1.0; `Z` per una correzione minore; `Y`, con `Z` azzerata, per un aggiornamento sostanziale; `X` solo con l'approvazione del Responsabile per il rilascio)
+        - [ ] Registro delle modifiche: la sezione della PR descrive la modifica in modo chiaro; la verifica non modifica il documento né il suo `<nome>.yml`
+        - [ ] Versionamento: la label è adatta alla modifica (`patch` per una correzione minore, `minor` per un aggiornamento sostanziale); la versione la calcola l'automazione dopo il merge
         - [ ] La PR chiude questa issue (`Closes #n`)
 
         **Esito** (spuntane uno):

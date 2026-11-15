@@ -4,17 +4,11 @@
   titolo: "Norme di Progetto",
   sottotitolo: "",
   tipo-documento: "Documento Interno",
-  versione: "0.1.0",
   autore: "Jacopo De Donà",
-  verificatore: "",
-  stato: "Bozza",
   data: datetime(year: 2026, month: 11, day: 11),
   file-nome: "norme-di-progetto.pdf",
-  // Ogni riga: (Ver., Data, Descrizione, Autore, Verificatore), dalla più recente
-  registro-modifiche: (
-    ([0.1.0], [2026-11-11], [Prima stesura: struttura per processi, regole del _Way of Working_ 1.0.0 riscritte come procedure, nuove regole su issue, verbali e verifica], [Jacopo De Donà], []),
-  ),
-  firma-responsabile: "",
+  // Versione, stato, verificatore, firma e registro: li scrive l'automazione dopo il merge
+  dati: yaml("norme-di-progetto.yml"),
 )
 
 #set heading(numbering: "1.1.1")
@@ -194,7 +188,7 @@ Ogni riunione ha un verbale, scritto da una sola persona, il redattore, con la s
   output: [Verbale verificato e integrato in `main`],
   strumenti: [Typst con `Templates/Verbali.typ`, GitHub],
 )[
-  + Scrive il verbale con il template dei verbali. Il primo punto è l'ordine del giorno; seguono data, ora, luogo e partecipanti.
+  + Scrive il verbale con il template dei verbali. Dopo il registro delle modifiche e l'indice, il template riporta l'ordine del giorno e poi data, ora, luogo e partecipanti: il redattore compila i campi corrispondenti.
   + Riporta ogni decisione con la sua motivazione, nel testo della decisione: «Deciso X perché Y».
   + Riporta ogni attività decisa con:
     - una sola persona assegnata;

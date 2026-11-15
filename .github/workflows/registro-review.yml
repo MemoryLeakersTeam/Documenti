@@ -1,0 +1,36 @@
+name: Registro PR (review)
+
+# Una review cambia l'esito del controllo obbligatorio «Registro delle
+# modifiche» (registro-pr.yml): questo workflow lo riesegue sull'ultimo commit
+# della PR, invece di aggiungere un secondo controllo con lo stesso nome.
+# Il controllo rieseguito legge le review dall'API, quindi vede l'approvazione
+on:
+  pull_request_review:
+    types: [submitted, dismissed]
+
+permissions:
+  actions: write
+
+jobs:
+  riesegui:
+    name: Riesegui il controllo del registro
+    # pull_request_review parte per tutte le PR: si controllano solo quelle verso main
+    if: github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Riesegui il controllo dell'ultimo commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/registro-pr.yml/runs?event=pull_request&head_sha=${SHA}&per_page=1" \
+            --jq '.workflow_runs[0].id // empty')"
+          if [ -z "$run" ]; then
+            echo "::error::Nessun controllo «Registro delle modifiche» per il commit ${SHA}: modifica la descrizione della PR per farlo partire."
+            exit 1
+          fi
+          # Un controllo ancora in corso potrebbe aver letto le review prima di questa
+          gh run watch "$run" --repo "$GITHUB_REPOSITORY" --exit-status > /dev/null || true
+          gh run rerun "$run" --repo "$GITHUB_REPOSITORY"
+          echo "Rieseguito il controllo: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${run}" >> "$GITHUB_STEP_SUMMARY"

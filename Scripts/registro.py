@@ -16,8 +16,14 @@ Due comandi:
              documento modificato aggiorna versione, stato e verificatore e
              aggiunge la riga in cima al registro, nel file <nome>.yml.
              Una correzione del registro non crea una versione nuova.
+  rilascia   rilascio avviato a mano dal Responsabile (workflow rilascio.yml):
+             i documenti indicati, tutti «Verificato», passano da X.Y.Z a
+             (X+1).0.0 con stato «Approvato», la firma del Responsabile e la
+             riga «Approvazione per il rilascio» in cima al registro.
+             Se un controllo fallisce non si modifica nessun documento.
 
-I dati della pull request li scarica il workflow dall'API di GitHub:
+Per controlla e aggiorna, i dati della pull request li scarica il workflow
+dall'API di GitHub:
   --pr       la pull request              (GET /repos/{repo}/pulls/{n})
   --review   le review, una JSON per riga (GET /repos/{repo}/pulls/{n}/reviews)
   --file     i file, uno JSON per riga    (GET /repos/{repo}/pulls/{n}/files)
@@ -46,11 +52,14 @@ MODELLO = "Templates/DatiDocumento.yml"
 LABEL = ("minor", "patch")
 # Correzione dei file dei dati (errore nel registro): niente versione nuova
 LABEL_CORREZIONE = "correzione-registro"
-# Campi che una correzione non può cambiare: li scrivono l'automazione e il rilascio (#66)
+# Campi che una correzione non può cambiare: li scrivono l'automazione e il rilascio
 CAMPI_FISSI = ("stato", "firma-responsabile")
 SEZIONE = "Registro delle modifiche"
 RUOLO_VERIFICATORE = "Verificatore"
+RUOLO_RESPONSABILE = "Responsabile"
 STATO_VERIFICATO = "Verificato"
+STATO_APPROVATO = "Approvato"
+DESCRIZIONE_RILASCIO = "Approvazione per il rilascio"
 FUSO = ZoneInfo("Europe/Rome")
 # Stati di review che cambiano l'approvazione (un semplice commento non la cambia)
 STATI_REVIEW = {"APPROVED", "CHANGES_REQUESTED", "DISMISSED"}
@@ -585,7 +594,7 @@ def aggiorna(a):
         dati["stato"] = STATO_VERIFICATO
         dati["verificatore"] = verificatore
         # Il contenuto è cambiato dopo l'ultimo rilascio: la firma la rimette il
-        # Responsabile al prossimo rilascio (#66)
+        # Responsabile al prossimo rilascio (comando rilascia)
         dati["firma-responsabile"] = ""
         riga = {
             "versione": dati["versione"],
@@ -616,6 +625,137 @@ def aggiorna(a):
 
 
 # ---------------------------------------------------------------------------
+# rilascia
+
+def documenti_indicati(testo):
+    """Documenti indicati dal Responsabile: percorsi separati da spazi, virgole o
+    a capo, con o senza estensione (.typ o .yml). Restituisce le radici senza
+    duplicati, nell'ordine indicato, e i percorsi che non sono documenti gestiti."""
+    radici, non_gestiti = [], []
+    for voce in re.split(r"[\s,]+", testo or ""):
+        voce = voce.strip().strip("'\"")
+        if voce.startswith("./"):
+            voce = voce[2:]
+        if not voce:
+            continue
+        p = PurePosixPath(voce)
+        d = documento(str(p if p.suffix in (".typ", ".yml") else p.with_name(p.name + ".typ")))
+        if d is None:
+            non_gestiti.append(voce)
+        elif d not in radici:
+            radici.append(d)
+    return radici, non_gestiti
+
+
+def prossimo_rilascio(versione):
+    """X.Y.Z -> (X+1).0.0: la prima cifra conta i rilasci approvati."""
+    m = re.fullmatch(r"(\d+)\.(\d+)\.(\d+)", str(versione))
+    if not m:
+        raise Errore(f"versione «{versione}» non nel formato X.Y.Z")
+    return f"{int(m.group(1)) + 1}.0.0"
+
+
+def modifiche_dal_rilascio(registro):
+    """Righe del registro dopo l'ultimo rilascio (la più recente per prima)."""
+    righe = []
+    for riga in registro:
+        if riga.get("descrizione") == DESCRIZIONE_RILASCIO and not riga.get("verificatore"):
+            break
+        righe.append(riga)
+    return righe
+
+
+def rilascia(a):
+    _, membri = leggi_ruoli(a.ruoli)
+    radice = Path(a.radice)
+    errori, avvisi = [], []
+
+    responsabile = membri.get(a.attore.lower())
+    if not responsabile or responsabile.get("ruolo") != RUOLO_RESPONSABILE:
+        ruolo = f"ha il ruolo «{responsabile.get('ruolo')}»" if responsabile else "non è in `.github/ruoli.yml`"
+        errori.append(f"Il rilascio lo avvia solo il Responsabile dello sprint: @{a.attore} {ruolo}.")
+
+    documenti, non_gestiti = documenti_indicati(a.documenti)
+    for voce in non_gestiti:
+        errori.append(f"`{voce}` non è un documento gestito dal registro: si rilasciano solo i documenti da `RTB/` in poi.")
+    if not documenti and not non_gestiti:
+        errori.append("Non è indicato nessun documento da rilasciare.")
+
+    data = a.data or datetime.now(FUSO).date().isoformat()
+    firma = responsabile["nome"] if responsabile else a.attore
+
+    # Prima si controlla e si calcola tutto, poi si scrive: o si rilasciano tutti i documenti o nessuno
+    rilasciati = []
+    for d in documenti:
+        typ, yml = radice / f"{d}.typ", radice / f"{d}.yml"
+        if not typ.exists():
+            errori.append(f"`{d}.typ` non esiste.")
+            continue
+        if not yml.exists():
+            errori.append(f"`{d}.typ` non ha il file dei dati `{d}.yml`.")
+            continue
+        dati = leggi_yaml(yml)
+        problemi = problemi_dati(dati)
+        if problemi:
+            errori.append(f"`{d}.yml` non è nella forma giusta: {'; '.join(problemi)}.")
+            continue
+        if dati["stato"] != STATO_VERIFICATO:
+            errori.append(f"`{d}` è nello stato «{dati['stato']}»: si rilascia solo un documento «{STATO_VERIFICATO}».")
+            continue
+        meta = metadati_documento(radice, typ)
+        if (meta.get("versione"), meta.get("stato")) != (dati["versione"], dati["stato"]):
+            errori.append(f"`{d}.typ` non mostra i dati di `{d}.yml` (versione e stato): manca `dati: yaml(\"{yml.name}\")` nel template.")
+            continue
+        if responsabile:
+            proprie = [r["versione"] for r in modifiche_dal_rilascio(dati["registro"]) if r.get("autore") == responsabile["nome"]]
+            if proprie:
+                avvisi.append(f"`{d}`: il Responsabile è autore di modifiche incluse nel rilascio (versioni {', '.join(proprie)}).")
+        prima = dati["versione"]
+        dati["versione"] = prossimo_rilascio(prima)
+        dati["stato"] = STATO_APPROVATO
+        dati["firma-responsabile"] = firma
+        riga = {
+            "versione": dati["versione"],
+            "data": data,
+            "descrizione": DESCRIZIONE_RILASCIO,
+            "autore": firma,
+            "verificatore": "",
+        }
+        dati["registro"] = [riga] + list(dati["registro"])
+        rilasciati.append((d, yml, dati, prima))
+
+    righe = ["### Rilascio", "", f"Avviato da: @{a.attore}; data: {data}", ""]
+    if errori:
+        righe += ["❌ Rilascio non eseguito: nessun documento è stato modificato.", ""] + [f"- {e}" for e in errori]
+        for e in errori:
+            segnala("error", e)
+        riepilogo(righe)
+        return 1
+
+    for _, yml, dati, _ in rilasciati:
+        scrivi_yaml(yml, dati)
+
+    elenco = [f"- {d}: {prima} -> {dati['versione']}" for d, _, dati, prima in rilasciati]
+    if a.messaggio:
+        n = len(rilasciati)
+        Path(a.messaggio).write_text(
+            f"docs(release): approve {n} document{'s' if n > 1 else ''} for release\n\n"
+            + "\n".join(elenco)
+            + (f"\n\nRilascio: {a.esecuzione}\n" if a.esecuzione else "\n"),
+            encoding="utf-8",
+        )
+    righe += ["| Documento | Prima | Dopo il rilascio |", "|---|---|---|"]
+    righe += [f"| `{d}` | {prima} | {dati['versione']} «{STATO_APPROVATO}» |" for d, _, dati, prima in rilasciati]
+    if avvisi:
+        for v in avvisi:
+            segnala("warning", v)
+        righe += ["", "⚠️ L'autore di un documento non ne approva il rilascio (Norme di Progetto, «Verifica»):"]
+        righe += [f"- {v}" for v in avvisi]
+    riepilogo(righe)
+    return 0
+
+
+# ---------------------------------------------------------------------------
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -632,6 +772,15 @@ def main():
             p.add_argument("--base", default="origin/main", help="ref con i file dei dati prima della PR (predefinito: origin/main)")
         if nome_comando == "aggiorna":
             p.add_argument("--messaggio", help="file in cui scrivere il messaggio del commit")
+    p = comandi.add_parser("rilascia")
+    p.set_defaults(funzione=rilascia)
+    p.add_argument("--documenti", required=True, help="percorsi dei documenti, separati da spazi, virgole o a capo")
+    p.add_argument("--attore", required=True, help="login di chi ha avviato il rilascio")
+    p.add_argument("--ruoli", required=True, help=".github/ruoli.yml nella versione su main")
+    p.add_argument("--radice", default=".", help="cartella del repository (predefinita: .)")
+    p.add_argument("--data", help="data del rilascio, AAAA-MM-GG (predefinita: oggi, ora italiana)")
+    p.add_argument("--esecuzione", help="identificativo dell'esecuzione del workflow, scritto nel messaggio del commit")
+    p.add_argument("--messaggio", help="file in cui scrivere il messaggio del commit")
     a = parser.parse_args()
     try:
         return a.funzione(a)

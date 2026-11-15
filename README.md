@@ -47,6 +47,16 @@ Se l'automazione fallisce (per esempio per un push rifiutato), basta rieseguire 
 
 I ruoli dello sprint sono in `.github/ruoli.yml` (login GitHub, nome e ruolo): lo aggiorna l'Amministratore, con una PR, a ogni rotazione dei ruoli.
 
+### Rilascio
+Il rilascio di un documento lo approva il Responsabile, senza pull request. Dalla scheda *Actions* sceglie **Rilascio** → *Run workflow*, lascia il ramo `main` e indica i documenti da rilasciare, separati da spazi o virgole (per esempio `RTB/Generali/norme-di-progetto RTB/Verbali_interni/2026-11-10`, con o senza `.typ`).
+
+Il workflow (`rilascio.yml`) controlla che chi lo avvia sia il Responsabile in `.github/ruoli.yml` e che ogni documento abbia il suo `<nome>.yml` e sia «Verificato». Se un controllo fallisce non modifica nessun documento e scrive il motivo nel riepilogo dell'esecuzione. Altrimenti, per ogni documento:
+- porta la versione da X.Y.Z a (X+1).0.0: il primo rilascio è `1.0.0`, il successivo `2.0.0`;
+- aggiunge in cima al registro la riga «Approvazione per il rilascio», con la data del rilascio, il Responsabile come autore e nessun verificatore;
+- imposta lo stato «Approvato» e la firma del Responsabile.
+
+Infine fa un solo commit su `main` per tutti i documenti: il commit fa ripartire la compilazione, che pubblica i documenti sul sito. Se il Responsabile è autore di una modifica inclusa nel rilascio, il riepilogo lo segnala, ma il rilascio si fa lo stesso. Un verbale esterno, dopo il rilascio a `1.0.0`, si invia all'azienda per la firma: il PDF firmato entra con una PR a parte.
+
 ## Issue
 Ogni issue si apre con uno dei moduli di *New issue*: le issue vuote sono disattivate.
 

@@ -13,7 +13,7 @@
   ordine-del-giorno: (
     [Introduzione template issue],
     [Cruscotto rendicontazione ore produttive],
-    [Cambio formato data su sito],
+    [Cambio formato data su documenti],
     [Automazione modifiche alla documentazione],
     [Milestone RTB],
     [Varie ed eventuali],

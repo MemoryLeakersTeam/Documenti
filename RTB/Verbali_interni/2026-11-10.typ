@@ -2,7 +2,7 @@
 
 #show: verbale.with(
   dati: yaml("2026-11-10.yml"),
-  titolo: "Verbale interno del 10/11/2026",
+  titolo: "Verbale interno del 2026-11-10",
   tipo-documento: "Verbale Interno",
   data: datetime(year: 2026, month: 11, day: 10),
   ora: "14:00 – 15:00",
@@ -13,7 +13,7 @@
   ordine-del-giorno: (
     [Introduzione template issue],
     [Cruscotto rendicontazione ore produttive],
-    [Cambio formato data su documenti],
+    [Cambio formato data su sito e documenti],
     [Automazione modifiche alla documentazione],
     [Milestone RTB],
     [Varie ed eventuali],
@@ -92,7 +92,7 @@
     (
       [A12],
       [Workflow modifica registro versioni dei documenti],
-      [Implementare workflow che permettano aggiornamento dati verificatore alla PR e all'approvazione del respondabile],
+      [Implementare workflow che permettano aggiornamento dati verificatore alla PR e all'approvazione del responsabile],
       [Jacopo De Donà],
       [2026-11-17],
       [D13],

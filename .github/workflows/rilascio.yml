@@ -1,0 +1,130 @@
+name: Rilascio
+
+# Rilascio dei documenti, avviato a mano dal Responsabile dalla scheda Actions
+# (Run workflow, ramo main) indicando i percorsi dei documenti.
+# Scripts/registro.py rilascia controlla che chi lo avvia sia il Responsabile
+# secondo .github/ruoli.yml e che ogni documento sia «Verificato»; se un
+# controllo fallisce non modifica nessun documento e ne scrive il motivo nel
+# riepilogo. Altrimenti porta ogni documento da X.Y.Z a (X+1).0.0, con stato
+# «Approvato», la firma del Responsabile e la riga «Approvazione per il
+# rilascio» in cima al registro, e fa un solo commit su main con la GitHub App:
+# il push fa ripartire compila-pdf.yml, che pubblica i documenti sul sito.
+# Serve la stessa configurazione di registro-modifiche.yml: variabile
+# SITO_APP_ID, secret SITO_APP_PRIVATE_KEY, App con contents: write nel bypass
+# del ruleset di main.
+on:
+  workflow_dispatch:
+    inputs:
+      documenti:
+        description: "Documenti da rilasciare, separati da spazi o virgole (per esempio RTB/Generali/norme-di-progetto)"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+# Un rilascio alla volta; un merge nel frattempo si gestisce riprovando
+concurrency:
+  group: rilascio
+  cancel-in-progress: false
+
+jobs:
+  rilascia:
+    name: Rilascio dei documenti
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Controlla da dove parte il rilascio
+        env:
+          SITO_APP_ID: ${{ vars.SITO_APP_ID }}
+        run: |
+          if [ "$GITHUB_REF" != "refs/heads/main" ]; then
+            echo "::error::Avvia il rilascio dal ramo main (ora: ${GITHUB_REF#refs/heads/})"
+            exit 1
+          fi
+          if [ -z "$SITO_APP_ID" ]; then
+            echo "::error::Manca la variabile SITO_APP_ID della GitHub App"
+            exit 1
+          fi
+
+      - name: Token della GitHub App
+        id: token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ vars.SITO_APP_ID }}
+          private-key: ${{ secrets.SITO_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+
+      - name: Checkout di main
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          token: ${{ steps.token.outputs.token }}
+          fetch-depth: 0
+
+      - name: Installa Typst
+        uses: typst-community/setup-typst@v5
+        with:
+          # Scripts/registro.py legge i file YAML e i metadati dei documenti con typst
+          typst-version: "0.15"
+
+      - name: Rilascia i documenti e fai il commit su main
+        env:
+          GH_TOKEN: ${{ steps.token.outputs.token }}
+          BOT: ${{ steps.token.outputs.app-slug }}[bot]
+          DOCUMENTI: ${{ inputs.documenti }}
+          # Chi ha avviato questa esecuzione: in una riesecuzione è chi l'ha rieseguita
+          ATTORE: ${{ github.triggering_actor }}
+        run: |
+          id="$(gh api "/users/${BOT}" --jq .id)"
+          git config user.name "$BOT"
+          git config user.email "${id}+${BOT}@users.noreply.github.com"
+
+          riepilogo="$RUNNER_TEMP/riepilogo.md"
+          fine() { cat "$riepilogo" >> "$GITHUB_STEP_SUMMARY"; exit "$1"; }
+
+          # Se nel frattempo un merge ha cambiato main, il push viene rifiutato:
+          # si riparte da main aggiornato e si ricontrolla tutto
+          for tentativo in 1 2 3 4 5; do
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            base="$(git rev-parse HEAD)"
+            : > "$riepilogo"
+
+            # Una riesecuzione dopo un rilascio riuscito non rilascia di nuovo
+            fatti="$(git log --fixed-strings --author="$BOT" --format=%B origin/main)"
+            if grep -qxF "Rilascio: ${GITHUB_RUN_ID}" <<<"$fatti"; then
+              echo "Il rilascio di questa esecuzione è già su main" | tee "$riepilogo"
+              fine 0
+            fi
+
+            if ! GITHUB_STEP_SUMMARY="$riepilogo" python3 Scripts/registro.py rilascia \
+                --documenti "$DOCUMENTI" \
+                --attore "$ATTORE" \
+                --ruoli .github/ruoli.yml \
+                --esecuzione "$GITHUB_RUN_ID" \
+                --messaggio "$RUNNER_TEMP/messaggio.txt"; then
+              fine 1
+            fi
+
+            git add -A
+            if git diff --cached --quiet; then
+              fine 0
+            fi
+            git commit -q -F "$RUNNER_TEMP/messaggio.txt"
+            if git push -q origin HEAD:main 2> "$RUNNER_TEMP/push.err"; then
+              fine 0
+            fi
+
+            git fetch -q origin main
+            if [ "$(git rev-parse origin/main)" = "$base" ]; then
+              cat "$RUNNER_TEMP/push.err"
+              echo "::error::Push su main rifiutato senza che main sia cambiato: controlla che la GitHub App sia installata con contents: write e possa scavalcare il ruleset di main"
+              fine 1
+            fi
+            echo "::warning::main è cambiato durante il rilascio (tentativo $tentativo), riprovo"
+            sleep $((5 + RANDOM % 10))
+          done
+          echo "::error::Impossibile fare il rilascio dopo 5 tentativi"
+          fine 1

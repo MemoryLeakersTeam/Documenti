@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         Una issue = **una persona** e **una scadenza**. Assegnala al redattore e imposta la milestone.
-        Il verbale esterno va firmato dall'azienda. La PR del verbale si integra appena il Responsabile la approva e cita questa issue solo con `Refs #n`. Il PDF firmato arriva con una seconda PR, che chiude questa issue (`Closes #n`). Il sito pubblica il verbale solo quando c'è la versione `*-signed.pdf`.
+        Il verbale esterno va firmato dall'azienda. La PR del verbale si integra con l'approvazione del Verificatore e cita questa issue solo con `Refs #n`. Poi il Responsabile rilascia il verbale (versione 1.0.0) e lo invia all'azienda per la firma. Il PDF firmato arriva con una seconda PR, che chiude questa issue (`Closes #n`). Il sito pubblica il verbale solo quando c'è la versione `*-signed.pdf`.
 
   - type: input
     id: riunione
@@ -76,10 +76,10 @@ body:
         _Le voci le spunta l'assegnatario, man mano che le completa. Quando sono tutte spuntate, avvisa il verificatore._
 
         - [ ] Verbale redatto con il template `Templates/Verbali.typ`, con il campo `azienda` compilato
-        - [ ] Il campo `versione` è aggiornato secondo le regole di versionamento delle Norme di Progetto; il registro delle modifiche non è modificato a mano
+        - [ ] La PR ha la label `minor` o `patch` e la sezione *Registro delle modifiche* compilata; versione, stato e registro (`<nome>.yml`) non sono modificati a mano
         - [ ] Per ogni azione decisa esiste la sua issue, e il numero è nella colonna Issue
-        - [ ] La PR del verbale cita questa issue e le issue delle azioni solo con `Refs #n`, ed è integrata dopo l'approvazione del Responsabile
-        - [ ] Il Responsabile ha inviato all'azienda, per la firma, il PDF della versione integrata in `main`
+        - [ ] La PR del verbale cita questa issue e le issue delle azioni solo con `Refs #n`, ed è integrata dopo l'approvazione del Verificatore
+        - [ ] Il Responsabile ha rilasciato il verbale (versione 1.0.0) e ha inviato all'azienda, per la firma, il PDF di quella versione
         - [ ] Il PDF firmato è caricato accanto al sorgente come `*-signed.pdf`, con una seconda PR che chiude questa issue (`Closes #n`)
     validations:
       required: true
@@ -99,10 +99,10 @@ body:
         - [ ] Non ci sono «Tutti», «da definire» o `N/D`
         - [ ] Le issue citate esistono e corrispondono alle azioni (assegnatario e scadenza coincidono)
         - [ ] Tutte le date sono nel formato AAAA-MM-GG
-        - [ ] Registro delle modifiche: una riga per modifica, con un solo autore; la verifica non aggiunge righe
-        - [ ] Versionamento: la `versione` segue le Norme di Progetto (un documento nuovo parte da 0.1.0; `Z` per una correzione minore; `Y`, con `Z` azzerata, per un aggiornamento sostanziale; `X` solo con l'approvazione del Responsabile per il rilascio)
+        - [ ] Registro delle modifiche: la sezione della PR descrive la modifica in modo chiaro; la verifica non modifica il documento né il suo `<nome>.yml`
+        - [ ] Versionamento: la label è adatta alla modifica (`patch` per una correzione minore, `minor` per un aggiornamento sostanziale); la versione la calcola l'automazione dopo il merge
         - [ ] Il verbale compila senza errori (CI verde)
-        - [ ] Il PDF firmato corrisponde alla versione del verbale integrata in `main`
+        - [ ] Il PDF firmato corrisponde alla versione 1.0.0 rilasciata dal Responsabile
         - [ ] La PR del verbale non chiude nessuna issue; questa issue la chiude solo la PR del PDF firmato
 
         **Esito** (spuntane uno):

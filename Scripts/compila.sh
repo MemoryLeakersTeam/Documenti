@@ -51,9 +51,9 @@ while IFS= read -r -d '' file; do
   dest="$OUT/$pdf"
   mkdir -p "$(dirname "$dest")"
   echo "▶ $rel"
-  # Data del PDF = data dell'ultimo commit del file: così un PDF
-  # cambia (e viene ripubblicato) solo se il suo sorgente è cambiato
-  ts="$(git log -1 --format=%ct -- "$rel" 2>/dev/null || true)"
+  # Data del PDF = data dell'ultimo commit del sorgente o dei suoi dati (<nome>.yml):
+  # così un PDF cambia (e viene ripubblicato) solo se uno dei due è cambiato
+  ts="$(git log -1 --format=%ct -- "$rel" "${rel%.typ}.yml" 2>/dev/null || true)"
   export SOURCE_DATE_EPOCH="${ts:-$(date +%s)}"
   if ! typst compile --root . "${FONT_ARGS[@]}" "$rel" "$dest"; then
     echo "✖ Errore nella compilazione di $rel"

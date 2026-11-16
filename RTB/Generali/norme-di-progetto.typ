@@ -266,7 +266,6 @@ Dopo il merge l'automazione non crea una versione nuova. Il PDF si ricompila, ma
 === Rilascio di un documento <rilascio>
 
 Il Responsabile approva il rilascio di un documento senza ulteriore verifica. Il rilascio non ha una pull request: il documento è già verificato e non c'è nulla da modificare.
-// TODO: `rilascio.yml` si realizza con l'issue #66. Finché non c'è, con l'automazione del registro attiva un documento non può diventare «Approvato»
 
 #procedura(
   chi: [Responsabile],
@@ -274,12 +273,14 @@ Il Responsabile approva il rilascio di un documento senza ulteriore verifica. Il
   output: [Documenti alla versione (X+1).0.0, con stato «Approvato» e la firma del Responsabile, pubblicati sul sito],
   strumenti: [GitHub Actions (`rilascio.yml`)],
 )[
-  + Avvia a mano il workflow `rilascio.yml` dalla scheda _Actions_ del repository, indicando i percorsi dei documenti da rilasciare.
-  + Il workflow controlla che chi lo avvia sia il Responsabile secondo `.github/ruoli.yml` e che ogni documento indicato esista, abbia il suo `<nome>.yml` e sia nello stato «Verificato». Se un controllo fallisce, non modifica nessun documento e scrive il motivo nel riepilogo dell'esecuzione.
-  + Per ogni documento, il workflow porta la versione a (X+1).0.0, aggiunge in cima al registro la riga «Approvazione per il rilascio», imposta lo stato «Approvato» e la firma del Responsabile.
+  + Dalla scheda _Actions_ del repository sceglie *Rilascio* e poi _Run workflow_, lascia il ramo `main` e indica i percorsi dei documenti da rilasciare, separati da spazi o virgole, con o senza `.typ` (per esempio `RTB/Generali/norme-di-progetto`).
+  + Il workflow controlla che chi lo avvia sia il Responsabile secondo `.github/ruoli.yml` e che ogni documento indicato sia da `RTB/` in poi, esista, abbia il suo `<nome>.yml`, sia nello stato «Verificato» e ne mostri i dati. Se un controllo fallisce, non modifica nessun documento e scrive tutti i motivi nel riepilogo dell'esecuzione.
+  + Per ogni documento, il workflow porta la versione a (X+1).0.0, aggiunge in cima al registro la riga «Approvazione per il rilascio» con la data del rilascio, il Responsabile come autore e nessun Verificatore, imposta lo stato «Approvato» e la firma del Responsabile.
   + Il workflow fa un solo commit su `main` per tutti i documenti indicati. Il commit avvia la pubblicazione sul sito.
-  + Il Responsabile controlla nel riepilogo dell'esecuzione che il rilascio sia riuscito e che i documenti compaiano sul sito con la nuova versione.
+  + Il Responsabile controlla nel riepilogo dell'esecuzione che il rilascio sia riuscito e che i documenti compaiano sul sito con la nuova versione. Il riepilogo segnala anche se il Responsabile è autore di modifiche incluse nel rilascio (@verifica): il workflow non blocca il rilascio.
 ]
+
+Se il workflow fallisce dopo i controlli (per esempio per un push rifiutato), il Responsabile lo riesegue dalla pagina dell'esecuzione: una riesecuzione di un rilascio già riuscito non rilascia di nuovo. In una riesecuzione il controllo del ruolo vale per chi la avvia.
 
 == Gestione della configurazione
 
@@ -363,7 +364,7 @@ Il Verificatore approva l'integrazione di una pull request in `main` o `develop`
 === Principi
 
 - *Indipendenza*: il Verificatore indicato nell'issue è chi ha il ruolo di Verificatore nello sprint in `.github/ruoli.yml` (@ruoli). Il controllo *Registro delle modifiche* accetta solo la sua approvazione (@pr). L'autore di un'attività non ne è mai il Verificatore, né il Responsabile che ne approva il rilascio.
-  // TODO(decisione): se l'autore di un documento è il Responsabile dello sprint (per esempio di un diario di bordo), chi ne approva il rilascio?
+  // TODO(decisione): se l'autore di un documento è il Responsabile dello sprint (per esempio di un verbale che ha redatto), chi ne approva il rilascio? Oggi `rilascio.yml` lo segnala nel riepilogo, ma non lo blocca
 - *Sola lettura*: il Verificatore non modifica il prodotto che verifica. Segnala i problemi con un commento e li corregge l'autore.
 - *Checklist scritte prima*: ogni classe di attività ha la sua checklist di verifica, scritta nel modulo dell'issue (`.github/ISSUE_TEMPLATE/`). L'Amministratore abbozza la Definition of Done della singola issue quando la apre; l'assegnatario la completa prima di cominciare.
 
@@ -512,7 +513,7 @@ L'Amministratore mantiene gli strumenti del gruppo e le automazioni del reposito
   [`registro-pr.yml`], [Pull request verso `main`: apertura, modifica della descrizione, nuovi commit e label], [Controllo obbligatorio *Registro delle modifiche*: blocca il merge se mancano la label, la sezione _Registro delle modifiche_ o l'approvazione del Verificatore dello sprint, oppure se la pull request modifica un `<nome>.yml` senza la label `correzione-registro` (@pr)],
   [`registro-review.yml`], [Review di una pull request verso `main`, inviata o annullata], [Riesegue il controllo *Registro delle modifiche* dell'ultimo commit, che così vede la review. Non aggiunge un secondo controllo con lo stesso nome: resterebbe quello rosso di prima dell'approvazione, e bloccherebbe il merge],
   [`registro-modifiche.yml`], [Merge di una pull request in `main`, solo se la variabile del repository `REGISTRO_ATTIVO` vale `true`], [Per ogni documento modificato aggiorna `<nome>.yml`: versione secondo la label, riga in cima al registro, Verificatore, stato «Verificato» e firma tolta. Fa il commit direttamente su `main` con la GitHub App dell'organizzazione. Con la label `correzione-registro` non modifica nulla (@correzione)],
-  [`rilascio.yml`], [Avvio a mano del Responsabile], [Porta i documenti indicati a (X+1).0.0, con stato «Approvato» e la firma del Responsabile (@rilascio)],
+  [`rilascio.yml`], [Avvio a mano del Responsabile, dalla scheda _Actions_ sul ramo `main`], [Controlla ruolo e documenti; porta i documenti indicati a (X+1).0.0, con stato «Approvato», la firma del Responsabile e la riga «Approvazione per il rilascio» nel registro. Fa un solo commit su `main` con la GitHub App dell'organizzazione (@rilascio)],
   [`compila-pdf.yml`], [Push su `main`, anche dei commit di `registro-modifiche.yml` e `rilascio.yml`], [Compila i documenti e pubblica sul sito quelli approvati],
   [`compila-comune.yml`], [Da `compila-pr.yml` e `compila-pdf.yml`], [Contiene i passi comuni: installa Typst e i font, compila i documenti con `Scripts/compila.sh` e carica i PDF come artifact],
 )

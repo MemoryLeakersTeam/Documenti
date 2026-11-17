@@ -154,7 +154,7 @@ Al passaggio a una nuova tappa (per esempio da `RTB/` a `PB/`), un documento si 
 - Il glossario sta sul sito del gruppo. Ogni voce ha un identificativo univoco, che permette il collegamento diretto (`glossario#<id>`).
 - Il sito ricava l'identificativo dal nome della voce: lettere minuscole, senza accenti, con un trattino al posto di spazi e simboli. Per esempio, «Sprint Retrospective» diventa `sprint-retrospective`.
 - Nei documenti, un termine del glossario si marca alla sua prima occorrenza nel documento con la funzione `gloss` del template, che aggiunge il pedice #sub[G] e il collegamento alla voce.
-// TODO(decisione): chi aggiunge una voce nuova al glossario, e con quale procedura?
+- La voce di un termine nuovo la aggiunge chi introduce il termine in un documento, nella stessa attività, prima di chiedere la verifica (decisione della riunione interna del 2026-11-17). La aggiunge dal pannello di amministrazione del sito (`/admin`), con un token personale di GitHub con permesso _Contents: Read and write_ sul solo repository del sito, come indicato nella pagina stessa.
 
 === Stesura di un documento
 
@@ -274,10 +274,10 @@ Il Responsabile approva il rilascio di un documento senza ulteriore verifica. Il
   strumenti: [GitHub Actions (`rilascio.yml`)],
 )[
   + Dalla scheda _Actions_ del repository sceglie *Rilascio* e poi _Run workflow_, lascia il ramo `main` e indica i percorsi dei documenti da rilasciare, separati da spazi o virgole, con o senza `.typ` (per esempio `RTB/Generali/norme-di-progetto`).
-  + Il workflow controlla che chi lo avvia sia il Responsabile secondo `.github/ruoli.yml` e che ogni documento indicato sia da `RTB/` in poi, esista, abbia il suo `<nome>.yml`, sia nello stato «Verificato» e ne mostri i dati. Se un controllo fallisce, non modifica nessun documento e scrive tutti i motivi nel riepilogo dell'esecuzione.
+  + Il workflow controlla che chi lo avvia sia il Responsabile secondo `.github/ruoli.yml` e che ogni documento indicato sia da `RTB/` in poi, esista, abbia il suo `<nome>.yml`, sia nello stato «Verificato», ne mostri i dati e non abbia, dopo l'ultimo rilascio, modifiche scritte dal Responsabile stesso. Se un controllo fallisce, non modifica nessun documento e scrive tutti i motivi nel riepilogo dell'esecuzione.
   + Per ogni documento, il workflow porta la versione a (X+1).0.0, aggiunge in cima al registro la riga «Approvazione per il rilascio» con la data del rilascio, il Responsabile come autore e nessun Verificatore, imposta lo stato «Approvato» e la firma del Responsabile.
   + Il workflow fa un solo commit su `main` per tutti i documenti indicati. Il commit avvia la pubblicazione sul sito.
-  + Il Responsabile controlla nel riepilogo dell'esecuzione che il rilascio sia riuscito e che i documenti compaiano sul sito con la nuova versione. Il riepilogo segnala anche se il Responsabile è autore di modifiche incluse nel rilascio (@verifica): il workflow non blocca il rilascio.
+  + Il Responsabile controlla nel riepilogo dell'esecuzione che il rilascio sia riuscito e che i documenti compaiano sul sito con la nuova versione.
 ]
 
 Se il workflow fallisce dopo i controlli (per esempio per un push rifiutato), il Responsabile lo riesegue dalla pagina dell'esecuzione: una riesecuzione di un rilascio già riuscito non rilascia di nuovo. In una riesecuzione il controllo del ruolo vale per chi la avvia.
@@ -303,7 +303,7 @@ Se il workflow fallisce dopo i controlli (per esempio per un push rifiutato), il
 )[
   + Crea un branch per l'issue, da `main` per i documenti e da `develop` per il codice.
   + Lo chiama `<tipo>/<descrizione>`, con il tipo preso dalla tabella dei commit (@commit), in minuscolo e con i trattini come separatore. Il numero dell'issue è facoltativo: per esempio `ci/51-metadati-elenco`.
-  + Integra o elimina il branch entro 3 giorni dalla creazione, per evitare branch dimenticati e divergenze dal ramo principale. Un documento lungo si divide in più issue, ognuna con il suo branch.
+  + Un documento lungo si divide in più issue, ognuna con il suo branch.
 ]
 
 Le issue del modulo *Analisi* non hanno un branch: si chiudono con un output collegato nell'issue.
@@ -363,8 +363,7 @@ Il Verificatore approva l'integrazione di una pull request in `main` o `develop`
 
 === Principi
 
-- *Indipendenza*: il Verificatore indicato nell'issue è chi ha il ruolo di Verificatore nello sprint in `.github/ruoli.yml` (@ruoli). Il controllo *Registro delle modifiche* accetta solo la sua approvazione (@pr). L'autore di un'attività non ne è mai il Verificatore, né il Responsabile che ne approva il rilascio.
-  // TODO(decisione): se l'autore di un documento è il Responsabile dello sprint (per esempio di un verbale che ha redatto), chi ne approva il rilascio? Oggi `rilascio.yml` lo segnala nel riepilogo, ma non lo blocca
+- *Indipendenza*: il Verificatore indicato nell'issue è chi ha il ruolo di Verificatore nello sprint in `.github/ruoli.yml` (@ruoli). Il controllo *Registro delle modifiche* accetta solo la sua approvazione (@pr). L'autore di un'attività non ne è mai il Verificatore, né il Responsabile che ne approva il rilascio: il Responsabile non è mai autore delle modifiche che rilascia (decisione della riunione interna del 2026-11-17). `rilascio.yml` blocca il rilascio di un documento che, dopo l'ultimo rilascio, ha modifiche scritte dal Responsabile (@rilascio).
 - *Sola lettura*: il Verificatore non modifica il prodotto che verifica. Segnala i problemi con un commento e li corregge l'autore.
 - *Checklist scritte prima*: ogni classe di attività ha la sua checklist di verifica, scritta nel modulo dell'issue (`.github/ISSUE_TEMPLATE/`). L'Amministratore abbozza la Definition of Done della singola issue quando la apre; l'assegnatario la completa prima di cominciare.
 
@@ -402,8 +401,7 @@ Il Verificatore approva l'integrazione di una pull request in `main` o `develop`
 === Ruoli <ruoli>
 
 Ogni membro del gruppo ricopre un ruolo alla volta. I ruoli ruotano a ogni #g("sprint", "sprint").
-I membri del gruppo si organizzano da soli la rotazione e registrano nel cruscotto le ore svolte in ogni ruolo, così da controllare che ognuno li ricopra tutti.
-// TODO: il cruscotto delle ore non esiste ancora (issue #4 del sito)
+I membri del gruppo si organizzano da soli la rotazione e registrano sul sito le ore svolte in ogni ruolo (@ore), così da controllare che ognuno li ricopra tutti.
 
 I ruoli dello sprint in corso sono nel file `.github/ruoli.yml`: per ogni membro, il login GitHub, il nome e il ruolo. A ogni rotazione l'Amministratore aggiorna il file con una pull request. Le automazioni leggono il file nella versione su `main`:
 - il controllo delle pull request accetta solo l'approvazione del Verificatore (@pr);
@@ -450,8 +448,7 @@ Le attività del gruppo si tracciano con le issue del repository e si pianifican
 
 Si apre un'issue per ogni attività che:
 - compare come azione in un verbale;
-- richiede #g("ore-produttive", "ore produttive"), da rendicontare;
-  // TODO(decisione): manca la procedura di consuntivo: dove e come si registrano le ore effettive (issue #4 del sito)
+- richiede #g("ore-produttive", "ore produttive"), da rendicontare (@ore);
 - modifica il contenuto di un repository.
 
 Lo studio individuale su strumenti e metodi non ha un'issue: non conta tra le ore produttive.
@@ -483,6 +480,23 @@ Lo studio individuale su strumenti e metodi non ha un'issue: non conta tra le or
   + Se l'issue nasce da una proposta, la porta alla riunione successiva perché il gruppo la confermi a verbale. Il lavoro può cominciare anche prima della conferma.
 ]
 
+=== Consuntivo delle ore <ore>
+
+Le ore produttive si consuntivano sul sito del gruppo, nella pagina `/ore` (decisione della riunione interna del 2026-11-17). La pagina mostra le ore svolte da ciascun membro, per ruolo e per sprint, contro il preventivo della Dichiarazione degli impegni, e permette di scaricare un CSV per sprint da usare nel Piano di Progetto.
+
+#procedura(
+  chi: [Ogni membro del gruppo, per le proprie ore],
+  input: [Ore produttive svolte nello sprint],
+  output: [Ore registrate in `data/ore.json` del repository del sito],
+  strumenti: [Pannello di amministrazione del sito (`/admin`), scheda _Ore_],
+)[
+  + Registra solo le ore produttive svolte dal 2026-11-03, data dell'aggiudicazione. Le riunioni non sono ore produttive.
+  + Registra le proprie ore entro la fine dello sprint, a passi di 0,5 ore, con il ruolo ricoperto in quel momento e, se c'è, l'issue su cui ha lavorato (`Repository#numero`).
+  + Ogni registrazione o eliminazione è un commit sul repository del sito e si pubblica subito.
+]
+
+Il pannello non impedisce di registrare le ore di un altro membro: ognuno registra solo le proprie, e la cronologia dei commit mostra chi ha scritto cosa. Se il preventivo per persona e per ruolo cambia, si aggiorna `preventivo` in `data/ore.json`.
+
 == Gestione delle infrastrutture
 
 L'Amministratore mantiene gli strumenti del gruppo e le automazioni del repository, e ne aggiorna la descrizione in questo documento.
@@ -494,7 +508,7 @@ L'Amministratore mantiene gli strumenti del gruppo e le automazioni del reposito
   ("Strumento", "Uso"),
   [GitHub], [Repository dei documenti e del sito, issue, pull request, automazioni (#g("github-actions", "GitHub Actions"))],
   [GitHub Projects], [Bacheca #g("kanban", "Kanban") delle attività, divisa per sprint],
-  [GitHub Pages], [Sito del gruppo, con documenti pubblicati e glossario],
+  [GitHub Pages], [Sito del gruppo, con documenti pubblicati, glossario e consuntivo delle ore (@ore)],
   [Typst], [Stesura dei documenti],
   [Google Presentazioni], [Presentazioni dei diari di bordo],
   [#g("google-calendar", "Google Calendar")], [Calendario condiviso delle disponibilità],
@@ -513,7 +527,7 @@ L'Amministratore mantiene gli strumenti del gruppo e le automazioni del reposito
   [`registro-pr.yml`], [Pull request verso `main`: apertura, modifica della descrizione, nuovi commit e label], [Controllo obbligatorio *Registro delle modifiche*: blocca il merge se mancano la label, la sezione _Registro delle modifiche_ o l'approvazione del Verificatore dello sprint, oppure se la pull request modifica un `<nome>.yml` senza la label `correzione-registro` (@pr)],
   [`registro-review.yml`], [Review di una pull request verso `main`, inviata o annullata], [Riesegue il controllo *Registro delle modifiche* dell'ultimo commit, che così vede la review. Non aggiunge un secondo controllo con lo stesso nome: resterebbe quello rosso di prima dell'approvazione, e bloccherebbe il merge],
   [`registro-modifiche.yml`], [Merge di una pull request in `main`, solo se la variabile del repository `REGISTRO_ATTIVO` vale `true`], [Per ogni documento modificato aggiorna `<nome>.yml`: versione secondo la label, riga in cima al registro, Verificatore, stato «Verificato» e firma tolta. Fa il commit direttamente su `main` con la GitHub App dell'organizzazione. Con la label `correzione-registro` non modifica nulla (@correzione)],
-  [`rilascio.yml`], [Avvio a mano del Responsabile, dalla scheda _Actions_ sul ramo `main`], [Controlla ruolo e documenti; porta i documenti indicati a (X+1).0.0, con stato «Approvato», la firma del Responsabile e la riga «Approvazione per il rilascio» nel registro. Fa un solo commit su `main` con la GitHub App dell'organizzazione (@rilascio)],
+  [`rilascio.yml`], [Avvio a mano del Responsabile, dalla scheda _Actions_ sul ramo `main`], [Controlla ruolo e documenti, compreso che il Responsabile non sia autore di modifiche incluse nel rilascio; porta i documenti indicati a (X+1).0.0, con stato «Approvato», la firma del Responsabile e la riga «Approvazione per il rilascio» nel registro. Fa un solo commit su `main` con la GitHub App dell'organizzazione (@rilascio)],
   [`compila-pdf.yml`], [Push su `main`, anche dei commit di `registro-modifiche.yml` e `rilascio.yml`], [Compila i documenti e pubblica sul sito quelli approvati],
   [`compila-comune.yml`], [Da `compila-pr.yml` e `compila-pdf.yml`], [Contiene i passi comuni: installa Typst e i font, compila i documenti con `Scripts/compila.sh` e carica i PDF come artifact],
 )

@@ -1,15 +1,12 @@
 #import "../../Templates/Verbali.typ": gloss, verbale
 
 #show: verbale.with(
-  titolo: "Verbale interno del 03/11/2026",
+  titolo: "Verbale interno del 2026/11/03",
   tipo-documento: "Verbale Interno",
   data: datetime(year: 2026, month: 11, day: 03),
   ora: "14:00 – 16:00",
   luogo: "Google Meet",
-  versione: "1.0.0",
-  stato: "Approvato",
   autore: "Paolo Prevedello Ramirez",
-  verificatore: "Jacopo Franco",
   file-nome: "2026-11-03.pdf",
   gruppo: "Memory Leakers",
   ordine-del-giorno: (
@@ -31,13 +28,6 @@
     "Chiara Protopapa",
   ),
   distribuzione: ("Memory Leakers", "Prof. Riccardo Cardin", "Prof. Tullio Vardanega"),
-  // Ogni riga: (Ver., Data, Descrizione, Autore, Verificatore)
-  registro-modifiche: (
-    ([1.0.0], [12/11/2026], [Firma responsabile], [Chiara Protopapa], [-]),
-    ([0.1.1], [03/11/2026], [Correzioni varie], [Paolo Prevedello Ramirez], [Jacopo Franco]),
-    ([0.1.0], [03/11/2026], [Stesura del verbale dell'ottavo incontro], [Paolo Prevedello Ramirez], [Jacopo Franco]),
-
-  ),
   // Ogni riga: (ID, Decisione presa)
   decisioni: (
     (
@@ -50,7 +40,7 @@
     ),
     (
       [D3],
-      [Deciso di aggiornare il template dei Verbali aggiungendo le colonne per l'origine della decisione e l'issue GitHub correlata, proseguendo con la numerazione incrementale dei decisioni e azioni],
+      [Deciso di aggiornare il template dei Verbali aggiungendo le colonne per l'origine della decisione e l'issue GitHub correlata, proseguendo con la numerazione incrementale delle decisioni e azioni],
     ),
     (
       [D4],
@@ -58,7 +48,7 @@
     ),
     (
       [D5],
-      [Deciso di scrivere una mail a VarGroup S.p.A. per fissare un incontro conoscitivo per la settimana successiva],
+      [Deciso di scrivere una mail a Var Group S.p.A. per fissare un incontro conoscitivo per la settimana successiva],
     ),
     (
       [D6],
@@ -74,7 +64,7 @@
     ),
     (
       [D9],
-      [Deciso di procedere alla redazione del verbale interno dell'incontro del 03/11/2026],
+      [Deciso di procedere alla redazione del verbale interno dell'incontro del 2026-11-03],
     ),
   ),
   // Ogni riga: (ID, Nome attività, Descrizione, Responsabile, Scadenza, ID Decisione, Issue GitHub)
@@ -82,9 +72,9 @@
     (
       [A1],
       [Contatto VarGroup],
-      [Inviare email a VarGroup S.p.A. per fissare un incontro conoscitivo per la settimana successiva],
+      [Inviare email a Var Group S.p.A. per fissare un incontro conoscitivo per la settimana successiva],
       [Chiara Protopapa],
-      [04/11/2026],
+      [2026/11/04],
       [D5],
       [N/D],
     ),
@@ -93,7 +83,7 @@
       [Modifica Template Verbale],
       [Modifica del template dei verbali per aggiungere origine decisione e issue GitHub],
       [Matteo Marcon],
-      [05/11/2026],
+      [2026/11/05],
       [D3],
       [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/54")[\#54]],
     ),
@@ -102,7 +92,7 @@
       [Diario di bordo],
       [Stesura del prossimo diario di bordo],
       [Chiara Protopapa],
-      [09/11/2026],
+      [2026/11/09],
       [D8],
       [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/55")[\#55]],
     ),
@@ -111,16 +101,16 @@
       [Organizzazione GitHub Board],
       [Studio e configurazione della suddivisione della board GitHub in sprint],
       [Jacopo De Donà],
-      [10/11/2026],
+      [2026/11/10],
       [D7],
       [N/D],
     ),
     (
       [A5],
       [Redazione Verbale],
-      [Redazione del verbale interno dell'incontro del 03/11/2026],
+      [Redazione del verbale interno dell'incontro del 2026/11/03],
       [Paolo Prevedello Ramirez],
-      [10/11/2026],
+      [2026/11/10],
       [D9],
       [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/53")[\#53]],
     ),
@@ -129,7 +119,7 @@
       [Configurazione Discord],
       [Predisposizione del server Discord per le riunioni interne],
       [Jacopo De Donà],
-      [10/11/2026],
+      [2026/11/10],
       [D1],
       [N/D],
     ),
@@ -138,7 +128,7 @@
       [Domande riunione esterna],
       [Preparazione delle domande generali sull'avvio delle attività per la prossima riunione esterna],
       [Riccardo Peresson],
-      [10/11/2026],
+      [2026-11-10],
       [D8],
       [N/D],
     ),
@@ -147,13 +137,13 @@
       [Modifica Sito Web],
       [Aggiornamento della struttura e rimozione della numerazione sul sito web],
       [Matteo Arcandi],
-      [10/11/2026],
+      [2026-11-10],
       [D4],
       [N/D],
     ),
   ),
   ora-fine-riunione: "16:00",
-  data-prossima-riunione: "10/11/2026",
+  data-prossima-riunione: "2026-11-10",
   ruoli-prossima-settimana: (
     ([*Responsabile*], [Chiara Protopapa]),
     ([*Amministratore*], [Jacopo De Donà]),
@@ -164,7 +154,7 @@
 )
 
 = Introduzione
-Il presente documento attesta che, in data *3 novembre 2026* dalle ore 14:00 alle ore 16:00,
+Il presente documento attesta che, in data *2026/11/03* dalle ore 14:00 alle ore 16:00,
 si è tenuta, in modalità virtuale, l'ottava riunione del gruppo *Memory Leakers*.
 
 L'incontro si è aperto con la notizia dell'avvenuta aggiudicazione del capitolato ed è stato incentrato sulla riorganizzazione delle attività di progetto, il perfezionamento dei processi normativi interni e la ripartizione dei ruoli per le successive due settimane.
@@ -172,7 +162,7 @@ L'incontro si è aperto con la notizia dell'avvenuta aggiudicazione del capitola
 = Resoconto
 
 == Aggiudicazione capitolato e passi successivi
-A seguito dell'ufficializzazione dell'aggiudicazione del capitolato d'appalto, il gruppo ha discusso la pianificazione generale delle prime attività e l'avvio dei contatti ufficiali con l'azienda proponente (*VarGroup S.p.A.*).
+A seguito dell'ufficializzazione dell'aggiudicazione del capitolato d'appalto, il gruppo ha discusso la pianificazione generale delle prime attività e l'avvio dei contatti ufficiali con l'azienda proponente (*Var Group S.p.A.*).
 
 == Revisione del Way of Working e convenzioni di versionamento
 Sono state analizzate e chiarite le procedure di versionamento dei documenti da integrare nel *Way of Working*:

@@ -1,6 +1,7 @@
 #import "../../Templates/Verbali.typ": gloss, verbale
 
 #show: verbale.with(
+  dati: yaml("2026-11-03.yml"),
   titolo: "Verbale interno del 2026/11/03",
   tipo-documento: "Verbale Interno",
   data: datetime(year: 2026, month: 11, day: 03),

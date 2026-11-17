@@ -3,6 +3,18 @@ stato: "Approvato"
 verificatore: "Jacopo Franco"
 firma-responsabile: "Chiara Protopapa"
 registro:
-  - ["1.0.0", "2026/11/12", "Firma responsabile", "Chiara Protopapa", "-"]
-  - ["0.1.1", "2026/11/03", "Correzioni varie", "Paolo Prevedello Ramirez", "Jacopo Franco"]
-  - ["0.1.0", "2026/11/03", "Stesura del verbale dell'ottavo incontro", "Paolo Prevedello Ramirez", "Jacopo Franco"]
+  - versione: "1.0.0"
+    data: "2026-11-12"
+    descrizione: "Firma responsabile"
+    autore: "Chiara Protopapa"
+    verificatore: "-"
+  - versione: "0.1.1"
+    data: "2026-11-03"
+    descrizione: "Correzioni varie"
+    autore: "Paolo Prevedello Ramirez"
+    verificatore: "Jacopo Franco"
+  - versione: "0.1.0"
+    data: "2026-11-03"
+    descrizione: "Stesura del verbale dell'ottavo incontro"
+    autore: "Paolo Prevedello Ramirez"
+    verificatore: "Jacopo Franco"

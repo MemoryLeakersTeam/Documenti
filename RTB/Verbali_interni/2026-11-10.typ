@@ -58,6 +58,10 @@
     (
       [D16],
       [Deciso di procedere con la stesura del prossimo diario di bordo]
+    ),
+    (
+      [D17],
+      [Rimozione delle voci "Autore", "Verificato da" e "In data" dalla tabella "Controllo Documentale"]
     )
   ),
   // Ogni riga: (ID, Nome attività, Descrizione, Responsabile, Scadenza, ID Decisione, Issue GitHub)

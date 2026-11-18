@@ -151,7 +151,6 @@
     ([*Verificatore*], [Jacopo Franco]),
     ([*Analisti*], [Matteo Arcandi, Matteo Marcon, Riccardo Peresson, Paolo Prevedello Ramirez]),
   ),
-  firma-responsabile: "Chiara Protopapa"
 )
 
 = Introduzione

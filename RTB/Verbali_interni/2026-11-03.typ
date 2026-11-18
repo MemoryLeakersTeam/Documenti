@@ -2,7 +2,7 @@
 
 #show: verbale.with(
   dati: yaml("2026-11-03.yml"),
-  titolo: "Verbale interno del 2026/11/03",
+  titolo: "Verbale interno del 2026-11-03",
   tipo-documento: "Verbale Interno",
   data: datetime(year: 2026, month: 11, day: 03),
   ora: "14:00 – 16:00",
@@ -72,10 +72,10 @@
   attivita-todo: (
     (
       [A1],
-      [Contatto VarGroup],
+      [Contatto Var Group],
       [Inviare email a Var Group S.p.A. per fissare un incontro conoscitivo per la settimana successiva],
       [Chiara Protopapa],
-      [2026/11/04],
+      [2026-11-04],
       [D5],
       [N/D],
     ),
@@ -84,7 +84,7 @@
       [Modifica Template Verbale],
       [Modifica del template dei verbali per aggiungere origine decisione e issue GitHub],
       [Matteo Marcon],
-      [2026/11/05],
+      [2026-11-05],
       [D3],
       [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/54")[\#54]],
     ),
@@ -93,7 +93,7 @@
       [Diario di bordo],
       [Stesura del prossimo diario di bordo],
       [Chiara Protopapa],
-      [2026/11/09],
+      [2026-11-09],
       [D8],
       [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/55")[\#55]],
     ),
@@ -102,16 +102,16 @@
       [Organizzazione GitHub Board],
       [Studio e configurazione della suddivisione della board GitHub in sprint],
       [Jacopo De Donà],
-      [2026/11/10],
+      [2026-11-10],
       [D7],
       [N/D],
     ),
     (
       [A5],
       [Redazione Verbale],
-      [Redazione del verbale interno dell'incontro del 2026/11/03],
+      [Redazione del verbale interno dell'incontro del 2026-11-03],
       [Paolo Prevedello Ramirez],
-      [2026/11/10],
+      [2026-11-10],
       [D9],
       [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/53")[\#53]],
     ),
@@ -120,7 +120,7 @@
       [Configurazione Discord],
       [Predisposizione del server Discord per le riunioni interne],
       [Jacopo De Donà],
-      [2026/11/10],
+      [2026-11-10],
       [D1],
       [N/D],
     ),
@@ -155,7 +155,7 @@
 )
 
 = Introduzione
-Il presente documento attesta che, in data *2026/11/03* dalle ore 14:00 alle ore 16:00,
+Il presente documento attesta che, in data *2026-11-03* dalle ore 14:00 alle ore 16:00,
 si è tenuta, in modalità virtuale, l'ottava riunione del gruppo *Memory Leakers*.
 
 L'incontro si è aperto con la notizia dell'avvenuta aggiudicazione del capitolato ed è stato incentrato sulla riorganizzazione delle attività di progetto, il perfezionamento dei processi normativi interni e la ripartizione dei ruoli per le successive due settimane.

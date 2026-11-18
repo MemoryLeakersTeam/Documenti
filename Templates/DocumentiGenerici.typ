@@ -124,10 +124,7 @@
       stroke: 0.5pt + colore-bordo,
       [*Titolo Doc.:*], titolo,
       [*Versione:*], versione,
-      [*Autore:*], autore,
       [*Stato:*], stato,
-      [*Verificato da:*], verificatore,
-      [*In data:*], data-str,
       [*Tipo documento:*], tipo-documento,
       [*File:*], file-nome
     )

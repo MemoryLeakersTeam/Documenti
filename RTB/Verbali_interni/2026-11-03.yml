@@ -1,8 +1,16 @@
-versione: "1.0.0"
-stato: "Approvato"
-verificatore: "Jacopo Franco"
-firma-responsabile: "Chiara Protopapa"
+# Dati del documento gestiti dall'automazione del registro delle modifiche
+# (Scripts/registro.py): dopo ogni merge aggiorna versione, stato,
+# verificatore e registro. Non modificare questo file a mano.
+versione: "1.0.1"
+stato: "Verificato"
+verificatore: "Jacopo De Donà"
+firma-responsabile: ""
 registro:
+  - versione: "1.0.1"
+    data: "2026-11-18"
+    descrizione: "Dati spostati nel file .yml; date in AAAA-MM-GG; corretti refusi e nome dell'azienda."
+    autore: "Paolo Prevedello Ramirez"
+    verificatore: "Jacopo De Donà"
   - versione: "1.0.0"
     data: "2026-11-12"
     descrizione: "Firma responsabile"

@@ -5,6 +5,7 @@
 #let colore-bordo = rgb("#49736a")
 
 #show: verbale.with(
+  dati: yaml("2026-11-13-vargroup.yml"),
   titolo: "Verbale riunione esterna con Var Group del 2026-11-13",
   tipo-documento: "Verbale Esterno",
   azienda: "Var Group",

@@ -45,7 +45,7 @@
   let colore-secondario = rgb("#41837b")
   let colore-sfondo = rgb("#eaf7f2")
   let colore-bordo = rgb("#49736a")
-  let data-str = data.display("[day]/[month]/[year]")
+  let data-str = data.display("[year]-[month]-[day]")
 
   let attivita-todo-compat = attivita-todo.map(
     attivita => {

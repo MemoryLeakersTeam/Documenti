@@ -1,9 +1,5 @@
 #import "../../Templates/Verbali.typ": verbale, gloss
 
-#let colore-primario = rgb("#305b57")
-#let colore-sfondo = rgb("#eaf7f2")
-#let colore-bordo = rgb("#49736a")
-
 #show: verbale.with(
   dati: yaml("2026-11-13-vargroup.yml"),
   titolo: "Verbale riunione esterna con Var Group del 2026-11-13",
@@ -36,6 +32,7 @@
     "Prof. Tullio Vardanega"
   ),
   ora-fine-riunione: "16:25",
+  data-prossima-riunione: "2026-11-18",
   mostra-conclusioni-automatiche: true,
   firma-esterna: "",
 
@@ -57,17 +54,17 @@
     (
       [AE1],
       [Email a Var Group],
-      [Inviare email a VarGroup S.p.A. per confermare data e orario della sessione di design thinking e fascia oraria degli incontri di stand-up],
+      [Inviare email a Var Group S.p.A. per confermare data e orario della sessione di design thinking e fascia oraria degli incontri di stand-up],
       [Chiara Protopapa],
       [2026-11-13],
       [DE1, DE2],
-      [N/D],
+      [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/78")[\#78]],
     ),
   )
 )
 
 = Introduzione
-Il presente documento riporta quanto discusso durante il primo incontro tra il gruppo *Memory Leakers* e il proponente *Var Group S.p.A.*, tenutosi in data *13 novembre 2026*, a seguito dell'aggiudicazione del capitolato *C6 - SCSDF*. 
+Il presente documento riporta quanto discusso durante il primo incontro tra il gruppo *Memory Leakers* e il proponente *Var Group S.p.A.*, tenutosi in data *2026-11-13*, a seguito dell'aggiudicazione del capitolato *C6 - SCSDF*. 
 L'incontro, svolto congiuntamente al gruppo 3 *Bit Crusher*, ha avuto l'obiettivo di fornire riscontro ai quesiti sollevati dai gruppi e di definire le modalità organizzative per l'avvio delle attività progettuali.
 
 = Preparazione all'incontro
@@ -85,7 +82,7 @@ In sintesi, i principali quesiti posti dal gruppo *Memory Leakers* sono stati i 
 == Sessione di design thinking
 La sessione di design thinking avrà lo scopo di approfondire i flussi, analizzare congiuntamente i requisiti funzionali e confrontarsi sulle principali scelte progettuali. 
 Durante l'incontro verranno inoltre esaminate le possibili soluzioni e verificata la coerenza con quanto previsto dal capitolato.
-L'azienda ha proposto la data di *mercoledì 18 novembre 2026*, dalle ore *14:00 alle 17:00*, per lo svolgimento della sessione di design thinking presso la sede di Var Group a Padova, in via Salboro.
+L'azienda ha proposto il giorno *2026-11-18*, dalle ore *14:00 alle 17:00*, per lo svolgimento della sessione di design thinking presso la sede di Var Group a Padova, in via Salboro.
 Per i partecipanti che non potranno essere presenti, sarà possibile predisporre un collegamento da remoto.
 
 == Organizzazione degli incontri

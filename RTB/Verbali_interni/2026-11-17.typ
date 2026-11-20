@@ -178,7 +178,7 @@ Chiara Protopapa ha proposto un calendario delle milestone. La RTB è fissata pr
 
 Riccardo Peresson, come Amministratore, crea le milestone su GitHub; ogni nuova issue va associata a una milestone.
 
-Restano aperte le domande sulle ore disponibili per sprint e sul margine fino al 2027-03-23: il gruppo le tratta nella prossima riunione.
+Le domande 3 e 4 della issue #62, sulle ore disponibili per sprint e sul margine fino al 2027-03-23, sono rinviate alla riunione del 2026-11-24.
 
 == Ruoli dello sprint 2
 Riccardo Peresson ha chiesto di passare al ruolo di Amministratore per sperimentare in locale una pipeline che automatizzi la stesura dei verbali. Ha precisato che le automazioni esistenti restano invariate e che l'impegno stimato è di circa un'ora. Jacopo De Donà ha espresso il timore di perdere ore e di vanificare il lavoro dello sprint 1; il gruppo ha accolto la proposta.

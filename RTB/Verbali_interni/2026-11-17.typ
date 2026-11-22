@@ -19,7 +19,7 @@
     [Rendicontazione delle ore produttive],
     [Valutazione delle proposte di milestone],
     [Ruoli dello sprint 2 e automazione dei verbali],
-    [Norme di Progetto e template dei documenti],
+    [Way of Working e template dei documenti],
     [Organizzazione della riunione con Var Group],
   ),
   partecipanti: (
@@ -49,7 +49,7 @@
     ),
     (
       [D21],
-      [Eliminazione dalle Norme di Progetto della regola dei 3 giorni di vita di un branch]
+      [Eliminazione dal Way of Working della regola dei 3 giorni di vita di un branch]
     ),
     (
       [D22],
@@ -101,8 +101,7 @@
       [D18],
       [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/91")[\#91]],
     ),
-    // TODO: A19 (Norme di Progetto, Riccardo Peresson, D21): la issue #92 è stata eliminata.
-    // Reinserire la riga con la nuova issue e la sua scadenza.
+    // TODO: A19 (Way of Working, Riccardo Peresson, D21): riga da aggiungere con la nuova issue e la sua scadenza.
     (
       [A20],
       [Template dei documenti],
@@ -163,8 +162,8 @@ L'Amministratore crea le milestone su GitHub, e ogni nuova issue va associata a 
 == Ruoli dello sprint 2 e automazione dei verbali
 Sono stati assegnati i ruoli dello sprint 2, riportati nella tabella in fondo al documento. Jacopo De Donà passa al ruolo di Verificatore e Jacopo Franco a quello di Analista. Riccardo Peresson, come Amministratore, sperimenta in locale una #g("pipeline", "pipeline") per automatizzare la stesura dei verbali; le automazioni esistenti restano invariate e l'impegno stimato è di circa un'ora.
 
-== Norme di Progetto e template dei documenti
-La regola dei 3 giorni di vita massima di un #g("branch", "branch") viene superata spesso nella pratica: si è quindi deciso di eliminarla dalle #g("norme-di-progetto", "Norme di Progetto"). Nelle Norme va inoltre descritto l'uso del cruscotto. I template dei documenti non adottano ancora il formato AAAA-MM-GG e la tabella «Controllo Documentale» ridotta, decisi il 2026-11-10: l'Amministratore apre la relativa issue e la risolve.
+== Way of Working e template dei documenti
+La regola dei 3 giorni di vita massima di un #g("branch", "branch") viene superata spesso nella pratica: si è quindi deciso di eliminarla dal #g("way-of-working", "Way of Working"). Nelle #g("norme-di-progetto", "Norme di Progetto") va inoltre descritto l'uso del cruscotto. I template dei documenti non adottano ancora il formato AAAA-MM-GG e la tabella «Controllo Documentale» ridotta, decisi il 2026-11-10: l'Amministratore apre la relativa issue e la risolve.
 
 == Riunione con Var Group
 La #g("design-thinking", "sessione di design thinking") con Var Group si tiene il 2026-11-18 in presenza, dalle ore 14:00 alle ore 17:00. Il Responsabile è l'interlocutore principale e redige gli appunti nel documento condiviso; gli altri membri aggiungono le proprie domande. La stesura dell'Analisi dei Requisiti inizia dopo la sessione, e gli analisti concordano tra loro la ripartizione del lavoro.

@@ -19,7 +19,6 @@
     [Rendicontazione delle ore produttive],
     [Valutazione delle proposte di milestone],
     [Ruoli dello sprint 2 e automazione dei verbali],
-    [Way of Working e template dei documenti],
     [Organizzazione della riunione con Var Group],
   ),
   partecipanti: (
@@ -49,26 +48,22 @@
     ),
     (
       [D21],
-      [Eliminazione dal Way of Working della regola dei 3 giorni di vita di un branch]
-    ),
-    (
-      [D22],
       [Rotazione dei ruoli per lo sprint 2]
     ),
     (
-      [D23],
+      [D22],
       [Sperimentazione in locale di una pipeline per automatizzare la stesura dei verbali, a cura dell'Amministratore]
     ),
     (
-      [D24],
+      [D23],
       [Redazione del verbale di questa riunione e del diario di bordo della settimana]
     ),
     (
-      [D25],
+      [D24],
       [Avvio della stesura dell'Analisi dei Requisiti dopo la sessione di design thinking]
     ),
     (
-      [D26],
+      [D25],
       [Aggiornamento dei template dei documenti a cura dell'Amministratore]
     ),
   ),
@@ -80,7 +75,7 @@
       [Stesura del verbale di questa riunione],
       [Matteo Arcandi],
       [2026-11-20],
-      [D24],
+      [D23],
       [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/89")[\#89]],
     ),
     (
@@ -89,7 +84,7 @@
       [Preparazione del diario di bordo della settimana],
       [Matteo Marcon],
       [2026-11-22],
-      [D24],
+      [D23],
       [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/88")[\#88]],
     ),
     (
@@ -107,7 +102,7 @@
       [Adottare il formato AAAA-MM-GG e ridurre la tabella «Controllo Documentale» nei template],
       [Riccardo Peresson],
       [2026-11-18],
-      [D26],
+      [D25],
       [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/79")[\#79], #link("https://github.com/MemoryLeakersTeam/Documenti/issues/81")[\#81]],
     ),
     (
@@ -130,6 +125,9 @@
   ),
 )
 
+// I collegamenti al glossario non vanno sottolineati
+#show underline: it => it.body
+
 = Introduzione
 Il presente documento attesta che, in data *2026-11-17* dalle ore 14:10 alle ore 15:18,
 si è tenuta, in modalità virtuale, la decima riunione del gruppo *Memory Leakers*.
@@ -139,7 +137,7 @@ L'incontro ha chiuso lo #g("sprint", "sprint") 1 con la #g("sprint-retrospective
 = Resoconto
 
 == Retrospettiva dello sprint 1
-Sono state riesaminate le attività dello sprint 1: la configurazione dell'#g("ci-cd", "integrazione continua") per versionamento e approvazione dei documenti, i #g("template", "template") per #g("issues", "issue") e #g("pull-request", "pull request") e la modifica al sito che mantiene pubblicata l'ultima versione approvata di un documento. È stato presentato il cruscotto delle #g("ore-produttive", "ore produttive"), nel quale le ore si registrano dal pannello di amministrazione e si esportano in CSV. Le ore dello sprint 1 sono state dichiarate da ciascun membro.
+Sono state riesaminate le attività dello sprint 1: la configurazione dell'#g("ci-cd", "integrazione continua") per versionamento e approvazione dei documenti, i #g("template", "template") per #g("issues", "issue") e #g("pull-request", "pull request") e la modifica al sito che mantiene pubblicata l'ultima versione approvata di un documento. È stato presentato il cruscotto delle #g("ore-produttive", "ore produttive"), nel quale le ore si registrano dal pannello di amministrazione e si esportano in CSV. Le ore dello sprint 1 sono state dichiarate da ciascun membro. I template dei documenti non adottano ancora il formato AAAA-MM-GG e la tabella «Controllo Documentale» ridotta, decisi il 2026-11-10: l'Amministratore apre la relativa issue e la risolve.
 
 == Conferma delle decisioni prese in settimana
 Il gruppo ha confermato le decisioni prese durante la settimana tramite messaggistica istantanea, relative alle attività assegnate nella riunione del 2026-11-10.
@@ -160,9 +158,6 @@ L'Amministratore crea le milestone su GitHub, e ogni nuova issue va associata a 
 
 == Ruoli dello sprint 2 e automazione dei verbali
 Sono stati assegnati i ruoli dello sprint 2, riportati nella tabella in fondo al documento. Jacopo De Donà passa al ruolo di Verificatore e Jacopo Franco a quello di Analista. Riccardo Peresson, come Amministratore, sperimenta in locale una #g("pipeline", "pipeline") per automatizzare la stesura dei verbali; le automazioni esistenti restano invariate e l'impegno stimato è di circa un'ora.
-
-== Way of Working e template dei documenti
-La regola dei 3 giorni di vita massima di un #g("branch", "branch") viene superata spesso nella pratica: si è quindi deciso di eliminarla dal #g("way-of-working", "Way of Working"). Nelle #g("norme-di-progetto", "Norme di Progetto") va inoltre descritto l'uso del cruscotto. I template dei documenti non adottano ancora il formato AAAA-MM-GG e la tabella «Controllo Documentale» ridotta, decisi il 2026-11-10: l'Amministratore apre la relativa issue e la risolve.
 
 == Riunione con Var Group
 La #g("design-thinking", "sessione di design thinking") con Var Group si tiene il 2026-11-18 in presenza, dalle ore 14:00 alle ore 17:00. Il Responsabile è l'interlocutore principale e redige gli appunti nel documento condiviso; gli altri membri aggiungono le proprie domande. La stesura dell'Analisi dei Requisiti inizia dopo la sessione, e gli analisti concordano tra loro la ripartizione del lavoro.

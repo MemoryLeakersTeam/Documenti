@@ -101,9 +101,8 @@
       [D18],
       [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/91")[\#91]],
     ),
-    // TODO: A19 (Way of Working, Riccardo Peresson, D21): riga da aggiungere con la nuova issue e la sua scadenza.
     (
-      [A20],
+      [A19],
       [Template dei documenti],
       [Adottare il formato AAAA-MM-GG e ridurre la tabella «Controllo Documentale» nei template],
       [Riccardo Peresson],
@@ -112,7 +111,7 @@
       [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/79")[\#79], #link("https://github.com/MemoryLeakersTeam/Documenti/issues/81")[\#81]],
     ),
     (
-      [A21],
+      [A20],
       [Vista ore per ruolo e persona],
       [Aggiungere al cruscotto del sito la vista delle ore svolte per ruolo e per persona],
       [Matteo Arcandi],

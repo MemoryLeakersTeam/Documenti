@@ -1,5 +1,8 @@
 #import "../../Templates/Verbali.typ": gloss, verbale
 
+// Collegamento a una voce del glossario sul sito
+#let g(id, termine) = link("https://memoryleakersteam.github.io/glossario#" + id)[#termine#sub[G]]
+
 #show: verbale.with(
   dati: yaml("2026-11-17.yml"),
   titolo: "Verbale interno del 2026-11-17",
@@ -15,12 +18,9 @@
     [Conferma delle decisioni prese in settimana tramite messaggistica],
     [Rendicontazione delle ore produttive],
     [Valutazione delle proposte di milestone],
-    [Ruoli dello sprint 2],
-    [Pipeline per l'automazione dei verbali],
-    [Modifica delle Norme di Progetto],
-    [Issue per il formato delle date e per i template dei documenti],
+    [Ruoli dello sprint 2 e automazione dei verbali],
+    [Norme di Progetto e template dei documenti],
     [Organizzazione della riunione con Var Group],
-    [Varie ed eventuali],
   ),
   partecipanti: (
     "Matteo Arcandi",
@@ -37,7 +37,7 @@
   decisioni: (
     (
       [D18],
-      [Rendicontazione di preventivo, consuntivo e budget residuo delle ore in una sezione per sprint del Piano di Progetto; il cruscotto del sito resta uno strumento interno]
+      [Rendicontazione di preventivo, consuntivo e budget residuo delle ore in una sezione per sprint del Piano di Progetto]
     ),
     (
       [D19],
@@ -45,19 +45,19 @@
     ),
     (
       [D20],
-      [Adozione delle milestone 2026-11-30 (base di analisi e conoscenza delle tecnologie), 2026-12-18 (validazione dell'Analisi dei Requisiti), 2027-01-12 (PoC) e 2027-01-18 (RTB, prima della sessione d'esame)]
+      [Adozione delle milestone 2026-11-30, 2026-12-18, 2027-01-12 e 2027-01-18 (RTB, prima della sessione d'esame)]
     ),
     (
       [D21],
-      [Eliminazione dalle Norme di Progetto della regola che limita a 3 giorni la vita di un branch]
+      [Eliminazione dalle Norme di Progetto della regola dei 3 giorni di vita di un branch]
     ),
     (
       [D22],
-      [Rotazione dei ruoli per lo sprint 2: Matteo Marcon Responsabile, Riccardo Peresson Amministratore, Jacopo De Donà Verificatore, gli altri Analisti]
+      [Rotazione dei ruoli per lo sprint 2]
     ),
     (
       [D23],
-      [Riccardo Peresson, come Amministratore dello sprint 2, sperimenta in locale una pipeline per automatizzare la stesura dei verbali; le automazioni esistenti restano invariate]
+      [Sperimentazione in locale di una pipeline per automatizzare la stesura dei verbali, a cura dell'Amministratore]
     ),
     (
       [D24],
@@ -65,11 +65,11 @@
     ),
     (
       [D25],
-      [Avvio della stesura dell'Analisi dei Requisiti dopo la sessione di design thinking, con ripartizione del lavoro concordata tra gli analisti]
+      [Avvio della stesura dell'Analisi dei Requisiti dopo la sessione di design thinking]
     ),
     (
       [D26],
-      [Affidamento all'Amministratore della modifica dei template dei documenti (formato AAAA-MM-GG e tabella «Controllo Documentale» ridotta), con apertura della relativa issue]
+      [Aggiornamento dei template dei documenti a cura dell'Amministratore]
     ),
   ),
   // Ogni riga: (ID, Nome attività, Descrizione, Responsabile, Scadenza, ID Decisione, Issue GitHub)
@@ -101,15 +101,8 @@
       [D18],
       [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/91")[\#91]],
     ),
-    (
-      [A19],
-      [Norme di Progetto],
-      [Eliminare la regola dei 3 giorni di vita di un branch],
-      [Riccardo Peresson],
-      [2026-11-24],
-      [D21],
-      [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/92")[\#92]],
-    ),
+    // TODO: A19 (Norme di Progetto, Riccardo Peresson, D21): la issue #92 è stata eliminata.
+    // Reinserire la riga con la nuova issue e la sua scadenza.
     (
       [A20],
       [Template dei documenti],
@@ -140,63 +133,41 @@
 )
 
 = Introduzione
-Il presente documento attesta che, in data *17 novembre 2026* dalle ore 14:10 alle ore 15:18,
+Il presente documento attesta che, in data *2026-11-17* dalle ore 14:10 alle ore 15:18,
 si è tenuta, in modalità virtuale, la decima riunione del gruppo *Memory Leakers*.
 
-L'incontro ha chiuso lo sprint 1 con una retrospettiva sul lavoro svolto e sulle ore produttive. Ha poi fissato le milestone verso la RTB e assegnato i ruoli dello sprint 2.
+L'incontro ha chiuso lo #g("sprint", "sprint") 1 con la #g("sprint-retrospective", "retrospettiva") sul lavoro svolto. Ha poi fissato le #g("milestone", "milestone") verso la #g("rtb", "RTB") e assegnato i ruoli dello sprint 2.
 
 = Resoconto
 
 == Retrospettiva dello sprint 1
-Jacopo De Donà ha riferito sulla configurazione dell'integrazione continua per versionamento e approvazione, sulle relative modifiche alle Norme di Progetto e sui template per issue e pull request. Ha riferito anche una modifica al sito: un documento approvato resta pubblicato anche quando esiste una nuova versione solo verificata.
-
-Matteo Arcandi ha presentato il cruscotto delle ore produttive del sito. Il file dei dati contiene il preventivo, gli sprint e le voci inserite; le voci si aggiungono dal pannello di amministrazione e si possono esportare in CSV. Si possono inserire anche le ore degli sprint precedenti. Per la regola d'uso non ha modificato il Way of Working, in attesa di un parere del gruppo; Jacopo De Donà aggiungerà una sezione sul cruscotto alle Norme di Progetto.
-
-Le ore produttive dichiarate per lo sprint 1 sono:
-- Jacopo De Donà: 5 ore, per la configurazione dell'integrazione continua e dei template;
-- Matteo Arcandi: 2 ore, per il cruscotto delle ore;
-- Matteo Marcon: 0,5 ore, per il primo verbale esterno;
-- Chiara Protopapa: 1,5 ore, per l'analisi del calendario delle milestone e le comunicazioni esterne;
-- Jacopo Franco: 4 ore, per la verifica dei documenti;
-- Paolo Prevedello Ramirez: 0,5 ore, per il verbale interno del 2026-11-03;
-- Riccardo Peresson: 0,5 ore, per il verbale interno del 2026-11-10.
+Sono state riesaminate le attività dello sprint 1: la configurazione dell'#g("ci-cd", "integrazione continua") per versionamento e approvazione dei documenti, i #g("template", "template") per #g("issues", "issue") e #g("pull-request", "pull request") e la modifica al sito che mantiene pubblicata l'ultima versione approvata di un documento. È stato presentato il cruscotto delle #g("ore-produttive", "ore produttive"), nel quale le ore si registrano dal pannello di amministrazione e si esportano in CSV. Le ore dello sprint 1 sono state dichiarate da ciascun membro.
 
 == Conferma delle decisioni prese in settimana
 Il gruppo ha confermato le decisioni prese durante la settimana tramite messaggistica istantanea, relative alle attività assegnate nella riunione del 2026-11-10.
 
-== Rendicontazione delle ore nel Piano di Progetto
-Il gruppo ha discusso dove esporre preventivo e consuntivo delle ore. Il documento ufficiale è il Piano di Progetto, e gli altri gruppi non pubblicano questi dati sul proprio sito. Il gruppo ha quindi deciso di dedicare al Piano di Progetto una sezione per ogni sprint, con preventivo, consuntivo e ricalcolo del budget residuo. Il ricalcolo serve anche alla lettera di presentazione della RTB, che richiede una nuova previsione dei costi. Il cruscotto resta uno strumento interno, a cui si aggiunge la vista delle ore per ruolo e per persona.
+== Rendicontazione delle ore produttive
+È stato valutato dove esporre #g("preventivo", "preventivo") e #g("consuntivo", "consuntivo") delle ore. Il documento ufficiale è il #g("piano-di-progetto", "Piano di Progetto"), mentre gli altri gruppi non pubblicano questi dati sul proprio sito. Si è quindi deciso di dedicare al Piano di Progetto una sezione per ogni sprint, con preventivo, consuntivo e ricalcolo del budget residuo; il ricalcolo serve anche alla lettera di presentazione della RTB, che richiede una nuova previsione dei costi. Il cruscotto resta uno strumento interno e si arricchisce della vista delle ore per ruolo e per persona.
 
-La prima bozza del Piano di Progetto spetta a un analista e riporta sia lo sprint 1 sia lo sprint 2, perché il documento è in ritardo di uno sprint.
+La prima bozza del Piano di Progetto spetta a un analista e riporta sia lo sprint 1 sia lo sprint 2.
 
 == Milestone
-Chiara Protopapa ha proposto un calendario delle milestone. La RTB è fissata prima della sessione d'esame, perché la consegna finale è prevista per il 2027-03-23 e presentare dopo la sessione significherebbe pianificare un ritardo. Il gruppo ha adottato queste milestone:
+La RTB è fissata prima della sessione d'esame: la consegna finale è prevista per il 2027-03-23 e presentare dopo la sessione significherebbe pianificare un ritardo. Il gruppo ha adottato queste milestone:
 - 2026-11-30: base di analisi e conoscenza delle tecnologie;
-- 2026-12-18: validazione dell'Analisi dei Requisiti, con l'obiettivo di chiudere entro il 2026-12-11;
-- 2027-01-12: PoC, che può iniziare prima della chiusura dell'analisi;
+- 2026-12-18: validazione dell'#g("analisi-dei-requisiti", "Analisi dei Requisiti"), con l'obiettivo di chiudere entro il 2026-12-11;
+- 2027-01-12: #g("poc", "PoC"), che può iniziare prima della chiusura dell'analisi;
 - 2027-01-18: RTB.
 
-Riccardo Peresson, come Amministratore, crea le milestone su GitHub; ogni nuova issue va associata a una milestone.
+L'Amministratore crea le milestone su GitHub, e ogni nuova issue va associata a una milestone. Le domande 3 e 4 della issue \#62, sulle ore disponibili per sprint e sul margine fino al 2027-03-23, sono rinviate alla riunione del 2026-11-24.
 
-Le domande 3 e 4 della issue \#62, sulle ore disponibili per sprint e sul margine fino al 2027-03-23, sono rinviate alla riunione del 2026-11-24.
+== Ruoli dello sprint 2 e automazione dei verbali
+Sono stati assegnati i ruoli dello sprint 2, riportati nella tabella in fondo al documento. Jacopo De Donà passa al ruolo di Verificatore e Jacopo Franco a quello di Analista. Riccardo Peresson, come Amministratore, sperimenta in locale una #g("pipeline", "pipeline") per automatizzare la stesura dei verbali; le automazioni esistenti restano invariate e l'impegno stimato è di circa un'ora.
 
-== Ruoli dello sprint 2
-Riccardo Peresson ha chiesto di passare al ruolo di Amministratore per sperimentare in locale una pipeline che automatizzi la stesura dei verbali. Ha precisato che le automazioni esistenti restano invariate e che l'impegno stimato è di circa un'ora. Jacopo De Donà ha espresso il timore di perdere ore e di vanificare il lavoro dello sprint 1; il gruppo ha accolto la proposta.
+== Norme di Progetto e template dei documenti
+La regola dei 3 giorni di vita massima di un #g("branch", "branch") viene superata spesso nella pratica: si è quindi deciso di eliminarla dalle #g("norme-di-progetto", "Norme di Progetto"). Nelle Norme va inoltre descritto l'uso del cruscotto. I template dei documenti non adottano ancora il formato AAAA-MM-GG e la tabella «Controllo Documentale» ridotta, decisi il 2026-11-10: l'Amministratore apre la relativa issue e la risolve.
 
-Jacopo Franco ha chiesto di chiudere le verifiche in corso prima di cambiare ruolo. Jacopo De Donà ha preso il suo posto come Verificatore e Jacopo Franco è passato ai compiti di Analista.
-
-== Norme di Progetto
-Il gruppo ha rilevato che la regola dei 3 giorni di vita massima di un branch viene superata spesso nella pratica. Ha quindi deciso di eliminarla dalle Norme di Progetto.
-
-== Analisi dei Requisiti, issue e template
-L'Analisi dei Requisiti inizia dopo la sessione di design thinking. Gli analisti concordano tra loro come ripartire il lavoro. Riccardo Peresson, come Amministratore, apre le issue per la bozza dell'Analisi dei Requisiti, per la bozza del Piano di Progetto, per il diario di bordo e per i verbali.
-
-I template dei documenti non sono ancora aggiornati con il formato AAAA-MM-GG e con la tabella «Controllo Documentale» ridotta, decisi il 2026-11-10. Spetta all'Amministratore aprire la relativa issue e risolverla.
-
-Il Responsabile carica e rilascia sempre i diari di bordo. Chiara Protopapa ha dichiarato pronto il diario di bordo del 2026-11-16, che pubblica dopo la riunione.
-
-== Organizzazione della riunione con Var Group
-La riunione con Var Group si tiene il 2026-11-18 in presenza, dalle ore 14:00 alle ore 17:00. Matteo Marcon, come Responsabile, è l'interlocutore principale e scrive gli appunti nel documento condiviso. Gli altri membri lo seguono e aggiungono le proprie domande a partire dall'analisi preparata da Riccardo Peresson.
+== Riunione con Var Group
+La #g("design-thinking", "sessione di design thinking") con Var Group si tiene il 2026-11-18 in presenza, dalle ore 14:00 alle ore 17:00. Il Responsabile è l'interlocutore principale e redige gli appunti nel documento condiviso; gli altri membri aggiungono le proprie domande. La stesura dell'Analisi dei Requisiti inizia dopo la sessione, e gli analisti concordano tra loro la ripartizione del lavoro.
 
 = Decisioni e attività
 Si è infine proceduto alla ripartizione delle attività individuate nel corso della riunione, riportata nella tabella seguente.

@@ -1,7 +1,10 @@
 #import "../../Templates/Verbali.typ": gloss, verbale
 
 // Collegamento a una voce del glossario sul sito
-#let g(id, termine) = link("https://memoryleakersteam.github.io/glossario#" + id)[#termine#sub[G]]
+#let g(id, termine) = link(
+  "https://memoryleakersteam.github.io/glossario#" + id,
+  text(fill: black, gloss(termine)),
+)
 
 #show: verbale.with(
   dati: yaml("2026-11-17.yml"),

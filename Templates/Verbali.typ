@@ -1,6 +1,9 @@
 #import "Dati.typ": campi-dati
 
-#let gloss(term) = [#term#sub[G]]
+#let gloss(term, url: none) = {
+  let t = [#term#sub[G]]
+  if url == none or url == "" { t } else { link(url)[#t] }
+}
 
 #let verbale(
   titolo: "VERBALE DI RIUNIONE N. 01",
@@ -91,7 +94,8 @@
     #set text(fill: colore-primario)
     #it
   ]
-  show link: it => underline(text(fill: colore-secondario, it))
+  show link: it => if type(it.dest) == str and it.dest.starts-with("https://memoryleakersteam.github.io/glossario") { it } 
+                   else { underline(text(fill: colore-secondario, it)) }
 
   // Dati letti da Scripts/compila.sh per pubblicare il documento sul sito
   [#metadata((

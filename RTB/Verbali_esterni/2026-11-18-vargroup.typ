@@ -93,7 +93,7 @@
       [AE4],
       [Scelta tecnologie],
       [Valutare le tecnologie da approfondire con la proponente],
-      [Matteo Arcandi, Jacopo Franco, Paolo Prevedello Ramirez, Chiara Protopapa],
+      [Paolo Prevedello Ramirez],
       [2026-11-24],
       [DE9],
       [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/99")[\#99]],
@@ -121,7 +121,7 @@ Abbiamo infine fissato una permanenza massima in cache pari a *1 settimana* per 
 == Classificazione, sicurezza e permessi
 Abbiamo condiviso il criterio generale di salvare in cache quanto più possibile compatibilmente con i vincoli di sicurezza e coerenza, escludendo le richieste che non è opportuno memorizzare.
 In particolare, abbiamo stabilito di non salvare in cache domande legate a informazioni riservate o sensibili (ad esempio ambiti HR o documenti riservati) né richieste che prevedono l'uso di connettori o servizi esterni con login o autenticazione.
-Abbiamo quindi deciso di adottare un #g("classificatore")[classificatore] (valutando soluzioni esistenti menzionate durante l'incontro, come il classificatore jev per filtrare le domande da inserire in cache, tenendo conto anche della relativa risposta.
+Abbiamo quindi deciso di adottare un #g("classificatore")[classificatore] (valutando soluzioni esistenti menzionate durante l'incontro, come *Jev*, uno strumento utilizzato per analizzare e classificare il contenuto delle richieste) per filtrare le domande da inserire in cache, tenendo conto anche della relativa risposta.
 
 == Conversazioni multi-turno e system prompt
 Poiché nelle #g("conversazioni-multi-turno")[conversazioni multi-turno] l'ultima domanda può dipendere dal contesto precedente senza esplicitare l'argomento, abbiamo discusso la riformulazione dell'ultima domanda rispetto al contesto della conversazione. Questa rielaborazione dovrà dare enfasi all'ultima domanda e includere solo il contesto necessario, entro un numero di turni da calibrare verificando anche la lunghezza media delle chat su LiteLLM (indicativamente intorno a 10 turni come punto di partenza).

@@ -1,6 +1,9 @@
 #import "Dati.typ": campi-dati
 
-#let gloss(term) = [#term#sub[G]]
+#let gloss(term, url: none) = {
+  let t = [#term#sub[G]]
+  if url == none or url == "" { t } else { link(url)[#t] }
+}
 
 #let verbale(
   titolo: "VERBALE DI RIUNIONE N. 01",

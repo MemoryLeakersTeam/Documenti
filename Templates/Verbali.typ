@@ -26,7 +26,7 @@
   mostra-conclusioni-automatiche: true,
   ora-fine-riunione: "11:30",
   ruoli-prossima-settimana: (),
-  data-prossima-riunione: "",
+  data-prossima-riunione: none, // accetta sia stringa (deprecato) che datetime; di quest'ultimo la formattazione AAAA-MM-GG è automatica
   firma-responsabile: "Firma del Responsabile di Progetto",
   firma-esterna: "",
   azienda: "",
@@ -268,7 +268,7 @@
     )
   ]
 
-  if data-prossima-riunione != "" [
+  if data-prossima-riunione not in (none, "") [
     #v(8pt)
     #block(
       fill: colore-sfondo,
@@ -277,7 +277,11 @@
       width: 100%,
       radius: (right: 4pt),
     )[
-      *Data Prossima Riunione:* #data-prossima-riunione
+      *Data Prossima Riunione:* #if type(data-prossima-riunione) == datetime {
+        data-prossima-riunione.display("[year]-[month]-[day]")
+      } else {
+        data-prossima-riunione
+    }
     ]
   ]
 

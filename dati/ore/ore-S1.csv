@@ -1,0 +1,10 @@
+sprint,data,persona,nome,ruolo,ore,issue,nota
+S1,2026-11-14,JJ-jacopo24,Jacopo Franco,verificatore,0.5,Documenti#65,verifica dell'automazione del registro (#70)
+S1,2026-11-14,JJ-jacopo24,Jacopo Franco,verificatore,0.5,MemoryLeakersTeam.github.io#7,verifica della PR #8 (versione approvata sul sito)
+S1,2026-11-16,jeidi19,Jacopo De Donà,amministratore,5,,
+S1,2026-11-16,JJ-jacopo24,Jacopo Franco,verificatore,0.5,Documenti#67,verifica delle Norme di Progetto (#69)
+S1,2026-11-16,JJ-jacopo24,Jacopo Franco,verificatore,0.5,Documenti#66,verifica del rilascio (#74)
+S1,2026-11-16,JJ-jacopo24,Jacopo Franco,verificatore,0.5,MemoryLeakersTeam.github.io#4,verifica del cruscotto ore (#6)
+S1,2026-11-16,JJ-jacopo24,Jacopo Franco,verificatore,0.5,Documenti#62,verifica delle milestone
+S1,2026-11-16,Kyara-Prot,Chiara Protopapa,responsabile,1.5,,
+S1,2026-11-16,ttteo,Matteo Arcandi,analista,2,,

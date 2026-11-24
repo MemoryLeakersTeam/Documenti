@@ -1,6 +1,6 @@
 #import "../../Templates/DocumentiGenerici.typ": *
 
-// BOZZA (issue #91). Le parti segnate TODO sono da completare o da decidere.
+// BOZZA (issue #106). Le parti segnate TODO sono da completare o da decidere.
 // Le tabelle delle ore si calcolano dai CSV in dati/ore/ (radice del repo), scaricati dalla pagina /ore del sito:
 // a ogni sprint si aggiunge il suo CSV e una voce in `sprint`.
 
@@ -33,16 +33,21 @@
   ..celle,
 )
 
-#let rischio(descrizione, probabilita, impatto, mitigazione) = block(breakable: false, table(
-  columns: (1fr, 3.5fr),
-  inset: 7pt,
-  fill: (x, y) => if x == 0 { colore-sfondo } else { none },
-  stroke: 0.5pt + colore-bordo,
-  [*Descrizione*], descrizione,
-  [*Probabilità*], probabilita,
-  [*Impatto*], impatto,
-  [*Mitigazione*], mitigazione,
-))
+// Scheda di un rischio: titolo con codice e nome, poi la tabella
+#let scheda-rischio(r) = block(breakable: false)[
+  === #r.codice - #r.nome
+  #table(
+    columns: (1fr, 3.5fr),
+    inset: 7pt,
+    fill: (x, y) => if x == 0 { colore-sfondo } else { none },
+    stroke: 0.5pt + colore-bordo,
+    [*Descrizione*], r.descrizione,
+    [*Probabilità*], r.probabilita,
+    [*Impatto*], r.impatto,
+    [*Mitigazione*], r.mitigazione,
+    [*Contingenza*], r.contingenza,
+  )
+]
 
 // ---------------------------------------------------------------------------
 // Dichiarazione degli impegni
@@ -181,47 +186,123 @@ I termini con pedice #sub[G] rimandano alla voce corrispondente del glossario su
 - Dichiarazione degli impegni, Memory Leakers: `Candidatura/Generali/Dichiarazione-degli-impegni.typ`;
 - Verbale interno del 2026-11-17: `RTB/Verbali_interni/2026-11-17.typ`.
 
+
 = Analisi dei rischi
 
-// Ripresi dalla Dichiarazione degli impegni. TODO: rivedere a ogni sprint.
+// TODO: rivedere a ogni sprint (rischi nuovi, probabilità e impatto aggiornati)
 
-== Stima errata delle risorse
-#rischio(
-  [La ripartizione delle ore tra i ruoli e nel tempo potrebbe rivelarsi errata, per l'inesperienza del gruppo nella pianificazione di progetti di queste dimensioni, causando carenza di risorse su alcune attività.],
-  [Alta],
-  [Alto],
-  [Il Responsabile confronta a ogni sprint le ore svolte con quelle preventivate (@sprint-sez). Gli scostamenti si discutono nella riunione successiva, per ridistribuire le attività o pianificare un riallineamento.],
+I rischi sono divisi in tre categorie, ognuna con la sua sigla:
+
+#let categorie = (
+  (sigla: "RT", nome: "Rischi tecnologici", descrizione: [legati alle tecnologie e ai servizi usati dal prodotto]),
+  (sigla: "RO", nome: "Rischi organizzativi", descrizione: [legati alla pianificazione, al modo di lavorare del gruppo e al rapporto con il #g("proponente", "proponente")]),
+  (sigla: "RP", nome: "Rischi personali", descrizione: [legati alla disponibilità dei componenti del gruppo]),
 )
 
-== Incomprensione dei requisiti
-#rischio(
-  [Un'analisi superficiale o una comunicazione insufficiente con il #g("proponente", "proponente") potrebbero portare a requisiti incompleti o fraintesi, con modifiche costose nelle fasi avanzate.],
-  [Media],
-  [Alto],
-  [Analisi dei requisiti attenta, con domande raccolte in modo asincrono e chiarite con Var Group negli incontri periodici.],
+#for c in categorie [
+  - *#c.sigla* - #c.nome: #c.descrizione.
+]
+
+Per ogni rischio si indicano:
+- *probabilità*: quanto è probabile che il rischio si verifichi (Bassa, Media, Alta);
+- *impatto*: quanto pesa su tempi e costi se si verifica (Basso: ritardo recuperabile nello sprint; Medio: ritardo di uno sprint o più ore del previsto; Alto: mette a rischio una #g("milestone", "milestone") o il budget);
+- *mitigazione*: cosa fa il gruppo per evitarlo o ridurlo;
+- *contingenza*: cosa fa il gruppo se il rischio si verifica.
+
+#let rischi = (
+  (
+    codice: "RT1", nome: "Tecnologie nuove per il gruppo",
+    descrizione: [Il capitolato propone tecnologie sconosciute alla maggior parte del gruppo, in particolare quelle legate alla #g("cache-semantica", "cache semantica"): #g("litellm", "LiteLLM"), i #g("modelli-di-embedding", "modelli di embedding"), i #g("vector-store", "vector store") e #g("redis", "Redis"). Il tempo per impararle potrebbe rallentare progettazione e sviluppo.],
+    probabilita: "Alta", impatto: "Medio",
+    mitigazione: [Studio delle tecnologie fin dalle prime settimane, condivisione delle conoscenze nel gruppo e confronto con il proponente in caso di dubbi.],
+    contingenza: [Il #g("responsabile", "Responsabile") sposta allo sprint successivo le attività che dipendono dalla tecnologia e il gruppo chiede a Var Group un incontro di formazione o un esempio di riferimento.],
+  ),
+  (
+    codice: "RT2", nome: "Dipendenza da servizi esterni",
+    descrizione: [Sviluppo e test dipendono da servizi che il gruppo non controlla: le chiavi fornite da Var Group per i modelli e per l'embedding, #g("aws-bedrock", "AWS Bedrock") e l'eventuale #g("classificatore", "classificatore") esterno #g("jev", "Jev"). Un ritardo nel rilascio delle chiavi, un servizio non disponibile o un limite di utilizzo potrebbero bloccare il lavoro.],
+    probabilita: "Media", impatto: "Alto",
+    mitigazione: [Il gruppo chiede le chiavi con anticipo rispetto alle attività che le usano e tiene sotto controllo il consumo dei servizi.],
+    contingenza: [Il Responsabile segnala subito il problema al proponente. Nel frattempo il gruppo prosegue con risposte simulate o con modelli #g("open-source", "open source") in locale.],
+  ),
+  (
+    codice: "RO1", nome: "Stima errata delle risorse",
+    descrizione: [La ripartizione delle ore tra i ruoli e nel tempo potrebbe rivelarsi errata, per l'inesperienza del gruppo nella pianificazione di progetti di queste dimensioni, causando carenza di risorse su alcune attività.],
+    probabilita: "Alta", impatto: "Alto",
+    mitigazione: [Il Responsabile confronta a ogni sprint le ore svolte con quelle preventivate (@sprint-sez). Gli scostamenti si discutono nella riunione successiva, per ridistribuire le attività o pianificare un riallineamento.],
+    contingenza: [Il Responsabile ridistribuisce le ore tra ruoli e sprint e aggiorna il preventivo a finire. Se il budget complessivo è a rischio, il gruppo concorda con il proponente quali requisiti desiderabili e opzionali rimandare.],
+  ),
+  (
+    codice: "RO2", nome: "Incomprensione dei requisiti",
+    descrizione: [Un'analisi superficiale o una comunicazione insufficiente con il proponente potrebbero portare a requisiti incompleti o fraintesi, con modifiche costose nelle fasi avanzate.],
+    probabilita: "Media", impatto: "Alto",
+    mitigazione: [#g("analisi-dei-requisiti", "Analisi dei requisiti") attenta, con domande raccolte in modo asincrono e chiarite con Var Group negli incontri periodici. Ogni requisito riporta la sua fonte e il gruppo sottopone i requisiti al proponente per la validazione.],
+    contingenza: [Gli #g("analista", "analisti") correggono i requisiti con una nuova #g("issues", "issue") appena il proponente segnala l'errore. Il Responsabile valuta l'impatto sulle attività e sulle ore già pianificate.],
+  ),
+  (
+    codice: "RO3", nome: "Requisiti che cambiano",
+    descrizione: [Il proponente potrebbe cambiare o precisare le richieste durante il progetto. Per esempio, le funzioni della #g("dashboard-finops", "dashboard FinOps") richieste dal capitolato (budget, avvisi, previsione della spesa) sono ancora da confermare con Var Group.],
+    probabilita: "Media", impatto: "Medio",
+    mitigazione: [Il gruppo porta le domande aperte agli incontri periodici con il proponente. Ogni modifica ai requisiti passa da un verbale esterno e da una nuova issue.],
+    contingenza: [Il Responsabile stima le ore della modifica. Se non rientra nel budget, il gruppo concorda con il proponente cosa rimandare o rendere opzionale.],
+  ),
+  (
+    codice: "RO4", nome: "Coordinamento insufficiente nel lavoro in parallelo",
+    descrizione: [Più componenti lavorano in parallelo sugli stessi documenti e sulle stesse parti del prodotto. Senza coordinamento si rischiano lavoro doppio, conflitti tra #g("branch", "branch") e incoerenze, per esempio due analisti che usano lo stesso codice per requisiti diversi.],
+    probabilita: "Media", impatto: "Medio",
+    mitigazione: [Il lavoro si divide per area, ogni attività ha la sua issue con un assegnatario e il gruppo segue le procedure delle Norme di Progetto. Chi introduce un codice nuovo lo comunica prima agli altri.],
+    contingenza: [Chi nota il problema lo segnala al gruppo. Gli assegnatari coinvolti concordano la correzione e la svolgono con una nuova issue.],
+  ),
+  (
+    codice: "RO5", nome: "Rotazione dei ruoli e verifica indipendente",
+    descrizione: [Il regolamento chiede che ogni componente ricopra tutti i ruoli per un tempo congruo e che ogni attività abbia una verifica indipendente. Con la rotazione ogni due settimane, un componente potrebbe ricoprire un ruolo nella fase in cui quel ruolo ha poco lavoro, oppure verificare un lavoro a cui ha partecipato.],
+    probabilita: "Media", impatto: "Medio",
+    mitigazione: [I ruoli ruotano secondo le regole delle Norme di Progetto. Il Responsabile controlla a ogni sprint le ore per componente e ruolo rispetto al preventivo. Il #g("verificatore", "verificatore") non verifica il proprio lavoro e non apre #g("pull-request", "pull request") nello sprint in cui verifica.],
+    contingenza: [Il Responsabile assegna il ruolo mancante al componente negli sprint in cui quel ruolo ha più lavoro. Se una verifica non è indipendente, la ripete un altro componente.],
+  ),
+  (
+    codice: "RP1", nome: "Esami e sessione",
+    descrizione: [Durante la sessione invernale, dal 2027-01-18 al 2027-02-19, e nelle settimane prima degli appelli i componenti hanno meno tempo per il progetto. La sessione inizia lo stesso giorno della #g("rtb", "RTB").],
+    probabilita: "Alta", impatto: "Medio",
+    mitigazione: [Le milestone critiche (Analisi dei Requisiti e #g("poc", "PoC")) cadono prima della sessione. Ogni componente comunica in anticipo i propri appelli e il preventivo dello sprint tiene conto della disponibilità ridotta.],
+    contingenza: [Il Responsabile ridistribuisce le attività tra i componenti disponibili e sposta agli sprint successivi quelle non urgenti.],
+  ),
+  (
+    codice: "RP2", nome: "Periodo natalizio e impegni personali",
+    descrizione: [Nel periodo natalizio, dal 2026-12-24 al 2027-01-01, e per impegni personali imprevisti, uno o più componenti potrebbero non essere disponibili.],
+    probabilita: "Media", impatto: "Medio",
+    mitigazione: [Chi prevede un'assenza la comunica in anticipo. Ogni attività ha un'issue con assegnatario e stato aggiornato, così un altro componente può subentrare.],
+    contingenza: [Il Responsabile riassegna le attività bloccate e aggiorna il preventivo dello sprint.],
+  ),
 )
 
-== Tecnologie nuove per il gruppo
-#rischio(
-  [Il capitolato propone tecnologie sconosciute alla maggior parte del gruppo, in particolare quelle legate alla #g("cache-semantica", "cache semantica"): #g("litellm", "LiteLLM"), i #g("modelli-di-embedding", "modelli di embedding"), i #g("vector-store", "vector store") e #g("redis", "Redis"). Il tempo per impararle potrebbe rallentare progettazione e sviluppo.],
-  [Alta],
-  [Medio],
-  [Studio delle tecnologie fin dalle prime settimane, condivisione delle conoscenze nel gruppo e confronto con il proponente in caso di dubbi.],
+== Riepilogo
+
+#tabella(
+  (auto, 1fr, auto, auto),
+  ("Codice", "Rischio", "Probabilità", "Impatto"),
+  ..rischi.map(r => (r.codice, r.nome, r.probabilita, r.impatto)).flatten(),
 )
+
+#for c in categorie [
+  == #c.nome
+  #for r in rischi.filter(r => r.codice.starts-with(c.sigla)) {
+    scheda-rischio(r)
+  }
+]
 
 = Calendario
 
-Il gruppo lavora a sprint di due settimane, dal martedì al lunedì di due settimane dopo, con le date della pagina `/ore` del sito. La tabella riporta per ogni sprint le #g("milestone", "milestone") e i periodi di disponibilità ridotta. La consegna finale è prevista entro il 2027-03-23 (Dichiarazione degli impegni).
+Il gruppo lavora a sprint di due settimane, dal martedì al lunedì di due settimane dopo, con le date della pagina `/ore` del sito. La tabella riporta per ogni sprint le milestone e i periodi di disponibilità ridotta. La consegna finale è prevista entro il 2027-03-23 (Dichiarazione degli impegni).
 
 #tabella(
   (auto, auto, auto, 1fr),
   ("Sprint", "Inizio", "Fine", "Milestone e note"),
   [S1], [2026-11-03], [2026-11-16], [],
   [S2], [2026-11-17], [2026-11-30], [2026-11-30: base di analisi e conoscenza delle tecnologie],
-  [S3], [2026-12-01], [2026-12-14], [2026-12-11: chiusura dell'#g("analisi-dei-requisiti", "Analisi dei Requisiti") (obiettivo)],
+  [S3], [2026-12-01], [2026-12-14], [2026-12-11: chiusura dell'Analisi dei Requisiti (obiettivo)],
   [S4], [2026-12-15], [2026-12-28], [2026-12-18: validazione dell'Analisi dei Requisiti; dal 2026-12-24 periodo natalizio],
   [S5], [2026-12-29], [2027-01-11], [fino al 2027-01-01 periodo natalizio],
-  [S6], [2027-01-12], [2027-01-25], [2027-01-12: #g("poc", "PoC"); 2027-01-18: #g("rtb", "RTB"); dal 2027-01-18 sessione d'esame],
+  [S6], [2027-01-12], [2027-01-25], [2027-01-12: PoC; 2027-01-18: RTB; dal 2027-01-18 sessione d'esame],
   [S7], [2027-01-26], [2027-02-08], [sessione d'esame],
   [S8], [2027-02-09], [2027-02-22], [sessione d'esame fino al 2027-02-19],
   [S9], [2027-02-23], [2027-03-08], [],

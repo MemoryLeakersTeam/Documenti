@@ -89,6 +89,14 @@
       "ttteo": "Analista", "Matteomarcon": "Analista", "Ric02P": "Analista", "paolopreve": "Analista",
     ),
     bacheca: "Sprint 1",
+    rischi-attesi: ("RT1", "RO1", "RO2"),
+    rischi-occorsi: (
+      (
+        codice: "RO6",
+        descrizione: [La risposta di Var Group alla mail per fissare un incontro conoscitivo dopo l'aggiudicazione (verbale interno del 2026-11-03, A1) è arrivata in ritardo per un problema nell'invio programmato della loro email. Ricevuta la risposta, il gruppo ha organizzato l'incontro del 2026-11-13, che ha fissato la sessione di #g("design-thinking", "design thinking") al 2026-11-18.],
+        efficacia: [Il rischio non era ancora tra quelli individuati. Le domande preparate in anticipo hanno reso utile l'incontro del 2026-11-13; da questa esperienza nasce RO6, con il canale Microsoft Teams per le comunicazioni rapide.],
+      ),
+    ),
     nota: [Nello sprint si sono occupati della stesura dei verbali, che non è ora produttiva.],
   ),
   (
@@ -99,6 +107,7 @@
       "Kyara-Prot": "Analista", "JJ-jacopo24": "Analista", "ttteo": "Analista", "paolopreve": "Analista",
     ),
     bacheca: "Sprint 2",
+    rischi-attesi: ("RT1", "RO2", "RO3", "RO4", "RO6"),
   ),
 )
 
@@ -242,7 +251,7 @@ Per ogni rischio si indicano:
     codice: "RO3", nome: "Requisiti che cambiano",
     descrizione: [Il proponente potrebbe cambiare o precisare le richieste durante il progetto. Per esempio, le funzioni della #g("dashboard-finops", "dashboard FinOps") richieste dal capitolato (budget, avvisi, previsione della spesa) sono ancora da confermare con Var Group.],
     probabilita: "Media", impatto: "Medio",
-    mitigazione: [Il gruppo porta le domande aperte agli incontri periodici con il proponente. Ogni modifica ai requisiti passa da un verbale esterno e da una nuova issue.],
+    mitigazione: [Il gruppo porta le domande aperte agli incontri periodici con il proponente. Ogni modifica ai requisiti passa da un #g("verbale", "verbale") esterno e da una nuova issue.],
     contingenza: [Il Responsabile stima le ore della modifica. Se non rientra nel budget, il gruppo concorda con il proponente cosa rimandare o rendere opzionale.],
   ),
   (
@@ -258,6 +267,13 @@ Per ogni rischio si indicano:
     probabilita: "Media", impatto: "Medio",
     mitigazione: [I ruoli ruotano secondo le regole delle Norme di Progetto. Il Responsabile controlla a ogni sprint le ore per componente e ruolo rispetto al preventivo. Il #g("verificatore", "verificatore") non verifica il proprio lavoro e non apre #g("pull-request", "pull request") nello sprint in cui verifica.],
     contingenza: [Il Responsabile assegna il ruolo mancante al componente negli sprint in cui quel ruolo ha più lavoro. Se una verifica non è indipendente, la ripete un altro componente.],
+  ),
+  (
+    codice: "RO6", nome: "Difficoltà di comunicazione con il proponente",
+    descrizione: [Le risposte del proponente potrebbero arrivare in ritardo e gli incontri, fissati in orari concordati con l'azienda, potrebbero non essere accessibili a tutto il gruppo. Domande senza risposta e componenti assenti agli incontri rallentano l'analisi e le decisioni.],
+    probabilita: "Media", impatto: "Medio",
+    mitigazione: [Il gruppo raccoglie le domande in anticipo in un documento condiviso e usa il canale #g("microsoft-teams", "Microsoft Teams") concordato con Var Group per le comunicazioni rapide. Chi partecipa a un incontro ne riporta l'esito agli assenti.],
+    contingenza: [Se una risposta tarda, il Responsabile sollecita il proponente. Nel frattempo il gruppo prosegue sulle parti che non dipendono dalla risposta e segna come da confermare i requisiti coinvolti.],
   ),
   (
     codice: "RP1", nome: "Esami e sessione",
@@ -337,10 +353,17 @@ Ore preventivate per componente e ruolo:
 
 Per ogni sprint si riportano i ruoli, il collegamento alle attività, il preventivo, il consuntivo delle ore e il budget residuo. Le attività di ogni sprint sono le issue della bacheca del gruppo in #g("github-projects", "GitHub Projects"), filtrate per sprint. 
 
-Le ore sono quelle produttive registrate sul sito nella pagina `/ore`. Riunioni e stesura dei verbali non sono ore produttive: le riunioni sono escluse dalle Norme di Progetto, la stesura dei verbali su indicazione del committente nel diario di bordo del 2026-11-23. Ogni membro registra le proprie ore entro la fine dello sprint: per uno sprint in corso il consuntivo è parziale.
+Le ore sono quelle produttive registrate sul sito nella pagina `/ore`. Riunioni e stesura dei verbali non sono ore produttive: le riunioni sono escluse dalle Norme di Progetto, la stesura dei verbali su indicazione del #g("committente", "committente") nel #g("diario-di-bordo", "diario di bordo") del 2026-11-23. Ogni membro registra le proprie ore entro la fine dello sprint: per uno sprint in corso il consuntivo è parziale.
 
 // TODO(gruppo): preventivo delle ore per sprint. La domanda è rinviata alla riunione
 // del 2026-11-24 (verbale del 2026-11-17, issue #62).
+
+// Nome di un rischio a partire dal suo codice, per esempio "RT1"
+#let nome-rischio(codice) = {
+  let r = rischi.find(r => r.codice == codice)
+  assert(r != none, message: "Rischio sconosciuto: " + codice)
+  r.nome
+}
 
 #for s in sprint {
   let righe = ore-di(s)
@@ -358,6 +381,18 @@ Le ore sono quelle produttive registrate sul sito nella pagina `/ore`. Riunioni 
 
     === Attività
       Le attività dello sprint sono le issue con il campo Sprint «#s.bacheca» sulla #link(bacheca(s.bacheca))[bacheca del gruppo].
+    
+    === Rischi attesi
+    #let attesi = s.at("rischi-attesi", default: ())
+    #if attesi.len() == 0 [
+      Da definire all'inizio dello sprint.
+    ] else [
+      #tabella(
+        (auto, 1fr),
+        ("Codice", "Rischio"),
+        ..attesi.map(c => (c, nome-rischio(c))).flatten(),
+      )
+    ]
 
     === Preventivo
     // TODO(gruppo): ore preventivate nello sprint, per ruolo
@@ -375,8 +410,24 @@ Le ore sono quelle produttive registrate sul sito nella pagina `/ore`. Riunioni 
     ]
     #if s.at("nota", default: none) != none [ #s.nota ]
 
-    === Rischi occorsi e retrospettiva
-    // TODO(Responsabile): rischi che si sono verificati e cosa migliorare
+    === Rischi occorsi
+    #let occorsi = s.at("rischi-occorsi", default: none)
+    #if occorsi == none [
+      Da compilare a fine sprint.
+    ] else if occorsi.len() == 0 [
+      Nessun rischio si è verificato nello sprint.
+    ] else [
+      #tabella(
+        (auto, 1fr, 1.5fr, 1.5fr),
+        ("Codice", "Rischio", "Cosa è successo", "Efficacia della mitigazione"),
+        ..occorsi.map(o => (
+          o.codice, nome-rischio(o.codice), align(left, o.descrizione), align(left, o.efficacia),
+        )).flatten(),
+      )
+    ]
+
+    === Retrospettiva
+    // TODO(Responsabile): cosa è andato bene e cosa migliorare
     Da compilare a fine sprint.
   ]
 }

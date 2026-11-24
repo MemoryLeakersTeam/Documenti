@@ -178,6 +178,17 @@ Il documento descrive come il gruppo Memory Leakers pianifica e controlla il pro
 
 Il documento si aggiorna alla fine di ogni sprint.
 
+
+== Scopo del prodotto
+
+Var Group S.p.A., #g("proponente", "proponente") del capitolato, usa #g("litellm", "LiteLLM"), un #g("proxy", "proxy") che smista le richieste verso diversi modelli di intelligenza artificiale. Oggi LiteLLM riconosce solo le richieste identiche a una già servita, non mostra i costi divisi per team e progetto e non prevede la spesa futura.
+
+Il prodotto estende LiteLLM con due componenti:
+- una #g("cache-semantica", "cache semantica"), che riconosce le richieste con lo stesso significato di una già servita e restituisce la risposta salvata, risparmiando costi e tempo;
+- una #g("dashboard-finops", "dashboard FinOps"), che mostra consumi e costi per team, progetto e utente, il risparmio ottenuto con la cache, i budget con i relativi avvisi e la previsione della spesa mensile.
+
+Il capitolato chiede di partire da LiteLLM senza reimplementarlo e di coprire con i test almeno il 70% del codice prodotto. Il gruppo si è impegnato a completare il progetto entro il 2027-03-23 (Dichiarazione degli impegni).
+
 == Glossario
 
 I termini con pedice #sub[G] rimandano alla voce corrispondente del glossario sul sito del gruppo.
@@ -195,6 +206,41 @@ I termini con pedice #sub[G] rimandano alla voce corrispondente del glossario su
 - Dichiarazione degli impegni, Memory Leakers: `Candidatura/Generali/Dichiarazione-degli-impegni.typ`;
 - Verbale interno del 2026-11-17: `RTB/Verbali_interni/2026-11-17.typ`.
 
+= Modello di sviluppo
+
+Il gruppo segue un modello #g("agile", "agile"), a sprint di due settimane. A ogni sprint i ruoli ruotano secondo le Norme di Progetto e il gruppo:
+- all'inizio fissa le attività come #g("issues", "issue") sulla bacheca e ne stima le ore, da cui nasce il preventivo dello sprint;
+- durante lo sprint si coordina nella riunione interna del martedì e negli stand-up del venerdì con Var Group;
+- alla fine registra le ore produttive, confronta preventivo e consuntivo, riporta i rischi occorsi e svolge la #g("sprint-retrospective", "retrospettiva").
+
+Il progetto ha due revisioni di avanzamento, che sono le #g("milestone", "milestone") principali:
+- #g("rtb", "RTB") (Requirements and Technology Baseline), il 2027-01-18: #g("analisi-dei-requisiti", "Analisi dei Requisiti") validata dal proponente e #g("poc", "PoC") che dimostra la fattibilità delle tecnologie scelte;
+- #g("pb", "PB") (Product Baseline): Specifica Tecnica e #g("mvp", "MVP") validato dal proponente, con data ancora da fissare.
+
+Le milestone intermedie sono nel calendario (@calendario).
+
+= Risorse e ruoli
+
+Il gruppo è composto da sette componenti. Ognuno ricopre un solo ruolo alla volta e i ruoli ruotano a ogni sprint secondo le Norme di Progetto, così che ogni componente li ricopra tutti (Regolamento del progetto didattico).
+
+#let compiti = (
+  responsabile: [Coordina il gruppo e le sue attività, elabora piani e scadenze, rappresenta il gruppo verso proponente e committente e approva il rilascio dei prodotti.],
+  amministratore: [Assicura l'efficienza di procedure, strumenti e tecnologie del modo di lavorare del gruppo (repository, automazioni, sito) e ne descrive l'uso nelle Norme di Progetto.],
+  analista: [Svolge l'analisi dei requisiti: studia il problema e il dominio e ne ricava i requisiti del prodotto.],
+  progettista: [Svolge la progettazione: definisce l'architettura del prodotto a partire dai requisiti.],
+  programmatore: [Svolge la codifica: realizza il prodotto secondo la progettazione, con il codice e i test.],
+  verificatore: [Svolge la verifica: controlla che documenti e codice rispettino le Norme di Progetto e i requisiti.],
+)
+
+#tabella(
+  (auto, 1fr, auto),
+  ("Ruolo", "Compiti", "Costo orario"),
+  ..ruoli.map(r => (r.nome, align(left, compiti.at(r.id)), [#r.tariffa €/h])).flatten(),
+)
+
+Le ore preventivate e rendicontate sono #g("ore-produttive", "ore produttive"): ore di lavoro su un'attività del progetto, svolte nel ruolo assegnato nello sprint e registrate sul sito (@sprint-sez). Per regolamento ogni componente ne dedica tra 80 e 95, contate solo dopo l'aggiudicazione del 2026-11-03; il gruppo ne ha dichiarate 93 a testa.
+
+La ripartizione delle ore tra ruoli e componenti del preventivo iniziale è un obiettivo verso cui tendere, non un vincolo: il Responsabile la rivede a ogni sprint in base al consuntivo. Il costo totale accettato all'aggiudicazione, #euro(preventivo-costo), è invece un limite che non si può superare: se il costo sostenuto si avvicina a quel limite, il gruppo rinegozia al ribasso i requisiti con il proponente (Regolamento del progetto didattico).
 
 = Analisi dei rischi
 
@@ -204,7 +250,7 @@ I rischi sono divisi in tre categorie, ognuna con la sua sigla:
 
 #let categorie = (
   (sigla: "RT", nome: "Rischi tecnologici", descrizione: [legati alle tecnologie e ai servizi usati dal prodotto]),
-  (sigla: "RO", nome: "Rischi organizzativi", descrizione: [legati alla pianificazione, al modo di lavorare del gruppo e al rapporto con il #g("proponente", "proponente")]),
+  (sigla: "RO", nome: "Rischi organizzativi", descrizione: [legati alla pianificazione, al modo di lavorare del gruppo e al rapporto con il proponente]),
   (sigla: "RP", nome: "Rischi personali", descrizione: [legati alla disponibilità dei componenti del gruppo]),
 )
 
@@ -214,14 +260,14 @@ I rischi sono divisi in tre categorie, ognuna con la sua sigla:
 
 Per ogni rischio si indicano:
 - *probabilità*: quanto è probabile che il rischio si verifichi (Bassa, Media, Alta);
-- *impatto*: quanto pesa su tempi e costi se si verifica (Basso: ritardo recuperabile nello sprint; Medio: ritardo di uno sprint o più ore del previsto; Alto: mette a rischio una #g("milestone", "milestone") o il budget);
+- *impatto*: quanto pesa su tempi e costi se si verifica (Basso: ritardo recuperabile nello sprint; Medio: ritardo di uno sprint o più ore del previsto; Alto: mette a rischio una milestone o il budget);
 - *mitigazione*: cosa fa il gruppo per evitarlo o ridurlo;
 - *contingenza*: cosa fa il gruppo se il rischio si verifica.
 
 #let rischi = (
   (
     codice: "RT1", nome: "Tecnologie nuove per il gruppo",
-    descrizione: [Il capitolato propone tecnologie sconosciute alla maggior parte del gruppo, in particolare quelle legate alla #g("cache-semantica", "cache semantica"): #g("litellm", "LiteLLM"), i #g("modelli-di-embedding", "modelli di embedding"), i #g("vector-store", "vector store") e #g("redis", "Redis"). Il tempo per impararle potrebbe rallentare progettazione e sviluppo.],
+    descrizione: [Il capitolato propone tecnologie sconosciute alla maggior parte del gruppo, in particolare quelle legate alla cache semantica: LiteLLM, i #g("modelli-di-embedding", "modelli di embedding"), i #g("vector-store", "vector store") e #g("redis", "Redis"). Il tempo per impararle potrebbe rallentare progettazione e sviluppo.],
     probabilita: "Alta", impatto: "Medio",
     mitigazione: [Studio delle tecnologie fin dalle prime settimane, condivisione delle conoscenze nel gruppo e confronto con il proponente in caso di dubbi.],
     contingenza: [Il #g("responsabile", "Responsabile") sposta allo sprint successivo le attività che dipendono dalla tecnologia e il gruppo chiede a Var Group un incontro di formazione o un esempio di riferimento.],
@@ -306,7 +352,7 @@ Per ogni rischio si indicano:
   }
 ]
 
-= Calendario
+= Calendario <calendario>
 
 Il gruppo lavora a sprint di due settimane, dal martedì al lunedì di due settimane dopo, con le date della pagina `/ore` del sito. La tabella riporta per ogni sprint le milestone e i periodi di disponibilità ridotta. La consegna finale è prevista entro il 2027-03-23 (Dichiarazione degli impegni).
 

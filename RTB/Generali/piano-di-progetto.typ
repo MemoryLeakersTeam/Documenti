@@ -211,7 +211,7 @@ I termini con pedice #sub[G] rimandano alla voce corrispondente del glossario su
 
 = Calendario
 
-Il gruppo lavora a sprint di due settimane, dal martedì al lunedì della settimana successiva, con le date della pagina `/ore` del sito. La tabella riporta per ogni sprint le #g("milestone", "milestone") e i periodi di disponibilità ridotta. La consegna finale è prevista entro il 2027-03-23 (Dichiarazione degli impegni).
+Il gruppo lavora a sprint di due settimane, dal martedì al lunedì di due settimane dopo, con le date della pagina `/ore` del sito. La tabella riporta per ogni sprint le #g("milestone", "milestone") e i periodi di disponibilità ridotta. La consegna finale è prevista entro il 2027-03-23 (Dichiarazione degli impegni).
 
 #tabella(
   (auto, auto, auto, 1fr),

@@ -77,16 +77,17 @@
 // ---------------------------------------------------------------------------
 #let sprint = (
   (
-    codice: "S1", numero: 1, inizio: "2026-11-03", fine: "2026-11-17", stato: "Concluso",
+    codice: "S1", numero: 1, inizio: "2026-11-03", fine: "2026-11-16", stato: "Concluso",
     file: "../../dati/ore/ore-S1.csv",
     ruoli: (
       "Kyara-Prot": "Responsabile", "jeidi19": "Amministratore", "JJ-jacopo24": "Verificatore",
       "ttteo": "Analista", "Matteomarcon": "Analista", "Ric02P": "Analista", "paolopreve": "Analista",
     ),
     bacheca: "Sprint 1",
+    nota: [Nello sprint si sono occupati della stesura dei verbali, che non è ora produttiva.],
   ),
   (
-    codice: "S2", numero: 2, inizio: "2026-11-17", fine: "2026-12-01", stato: "In corso",
+    codice: "S2", numero: 2, inizio: "2026-11-17", fine: "2026-11-30", stato: "In corso",
     file: "../../dati/ore/ore-S2.csv",
     ruoli: (
       "Matteomarcon": "Responsabile", "Ric02P": "Amministratore", "jeidi19": "Verificatore",
@@ -159,7 +160,7 @@
 
 == Scopo del documento
 
-Il documento descrive come il gruppo Memory Leakers pianifica e controlla il progetto del capitolato C6 «SCSDF» di Var Group S.p.A.: rischi, calendario, preventivo e, per ogni #g("sprint", "sprint"), le ore e i costi preventivati, quelli effettivi e il budget che resta.
+Il documento descrive come il gruppo Memory Leakers pianifica e controlla il progetto del #g("capitolato", "capitolato") C6 «SCSDF» di Var Group S.p.A.: rischi, calendario, #g("preventivo", "preventivo") e, per ogni #g("sprint", "sprint"), le ore e i costi preventivati, quelli effettivi (#g("consuntivo", "consuntivo")) e il budget che resta.
 
 Il documento si aggiorna alla fine di ogni sprint.
 
@@ -172,7 +173,7 @@ I termini con pedice #sub[G] rimandano alla voce corrispondente del glossario su
 === Riferimenti normativi
 - Regolamento del progetto didattico (PD1), Ingegneria del Software, A.A. 2026/2027;
   // TODO(dato): link e data di consultazione
-- Norme di Progetto, Memory Leakers: `RTB/Generali/norme-di-progetto.typ`.
+- #g("norme-di-progetto", "Norme di Progetto"), Memory Leakers: `RTB/Generali/norme-di-progetto.typ`.
 
 === Riferimenti informativi
 - Capitolato C6 «SCSDF», Var Group S.p.A.;
@@ -194,7 +195,7 @@ I termini con pedice #sub[G] rimandano alla voce corrispondente del glossario su
 
 == Incomprensione dei requisiti
 #rischio(
-  [Un'analisi superficiale o una comunicazione insufficiente con il proponente potrebbero portare a requisiti incompleti o fraintesi, con modifiche costose nelle fasi avanzate.],
+  [Un'analisi superficiale o una comunicazione insufficiente con il #g("proponente", "proponente") potrebbero portare a requisiti incompleti o fraintesi, con modifiche costose nelle fasi avanzate.],
   [Media],
   [Alto],
   [Analisi dei requisiti attenta, con domande raccolte in modo asincrono e chiarite con Var Group negli incontri periodici.],
@@ -202,7 +203,7 @@ I termini con pedice #sub[G] rimandano alla voce corrispondente del glossario su
 
 == Tecnologie nuove per il gruppo
 #rischio(
-  [Il capitolato propone tecnologie sconosciute alla maggior parte del gruppo, in particolare quelle legate alla #g("cache-semantica", "cache semantica"): #g("litellm", "LiteLLM"), i modelli di #g("embedding", "embedding"), i vector store e Redis. Il tempo per impararle potrebbe rallentare progettazione e sviluppo.],
+  [Il capitolato propone tecnologie sconosciute alla maggior parte del gruppo, in particolare quelle legate alla #g("cache-semantica", "cache semantica"): #g("litellm", "LiteLLM"), i #g("modelli-di-embedding", "modelli di embedding"), i #g("vector-store", "vector store") e #g("redis", "Redis"). Il tempo per impararle potrebbe rallentare progettazione e sviluppo.],
   [Alta],
   [Medio],
   [Studio delle tecnologie fin dalle prime settimane, condivisione delle conoscenze nel gruppo e confronto con il proponente in caso di dubbi.],
@@ -210,21 +211,21 @@ I termini con pedice #sub[G] rimandano alla voce corrispondente del glossario su
 
 = Calendario
 
-Il gruppo lavora a sprint di due settimane, da un martedì al martedì di due settimane dopo (Norme di Progetto). La consegna finale è prevista entro il 2027-03-23 (Dichiarazione degli impegni).
+Il gruppo lavora a sprint di due settimane, dal martedì al lunedì della settimana successiva, con le date della pagina `/ore` del sito. La tabella riporta per ogni sprint le #g("milestone", "milestone") e i periodi di disponibilità ridotta. La consegna finale è prevista entro il 2027-03-23 (Dichiarazione degli impegni).
 
 #tabella(
   (auto, auto, auto, 1fr),
   ("Sprint", "Inizio", "Fine", "Milestone e note"),
-  [S1], [2026-11-03], [2026-11-17], [],
-  [S2], [2026-11-17], [2026-12-01], [2026-11-30: base di analisi e conoscenza delle tecnologie],
-  [S3], [2026-12-01], [2026-12-15], [2026-12-11: chiusura dell'Analisi dei Requisiti (obiettivo)],
-  [S4], [2026-12-15], [2026-12-29], [2026-12-18: validazione dell'Analisi dei Requisiti; dal 2026-12-24 periodo natalizio],
-  [S5], [2026-12-29], [2027-01-12], [fino al 2027-01-01 periodo natalizio; 2027-01-12: #g("poc", "PoC")],
-  [S6], [2027-01-12], [2027-01-26], [2027-01-18: #g("rtb", "RTB"); dal 2027-01-18 sessione d'esame],
-  [S7], [2027-01-26], [2027-02-09], [sessione d'esame],
-  [S8], [2027-02-09], [2027-02-23], [sessione d'esame fino al 2027-02-19],
-  [S9], [2027-02-23], [2027-03-09], [],
-  [S10], [2027-03-09], [2027-03-23], [2027-03-23: consegna finale],
+  [S1], [2026-11-03], [2026-11-16], [],
+  [S2], [2026-11-17], [2026-11-30], [2026-11-30: base di analisi e conoscenza delle tecnologie],
+  [S3], [2026-12-01], [2026-12-14], [2026-12-11: chiusura dell'#g("analisi-dei-requisiti", "Analisi dei Requisiti") (obiettivo)],
+  [S4], [2026-12-15], [2026-12-28], [2026-12-18: validazione dell'Analisi dei Requisiti; dal 2026-12-24 periodo natalizio],
+  [S5], [2026-12-29], [2027-01-11], [fino al 2027-01-01 periodo natalizio],
+  [S6], [2027-01-12], [2027-01-25], [2027-01-12: #g("poc", "PoC"); 2027-01-18: #g("rtb", "RTB"); dal 2027-01-18 sessione d'esame],
+  [S7], [2027-01-26], [2027-02-08], [sessione d'esame],
+  [S8], [2027-02-09], [2027-02-22], [sessione d'esame fino al 2027-02-19],
+  [S9], [2027-02-23], [2027-03-08], [],
+  [S10], [2027-03-09], [2027-03-22], [consegna finale entro il 2027-03-23],
 )
 
 Milestone dal verbale interno del 2026-11-17; periodi di rallentamento dalla Dichiarazione degli impegni.
@@ -232,7 +233,7 @@ Milestone dal verbale interno del 2026-11-17; periodi di rallentamento dalla Dic
 
 = Preventivo iniziale
 
-Il preventivo presentato in candidatura prevede #num(preventivo-ore) ore produttive, 93 per componente, per un costo di #euro(preventivo-costo).
+Il preventivo presentato in candidatura prevede #num(preventivo-ore) #g("ore-produttive", "ore produttive"), 93 per componente, per un costo di #euro(preventivo-costo).
 
 #tabella(
   (1fr, auto, auto, auto),
@@ -253,7 +254,9 @@ Ore preventivate per componente e ruolo:
 
 = Sprint <sprint-sez>
 
-Per ogni sprint si riportano i ruoli, il collegamento alle attività, il preventivo, il consuntivo delle ore e il budget residuo. Le ore sono quelle produttive registrate sul sito nella pagina `/ore` (Norme di Progetto). Riunioni e stesura dei verbali non sono ore produttive. Ogni membro registra le proprie ore entro la fine dello sprint: per uno sprint in corso il consuntivo è parziale.
+Per ogni sprint si riportano i ruoli, il collegamento alle attività, il preventivo, il consuntivo delle ore e il budget residuo. Le attività di ogni sprint sono le issue della bacheca del gruppo in #g("github-projects", "GitHub Projects"), filtrate per sprint. 
+
+Le ore sono quelle produttive registrate sul sito nella pagina `/ore`. Riunioni e stesura dei verbali non sono ore produttive: le riunioni sono escluse dalle Norme di Progetto, la stesura dei verbali su indicazione del committente nel diario di bordo del 2026-11-23. Ogni membro registra le proprie ore entro la fine dello sprint: per uno sprint in corso il consuntivo è parziale.
 
 // TODO(gruppo): preventivo delle ore per sprint. La domanda è rinviata alla riunione
 // del 2026-11-24 (verbale del 2026-11-17, issue #62).
@@ -273,7 +276,7 @@ Per ogni sprint si riportano i ruoli, il collegamento alle attività, il prevent
     )
 
     === Attività
-      Le attività dello sprint sono le issue con il campo Sprint «#s.bacheca» sulla #link(bacheca(s.bacheca))[bacheca del gruppo] (GitHub Projects).
+      Le attività dello sprint sono le issue con il campo Sprint «#s.bacheca» sulla #link(bacheca(s.bacheca))[bacheca del gruppo].
 
     === Preventivo
     // TODO(gruppo): ore preventivate nello sprint, per ruolo
@@ -285,6 +288,11 @@ Per ogni sprint si riportano i ruoli, il collegamento alle attività, il prevent
     ] else [
       #tabella-ore(righe)
     ]
+    #let senza-ore = membri.filter(m => ore-persona(righe, m.login) == 0).map(m => m.nome)
+    #if s.stato == "Concluso" and senza-ore.len() > 0 [
+      Non hanno ore produttive registrate nello sprint: #senza-ore.join(", ", last: " e ").
+    ]
+    #if s.at("nota", default: none) != none [ #s.nota ]
 
     === Rischi occorsi e retrospettiva
     // TODO(Responsabile): rischi che si sono verificati e cosa migliorare

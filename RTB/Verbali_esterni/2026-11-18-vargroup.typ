@@ -94,9 +94,36 @@
       [Scelta tecnologie],
       [Valutare le tecnologie da approfondire con la proponente],
       [Paolo Prevedello Ramirez],
-      [2026-11-24],
+      [2026-11-30],
       [DE9],
       [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/99")[\#99]],
+    ),
+(
+      [AE5],
+      [Stesura analisi dei requisiti obbligatori],
+      [Definizione e formalizzazione dei requisiti obbligatori per il progetto],
+      [Chiara Protopapa],
+      [2026-11-27],
+      [D24],
+      [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/87")[\#87]]
+    ),
+    (
+      [AE6],
+      [Stesura analisi dei requisiti desiderabili],
+      [Definizione e formalizzazione dei requisiti non strettamente necessari ma ad alto valore aggiunto],
+      [Jacopo Franco],
+      [2026-11-27],
+      [D24],
+      [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/87")[\#87]]
+    ),
+    (
+      [AE7],
+      [Stesura analisi dei requisiti opzionali],
+      [Definizione e formalizzazione delle funzionalità aggiuntive implementabili in base alle risorse disponibili],
+      [Paolo Prevedello Ramirez],
+      [2026-11-27],
+      [D24],
+      [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/87")[\#87]]
     ),
   ),
 )

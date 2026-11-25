@@ -66,6 +66,14 @@
       [D32],
       [Abbandono dell'automazione dei verbali tramite LLM e mantenimento della stesura manuale],
     ),
+    (
+      [D33],
+      [Redazione del verbale di questa riunione],
+    ),
+    (
+      [D34],
+      [Scrittura del Diario di bordo del 2026-11-30],
+    ),
   ),
   // Ogni riga: (ID, Nome attività, Descrizione, Responsabile, Scadenza, ID Decisione, Issue GitHub)
   attivita-todo: (
@@ -120,8 +128,17 @@
       [Stesura del verbale di questa riunione],
       [Paolo Prevedello Ramirez],
       [2026-11-27],
-      [D32],
+      [D33],
       [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/108")[\#108]],
+    ),
+    (
+      [A27],
+      [Diario di Bordo],
+      [Scrittura del Diario di bordo del 2026-11-30],
+      [Matteo Marcon],
+      [2026-11-30],
+      [D34],
+      [#link("https://github.com/MemoryLeakersTeam/Documenti/issues/110")[\#110]],
     ),
   ),
   ora-fine-riunione: "15:45",

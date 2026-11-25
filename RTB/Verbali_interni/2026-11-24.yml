@@ -1,8 +1,8 @@
 # Dati del documento gestiti dall'automazione del registro delle modifiche
 # (Scripts/registro.py): dopo ogni merge aggiorna versione, stato,
 # verificatore e registro. Non modificare questo file a mano.
-versione: "0.1.0"
+versione: "0.0.0"
 stato: "Bozza"
-verificatore: "Jacopo De Donà"
-firma-responsabile: 
-registro:
+verificatore: ""
+firma-responsabile: ""
+registro: []

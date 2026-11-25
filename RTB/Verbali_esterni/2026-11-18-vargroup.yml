@@ -1,11 +1,16 @@
 # Dati del documento gestiti dall'automazione del registro delle modifiche
 # (Scripts/registro.py): dopo ogni merge aggiorna versione, stato,
 # verificatore e registro. Non modificare questo file a mano.
-versione: "0.1.0"
+versione: "0.1.1"
 stato: "Verificato"
 verificatore: "Jacopo De Donà"
 firma-responsabile: ""
 registro:
+  - versione: "0.1.1"
+    data: "2026-11-25"
+    descrizione: "Aggiornata tabella attività"
+    autore: "Chiara Protopapa"
+    verificatore: "Jacopo De Donà"
   - versione: "0.1.0"
     data: "2026-11-24"
     descrizione: "Stesura del verbale esterno della riunione del 2026-11-18 con Var Group"

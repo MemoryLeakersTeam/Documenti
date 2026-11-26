@@ -148,11 +148,11 @@
       (
         codice: "RO6",
         descrizione: [La risposta di Var Group alla prima mail del gruppo dopo l'aggiudicazione (verbale interno del 2026-11-03, A1) è arrivata in ritardo per un problema nell'invio programmato della loro email (diario di bordo del 2026-11-09). Con la risposta Var Group 
-        ha proposto l'incontro conoscitivo del 2026-11-13, in cui si è fissata la sessione di #g("design-thinking", "design thinking") al 2026-11-18, poi confermata dal gruppo per email.],
+        ha proposto l'incontro conoscitivo del 2026-11-13, in cui si è fissata la sessione di design thinking al 2026-11-18, poi confermata dal gruppo per email.],
         efficacia: [Il rischio non era ancora tra quelli individuati. Le domande preparate in anticipo hanno reso utile l'incontro del 2026-11-13; da questa esperienza nasce RO6, con il canale Microsoft Teams per le comunicazioni rapide.],
       ),
     ),
-    nota: [Nello sprint si sono occupati della stesura dei verbali, che non è ora produttiva. Per l'#g("amministratore", "Amministratore") il gruppo ha riconosciuto 5 ore produttive, tenendo conto di tutto il lavoro svolto nello sprint.
+    nota: [Alcuni componenti si sono occupati della stesura dei verbali, che non è ora produttiva. Per l'Amministratore il gruppo ha riconosciuto 5 ore produttive, tenendo conto di tutto il lavoro svolto nello sprint.
      Il preventivo dello sprint è stato ricostruito a posteriori.],
   ),
   (
@@ -182,7 +182,7 @@
       (issue: 98, titolo: [Invio del diagramma di flusso alla proponente sul canale Teams], stato: "Svolta"),
       (issue: 99, titolo: [Scelta delle tecnologie per le sessioni di formazione], stato: "Da fare", ruolo: "analista", ore: 0.3),
       (issue: 101, titolo: [Link alla voce del glossario anche nel template dei verbali], stato: "Svolta", ruolo: "amministratore", ore: 0.15),
-      (issue: 106, titolo: [Prosecuzione del Piano di Progetto dopo la verifica della prima bozza], stato: "Da fare", ruolo: "analista", ore: 1),
+      (issue: 106, titolo: [Prosecuzione del Piano di Progetto dopo la verifica della prima bozza], stato: "In revisione", ruolo: "analista", ore: 1),
       (issue: 107, titolo: [Revisione delle Norme di Progetto: verbali e merge delle pull request], stato: "Da fare", ruolo: "amministratore", ore: 0.3),
       (issue: 108, titolo: [Verbale interno del 2026-11-24], stato: "In revisione"),
       (issue: 110, titolo: [Diario di bordo del 2026-11-30], stato: "Da fare"),
@@ -271,12 +271,12 @@ Il documento si aggiorna alla fine di ogni sprint (@redazione).
 
 // TODO: chi aggiorna il Piano a fine sprint (Amministratore, analisti o Responsabile), da definire alla riunione del 2026-12-01; poi va scritto anche nelle Norme di Progetto.
 Il Piano si aggiorna alla fine di ogni sprint, con questa #g("procedura", "procedura"):
-+ ogni componente registra le proprie ore produttive sul sito, nella pagina `/ore`, entro la fine dello sprint;
++ ogni componente registra le proprie #g("ore-produttive", "ore produttive") sul sito, nella pagina `/ore`, entro la fine dello sprint;
 + chi aggiorna il Piano scarica il CSV delle ore dello sprint dalla pagina `/ore` e lo salva in `dati/ore/` con il nome `ore-Sn.csv`, dove `n` è il numero dello sprint;
-+ nella voce dello sprint concluso imposta lo stato «Concluso» e inserisce rischi occorsi e retrospettiva, discussi nella riunione di fine sprint a partire dalle difficoltà riportate nei diari di bordo dello sprint;
++ nella voce dello sprint concluso imposta lo stato «Concluso» e inserisce rischi occorsi e #g("sprint-retrospective", "retrospettiva"), discussi nella riunione di fine sprint a partire dalle difficoltà riportate nei #g("diario-di-bordo", "diari di bordo") dello sprint;
 + aggiunge la voce dello sprint nuovo: date, ruoli, file delle ore, nome dello sprint sulla bacheca, rischi attesi e preventivo;
 + rivede l'analisi dei rischi (rischi nuovi, probabilità e impatto) e il calendario;
-+ segue la procedura dei documenti delle Norme di Progetto (issue, branch, pull request e verifica); dopo la verifica, il Responsabile approva il rilascio.
++ segue la procedura dei documenti delle #g("norme-di-progetto", "Norme di Progetto") (#g("issues", "issue"), #g("branch", "branch"), #g("pull-request", "pull request") e verifica); dopo la verifica, il #g("responsabile", "Responsabile") approva il rilascio.
 
 Consuntivo e budget residuo si calcolano dai file delle ore, quindi non si scrivono a mano.
 
@@ -299,21 +299,21 @@ I termini con pedice #sub[G] rimandano alla voce corrispondente del #g("glossari
 
 === Riferimenti normativi
 - Regolamento del progetto didattico, Ingegneria del Software, A.A. 2026/2027 (consultato dal 2026-10-06 al 2026-11-26);
-- #g("norme-di-progetto", "Norme di Progetto"), Memory Leakers: `RTB/Generali/norme-di-progetto.typ`.
+- Norme di Progetto, Memory Leakers: `RTB/Generali/norme-di-progetto.typ`.
 
 === Riferimenti informativi
 - Capitolato C6 «SCSDF», Var Group S.p.A. (consultato dal 2026-10-13 al 2026-11-26);
 - Gestione di progetto (T4), Ingegneria del Software, A.A. 2026/2027 (consultato dal 2026-10-19 al 2026-11-26);
 - Dichiarazione degli impegni, Memory Leakers: `Candidatura/Generali/Dichiarazione-degli-impegni.typ`;
-- Verbale interno del 2026-11-17: `RTB/Verbali_interni/2026-11-17.typ`;
+- #g("verbale", "Verbale") interno del 2026-11-17: `RTB/Verbali_interni/2026-11-17.typ`;
 - Diari di bordo, Memory Leakers: `RTB/Diario_di_bordo/`.
 
 = Modello di sviluppo
 
 Il gruppo segue un modello #g("agile", "agile"), a sprint di due settimane. A ogni sprint i ruoli ruotano secondo le Norme di Progetto e il gruppo:
-- all'inizio fissa le attività come #g("issues", "issue") sulla bacheca e ne stima le ore, da cui nasce il preventivo dello sprint;
+- all'inizio fissa le attività come issue sulla bacheca e ne stima le ore, da cui nasce il preventivo dello sprint;
 - durante lo sprint si coordina nella riunione interna del martedì e negli stand-up del venerdì con Var Group;
-- alla fine registra le ore produttive, confronta preventivo e consuntivo, riporta i rischi occorsi e svolge la #g("sprint-retrospective", "retrospettiva").
+- alla fine registra le ore produttive, confronta preventivo e consuntivo, riporta i rischi occorsi e svolge la retrospettiva.
 
 Il progetto ha due revisioni di avanzamento, che sono le #g("milestone", "milestone") principali:
 - #g("rtb", "RTB") (Requirements and Technology Baseline), il 2027-01-18: #g("analisi-dei-requisiti", "Analisi dei Requisiti") validata dal proponente e #g("poc", "PoC") che dimostra 
@@ -324,10 +324,11 @@ Le milestone intermedie sono nel calendario (@calendario).
 
 = Risorse e ruoli
 
-Il gruppo è composto da sette componenti. Ognuno ricopre un solo ruolo alla volta e i ruoli ruotano a ogni sprint secondo le Norme di Progetto, così che ogni componente li ricopra tutti (Regolamento del progetto didattico).
+Il gruppo è composto da sette componenti. Il Regolamento del progetto didattico prevede sei ruoli: Responsabile, #g("amministratore", "Amministratore"), #g("analista", "Analista"), #g("progettista", "Progettista"), 
+#g("programmatore", "Programmatore") e #g("verificatore", "Verificatore"). Ognuno ricopre un solo ruolo alla volta e i ruoli ruotano a ogni sprint secondo le Norme di Progetto, così che ogni componente li ricopra tutti (Regolamento del progetto didattico).
 
 #let compiti = (
-  responsabile: [Coordina il gruppo e le sue attività, elabora piani e scadenze, rappresenta il gruppo verso proponente e committente e approva il rilascio dei prodotti.],
+  responsabile: [Coordina il gruppo e le sue attività, elabora piani e scadenze, rappresenta il gruppo verso proponente e #g("committente", "committente") e approva il rilascio dei prodotti.],
   amministratore: [Assicura l'efficienza di procedure, strumenti e tecnologie del modo di lavorare del gruppo (#g("repository", "repository"), automazioni, sito) e ne descrive l'uso nelle Norme di Progetto.],
   analista: [Svolge l'analisi dei requisiti: studia il problema e il dominio e ne ricava i requisiti del prodotto.],
   progettista: [Svolge la progettazione: definisce l'architettura del prodotto a partire dai requisiti.],
@@ -341,7 +342,7 @@ Il gruppo è composto da sette componenti. Ognuno ricopre un solo ruolo alla vol
   ..ruoli.map(r => (r.nome, align(left, compiti.at(r.id)), [#r.tariffa €/h])).flatten(),
 )
 
-Le ore preventivate e rendicontate sono #g("ore-produttive", "ore produttive"): ore di lavoro su un'attività del progetto, svolte nel ruolo assegnato nello sprint e registrate sul sito (@sprint-sez). Per regolamento ogni 
+Le ore preventivate e rendicontate sono ore produttive: ore di lavoro su un'attività del progetto, svolte nel ruolo assegnato nello sprint e registrate sul sito (@sprint-sez). Per regolamento ogni 
 componente ne dedica tra 80 e 95, contate solo dopo l'aggiudicazione del 2026-11-03; il gruppo ne ha dichiarate 93 a testa.
 
 La ripartizione delle ore tra ruoli e componenti del preventivo iniziale è un obiettivo verso cui tendere, non un vincolo: il Responsabile la rivede a ogni sprint in base al consuntivo. Il costo totale accettato 
@@ -376,7 +377,7 @@ Per ogni rischio si indicano:
     i #g("vector-store", "vector store") e #g("redis", "Redis"). Il tempo per impararle potrebbe rallentare progettazione e sviluppo.],
     probabilita: "Alta", impatto: "Medio",
     mitigazione: [Studio delle tecnologie fin dalle prime settimane, condivisione delle conoscenze nel gruppo e confronto con il proponente in caso di dubbi.],
-    contingenza: [Il #g("responsabile", "Responsabile") sposta allo sprint successivo le attività che dipendono dalla tecnologia e il gruppo chiede a Var Group un incontro di formazione o un esempio di riferimento.],
+    contingenza: [Il Responsabile sposta allo sprint successivo le attività che dipendono dalla tecnologia e il gruppo chiede a Var Group un incontro di formazione o un esempio di riferimento.],
   ),
   (
     codice: "RT2", nome: "Dipendenza da servizi esterni",
@@ -399,19 +400,19 @@ Per ogni rischio si indicano:
     probabilita: "Media", impatto: "Alto",
     mitigazione: [Analisi dei requisiti attenta, con domande raccolte in modo asincrono e chiarite con Var Group negli incontri periodici. Ogni requisito riporta la sua fonte e il gruppo sottopone 
     i requisiti al proponente per la validazione.],
-    contingenza: [Gli #g("analista", "analisti") correggono i requisiti con una nuova issue appena il proponente segnala l'errore. Il Responsabile valuta l'impatto sulle attività e sulle ore già pianificate.],
+    contingenza: [Gli analisti correggono i requisiti con una nuova issue appena il proponente segnala l'errore. Il Responsabile valuta l'impatto sulle attività e sulle ore già pianificate.],
   ),
   (
     codice: "RO3", nome: "Requisiti che cambiano",
     descrizione: [Il proponente potrebbe cambiare o precisare le richieste durante il progetto. Per esempio, le funzioni della dashboard FinOps richieste dal capitolato (budget, avvisi, previsione della spesa) 
     sono ancora da confermare con Var Group.],
     probabilita: "Media", impatto: "Medio",
-    mitigazione: [Il gruppo porta le domande aperte agli incontri periodici con il proponente. Ogni modifica ai requisiti passa da un #g("verbale", "verbale") esterno o da una riunione con il proponente, e da una nuova issue.],
+    mitigazione: [Il gruppo porta le domande aperte agli incontri periodici con il proponente. Ogni modifica ai requisiti passa da un verbale esterno o da una riunione con il proponente, e da una nuova issue.],
     contingenza: [Il Responsabile stima le ore della modifica. Se non rientra nel budget, il gruppo concorda con il proponente cosa rimandare o rendere opzionale.],
   ),
   (
     codice: "RO4", nome: "Coordinamento insufficiente nel lavoro in parallelo",
-    descrizione: [Più componenti lavorano in parallelo sugli stessi documenti e sulle stesse parti del prodotto. Senza coordinamento si rischiano lavoro doppio, conflitti tra #g("branch", "branch") e incoerenze, per esempio due 
+    descrizione: [Più componenti lavorano in parallelo sugli stessi documenti e sulle stesse parti del prodotto. Senza coordinamento si rischiano lavoro doppio, conflitti tra branch e incoerenze, per esempio due 
     analisti che usano lo stesso codice per requisiti diversi.],
     probabilita: "Media", impatto: "Medio",
     mitigazione: [Il lavoro si divide per area, ogni attività ha la sua issue con un assegnatario e il gruppo segue le procedure delle Norme di Progetto. Chi introduce un codice nuovo lo comunica prima agli altri.],
@@ -422,8 +423,8 @@ Per ogni rischio si indicano:
     descrizione: [Il regolamento chiede che ogni componente ricopra tutti i ruoli per un tempo congruo e che ogni attività abbia una verifica indipendente. Con la rotazione ogni due settimane, un componente potrebbe ricoprire un ruolo nella 
     fase in cui quel ruolo ha poco lavoro, oppure verificare un lavoro a cui ha partecipato.],
     probabilita: "Media", impatto: "Medio",
-    mitigazione: [I ruoli ruotano secondo le regole delle Norme di Progetto. Il Responsabile controlla a ogni sprint le ore per componente e ruolo rispetto al preventivo. Il #g("verificatore", "verificatore") non verifica il proprio lavoro 
-    e non apre #g("pull-request", "pull request") nello sprint in cui verifica.],
+    mitigazione: [I ruoli ruotano secondo le regole delle Norme di Progetto. Il Responsabile controlla a ogni sprint le ore per componente e ruolo rispetto al preventivo. Il verificatore non verifica il proprio lavoro 
+    e non apre pull request nello sprint in cui verifica.],
     contingenza: [Il Responsabile assegna il ruolo mancante al componente negli sprint in cui quel ruolo ha più lavoro. Se una verifica non è indipendente, la ripete un altro componente.],
   ),
   (
@@ -504,7 +505,7 @@ Per la RTB servono l'Analisi dei Requisiti, validata dal proponente, e il PoC (@
 L'Analisi dei Requisiti stabilisce che cosa deve fare il prodotto, in accordo con il proponente: attori, casi d'uso e requisiti, ognuno con la sua fonte e il tracciamento. È la base della progettazione e della verifica del prodotto. Le regole per scriverla sono nelle Norme di Progetto.
 
 Il gruppo la redige con queste attività:
-+ raccolta delle informazioni dal capitolato e dagli incontri con Var Group (verbali esterni, sessione di design thinking del 2026-11-18, stand-up settimanali);
++ raccolta delle informazioni dal capitolato e dagli incontri con Var Group (verbali esterni, sessione di #g("design-thinking", "design thinking") del 2026-11-18, stand-up settimanali);
 + prima stesura dei requisiti in un documento condiviso, divisi per area del prodotto e per importanza (obbligatori, desiderabili, opzionali), con le domande aperte da portare a Var Group;
 + individuazione degli attori e dei casi d'uso, con i diagrammi UML;
 + stesura del documento in #g("typst", "Typst"), con codice, fonte e tracciamento di ogni requisito;
@@ -552,7 +553,7 @@ Per ogni sprint si riportano i ruoli, l'obiettivo, le attività con la loro stim
 Le attività di ogni sprint sono le issue della bacheca del gruppo in #g("github-projects", "GitHub Projects"), filtrate per sprint.
 
 Le ore sono quelle produttive registrate sul sito nella pagina `/ore`. Riunioni e stesura dei verbali non sono ore produttive: le riunioni sono escluse dalle Norme di Progetto, la stesura dei verbali su indicazione del 
-#g("committente", "committente") nel #g("diario-di-bordo", "diario di bordo") del 2026-11-23. Ogni membro registra le proprie ore entro la fine dello sprint: per uno sprint in corso il consuntivo è parziale.
+committente nel diario di bordo del 2026-11-23. Ogni membro registra le proprie ore entro la fine dello sprint: per uno sprint in corso il consuntivo è parziale.
 
 // TODO: metodo del preventivo da confermare alla riunione del 2026-12-01
 // (stime delle issue, verifica al 60%, 0,3 ore per issue all'Amministratore, 2 ore per sprint al Responsabile).

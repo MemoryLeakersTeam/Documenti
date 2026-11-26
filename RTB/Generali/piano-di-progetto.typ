@@ -208,13 +208,12 @@ I termini con pedice #sub[G] rimandano alla voce corrispondente del glossario su
 == Riferimenti
 
 === Riferimenti normativi
-- Regolamento del progetto didattico (PD1), Ingegneria del Software, A.A. 2026/2027;
-  // TODO(dato): link e data di consultazione
+- Regolamento del progetto didattico, Ingegneria del Software, A.A. 2026/2027 (consultato dal 2026-10-06 al 2026-11-26);
 - #g("norme-di-progetto", "Norme di Progetto"), Memory Leakers: `RTB/Generali/norme-di-progetto.typ`.
 
 === Riferimenti informativi
-- Capitolato C6 «SCSDF», Var Group S.p.A.;
-  // TODO(dato): link e data di consultazione
+- Capitolato C6 «SCSDF», Var Group S.p.A. (consultato dal 2026-10-13 al 2026-11-26);
+- Gestione di progetto (T4), Ingegneria del Software, A.A. 2026/2027 (consultato dal 2026-10-19 al 2026-11-26);
 - Dichiarazione degli impegni, Memory Leakers: `Candidatura/Generali/Dichiarazione-degli-impegni.typ`;
 - Verbale interno del 2026-11-17: `RTB/Verbali_interni/2026-11-17.typ`.
 

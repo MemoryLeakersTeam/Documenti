@@ -77,6 +77,26 @@
 // Vista della bacheca del gruppo (GitHub Projects) filtrata per sprint
 #let bacheca(nome) = "https://github.com/orgs/MemoryLeakersTeam/projects/2/views/1?filterQuery=sprint%3A%22" + nome.replace(" ", "+") + "%22"
 
+
+// Ore di verifica preventivate per ogni ora stimata nelle issue (le issue non stimano la verifica)
+#let rapporto-verifica = 0.6
+
+// Ore di gestione dell'Amministratore per ogni issue dello sprint (apertura con la descrizione)
+#let ore-per-issue = 0.3
+
+// Ore di gestione del Responsabile per sprint (proponente, email, coordinamento del gruppo)
+#let gestione-responsabile = 2
+
+// Arrotonda alla mezz'ora più vicina, perché le ore si registrano solo a mezz'ore: 3.3 -> 3.5, 7.2 -> 7
+#let mezz-ora(x) = calc.round(x * 2) / 2
+
+// Collegamento a una issue: issue(62) -> "#62" (repository Documenti);
+// issue(4, repo: "MemoryLeakersTeam.github.io") -> "sito #4" (repository del sito)
+#let issue(n, repo: "Documenti") = link(
+  "https://github.com/MemoryLeakersTeam/" + repo + "/issues/" + str(n),
+  (if repo == "Documenti" { "" } else { "sito " }) + "#" + str(n),
+)
+
 // ---------------------------------------------------------------------------
 // Sprint: una voce per sprint, con il CSV delle ore scaricato da /ore
 // ---------------------------------------------------------------------------
@@ -89,7 +109,40 @@
       "ttteo": "Analista", "Matteomarcon": "Analista", "Ric02P": "Analista", "paolopreve": "Analista",
     ),
     bacheca: "Sprint 1",
+    obiettivo: [Organizzare il modo di lavorare del gruppo (Norme di Progetto, template, modelli delle issue, automazioni del registro delle modifiche), fissare le milestone fino alla RTB e avviare i contatti con il proponente.],
+    attivita: (
+      (issue: 53, titolo: [Verbale interno del 2026-11-03], stato: "Svolta"),
+      (issue: 54, titolo: [Modifica dei template], stato: "Svolta"),
+      (issue: 55, titolo: [Diario di bordo del 2026-11-09], stato: "Svolta"),
+      (issue: 60, titolo: [Moduli delle issue per classe di attività, con campi obbligatori e checklist di verifica], stato: "Svolta", ruolo: "amministratore", ore: 1),
+      (issue: 62, titolo: [Data della RTB e milestone intermedie, create su GitHub], stato: "Svolta", ruolo: "responsabile", ore: 2),
+      (issue: 63, titolo: [Verbale interno del 2026-11-10], stato: "Svolta"),
+      (issue: 64, titolo: [Diario di bordo del 2026-11-16], stato: "Svolta"),
+      (issue: 65, titolo: [Versionamento automatico al merge: versione, stato, verificatore e registro delle modifiche nei file YAML], stato: "Svolta", ruolo: "amministratore", ore: 4),
+      (issue: 66, titolo: [Rilascio avviato dal Responsabile: versione definitiva, stato «Approvato» e firma], stato: "Svolta", ruolo: "amministratore", ore: 2),
+      (issue: 67, titolo: [Prima stesura delle Norme di Progetto, organizzate per processi], stato: "Svolta", ruolo: "amministratore", ore: 2),
+      (issue: 73, titolo: [Migrazione del verbale interno del 2026-11-03 e correzione delle date], stato: "Svolta"),
+      (issue: 1, repo: "MemoryLeakersTeam.github.io", titolo: [Sincronizzazione automatica dei documenti approvati dal repository Documenti], stato: "Svolta"),
+      (issue: 4, repo: "MemoryLeakersTeam.github.io", titolo: [Registrazione delle ore produttive, con riepilogo per persona e per ruolo], stato: "Svolta", ruolo: "analista", ore: 1),
+      (issue: 5, repo: "MemoryLeakersTeam.github.io", titolo: [Date nel formato AAAA-MM-GG], stato: "Svolta", ruolo: "analista", ore: 1),
+      (issue: 7, repo: "MemoryLeakersTeam.github.io", titolo: [Documenti in revisione mantenuti all'ultima versione approvata], stato: "Svolta", ruolo: "amministratore", ore: 1),    
+    ),
     rischi-attesi: ("RT1", "RO1", "RO2"),
+    // TODO(gruppo): retrospettiva da confermare alla riunione del 2026-12-01
+    retrospettiva: (
+      bene: (
+        [In un solo sprint il gruppo ha definito e automatizzato il proprio modo di lavorare: moduli delle issue, versionamento e rilascio automatici dei documenti, prima stesura delle Norme di Progetto (#issue(60), #issue(65), #issue(66), #issue(67)).],
+        [La rendicontazione delle ore produttive è attiva dal primo sprint (#issue(4, repo: "MemoryLeakersTeam.github.io")), quindi preventivo e consuntivo si possono confrontare da subito.],
+        [Le domande preparate in anticipo hanno reso utile l'incontro del 2026-11-13 con Var Group.],
+      ),
+      migliorare: (
+        [*Stima delle ore.* Le issue aperte prima dei moduli non hanno una stima e le ore di verifica e di gestione non erano stimate, quindi il preventivo dello sprint è stato ricostruito a posteriori. Dallo sprint 2 ogni issue ha la sua stima all'inizio dello sprint.],
+        [*Ore registrate senza issue.* 8,5 delle 11,5 ore registrate nello sprint non indicano l'issue a cui si riferiscono, quindi è servito ricostruire a mano su quali attività sono state spese. Chi registra le ore indica sempre l'issue.],
+        [*Definition of Done e checklist di verifica.* Alcune issue sono state chiuse con la Definition of Done o la checklist di verifica non compilate (#issue(65), #issue(66)). Ogni issue si chiude solo con entrambe compilate e l'esito spuntato; se la verifica richiede prima il merge della pull request, si compilano subito dopo il merge.],
+        [*Divisione del lavoro.* Alcuni componenti non hanno ore produttive nello sprint, mentre le ore si sono concentrate su pochi ruoli. Il Responsabile distribuisce le attività in modo più equilibrato tra i componenti.],
+        [*Template dei documenti.* Non usano ancora il formato AAAA-MM-GG e la tabella «Controllo Documentale» ridotta, decisi il 2026-11-10: l'Amministratore li aggiorna nello sprint 2.],
+      ),
+    ),
     rischi-occorsi: (
       (
         codice: "RO6",
@@ -97,7 +150,7 @@
         efficacia: [Il rischio non era ancora tra quelli individuati. Le domande preparate in anticipo hanno reso utile l'incontro del 2026-11-13; da questa esperienza nasce RO6, con il canale Microsoft Teams per le comunicazioni rapide.],
       ),
     ),
-    nota: [Nello sprint si sono occupati della stesura dei verbali, che non è ora produttiva.],
+    nota: [Nello sprint si sono occupati della stesura dei verbali, che non è ora produttiva. Per l'Amministratore il gruppo ha riconosciuto 5 ore produttive, tenendo conto di tutto il lavoro svolto nello sprint.],
   ),
   (
     codice: "S2", numero: 2, inizio: "2026-11-17", fine: "2026-11-30", stato: "In corso",
@@ -439,12 +492,12 @@ Ore preventivate per componente e ruolo:
 
 = Sprint <sprint-sez>
 
-Per ogni sprint si riportano i ruoli, il collegamento alle attività, il preventivo, il consuntivo delle ore e il budget residuo. Le attività di ogni sprint sono le issue della bacheca del gruppo in #g("github-projects", "GitHub Projects"), filtrate per sprint. 
+Per ogni sprint si riportano i ruoli, l'obiettivo, le attività con la loro stima, i rischi attesi, il preventivo confrontato con le ore effettive, il consuntivo per componente, i rischi occorsi e la retrospettiva. Le attività di ogni sprint sono le issue della bacheca del gruppo in #g("github-projects", "GitHub Projects"), filtrate per sprint.
 
 Le ore sono quelle produttive registrate sul sito nella pagina `/ore`. Riunioni e stesura dei verbali non sono ore produttive: le riunioni sono escluse dalle Norme di Progetto, la stesura dei verbali su indicazione del #g("committente", "committente") nel #g("diario-di-bordo", "diario di bordo") del 2026-11-23. Ogni membro registra le proprie ore entro la fine dello sprint: per uno sprint in corso il consuntivo è parziale.
 
-// TODO(gruppo): preventivo delle ore per sprint. La domanda è rinviata alla riunione
-// del 2026-11-24 (verbale del 2026-11-17, issue #62).
+// TODO(gruppo): metodo del preventivo da confermare alla riunione del 2026-12-01
+// (stime delle issue, verifica al 60%, 0,3 ore per issue all'Amministratore, 2 ore per sprint al Responsabile).
 
 // Nome di un rischio a partire dal suo codice, per esempio "RT1"
 #let nome-rischio(codice) = {
@@ -467,9 +520,22 @@ Le ore sono quelle produttive registrate sul sito nella pagina `/ore`. Riunioni 
       ..membri.map(m => (m.nome, s.ruoli.at(m.login, default: "-"))).flatten(),
     )
 
+    === Obiettivo
+    #s.at("obiettivo", default: [Da definire all'inizio dello sprint.])
+
     === Attività
-      Le attività dello sprint sono le issue con il campo Sprint «#s.bacheca» sulla #link(bacheca(s.bacheca))[bacheca del gruppo].
-    
+    #let attivita = s.at("attivita", default: ())
+    #if attivita.len() == 0 [
+      Da compilare.
+    ] else [
+      #tabella(
+        (auto, 1fr, auto, auto),
+        ("Issue", "Attività", "Stima (ore)", "Stato"),
+        ..attivita.map(a => (issue(a.issue, repo: a.at("repo", default: "Documenti")), align(left, a.titolo), if "ore" in a { num(a.ore) } else { "-" }, a.stato)).flatten(),
+      )
+    ]
+    Le attività previste sono le issue con il campo Sprint «#s.bacheca» sulla #link(bacheca(s.bacheca))[bacheca del gruppo]; quelle svolte hanno stato «Svolta».
+
     === Rischi attesi
     #let attesi = s.at("rischi-attesi", default: ())
     #if attesi.len() == 0 [
@@ -483,8 +549,35 @@ Le ore sono quelle produttive registrate sul sito nella pagina `/ore`. Riunioni 
     ]
 
     === Preventivo
-    // TODO(gruppo): ore preventivate nello sprint, per ruolo
-    Da definire.
+    #let stimate = attivita.filter(a => "ore" in a)
+    #if stimate.len() == 0 [
+      Da definire.
+    ] else [
+      #let stima-issue(r) = stimate.filter(a => a.ruolo == r.id).map(a => a.ore).sum(default: 0)
+      #let ore-da-verificare = stimate.map(a => a.ore).sum()
+      #let gestione(r) = if r.id == "amministratore" { attivita.len() * ore-per-issue } else if r.id == "responsabile" { gestione-responsabile } else { 0 }
+      #let verifica(r) = if r.id == "verificatore" { ore-da-verificare * rapporto-verifica } else { 0 }
+      #let prev(r) = mezz-ora(stima-issue(r) + gestione(r) + verifica(r))
+      #let usati = ruoli.filter(r => prev(r) > 0 or ore-ruolo(righe, r.id) > 0)
+      #tabella(
+        (1.4fr, 1fr, 1fr, 1fr, 1fr),
+        ("Ruolo", "Ore preventivate", "Ore effettive", "Costo preventivato", "Costo effettivo"),
+        ..usati.map(r => (
+          r.nome, num(prev(r)), num(ore-ruolo(righe, r.id)),
+          euro(prev(r) * r.tariffa), euro(costo-ruolo(righe, r)),
+        )).flatten(),
+        [*Totale*],
+        [*#num(usati.map(prev).sum())*],
+        [*#num(somma(righe))*],
+        [*#euro(usati.map(r => prev(r) * r.tariffa).sum())*],
+        [*#euro(costo(righe))*],
+      )
+      Il preventivo è la somma delle stime scritte nelle issue dello sprint. Le issue senza stima non entrano nel preventivo: verbali e diari di bordo non sono ore produttive e le attività più piccole non sono state stimate. 
+      Le issue non stimano la verifica: le ore del Verificatore sono stimate a posteriori come il #num(rapporto-verifica * 100)% delle ore stimate per le attività da verificare. 
+      All'Amministratore si aggiungono #num(ore-per-issue) ore per ogni issue dello sprint, per aprirla con la sua descrizione: queste ore non passano dalla verifica.
+      Al Responsabile si aggiungono #num(gestione-responsabile) ore per sprint per i rapporti con il proponente, le email e il coordinamento del gruppo, anche queste senza verifica.
+      Le ore preventivate di ogni ruolo sono arrotondate alla mezz'ora più vicina, come quelle registrate.
+    ]
 
     === Consuntivo
     #if righe.len() == 0 [
@@ -515,8 +608,16 @@ Le ore sono quelle produttive registrate sul sito nella pagina `/ore`. Riunioni 
     ]
 
     === Retrospettiva
-    // TODO(Responsabile): cosa è andato bene e cosa migliorare
-    Da compilare a fine sprint.
+    #let retro = s.at("retrospettiva", default: none)
+    #if retro == none [
+      Da compilare a fine sprint.
+    ] else [
+      *Cosa è andato bene*
+      #for p in retro.bene [- #p]
+
+      *Cosa migliorare*
+      #for p in retro.migliorare [- #p]
+    ]
   ]
 }
 

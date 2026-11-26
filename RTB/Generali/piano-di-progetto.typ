@@ -176,8 +176,20 @@
 
 Il documento descrive come il gruppo Memory Leakers pianifica e controlla il progetto del #g("capitolato", "capitolato") C6 «SCSDF» di Var Group S.p.A.: rischi, calendario, #g("preventivo", "preventivo") e, per ogni #g("sprint", "sprint"), le ore e i costi preventivati, quelli effettivi (#g("consuntivo", "consuntivo")) e il budget che resta.
 
-Il documento si aggiorna alla fine di ogni sprint.
+Il documento si aggiorna alla fine di ogni sprint (@redazione).
 
+== Redazione del documento <redazione>
+
+// TODO(gruppo): chi aggiorna il Piano a fine sprint (Amministratore, analisti o Responsabile). Va scritto anche nelle Norme di Progetto (issue #107).
+Il Piano si aggiorna alla fine di ogni sprint, con questa procedura:
++ ogni componente registra le proprie ore produttive sul sito, nella pagina `/ore`, entro la fine dello sprint;
++ chi aggiorna il Piano scarica il CSV delle ore dello sprint dalla pagina `/ore` e lo salva in `dati/ore/` con il nome `ore-Sn.csv`, dove `n` è il numero dello sprint;
++ nella voce dello sprint concluso imposta lo stato «Concluso» e inserisce rischi occorsi e retrospettiva, discussi nella riunione di fine sprint;
++ aggiunge la voce dello sprint nuovo: date, ruoli, file delle ore, nome dello sprint sulla bacheca, rischi attesi e preventivo;
++ rivede l'analisi dei rischi (rischi nuovi, probabilità e impatto) e il calendario;
++ segue la procedura dei documenti delle Norme di Progetto (issue, branch, pull request e verifica); dopo la verifica, il Responsabile approva il rilascio.
+
+Consuntivo e budget residuo si calcolano dai file delle ore, quindi non si scrivono a mano.
 
 == Scopo del prodotto
 
@@ -297,7 +309,7 @@ Per ogni rischio si indicano:
     codice: "RO3", nome: "Requisiti che cambiano",
     descrizione: [Il proponente potrebbe cambiare o precisare le richieste durante il progetto. Per esempio, le funzioni della #g("dashboard-finops", "dashboard FinOps") richieste dal capitolato (budget, avvisi, previsione della spesa) sono ancora da confermare con Var Group.],
     probabilita: "Media", impatto: "Medio",
-    mitigazione: [Il gruppo porta le domande aperte agli incontri periodici con il proponente. Ogni modifica ai requisiti passa da un #g("verbale", "verbale") esterno e da una nuova issue.],
+    mitigazione: [Il gruppo porta le domande aperte agli incontri periodici con il proponente. Ogni modifica ai requisiti passa da un #g("verbale", "verbale") esterno o da una riunione con il proponente, e da una nuova issue.],
     contingenza: [Il Responsabile stima le ore della modifica. Se non rientra nel budget, il gruppo concorda con il proponente cosa rimandare o rendere opzionale.],
   ),
   (
@@ -373,6 +385,37 @@ Il gruppo lavora a sprint di due settimane, dal martedì al lunedì di due setti
 
 Milestone dal verbale interno del 2026-11-17; periodi di rallentamento dalla Dichiarazione degli impegni.
 // TODO(gruppo): le milestone dopo la RTB (PB, MVP) sono ancora da fissare
+
+= Pianificazione della RTB <pianificazione-rtb>
+
+Per la RTB servono l'Analisi dei Requisiti, validata dal proponente, e il PoC (@calendario).
+// TODO: sottosezione sul PoC
+
+== Analisi dei Requisiti
+
+L'Analisi dei Requisiti stabilisce che cosa deve fare il prodotto, in accordo con il proponente: attori, casi d'uso e requisiti, ognuno con la sua fonte e il tracciamento. È la base della progettazione e della verifica del prodotto. Le regole per scriverla sono nelle Norme di Progetto.
+
+Il gruppo la redige con queste attività:
++ raccolta delle informazioni dal capitolato e dagli incontri con Var Group (verbali esterni, sessione di design thinking del 2026-11-18, stand-up settimanali);
++ prima stesura dei requisiti in un documento condiviso, divisi per area del prodotto e per importanza (obbligatori, desiderabili, opzionali), con le domande aperte da portare a Var Group;
++ individuazione degli attori e dei casi d'uso, con i diagrammi UML;
++ stesura del documento in Typst, con codice, fonte e tracciamento di ogni requisito;
++ verifica interna;
++ validazione con Var Group.
+
+// TODO: citare il verbale interno del 2026-11-24 quando è nel repository
+Gli analisti si dividono il lavoro per area del prodotto, cache semantica e dashboard FinOps (riunione interna del 2026-11-24). Con la rotazione dei ruoli del 2026-12-01 cambiano gli analisti: chi prosegue l'analisi nello sprint 3 è da decidere all'inizio dello sprint.
+// TODO(gruppo): decidere chi prosegue l'Analisi dei Requisiti dopo la rotazione
+
+#tabella(
+  (auto, auto, 1fr),
+  ("Sprint", "Periodo", "Attività"),
+  [S2], [2026-11-17 → 2026-11-30], [Design thinking, prima stesura dei requisiti nel documento condiviso, domande allo stand-up del 2026-11-27],
+  [S3], [2026-12-01 → 2026-12-14], [Casi d'uso, stesura in Typst e verifica; chiusura entro il 2026-12-11],
+  [S4], [2026-12-15 → 2026-12-28], [Validazione con Var Group entro il 2026-12-18],
+)
+
+Milestone e avvio dell'analisi dopo il design thinking: verbale interno del 2026-11-17. La stesura in Typst comincia dopo che le Norme di Progetto contengono la sezione sull'analisi dei requisiti (issue \#107).
 
 = Preventivo iniziale
 

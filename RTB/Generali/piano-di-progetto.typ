@@ -109,7 +109,7 @@
       "ttteo": "Analista", "Matteomarcon": "Analista", "Ric02P": "Analista", "paolopreve": "Analista",
     ),
     bacheca: "Sprint 1",
-    obiettivo: [Organizzare il modo di lavorare del gruppo (Norme di Progetto, template, modelli delle issue, automazioni del registro delle modifiche), fissare le milestone fino alla RTB e avviare i contatti con il proponente.],
+    obiettivo: [Organizzare il modo di lavorare del gruppo (Norme di Progetto, #g("template", "template"), modelli delle issue, automazioni del registro delle modifiche), fissare le milestone fino alla RTB e avviare i contatti con il proponente.],
     attivita: (
       (issue: 53, titolo: [Verbale interno del 2026-11-03], stato: "Svolta"),
       (issue: 54, titolo: [Modifica dei template], stato: "Svolta"),
@@ -128,7 +128,7 @@
       (issue: 7, repo: "MemoryLeakersTeam.github.io", titolo: [Documenti in revisione mantenuti all'ultima versione approvata], stato: "Svolta", ruolo: "amministratore", ore: 1),    
     ),
     rischi-attesi: ("RT1", "RO1", "RO2"),
-    // TODO(gruppo): retrospettiva da confermare alla riunione del 2026-12-01
+    // TODO: retrospettiva da confermare alla riunione del 2026-12-01
     retrospettiva: (
       bene: (
         [In un solo sprint il gruppo ha definito e automatizzato il proprio modo di lavorare: moduli delle issue, versionamento e rilascio automatici dei documenti, prima stesura delle Norme di Progetto (#issue(60), #issue(65), #issue(66), #issue(67)).],
@@ -138,7 +138,7 @@
       migliorare: (
         [*Stima delle ore.* Le issue aperte prima dei moduli non hanno una stima e le ore di verifica e di gestione non erano stimate, quindi il preventivo dello sprint è stato ricostruito a posteriori. Dallo sprint 2 ogni issue ha la sua stima all'inizio dello sprint.],
         [*Ore registrate senza issue.* 8,5 delle 11,5 ore registrate nello sprint non indicano l'issue a cui si riferiscono, quindi è servito ricostruire a mano su quali attività sono state spese. Chi registra le ore indica sempre l'issue.],
-        [*Definition of Done e checklist di verifica.* Alcune issue sono state chiuse con la Definition of Done o la checklist di verifica non compilate (#issue(65), #issue(66)). Ogni issue si chiude solo con entrambe compilate e l'esito spuntato; se la verifica richiede 
+        [*#g("definition-of-done", "Definition of Done") e checklist di verifica.* Alcune issue sono state chiuse con la Definition of Done o la checklist di verifica non compilate (#issue(65), #issue(66)). Ogni issue si chiude solo con entrambe compilate e l'esito spuntato; se la verifica richiede 
         prima il merge della pull request, si compilano subito dopo il merge.],
         [*Divisione del lavoro.* Alcuni componenti non hanno ore produttive nello sprint, mentre le ore si sono concentrate su pochi ruoli. Il Responsabile distribuisce le attività in modo più equilibrato tra i componenti.],
         [*Template dei documenti.* Non usano ancora il formato AAAA-MM-GG e la tabella «Controllo Documentale» ridotta, decisi il 2026-11-10: l'Amministratore li aggiorna nello sprint 2.],
@@ -152,7 +152,8 @@
         efficacia: [Il rischio non era ancora tra quelli individuati. Le domande preparate in anticipo hanno reso utile l'incontro del 2026-11-13; da questa esperienza nasce RO6, con il canale Microsoft Teams per le comunicazioni rapide.],
       ),
     ),
-    nota: [Nello sprint si sono occupati della stesura dei verbali, che non è ora produttiva. Per l'Amministratore il gruppo ha riconosciuto 5 ore produttive, tenendo conto di tutto il lavoro svolto nello sprint.],
+    nota: [Nello sprint si sono occupati della stesura dei verbali, che non è ora produttiva. Per l'#g("amministratore", "Amministratore") il gruppo ha riconosciuto 5 ore produttive, tenendo conto di tutto il lavoro svolto nello sprint.
+     Il preventivo dello sprint è stato ricostruito a posteriori.],
   ),
   (
     codice: "S2", numero: 2, inizio: "2026-11-17", fine: "2026-11-30", stato: "In corso",
@@ -162,11 +163,36 @@
       "Kyara-Prot": "Analista", "JJ-jacopo24": "Analista", "ttteo": "Analista", "paolopreve": "Analista",
     ),
     bacheca: "Sprint 2",
+    obiettivo: [Svolgere la sessione di design thinking con Var Group e avviare l'Analisi dei Requisiti e un primo studio delle tecnologie, fino alla milestone del 2026-11-30 (base di analisi e conoscenza delle tecnologie); redigere la prima bozza del #g("piano-di-progetto", "Piano di Progetto") e completare l'aggiornamento dei template.],
+    attivita: (
+      (issue: 71, titolo: [Verbale esterno del 2026-11-13], stato: "Svolta"),
+      (issue: 78, titolo: [Conferma alla proponente della data del design thinking e della fascia degli stand-up (mail del 2026-11-13, issue aperta nello sprint 2 per tracciabilità)], stato: "Svolta"),
+      (issue: 79, titolo: [Formato AAAA-MM-GG nei template], stato: "Svolta", ruolo: "amministratore", ore: 0.15),
+      (issue: 81, titolo: [Rimozione delle voci ridondanti dalla tabella «Controllo documentale»], stato: "Svolta", ruolo: "amministratore", ore: 0.15),
+      (issue: 84, titolo: [Requisiti obbligatori nel documento condiviso], stato: "In corso", ruolo: "analista", ore: 2),
+      (issue: 85, titolo: [Requisiti desiderabili nel documento condiviso], stato: "In corso", ruolo: "analista", ore: 2),
+      (issue: 86, titolo: [Requisiti opzionali nel documento condiviso], stato: "Da fare", ruolo: "analista", ore: 2),
+      (issue: 87, titolo: [Stesura dell'Analisi dei Requisiti in Typst], stato: "Da fare", ruolo: "analista", ore: 3),
+      (issue: 88, titolo: [Diario di bordo del 2026-11-23], stato: "Svolta"),
+      (issue: 89, titolo: [Verbale interno del 2026-11-17], stato: "Svolta"),
+      (issue: 90, titolo: [Verbale esterno del 2026-11-18], stato: "Svolta"),
+      (issue: 91, titolo: [Prima bozza del Piano di Progetto], stato: "Svolta", ruolo: "analista", ore: 1),
+      (issue: 93, titolo: [Formato AAAA-MM-GG anche per la data della prossima riunione nei verbali], stato: "Svolta", ruolo: "amministratore", ore: 0.15),
+      (issue: 97, titolo: [Diagramma di flusso della chat e similarità nelle conversazioni multiturno], stato: "Svolta", ruolo: "analista", ore: 1),
+      (issue: 98, titolo: [Invio del diagramma di flusso alla proponente sul canale Teams], stato: "Svolta"),
+      (issue: 99, titolo: [Scelta delle tecnologie per le sessioni di formazione], stato: "Da fare", ruolo: "analista", ore: 0.3),
+      (issue: 101, titolo: [Link alla voce del glossario anche nel template dei verbali], stato: "Svolta", ruolo: "amministratore", ore: 0.15),
+      (issue: 106, titolo: [Prosecuzione del Piano di Progetto dopo la verifica della prima bozza], stato: "Da fare", ruolo: "analista", ore: 1),
+      (issue: 107, titolo: [Revisione delle Norme di Progetto: verbali e merge delle pull request], stato: "Da fare", ruolo: "amministratore", ore: 0.3),
+      (issue: 108, titolo: [Verbale interno del 2026-11-24], stato: "In revisione"),
+      (issue: 110, titolo: [Diario di bordo del 2026-11-30], stato: "Da fare"),
+      (issue: 10, repo: "MemoryLeakersTeam.github.io", titolo: [Vista delle ore per ruolo e per persona], stato: "Svolta", ruolo: "analista", ore: 1),
+    ),
     rischi-attesi: ("RT1", "RO2", "RO3", "RO4", "RO6"),
     rischi-occorsi: (
       (
         codice: "RP2",
-        descrizione: [Un componente non ha potuto partecipare alla sessione di #g("design-thinking", "design thinking") con Var Group del 2026-11-18 per impegni di lavoro (diario di bordo del 2026-11-23).],
+        descrizione: [Un componente non ha potuto partecipare alla sessione di design thinking con Var Group del 2026-11-18 per impegni di lavoro (diario di bordo del 2026-11-23).],
         efficacia: [Il rischio non era tra quelli attesi per lo sprint. Gli appunti della sessione sono stati condivisi con tutto il gruppo, così chi era assente ha potuto recuperarne i contenuti.],
       ),
     ),
@@ -243,8 +269,8 @@ Il documento si aggiorna alla fine di ogni sprint (@redazione).
 
 == Redazione del documento <redazione>
 
-// TODO(gruppo): chi aggiorna il Piano a fine sprint (Amministratore, analisti o Responsabile). Va scritto anche nelle Norme di Progetto (issue #107).
-Il Piano si aggiorna alla fine di ogni sprint, con questa procedura:
+// TODO: chi aggiorna il Piano a fine sprint (Amministratore, analisti o Responsabile), da definire alla riunione del 2026-12-01; poi va scritto anche nelle Norme di Progetto.
+Il Piano si aggiorna alla fine di ogni sprint, con questa #g("procedura", "procedura"):
 + ogni componente registra le proprie ore produttive sul sito, nella pagina `/ore`, entro la fine dello sprint;
 + chi aggiorna il Piano scarica il CSV delle ore dello sprint dalla pagina `/ore` e lo salva in `dati/ore/` con il nome `ore-Sn.csv`, dove `n` è il numero dello sprint;
 + nella voce dello sprint concluso imposta lo stato «Concluso» e inserisce rischi occorsi e retrospettiva, discussi nella riunione di fine sprint a partire dalle difficoltà riportate nei diari di bordo dello sprint;
@@ -267,7 +293,7 @@ Il capitolato chiede di partire da LiteLLM senza reimplementarlo e di coprire co
 
 == Glossario
 
-I termini con pedice #sub[G] rimandano alla voce corrispondente del glossario sul sito del gruppo.
+I termini con pedice #sub[G] rimandano alla voce corrispondente del #g("glossario", "glossario") sul sito del gruppo.
 
 == Riferimenti
 
@@ -302,7 +328,7 @@ Il gruppo è composto da sette componenti. Ognuno ricopre un solo ruolo alla vol
 
 #let compiti = (
   responsabile: [Coordina il gruppo e le sue attività, elabora piani e scadenze, rappresenta il gruppo verso proponente e committente e approva il rilascio dei prodotti.],
-  amministratore: [Assicura l'efficienza di procedure, strumenti e tecnologie del modo di lavorare del gruppo (repository, automazioni, sito) e ne descrive l'uso nelle Norme di Progetto.],
+  amministratore: [Assicura l'efficienza di procedure, strumenti e tecnologie del modo di lavorare del gruppo (#g("repository", "repository"), automazioni, sito) e ne descrive l'uso nelle Norme di Progetto.],
   analista: [Svolge l'analisi dei requisiti: studia il problema e il dominio e ne ricava i requisiti del prodotto.],
   progettista: [Svolge la progettazione: definisce l'architettura del prodotto a partire dai requisiti.],
   programmatore: [Svolge la codifica: realizza il prodotto secondo la progettazione, con il codice e i test.],
@@ -371,13 +397,13 @@ Per ogni rischio si indicano:
     codice: "RO2", nome: "Incomprensione dei requisiti",
     descrizione: [Un'analisi superficiale o una comunicazione insufficiente con il proponente potrebbero portare a requisiti incompleti o fraintesi, con modifiche costose nelle fasi avanzate.],
     probabilita: "Media", impatto: "Alto",
-    mitigazione: [#g("analisi-dei-requisiti", "Analisi dei requisiti") attenta, con domande raccolte in modo asincrono e chiarite con Var Group negli incontri periodici. Ogni requisito riporta la sua fonte e il gruppo sottopone 
+    mitigazione: [Analisi dei requisiti attenta, con domande raccolte in modo asincrono e chiarite con Var Group negli incontri periodici. Ogni requisito riporta la sua fonte e il gruppo sottopone 
     i requisiti al proponente per la validazione.],
-    contingenza: [Gli #g("analista", "analisti") correggono i requisiti con una nuova #g("issues", "issue") appena il proponente segnala l'errore. Il Responsabile valuta l'impatto sulle attività e sulle ore già pianificate.],
+    contingenza: [Gli #g("analista", "analisti") correggono i requisiti con una nuova issue appena il proponente segnala l'errore. Il Responsabile valuta l'impatto sulle attività e sulle ore già pianificate.],
   ),
   (
     codice: "RO3", nome: "Requisiti che cambiano",
-    descrizione: [Il proponente potrebbe cambiare o precisare le richieste durante il progetto. Per esempio, le funzioni della #g("dashboard-finops", "dashboard FinOps") richieste dal capitolato (budget, avvisi, previsione della spesa) 
+    descrizione: [Il proponente potrebbe cambiare o precisare le richieste durante il progetto. Per esempio, le funzioni della dashboard FinOps richieste dal capitolato (budget, avvisi, previsione della spesa) 
     sono ancora da confermare con Var Group.],
     probabilita: "Media", impatto: "Medio",
     mitigazione: [Il gruppo porta le domande aperte agli incontri periodici con il proponente. Ogni modifica ai requisiti passa da un #g("verbale", "verbale") esterno o da una riunione con il proponente, e da una nuova issue.],
@@ -410,9 +436,9 @@ Per ogni rischio si indicano:
   ),
   (
     codice: "RP1", nome: "Esami e sessione",
-    descrizione: [Durante la sessione invernale, dal 2027-01-18 al 2027-02-19, e nelle settimane prima degli appelli i componenti hanno meno tempo per il progetto. La sessione inizia lo stesso giorno della #g("rtb", "RTB").],
+    descrizione: [Durante la sessione invernale, dal 2027-01-18 al 2027-02-19, e nelle settimane prima degli appelli i componenti hanno meno tempo per il progetto. La sessione inizia lo stesso giorno della RTB.],
     probabilita: "Alta", impatto: "Medio",
-    mitigazione: [Le milestone critiche (Analisi dei Requisiti e #g("poc", "PoC")) cadono prima della sessione. Ogni componente comunica in anticipo i propri appelli e il preventivo dello sprint tiene conto della disponibilità ridotta.],
+    mitigazione: [Le milestone critiche (Analisi dei Requisiti e PoC) cadono prima della sessione. Ogni componente comunica in anticipo i propri appelli e il preventivo dello sprint tiene conto della disponibilità ridotta.],
     contingenza: [Il Responsabile ridistribuisce le attività tra i componenti disponibili e sposta agli sprint successivi quelle non urgenti.],
   ),
   (
@@ -466,7 +492,7 @@ Il gruppo lavora a sprint di due settimane, dal martedì al lunedì di due setti
 )
 
 Milestone dal verbale interno del 2026-11-17; periodi di rallentamento dalla Dichiarazione degli impegni.
-// TODO(gruppo): le milestone dopo la RTB (PB, MVP) sono ancora da fissare
+// TODO: le milestone dopo la RTB (PB, MVP) sono ancora da fissare
 
 = Pianificazione della RTB <pianificazione-rtb>
 
@@ -481,27 +507,27 @@ Il gruppo la redige con queste attività:
 + raccolta delle informazioni dal capitolato e dagli incontri con Var Group (verbali esterni, sessione di design thinking del 2026-11-18, stand-up settimanali);
 + prima stesura dei requisiti in un documento condiviso, divisi per area del prodotto e per importanza (obbligatori, desiderabili, opzionali), con le domande aperte da portare a Var Group;
 + individuazione degli attori e dei casi d'uso, con i diagrammi UML;
-+ stesura del documento in Typst, con codice, fonte e tracciamento di ogni requisito;
++ stesura del documento in #g("typst", "Typst"), con codice, fonte e tracciamento di ogni requisito;
 + verifica interna;
 + validazione con Var Group.
 
 // TODO: citare il verbale interno del 2026-11-24 quando è nel repository
 Gli analisti si dividono il lavoro per area del prodotto, cache semantica e dashboard FinOps (riunione interna del 2026-11-24). Con la rotazione dei ruoli del 2026-12-01 cambiano gli analisti: chi prosegue l'analisi nello sprint 3 è da decidere all'inizio dello sprint.
-// TODO(gruppo): decidere chi prosegue l'Analisi dei Requisiti dopo la rotazione
+// TODO: decidere chi prosegue l'Analisi dei Requisiti dopo la rotazione
 
 #tabella(
   (auto, auto, 1fr),
   ("Sprint", "Periodo", "Attività"),
-  [S2], [2026-11-17 → 2026-11-30], [Design thinking, prima stesura dei requisiti nel documento condiviso, domande allo stand-up del 2026-11-27],
-  [S3], [2026-12-01 → 2026-12-14], [Casi d'uso, stesura in Typst e verifica; chiusura entro il 2026-12-11],
+  [S2], [2026-11-17 → 2026-11-30], [Design thinking, prima stesura dei requisiti nel documento condiviso, domande allo stand-up del 2026-11-27, avvio della stesura in Typst],
+  [S3], [2026-12-01 → 2026-12-14], [Casi d'uso, completamento della stesura in Typst e verifica; chiusura entro il 2026-12-11],
   [S4], [2026-12-15 → 2026-12-28], [Validazione con Var Group entro il 2026-12-18],
 )
 
-Milestone e avvio dell'analisi dopo il design thinking: verbale interno del 2026-11-17. La stesura in Typst comincia dopo che le Norme di Progetto contengono la sezione sull'analisi dei requisiti (issue \#107).
+Milestone e avvio dell'analisi dopo il design thinking: verbale interno del 2026-11-17.
 
 = Preventivo iniziale
 
-Il preventivo presentato in candidatura prevede #num(preventivo-ore) #g("ore-produttive", "ore produttive"), 93 per componente, per un costo di #euro(preventivo-costo).
+Il preventivo presentato in candidatura prevede #num(preventivo-ore) ore produttive, 93 per componente, per un costo di #euro(preventivo-costo).
 
 #tabella(
   (1fr, auto, auto, auto),
@@ -528,7 +554,7 @@ Le attività di ogni sprint sono le issue della bacheca del gruppo in #g("github
 Le ore sono quelle produttive registrate sul sito nella pagina `/ore`. Riunioni e stesura dei verbali non sono ore produttive: le riunioni sono escluse dalle Norme di Progetto, la stesura dei verbali su indicazione del 
 #g("committente", "committente") nel #g("diario-di-bordo", "diario di bordo") del 2026-11-23. Ogni membro registra le proprie ore entro la fine dello sprint: per uno sprint in corso il consuntivo è parziale.
 
-// TODO(gruppo): metodo del preventivo da confermare alla riunione del 2026-12-01
+// TODO: metodo del preventivo da confermare alla riunione del 2026-12-01
 // (stime delle issue, verifica al 60%, 0,3 ore per issue all'Amministratore, 2 ore per sprint al Responsabile).
 
 // Nome di un rischio a partire dal suo codice, per esempio "RT1"
@@ -563,7 +589,7 @@ Le ore sono quelle produttive registrate sul sito nella pagina `/ore`. Riunioni 
       #tabella(
         (auto, 1fr, auto, auto),
         ("Issue", "Attività", "Stima (ore)", "Stato"),
-        ..attivita.map(a => (issue(a.issue, repo: a.at("repo", default: "Documenti")), align(left, a.titolo), if "ore" in a { num(a.ore) } else { "-" }, a.stato)).flatten(),
+        ..attivita.map(a => (issue(a.issue, repo: a.at("repo", default: "Documenti")), align(left, a.titolo), if "ore" in a { str(a.ore).replace(".", ",") } else { "-" }, a.stato)).flatten(),
       )
     ]
     Le attività previste sono le issue con il campo Sprint «#s.bacheca» sulla #link(bacheca(s.bacheca))[bacheca del gruppo]; quelle svolte hanno stato «Svolta».
@@ -604,8 +630,8 @@ Le ore sono quelle produttive registrate sul sito nella pagina `/ore`. Riunioni 
         [*#euro(usati.map(r => prev(r) * r.tariffa).sum())*],
         [*#euro(costo(righe))*],
       )
-      Il preventivo è la somma delle stime scritte nelle issue dello sprint. Le issue senza stima non entrano nel preventivo: verbali e diari di bordo non sono ore produttive e le attività più piccole non sono state stimate. 
-      Le issue non stimano la verifica: le ore del Verificatore sono stimate a posteriori come il #num(rapporto-verifica * 100)% delle ore stimate per le attività da verificare. 
+      Il preventivo è la somma delle stime scritte nelle issue dello sprint. Le issue senza stima non entrano nel preventivo: verbali e diari di bordo non sono ore produttive e le attività più piccole non sono state stimate.      
+      Le issue non stimano la verifica: le ore del Verificatore sono stimate come il #num(rapporto-verifica * 100)% delle ore stimate per le attività da verificare. 
       All'Amministratore si aggiungono #num(ore-per-issue) ore per ogni issue dello sprint, per aprirla con la sua descrizione: queste ore non passano dalla verifica.
       Al Responsabile si aggiungono #num(gestione-responsabile) ore per sprint per i rapporti con il proponente, le email e il coordinamento del gruppo, anche queste senza verifica.
       Le ore preventivate di ogni ruolo sono arrotondate alla mezz'ora più vicina, come quelle registrate.
@@ -654,6 +680,8 @@ Le ore sono quelle produttive registrate sul sito nella pagina `/ore`. Riunioni 
 }
 
 = Budget residuo
+
+// TODO: preventivo a finire, cioè una nuova stima delle ore che servono per finire il progetto e non solo il residuo. Metodo da decidere alla riunione del 2026-12-01.
 
 Ore e costi svolti dall'inizio del progetto, confrontati con il preventivo iniziale.
 

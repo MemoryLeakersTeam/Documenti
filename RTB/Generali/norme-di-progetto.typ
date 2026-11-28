@@ -4,7 +4,7 @@
   titolo: "Norme di Progetto",
   sottotitolo: "",
   tipo-documento: "Documento Interno",
-  autore: "Jacopo De Donà",
+  autore: "Riccardo Peresson",
   data: datetime(year: 2026, month: 11, day: 11),
   file-nome: "norme-di-progetto.pdf",
   // Versione, stato, verificatore, firma e registro: li scrive l'automazione dopo il merge
@@ -176,6 +176,7 @@ Al passaggio a una nuova tappa (per esempio da `RTB/` a `PB/`), un documento si 
   + Fa i commit seguendo le regole dei commit (@commit).
   + Spunta le voci della #g("definition-of-done", "Definition of Done") man mano che le completa.
   + Apre la pull request seguendo la procedura delle pull request (@pr).
+  + Effettua il merge della pull request in seguito all'approvazione del verificatore (@pr).
 ]
 
 === Verbali <verbali>
@@ -344,6 +345,7 @@ I messaggi di commit seguono i #g("conventional-commits", "Conventional Commits"
   + Chiede la review al Verificatore dello sprint, che riceve così la notifica.
   + Attende che la CI compili i documenti senza errori e che il controllo *Registro delle modifiche* passi.
   + Se il Verificatore chiede modifiche, le applica con nuovi commit e chiede di nuovo la review.
+  + All'approvazione del verificatore, effettua il merge su `main`.
 ]
 
 Il controllo *Registro delle modifiche* è obbligatorio nel ruleset di `main`: finché non passa, la pull request non si integra. Il motivo del blocco è nel riepilogo del controllo. Il controllo blocca la pull request se:
@@ -490,7 +492,7 @@ Le ore produttive si consuntivano sul sito del gruppo, nella pagina `/ore` (deci
   output: [Ore registrate in `data/ore.json` del repository del sito],
   strumenti: [Pannello di amministrazione del sito (`/admin`), scheda _Ore_],
 )[
-  + Registra solo le ore produttive svolte dal 2026-11-03, data dell'aggiudicazione. Le riunioni non sono ore produttive.
+  + Registra solo le ore produttive svolte dal 2026-11-03, data dell'aggiudicazione. Le riunioni e la stesura dei verbali non sono ore produttive.
   + Registra le proprie ore entro la fine dello sprint, a passi di 0,5 ore, con il ruolo ricoperto in quel momento e, se c'è, l'issue su cui ha lavorato (`Repository#numero`).
   + Ogni registrazione o eliminazione è un commit sul repository del sito e si pubblica subito.
 ]
